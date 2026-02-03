@@ -1,18 +1,7 @@
 <!doctype html>
-<html lang="it">
-<head>
-  <meta charset="utf-8">
-  <title>Mango</title>
-  <script>
-    // Se arriva con ?lang=xx lascia passare
-    const params = new URLSearchParams(window.location.search);
-    const lang = params.get("lang");
-
-    if (!lang) {
-      // se NON c'è lingua, vai alla porta
-      window.location.href = "start.html";
-    }
-  </script>
-</head>
-<body></body>
+<html>
+  <head>
+    <meta http-equiv="refresh" content="0; url=start.html">
+  </head>
+  <body></body>
 </html>

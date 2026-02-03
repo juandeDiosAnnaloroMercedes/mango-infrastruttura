@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Mango — Il primo scambio</title>
+<style>
+  body{
+    margin:0;
+    font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+    background:#ffffff;
+    color:#111;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    height:100vh;
+    text-align:center;
+  }
+  .box{max-width:800px; padding:40px;}
+  h1{font-size:40px; margin-bottom:20px;}
+  p{font-size:20px; line-height:1.6; margin-bottom:25px;}
+  ol{font-size:20px; text-align:left; line-height:1.8;}
+</style>
+</head>
+<body>
+  <div class="box">
+    <h1>Il primo scambio Mango</h1>
+    <p>
+      Non servono gruppi. Non servono regole.<br>
+      Servono due persone.
+    </p>
+
+    <ol>
+      <li>Offri qualcosa che sai fare.</li>
+      <li>L’altra persona offre qualcosa che sa fare.</li>
+      <li>Fate lo scambio.</li>
+      <li>Scrivete una riga nel registro.</li>
+    </ol>
+
+    <p>
+      Avete appena iniziato Mango.
+    </p>
+  </div>
+</body>
+</html>

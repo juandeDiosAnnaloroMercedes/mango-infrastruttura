@@ -1,62 +1,35 @@
 <!DOCTYPE html>
-<html>
+<html lang="it">
 <head>
 <meta charset="UTF-8">
 <title>Mango</title>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <style>
-  body{font-family:Arial,sans-serif;text-align:center;padding:48px 16px;}
-  h1{margin:0 0 10px;}
-  .box{max-width:700px;margin:0 auto;border:1px solid #ddd;border-radius:14px;padding:18px;}
-  select, button{padding:12px 18px;margin:10px;font-size:16px;}
-  a{display:inline-block;text-decoration:none;}
+body{font-family:Arial,sans-serif;text-align:center;padding:60px;}
+a{
+  display:block;
+  margin:14px auto;
+  padding:14px;
+  max-width:320px;
+  border:1px solid #111;
+  border-radius:12px;
+  text-decoration:none;
+  color:#111;
+  font-weight:700;
+}
 </style>
 </head>
 <body>
 
 <h1>Mango 🥭</h1>
+<p>Scegli la tua lingua</p>
 
-<div class="box">
-  <p><strong>Choose your language / Scegli la tua lingua</strong></p>
-
-  <select id="lang">
-    <option value="it">Italiano</option>
-    <option value="en">English</option>
-    <option value="es">Español</option>
-    <option value="fr">Français</option>
-    <option value="de">Deutsch</option>
-    <option value="zh">中文</option>
-  </select>
-
-  <div id="contenuto" style="margin-top:10px;"></div>
-
-  <div style="margin-top:14px;">
-    <a id="btnRiga" href="primo-scambio.html"><button id="txtRiga"></button></a>
-    <a id="btnFaq" href="faq.html"><button id="txtFaq"></button></a>
-  </div>
-</div>
-
-<script>
-  const testi = {
-    it:{ titolo:"Benvenuto in Mango", testo:"È successo qualcosa tra te e qualcun altro?", riga:"Scrivi una riga", faq:"Cos’è Mango" },
-    en:{ titolo:"Welcome to Mango", testo:"Has something happened between you and someone else?", riga:"Write one line", faq:"What is Mango?" },
-    es:{ titolo:"Bienvenido a Mango", testo:"¿Ha ocurrido algo entre tú y otra persona?", riga:"Escribe una línea", faq:"¿Qué es Mango?" },
-    fr:{ titolo:"Bienvenue dans Mango", testo:"Quelque chose s’est-il passé entre vous et quelqu’un d’autre ?", riga:"Écrire une ligne", faq:"Qu’est-ce que Mango ?" },
-    de:{ titolo:"Willkommen bei Mango", testo:"Ist etwas zwischen dir und jemand anderem passiert?", riga:"Eine Zeile schreiben", faq:"Was ist Mango?" },
-    zh:{ titolo:"歡迎來到 Mango", testo:"你和他人之間是否發生了什麼事情？", riga:"寫下一行", faq:"Mango 是什麼？" }
-  };
-
-  function render(){
-    const l = document.getElementById("lang").value;
-    const t = testi[l];
-    document.getElementById("contenuto").innerHTML = `<h2>${t.titolo}</h2><p>${t.testo}</p>`;
-    document.getElementById("txtRiga").textContent = t.riga;
-    document.getElementById("txtFaq").textContent = t.faq;
-  }
-
-  document.getElementById("lang").addEventListener("change", render);
-  render();
-</script>
+<a href="it.html">Italiano</a>
+<a href="en.html">English</a>
+<a href="es.html">Español</a>
+<a href="fr.html">Français</a>
+<a href="de.html">Deutsch</a>
+<a href="zh.html">中文</a>
 
 </body>
 </html>

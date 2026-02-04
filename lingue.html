@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Mango</title>
+<style>
+body{
+  font-family: Arial, sans-serif;
+  text-align:center;
+  padding:60px;
+}
+select, button{
+  padding:12px 18px;
+  margin:12px;
+  font-size:16px;
+}
+</style>
+</head>
+<body>
+
+<h1>Mango 🥭</h1>
+
+<select id="lang" onchange="cambiaLingua()">
+  <option value="it">Italiano</option>
+  <option value="en">English</option>
+  <option value="es">Español</option>
+  <option value="fr">Français</option>
+  <option value="de">Deutsch</option>
+  <option value="zh">中文</option>
+</select>
+
+<div id="contenuto"></div>
+
+<script>
+const testi = {
+  it: {
+    titolo: "Benvenuto in Mango",
+    testo: "È successo qualcosa tra te e qualcun altro?",
+    riga: "Scrivi una riga",
+    faq: "Cos’è Mango"
+  },
+  en: {
+    titolo: "Welcome to Mango",
+    testo: "Has something happened between you and someone else?",
+    riga: "Write one line",
+    faq: "What is Mango?"
+  },

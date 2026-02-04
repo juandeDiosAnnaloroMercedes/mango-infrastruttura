@@ -5,13 +5,13 @@
 <title>Mango</title>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <style>
-  body{font-family:Arial,sans-serif;text-align:center;padding:48px 16px;}
-  .box{max-width:700px;margin:0 auto;border:1px solid #ddd;border-radius:14px;padding:18px;}
-  select{padding:12px 18px;margin:10px;font-size:16px;}
-  a{
-    display:block;margin:12px auto;padding:14px;max-width:340px;
-    border:1px solid #111;border-radius:12px;text-decoration:none;color:#111;font-weight:700;
-  }
+body{font-family:Arial,sans-serif;text-align:center;padding:48px 16px;}
+.box{max-width:700px;margin:0 auto;border:1px solid #ddd;border-radius:14px;padding:18px;}
+select{padding:12px 18px;margin:10px;font-size:16px;}
+a{
+ display:block;margin:12px auto;padding:14px;max-width:340px;
+ border:1px solid #111;border-radius:12px;text-decoration:none;color:#111;font-weight:700;
+}
 </style>
 </head>
 <body>
@@ -19,40 +19,40 @@
 <h1>Mango 🥭</h1>
 
 <div class="box">
-  <p><strong>Choose your language / Scegli la tua lingua</strong></p>
+<p><strong>Choose your language / Scegli la tua lingua</strong></p>
 
-  <select id="lang">
-    <option value="it">Italiano</option>
-    <option value="en">English</option>
-    <option value="es">Español</option>
-    <option value="fr">Français</option>
-    <option value="de">Deutsch</option>
-    <option value="zh">中文</option>
-  </select>
+<select id="lang">
+<option value="it">Italiano</option>
+<option value="en">English</option>
+<option value="es">Español</option>
+<option value="fr">Français</option>
+<option value="de">Deutsch</option>
+<option value="zh">中文</option>
+</select>
 
-  <div id="txt" style="margin-top:10px;"></div>
+<div id="txt"></div>
 
-  <a href="primo-scambio.html" id="btn1"></a>
-  <a href="faq.html" id="btn2"></a>
+<a href="primo-scambio.html" id="b1"></a>
+<a href="faq.html" id="b2"></a>
 </div>
 
 <script>
 const T={
- it:{h:"Benvenuto in Mango",p:"È successo qualcosa tra te e qualcun altro?",b1:"Scrivi una riga",b2:"Cos’è Mango"},
- en:{h:"Welcome to Mango",p:"Has something happened between you and someone else?",b1:"Write one line",b2:"What is Mango?"},
- es:{h:"Bienvenido a Mango",p:"¿Ha ocurrido algo entre tú y otra persona?",b1:"Escribe una línea",b2:"¿Qué es Mango?"},
- fr:{h:"Bienvenue dans Mango",p:"Quelque chose s’est-il passé entre vous et quelqu’un d’autre ?",b1:"Écrire une ligne",b2:"Qu’est-ce que Mango ?"},
- de:{h:"Willkommen bei Mango",p:"Ist etwas zwischen dir und jemand anderem passiert?",b1:"Eine Zeile schreiben",b2:"Was ist Mango?"},
- zh:{h:"歡迎來到 Mango",p:"你和他人之間是否發生了什麼事情？",b1:"寫下一行",b2:"Mango 是什麼？"}
+it:["Benvenuto in Mango","È successo qualcosa tra te e qualcun altro?","Scrivi una riga","Cos’è Mango"],
+en:["Welcome to Mango","Has something happened between you and someone else?","Write one line","What is Mango?"],
+es:["Bienvenido a Mango","¿Ha ocurrido algo entre tú y otra persona?","Escribe una línea","¿Qué es Mango?"],
+fr:["Bienvenue dans Mango","Quelque chose s’est-il passé entre vous et quelqu’un d’autre ?","Écrire une ligne","Qu’est-ce que Mango ?"],
+de:["Willkommen bei Mango","Ist etwas zwischen dir und jemand anderem passiert?","Eine Zeile schreiben","Was ist Mango?"],
+zh:["歡迎來到 Mango","你和他人之間是否發生了什麼事情？","寫下一行","Mango 是什麼？"]
 };
 function R(){
- const v=document.getElementById("lang").value;
- const t=T[v];
- document.getElementById("txt").innerHTML=`<h2>${t.h}</h2><p>${t.p}</p>`;
- document.getElementById("btn1").textContent=t.b1;
- document.getElementById("btn2").textContent=t.b2;
+let v=document.getElementById("lang").value;
+let t=T[v];
+document.getElementById("txt").innerHTML=`<h2>${t[0]}</h2><p>${t[1]}</p>`;
+document.getElementById("b1").textContent=t[2];
+document.getElementById("b2").textContent=t[3];
 }
-document.getElementById("lang").addEventListener("change",R); R();
+document.getElementById("lang").addEventListener("change",R);R();
 </script>
 
 </body>

@@ -1,12 +1,54 @@
-<div style="position:fixed; top:0; left:0; right:0; background:#fff; z-index:9999;
-text-align:right; font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
-font-size:14px; padding:14px 18px; border-bottom:1px solid #eee;">
-  <a href="/mango-infrastruttura/" style="color:#111; text-decoration:none; margin-left:12px;">IT</a>
-  <a href="/mango-infrastruttura/docs/en.html" style="color:#111; text-decoration:none; margin-left:12px;">EN</a>
-  <a href="/mango-infrastruttura/docs/es.html" style="color:#111; text-decoration:none; margin-left:12px;">ES</a>
-  <a href="/mango-infrastruttura/docs/fr.html" style="color:#111; text-decoration:none; margin-left:12px;">FR</a>
-  <a href="/mango-infrastruttura/docs/de.html" style="color:#111; text-decoration:none; margin-left:12px;">DE</a>
-  <a href="/mango-infrastruttura/docs/zh.html" style="color:#111; text-decoration:none; margin-left:12px;">中文</a>
-</div>
+<!doctype html>
+<html lang="it">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Mango — FAQ</title>
+</head>
+<body style="font-family:system-ui;max-width:900px;margin:0 auto;padding:20px;">
 
-<div style="height:60px;"></div>
+  <div style="position:fixed;top:0;left:0;right:0;text-align:right;font-size:14px;padding:14px 18px;background:#111;color:#fff;z-index:9999;">
+    <a class="lang" data-lang="it" href="#" style="color:#fff;margin-left:10px;">IT</a>
+    <a class="lang" data-lang="en" href="#" style="color:#fff;margin-left:10px;">EN</a>
+    <a class="lang" data-lang="es" href="#" style="color:#fff;margin-left:10px;">ES</a>
+    <a class="lang" data-lang="fr" href="#" style="color:#fff;margin-left:10px;">FR</a>
+    <a class="lang" data-lang="de" href="#" style="color:#fff;margin-left:10px;">DE</a>
+    <a class="lang" data-lang="zh" href="#" style="color:#fff;margin-left:10px;">ZH</a>
+  </div>
+
+  <div style="height:70px;"></div>
+
+  <h1>Mango — FAQ</h1>
+  <p>Scegli una lingua per aprire il PDF corrispondente.</p>
+
+  <ul style="line-height:1.9;">
+    <li><a id="pdf-it" href="docs/faq-it.pdf">FAQ — Italiano (PDF)</a></li>
+    <li><a id="pdf-en" href="docs/faq-en.pdf">FAQ — English (PDF)</a></li>
+    <li><a id="pdf-es" href="docs/faq-es.pdf">FAQ — Español (PDF)</a></li>
+    <li><a id="pdf-fr" href="docs/faq-fr.pdf">FAQ — Français (PDF)</a></li>
+    <li><a id="pdf-de" href="docs/faq-de.pdf">FAQ — Deutsch (PDF)</a></li>
+    <li><a id="pdf-zh" href="docs/faq-zh.pdf">FAQ — 中文 (PDF)</a></li>
+  </ul>
+
+  <script>
+    const PDF = {
+      it: "docs/faq-it.pdf",
+      en: "docs/faq-en.pdf",
+      es: "docs/faq-es.pdf",
+      fr: "docs/faq-fr.pdf",
+      de: "docs/faq-de.pdf",
+      zh: "docs/faq-zh.pdf"
+    };
+
+    document.querySelectorAll("a.lang").forEach(a => {
+      a.addEventListener("click", (e) => {
+        e.preventDefault();
+        const lang = a.dataset.lang;
+        // apre direttamente il PDF della lingua scelta
+        window.location.href = PDF[lang];
+      });
+    });
+  </script>
+
+</body>
+</html>

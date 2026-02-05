@@ -2,7 +2,7 @@
 <html lang="it">
 <head>
   <meta charset="UTF-8" />
-  <title>Primo Scambio — Mango</title>
+  <title>Mango</title>
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
@@ -11,14 +11,9 @@
 
   <main class="container">
 
-    <h1 id="title">Hai appena fatto Mango.</h1>
+    <h1>Hai appena fatto Mango 🥭</h1>
 
-    <p id="subtitle">
-      Non serve spiegare.  
-      Non serve contare.
-    </p>
-
-    <p><em id="guidance"></em></p>
+    <p><strong>Qui puoi lasciare una riga al mondo.</strong></p>
 
     <textarea rows="6"></textarea>
 
@@ -30,67 +25,10 @@
   </main>
 
   <script>
-    // HEADER
     fetch("header.html")
       .then(r => r.text())
       .then(t => document.getElementById("header").innerHTML = t);
 
-    // LINGUE
-    const texts = {
-      it: {
-        title: "Hai appena fatto Mango.",
-        subtitle: "Non serve spiegare.<br>Non serve contare.",
-        guidance: "Una riga per quello che è successo. Nient’altro.",
-        copy: "Copia la riga",
-        copied: "Copiato."
-      },
-      en: {
-        title: "You just did Mango.",
-        subtitle: "No need to explain.<br>No need to count.",
-        guidance: "One line for what happened. Nothing else.",
-        copy: "Copy the line",
-        copied: "Copied."
-      },
-      es: {
-        title: "Acabas de hacer Mango.",
-        subtitle: "No hace falta explicar.<br>No hace falta contar.",
-        guidance: "Una línea para lo que pasó. Nada más.",
-        copy: "Copiar la línea",
-        copied: "Copiado."
-      },
-      fr: {
-        title: "Tu viens de faire Mango.",
-        subtitle: "Pas besoin d’expliquer.<br>Pas besoin de compter.",
-        guidance: "Une ligne pour ce qui s’est passé. Rien d’autre.",
-        copy: "Copier la ligne",
-        copied: "Copié."
-      },
-      de: {
-        title: "Du hast gerade Mango gemacht.",
-        subtitle: "Keine Erklärung nötig.<br>Kein Zählen nötig.",
-        guidance: "Eine Zeile für das, was passiert ist. Nichts weiter.",
-        copy: "Zeile kopieren",
-        copied: "Kopiert."
-      },
-      zh: {
-        title: "你刚刚做了 Mango。",
-        subtitle: "不需要解释。<br>不需要计算。",
-        guidance: "为发生的事情写一行。仅此而已。",
-        copy: "复制这一行",
-        copied: "已复制。"
-      }
-    };
-
-    const lang = new URLSearchParams(window.location.search).get("lang") || "it";
-    const t = texts[lang] || texts.it;
-
-    document.documentElement.lang = lang;
-    document.getElementById("title").innerHTML = t.title;
-    document.getElementById("subtitle").innerHTML = t.subtitle;
-    document.getElementById("guidance").innerHTML = t.guidance;
-    document.getElementById("copyBtn").textContent = t.copy;
-
-    // COPY
     const btn = document.getElementById("copyBtn");
     const msg = document.getElementById("copyMsg");
     const ta = document.querySelector("textarea");
@@ -100,7 +38,7 @@
       if (!text) return;
       try {
         await navigator.clipboard.writeText(text);
-        msg.textContent = t.copied;
+        msg.textContent = "Copiato.";
       } catch {
         msg.textContent = "";
       }

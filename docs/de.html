@@ -1,4 +1,23 @@
-<!doctype html><html><head>
-<meta charset="utf-8">
-<meta http-equiv="refresh" content="0; url=index.html?lang=de">
-</head><body></body></html>
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Mango</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <div id="header"></div>
+
+  <main class="container">
+    <h1>Mango</h1>
+  </main>
+
+  <script>
+    fetch("header.html")
+      .then(r => r.text())
+      .then(t => document.getElementById("header").innerHTML = t);
+  </script>
+
+</body>
+</html>

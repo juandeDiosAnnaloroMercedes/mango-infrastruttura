@@ -1,47 +1,14 @@
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Mango</title>
-<style>
-body{
-  font-family: Arial, sans-serif;
-  text-align:center;
-  padding:60px;
-}
-select, button{
-  padding:12px 18px;
-  margin:12px;
-  font-size:16px;
-}
-</style>
-</head>
-<body>
+<div style="position:fixed; top:0; left:0; right:0; background:#fff; z-index:9999;
+text-align:right; font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
+font-size:14px; padding:14px 18px; border-bottom:1px solid #eee;">
 
-<h1>Mango 🥭</h1>
+  <a href="index.html" style="color:#111; text-decoration:none; margin-left:12px;">IT</a>
+  <a href="en.html" style="color:#111; text-decoration:none; margin-left:12px;">EN</a>
+  <a href="es.html" style="color:#111; text-decoration:none; margin-left:12px;">ES</a>
+  <a href="fr.html" style="color:#111; text-decoration:none; margin-left:12px;">FR</a>
+  <a href="de.html" style="color:#111; text-decoration:none; margin-left:12px;">DE</a>
+  <a href="zh.html" style="color:#111; text-decoration:none; margin-left:12px;">中文</a>
 
-<select id="lang" onchange="cambiaLingua()">
-  <option value="it">Italiano</option>
-  <option value="en">English</option>
-  <option value="es">Español</option>
-  <option value="fr">Français</option>
-  <option value="de">Deutsch</option>
-  <option value="zh">中文</option>
-</select>
+</div>
 
-<div id="contenuto"></div>
-
-<script>
-const testi = {
-  it: {
-    titolo: "Benvenuto in Mango",
-    testo: "È successo qualcosa tra te e qualcun altro?",
-    riga: "Scrivi una riga",
-    faq: "Cos’è Mango"
-  },
-  en: {
-    titolo: "Welcome to Mango",
-    testo: "Has something happened between you and someone else?",
-    riga: "Write one line",
-    faq: "What is Mango?"
-  },
+<div style="height:60px;"></div>

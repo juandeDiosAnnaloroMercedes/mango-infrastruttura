@@ -11,19 +11,13 @@
 
   <main class="container">
     <h1>Mango</h1>
-
-    <p>
-      <a href="primo-scambio.html">Ho appena fatto Mango</a>
-    </p>
+    <p><a href="primo-scambio.html">Ho appena fatto Mango</a></p>
   </main>
 
   <script>
     fetch("header.html")
       .then(r => r.text())
-      .then(t => {
-        const h = document.getElementById("header");
-        if (h) h.innerHTML = t;
-      });
+      .then(t => document.getElementById("header").innerHTML = t);
   </script>
 
 </body>

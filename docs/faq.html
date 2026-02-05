@@ -31,14 +31,22 @@
 </ul>
 
   <script>
-    const PDF = {
-      it: "docs/faq-it.pdf",
-      en: "docs/faq-en.pdf",
-      es: "docs/faq-es.pdf",
-      fr: "docs/faq-fr.pdf",
-      de: "docs/faq-de.pdf",
-      zh: "docs/faq-zh.pdf"
-    };
+  const PDF = {
+    it: "Mango_FAQ_IT.pdf",
+    en: "Mango_FAQ_EN.pdf",
+    es: "Mango_FAQ_ES.pdf",
+    fr: "Mango_FAQ_FR.pdf",
+    de: "Mango_FAQ_DE.pdf",
+    zh: "Mango_FAQ_ZH.pdf"
+  };
+
+  document.querySelectorAll("a.lang").forEach(a => {
+    a.addEventListener("click", (e) => {
+      e.preventDefault();
+      window.location.href = PDF[a.dataset.lang];
+    });
+  });
+</script>
 
     document.querySelectorAll("a.lang").forEach(a => {
       a.addEventListener("click", (e) => {

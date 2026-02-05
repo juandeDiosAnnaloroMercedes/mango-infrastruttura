@@ -1,61 +1,92 @@
 <!doctype html>
 <html lang="it">
 <head>
-<meta charset="utf-8"/>
-<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Mango</title>
+
 <style>
 body{margin:0;font-family:system-ui;background:#fff;color:#111}
-.wrap{max-width:900px;margin:auto;padding:24px}
-.nav{display:flex;gap:10px;flex-wrap:wrap;margin:20px 0}
-.btn{padding:12px;border:1px solid #ddd;border-radius:12px;text-decoration:none;color:#111;background:#f7f7f7;font-weight:700}
-.box{background:#f7f7f7;border:1px solid #eaeaea;border-radius:14px;padding:16px;margin:14px 0}
-.top{display:flex;gap:14px;justify-content:flex-end;padding:12px;border-bottom:1px solid #eee}
-.top a{text-decoration:none;color:#111;font-weight:600}
+.wrap{max-width:900px;margin:0 auto;padding:24px 16px 60px}
+.nav{display:flex;gap:10px;flex-wrap:wrap;margin:18px 0}
+.btn{padding:12px;border:1px solid #ddd;border-radius:10px;background:#fafafa;text-decoration:none;color:#111}
+.box{background:#f7f7f7;border:1px solid #eaeaea;border-radius:12px;padding:18px;margin:18px 0}
+.top{display:flex;gap:14px;justify-content:flex-end;font-size:14px;margin-bottom:10px}
+.top a{text-decoration:none;color:#111}
 h1{font-size:42px;margin:10px 0}
 h2{margin-top:30px}
 </style>
+
+<script>
+const t = {
+it:{
+title:"Infrastruttura di fiducia locale: riconosce scambi reali tra persone, senza denaro, senza numeri, senza accumulo.",
+do_btn:"Fai Mango adesso",
+line_btn:"Scrivi una riga",
+what_btn:"Cos'è Mango",
+faq_btn:"FAQ",
+do_title:"Fai Mango adesso",
+do_text:"Non serve un’app. Non serve denaro. Non serve registrarsi. Ti serve solo un’altra persona.",
+box:"Fate uno scambio reale.<br><br>Poi scrivete una riga su un foglio:<br><br><strong>Chi ha dato — Chi ha ricevuto — Cosa è successo.</strong>",
+first:"Quella riga è il primo Mango.",
+line_title:"Scrivi una riga",
+line_text:"Prendi un foglio. Scrivi una sola riga:"
+},
+en:{
+title:"Local trust infrastructure: recognizes real exchanges between people, without money, without numbers, without accumulation.",
+do_btn:"Do Mango now",
+line_btn:"Write one line",
+what_btn:"What is Mango",
+faq_btn:"FAQ",
+do_title:"Do Mango now",
+do_text:"You don’t need an app. You don’t need money. You don’t need to register. You only need another person.",
+box:"Make a real exchange.<br><br>Then write one line on a sheet of paper:<br><br><strong>Who gave — Who received — What happened.</strong>",
+first:"That line is the first Mango.",
+line_title:"Write one line",
+line_text:"Take a sheet of paper. Write a single line:"
+}
+};
+
+function setLang(l){
+document.getElementById('title').innerHTML=t[l].title;
+document.getElementById('do_btn').innerHTML=t[l].do_btn;
+document.getElementById('line_btn').innerHTML=t[l].line_btn;
+document.getElementById('do_title').innerHTML=t[l].do_title;
+document.getElementById('do_text').innerHTML=t[l].do_text;
+document.getElementById('box').innerHTML=t[l].box;
+document.getElementById('first').innerHTML=t[l].first;
+document.getElementById('line_title').innerHTML=t[l].line_title;
+document.getElementById('line_text').innerHTML=t[l].line_text;
+}
+</script>
 </head>
-<div class="top">
-<a href="/mango-infrastruttura/docs/index.html">IT</a>
-<a href="/mango-infrastruttura/docs/en.html">EN</a>
-<a href="/mango-infrastruttura/docs/es.html">ES</a>
-<a href="/mango-infrastruttura/docs/fr.html">FR</a>
-<a href="/mango-infrastruttura/docs/de.html">DE</a>
-<a href="/mango-infrastruttura/docs/zh.html">中文</a>
-</div>
+
+<body onload="setLang('it')">
 
 <div class="wrap">
-<h1>Mango</h1>
 
-<p><strong>Infrastruttura di fiducia locale</strong>: riconosce scambi reali tra persone, senza denaro, senza numeri, senza accumulo.</p>
+<div class="top">
+<a href="#" onclick="setLang('it')">IT</a>
+<a href="#" onclick="setLang('en')">EN</a>
+</div>
+
+<h1>Mango</h1>
+<p id="title"></p>
 
 <div class="nav">
-<a class="btn" href="#fai">Fai Mango adesso</a>
-<a class="btn" href="#riga">Scrivi una riga</a>
-<a class="btn" href="#cose">Cos’è Mango</a>
-<a class="btn" href="../faq.html">FAQ</a>
+<a class="btn" href="#do" id="do_btn"></a>
+<a class="btn" href="#line" id="line_btn"></a>
+<a class="btn" href="faq.html">FAQ</a>
 </div>
 
-<div id="fai">
-<h2>Fai Mango adesso</h2>
-<p>Non serve un’app. Non serve denaro. Non serve registrarsi.</p>
-<div class="box">
-Chi ha dato — Chi ha ricevuto — Cosa è successo.
-</div>
-</div>
+<h2 id="do_title"></h2>
+<p id="do_text"></p>
 
-<div id="riga">
-<h2>Scrivi una riga</h2>
-<div class="box">
-Chi ha dato — Chi ha ricevuto — Cosa è successo.
-</div>
-</div>
+<div class="box" id="box"></div>
+<p id="first"></p>
 
-<div id="cose">
-<h2>Cos’è Mango</h2>
-<p>Mango rende visibili le relazioni umane senza numeri e senza accumulo.</p>
-</div>
+<h2 id="line_title"></h2>
+<p id="line_text"></p>
 
 </div>
 </body>

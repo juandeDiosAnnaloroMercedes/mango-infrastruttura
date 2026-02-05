@@ -5,26 +5,29 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Mango — Home</title>
   <style>
-    body { margin:0; font-family: system-ui, -apple-system, Arial, sans-serif; background:#ffffff; color:#111111; }
+    body { margin:0; font-family: system-ui, -apple-system, Arial, sans-serif; background:#fff; color:#111; }
     .topbar {
       position: sticky; top: 0;
-      background:#ffffff; border-bottom:1px solid #eaeaea;
+      background:#fff; border-bottom:1px solid #eaeaea;
       padding:12px 14px; display:flex; justify-content:flex-end; gap:10px;
-      font-size:14px;
+      font-size:14px; z-index:9999;
     }
     .topbar a { color:#111; text-decoration:none; padding:6px 8px; border-radius:8px; }
+    .topbar a:hover { background:#f2f2f2; }
     .wrap { max-width: 920px; margin:0 auto; padding:24px 16px 60px; }
     h1 { margin: 10px 0 6px; font-size: 30px; }
     h2 { margin: 26px 0 8px; font-size: 22px; }
     p { line-height:1.6; margin: 10px 0; }
     .nav { display:flex; flex-wrap:wrap; gap:10px; margin: 18px 0 22px; }
     .btn { display:inline-block; padding:10px 12px; border:1px solid #ddd; border-radius:10px; background:#fafafa; color:#111; text-decoration:none; }
+    .btn:hover { background:#f2f2f2; }
     .box { background:#f7f7f7; border:1px solid #eaeaea; border-radius:12px; padding:14px; }
     .footer { margin-top: 34px; padding-top: 18px; border-top: 1px solid #eaeaea; }
   </style>
 </head>
 
 <body>
+  <!-- Lingue -->
   <div class="topbar">
     <a href="index.html">IT</a>
     <a href="en.html">EN</a>

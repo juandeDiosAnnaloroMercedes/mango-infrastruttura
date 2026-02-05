@@ -4,37 +4,61 @@
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Mango — Accueil</title>
+
 <style>
 body{margin:0;font-family:system-ui;background:#fff;color:#111}
-.topbar{position:sticky;top:0;background:#fff;border-bottom:1px solid #eaeaea;padding:12px 14px;display:flex;justify-content:flex-end;gap:10px;font-size:14px}
-.topbar a{color:#111;text-decoration:none;padding:6px 8px;border-radius:8px}
+.topbar{position:sticky;top:0;background:#fff;border-bottom:1px solid #eee;padding:12px 16px}
+.topbar a{margin-right:12px;color:#111;text-decoration:none;font-weight:600}
 .wrap{max-width:920px;margin:0 auto;padding:24px 16px 60px}
-h1{font-size:30px} h2{margin-top:26px}
+h1{font-size:30px;margin:10px 0 6px}
+h2{margin-top:26px}
 .nav{display:flex;flex-wrap:wrap;gap:10px;margin:18px 0}
 .btn{padding:10px 12px;border:1px solid #ddd;border-radius:10px;background:#fafafa;text-decoration:none;color:#111}
-.box{background:#f7f7f7;border:1px solid #eaeaea;border-radius:12px;padding:14px}
+.box{background:#f7f7f7;border:1px solid #eaeaea;border-radius:12px;padding:16px;margin-top:12px}
 </style>
 </head>
+
 <body>
+
 <div class="topbar">
-<a href="index.html">IT</a><a href="en.html">EN</a><a href="es.html">ES</a><a href="fr.html">FR</a><a href="de.html">DE</a><a href="zh.html">中文</a>
+  <a href="index.html">IT</a>
+  <a href="en.html">EN</a>
+  <a href="es.html">ES</a>
+  <a href="fr.html">FR</a>
+  <a href="de.html">DE</a>
+  <a href="zh.html">中文</a>
 </div>
+
 <div class="wrap">
-<h1>Mango</h1>
-<p><strong>Infrastructure de confiance locale</strong> : reconnaît des échanges réels entre personnes, sans argent, sans chiffres, sans accumulation.</p>
-<div class="nav">
-  <a class="btn" href="#fai">Fai Mango adesso</a>
-  <a class="btn" href="scrivi-riga.html">Scrivi una riga</a>
-  <a class="btn" href="#cose">Cos’è Mango</a>
-  <a class="btn" href="faq.html">FAQ</a>
-</div>
-<div id="fai">
-<h2>Fais Mango maintenant</h2>
-<p>Pas besoin d’application. Pas besoin d’argent. Pas besoin d’inscription.</p>
-<p>Tu as seulement besoin d’une autre personne.</p>
-<div class="box">Faites un échange réel.<br><br>Puis écrivez une ligne :<br><br><strong>Qui a donné — Qui a reçu — Qu’est-ce qui s’est passé.</strong></div>
-<p>Cette ligne est le premier Mango.</p>
-</div>
+  <h1>Mango</h1>
+  <p><strong>Infrastructure de confiance locale</strong> : reconnaît les échanges réels entre personnes, sans argent, sans nombres, sans accumulation.</p>
+
+  <div class="nav">
+    <a class="btn" href="#fai">Fais Mango maintenant</a>
+    <a class="btn" href="#riga">Écris une ligne</a>
+  </div>
+
+  <div id="fai">
+    <h2>Fais Mango maintenant</h2>
+    <p>Pas besoin d’application. Pas besoin d’argent. Pas besoin de s’inscrire.</p>
+    <p>Il te suffit d’une autre personne.</p>
+
+    <div class="box">
+      Fais un échange réel.<br><br>
+      Puis écrivez une ligne sur une feuille :<br><br>
+      Qui a donné — Qui a reçu — Ce qui s’est passé.
+    </div>
+
+    <p>Cette ligne est le premier Mango.</p>
+  </div>
+
+  <div id="riga">
+    <h2>Écris une ligne</h2>
+    <div class="box">
+      Qui a donné — Qui a reçu — Ce qui s’est passé.
+    </div>
+  </div>
+
 </div>
 </body>
 </html>

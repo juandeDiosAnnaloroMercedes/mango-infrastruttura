@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <title>Primo Scambio — Mango</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <div id="header"></div>
+
+  <main class="container">
+    <h1>Hai appena fatto Mango.</h1>
+
+    <p>
+      Non serve spiegare.  
+      Non serve contare.  
+      Serve solo scrivere la riga.
+    </p>
+
+    <h2>Scrivi cosa è successo</h2>
+
+    <textarea placeholder="Esempio: Ho portato la spesa a Lucia che non poteva uscire."></textarea>
+
+    <p>
+      Questa riga è Mango.  
+      Nient’altro.
+    </p>
+  </main>
+
+  <script>
+    fetch("header.html")
+      .then(res => res.text())
+      .then(data => document.getElementById("header").innerHTML = data);
+  </script>
+
+</body>
+</html>

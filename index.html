@@ -1,59 +1,14 @@
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Mango</title>
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<style>
-body{font-family:Arial,sans-serif;text-align:center;padding:48px 16px;}
-.box{max-width:700px;margin:0 auto;border:1px solid #ddd;border-radius:14px;padding:18px;}
-select{padding:12px 18px;margin:10px;font-size:16px;}
-a{
- display:block;margin:12px auto;padding:14px;max-width:340px;
- border:1px solid #111;border-radius:12px;text-decoration:none;color:#111;font-weight:700;
-}
-</style>
-</head>
-<body>
+<div style="position:fixed; top:0; left:0; right:0; background:#fff; z-index:9999;
+text-align:right; font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
+font-size:14px; padding:14px 18px; border-bottom:1px solid #eee;">
 
-<h1>Mango 🥭</h1>
+  <a href="index.html" style="color:#111; text-decoration:none; margin-left:12px;">IT</a>
+  <a href="en.html" style="color:#111; text-decoration:none; margin-left:12px;">EN</a>
+  <a href="es.html" style="color:#111; text-decoration:none; margin-left:12px;">ES</a>
+  <a href="fr.html" style="color:#111; text-decoration:none; margin-left:12px;">FR</a>
+  <a href="de.html" style="color:#111; text-decoration:none; margin-left:12px;">DE</a>
+  <a href="zh.html" style="color:#111; text-decoration:none; margin-left:12px;">中文</a>
 
-<div class="box">
-<p><strong>Choose your language / Scegli la tua lingua</strong></p>
-
-<select id="lang">
-<option value="it">Italiano</option>
-<option value="en">English</option>
-<option value="es">Español</option>
-<option value="fr">Français</option>
-<option value="de">Deutsch</option>
-<option value="zh">中文</option>
-</select>
-
-<div id="txt"></div>
-
-<a href="primo-scambio.html" id="b1"></a>
-<a href="faq.html" id="b2"></a>
 </div>
 
-<script>
-const T={
-it:["Benvenuto in Mango","È successo qualcosa tra te e qualcun altro?","Scrivi una riga","Cos’è Mango"],
-en:["Welcome to Mango","Has something happened between you and someone else?","Write one line","What is Mango?"],
-es:["Bienvenido a Mango","¿Ha ocurrido algo entre tú y otra persona?","Escribe una línea","¿Qué es Mango?"],
-fr:["Bienvenue dans Mango","Quelque chose s’est-il passé entre vous et quelqu’un d’autre ?","Écrire une ligne","Qu’est-ce que Mango ?"],
-de:["Willkommen bei Mango","Ist etwas zwischen dir und jemand anderem passiert?","Eine Zeile schreiben","Was ist Mango?"],
-zh:["歡迎來到 Mango","你和他人之間是否發生了什麼事情？","寫下一行","Mango 是什麼？"]
-};
-function R(){
-let v=document.getElementById("lang").value;
-let t=T[v];
-document.getElementById("txt").innerHTML=`<h2>${t[0]}</h2><p>${t[1]}</p>`;
-document.getElementById("b1").textContent=t[2];
-document.getElementById("b2").textContent=t[3];
-}
-document.getElementById("lang").addEventListener("change",R);R();
-</script>
-
-</body>
-</html>
+<div style="height:60px;"></div>

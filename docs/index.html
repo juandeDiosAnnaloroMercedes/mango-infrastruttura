@@ -1,41 +1,34 @@
 <!doctype html>
 <html lang="it">
 <head>
-<script>
-const T = {
-  it: {
-    title: "Infrastruttura di fiducia locale: riconosce scambi reali tra persone, senza denaro, senza numeri, senza accumulo.",
-    do_btn: "Fai Mango adesso",
-    line_btn: "Scrivi una riga",
-    do_title: "Fai Mango adesso",
-    do_text: "Non serve un'app. Non serve denaro. Non serve registrarsi.",
-    box: "Fate uno scambio reale.<br><br>Poi scrivete una riga su un foglio:<br><br><b>Chi ha dato — Chi ha ricevuto — Cosa è successo.</b>",
-    first: "Quella riga è il primo Mango.",
-    line_title: "Scrivi una riga",
-    line_text: "Prendi un foglio. Scrivi una sola riga."
-  },
-  en: {
-    title: "Local trust infrastructure: recognizes real exchanges between people, without money, without numbers, without accumulation.",
-    do_btn: "Do Mango now",
-    line_btn: "Write one line",
-    do_title: "Do Mango now",
-    do_text: "No app needed. No money needed. No registration.",
-    box: "Make a real exchange.<br><br>Then write one line on a sheet:<br><br><b>Who gave — Who received — What happened.</b>",
-    first: "That line is the first Mango.",
-    line_title: "Write one line",
-    line_text: "Take a sheet. Write a single line."
-  }
-};
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Mango</title>
+<style>
+body{font-family:system-ui;max-width:900px;margin:auto;padding:24px}
+.top a{margin-right:12px;text-decoration:none;color:#111}
+.box{border:1px solid #ddd;padding:16px;margin:16px 0}
+</style>
+</head>
+<body>
 
-function setLang(lang){
-  document.getElementById('title').innerHTML = T[lang].title;
-  document.getElementById('do_btn').innerHTML = T[lang].do_btn;
-  document.getElementById('line_btn').innerHTML = T[lang].line_btn;
-  document.getElementById('do_title').innerHTML = T[lang].do_title;
-  document.getElementById('do_text').innerHTML = T[lang].do_text;
-  document.getElementById('box').innerHTML = T[lang].box;
-  document.getElementById('first').innerHTML = T[lang].first;
-  document.getElementById('line_title').innerHTML = T[lang].line_title;
-  document.getElementById('line_text').innerHTML = T[lang].line_text;
-}
-</script>
+<div class="top">
+<a href="index.html">IT</a>
+<a href="en.html">EN</a>
+<a href="es.html">ES</a>
+<a href="fr.html">FR</a>
+<a href="de.html">DE</a>
+<a href="zh.html">中文</a>
+</div>
+
+<h1>Mango</h1>
+<p>Infrastruttura di fiducia locale: riconosce scambi reali tra persone.</p>
+
+<div class="box">
+Chi ha dato — Chi ha ricevuto — Cosa è successo.
+</div>
+
+<a href="../faq.html">FAQ</a>
+
+</body>
+</html>

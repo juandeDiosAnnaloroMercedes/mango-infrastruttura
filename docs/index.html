@@ -1,98 +1,83 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="it">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Mango</title>
+<style>
+body{
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+  margin:0;
+  padding:40px 20px;
+  max-width:900px;
+  margin:auto;
+}
+.lang{
+  position:fixed;
+  top:10px;
+  right:20px;
+  font-size:14px;
+}
+.lang a{
+  margin-left:10px;
+  text-decoration:none;
+  color:#000;
+}
+h1{font-size:44px;line-height:1.1;}
+.section{margin-top:80px;}
+.box{
+  border:2px solid #000;
+  padding:24px;
+  margin-top:24px;
+  font-size:20px;
+}
+</style>
 </head>
+<body>
 
-<body style="margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;color:#111;background:#fff;">
-
-<!-- Lingue -->
-<div style="position:fixed;top:0;left:0;right:0;background:#fff;z-index:9999;border-bottom:1px solid #eee;
-padding:14px 18px;text-align:right;font-size:14px;">
-  <a href="index.html" style="color:#111;text-decoration:none;">IT</a> ·
-  <a href="en.html" style="color:#111;text-decoration:none;">EN</a> ·
-  <a href="es.html" style="color:#111;text-decoration:none;">ES</a> ·
-  <a href="fr.html" style="color:#111;text-decoration:none;">FR</a> ·
-  <a href="de.html" style="color:#111;text-decoration:none;">DE</a> ·
-  <a href="zh.html" style="color:#111;text-decoration:none;">中文</a>
+<div class="lang">
+  <a href="#inizia">IT</a>
+  <a href="#inizia">EN</a>
+  <a href="#inizia">ES</a>
+  <a href="#inizia">FR</a>
+  <a href="#inizia">DE</a>
+  <a href="#inizia">中文</a>
 </div>
 
-<div style="height:60px;"></div>
+<!-- BLOCCO 1 -->
+<div id="inizia" class="section">
+<h1>Se stai leggendo questa pagina, puoi fare Mango adesso.</h1>
+<p>Non serve un’app.<br>
+Non serve denaro.<br>
+Non serve registrarsi.</p>
+<p>Ti serve solo un’altra persona.</p>
 
-<div style="max-width:760px;margin:0 auto;padding:24px;">
+<div class="box">
+Fate uno scambio reale.<br><br>
+Poi scrivete una riga su un foglio:<br><br>
+Chi ha dato — Chi ha ricevuto — Cosa è successo.
+</div>
 
-  <!-- Mini menu interno -->
-  <div style="margin:10px 0 30px;display:flex;gap:12px;flex-wrap:wrap;">
-    <a href="#inizia" style="border:1px solid #111;padding:10px 12px;text-decoration:none;color:#111;">Inizia</a>
-    <a href="#riga" style="border:1px solid #111;padding:10px 12px;text-decoration:none;color:#111;">Scrivi una riga</a>
-    <a href="#cose" style="border:1px solid #111;padding:10px 12px;text-decoration:none;color:#111;">Cos’è Mango</a>
-  </div>
+<p>Quella riga è il primo Mango.</p>
+</div>
 
-  <!-- 1) INIZIA -->
-  <section id="inizia" style="padding-top:10px;">
-    <h1 style="font-size:52px;line-height:1.05;margin:18px 0 18px;">
-      Se stai leggendo questa pagina,<br>
-      puoi fare Mango adesso.
-    </h1>
+<!-- BLOCCO 2 -->
+<div id="riga" class="section">
+<h1>Scrivi una riga</h1>
+<p>Prendi un foglio.</p>
+<p>Scrivi una sola riga:</p>
+<div class="box">
+Chi ha dato — Chi ha ricevuto — Cosa è successo.
+</div>
+<p>Non servono numeri. Non servono valori.</p>
+</div>
 
-    <p style="font-size:22px;line-height:1.6;margin:20px 0;">
-      Non serve un’app.<br>
-      Non serve denaro.<br>
-      Non serve registrarsi.
-    </p>
-
-    <p style="font-size:22px;margin:18px 0 0;">
-      Ti serve solo un’altra persona.
-    </p>
-
-    <div style="border:2px solid #111;padding:22px;margin:34px 0;font-size:22px;line-height:1.5;">
-      <b>Fate uno scambio reale.</b><br><br>
-      Poi scrivete una riga su un foglio:<br><br>
-      <b>Chi ha dato — Chi ha ricevuto — Cosa è successo.</b>
-    </div>
-
-    <p style="font-size:22px;margin:0 0 10px;">
-      Quella riga è il primo Mango.
-    </p>
-  </section>
-
-  <hr style="border:none;border-top:1px solid #eee;margin:50px 0;">
-
-  <!-- 2) SCRIVI UNA RIGA -->
-  <section id="riga" style="padding-top:10px;">
-    <h2 style="font-size:34px;margin:0 0 14px;">Scrivi una riga</h2>
-    <p style="font-size:20px;line-height:1.6;">
-      Dopo lo scambio, prendete un foglio (anche un quaderno) e scrivete una sola riga:
-    </p>
-    <div style="border:1px solid #111;padding:18px;font-size:20px;line-height:1.6;">
-      Chi ha dato — Chi ha ricevuto — Cosa è successo.
-    </div>
-    <p style="font-size:20px;line-height:1.6;margin-top:14px;">
-      Niente numeri. Niente valore. Niente debiti.<br>
-      Solo un fatto reale che rende visibile una relazione.
-    </p>
-  </section>
-
-  <hr style="border:none;border-top:1px solid #eee;margin:50px 0;">
-
-  <!-- 3) COS'È MANGO -->
-  <section id="cose" style="padding-top:10px;">
-    <h2 style="font-size:34px;margin:0 0 14px;">Cos’è Mango</h2>
-    <p style="font-size:20px;line-height:1.6;">
-      Mango rende visibili le relazioni umane.
-    </p>
-    <p style="font-size:20px;line-height:1.6;">
-      Mango registra con una sola riga i fatti reali che trasformano una relazione,
-      senza numeri, senza valore, senza debito.
-    </p>
-    <p style="font-size:20px;line-height:1.6;">
-      Se uno scambio è sbilanciato, si riequilibra nel tempo con altri scambi reali,
-      senza conti e senza accumulo.
-    </p>
-  </section>
-
+<!-- BLOCCO 3 -->
+<div id="cose" class="section">
+<h1>Cos’è Mango</h1>
+<p><strong>Mango rende visibili le relazioni umane.</strong></p>
+<p>Mango registra con una sola riga i fatti reali che trasformano una relazione,
+senza numeri, senza valore, senza debito.</p>
 </div>
 
 </body>

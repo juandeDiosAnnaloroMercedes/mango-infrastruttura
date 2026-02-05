@@ -1,27 +1,4 @@
-<!doctype html>
-<html lang="it">
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Mango — FAQ</title>
-</head>
-<body style="font-family:system-ui;max-width:900px;margin:0 auto;padding:20px;">
-
-  <div style="position:fixed;top:0;left:0;right:0;text-align:right;font-size:14px;padding:14px 18px;background:#111;color:#fff;z-index:9999;">
-    <a href="Mango_FAQ_IT.pdf">IT</a>
-<a href="Mango_FAQ_EN.pdf">EN</a>
-<a href="Mango_FAQ_ES.pdf">ES</a>
-<a href="Mango_FAQ_FR.pdf">FR</a>
-<a href="Mango_FAQ_DE.pdf">DE</a>
-<a href="Mango_FAQ_ZH.pdf">ZH</a>
-  </div>
-
-  <div style="height:70px;"></div>
-
-  <h1>Mango — FAQ</h1>
-  <p>Scegli una lingua per aprire il PDF corrispondente.</p>
-
-  <ul style="line-height:1.9;">
+<ul style="line-height:1.9;">
   <li><a href="Mango_FAQ_IT.pdf">FAQ — Italiano (PDF)</a></li>
   <li><a href="Mango_FAQ_EN.pdf">FAQ — English (PDF)</a></li>
   <li><a href="Mango_FAQ_ES.pdf">FAQ — Español (PDF)</a></li>
@@ -29,34 +6,3 @@
   <li><a href="Mango_FAQ_DE.pdf">FAQ — Deutsch (PDF)</a></li>
   <li><a href="Mango_FAQ_ZH.pdf">FAQ — 中文 (PDF)</a></li>
 </ul>
-
-  <script>
-  const PDF = {
-    it: "Mango_FAQ_IT.pdf",
-    en: "Mango_FAQ_EN.pdf",
-    es: "Mango_FAQ_ES.pdf",
-    fr: "Mango_FAQ_FR.pdf",
-    de: "Mango_FAQ_DE.pdf",
-    zh: "Mango_FAQ_ZH.pdf"
-  };
-
-  document.querySelectorAll("a.lang").forEach(a => {
-    a.addEventListener("click", (e) => {
-      e.preventDefault();
-      window.location.href = PDF[a.dataset.lang];
-    });
-  });
-</script>
-
-    document.querySelectorAll("a.lang").forEach(a => {
-      a.addEventListener("click", (e) => {
-        e.preventDefault();
-        const lang = a.dataset.lang;
-        // apre direttamente il PDF della lingua scelta
-        window.location.href = PDF[lang];
-      });
-    });
-  </script>
-
-</body>
-</html>

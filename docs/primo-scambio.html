@@ -27,7 +27,10 @@
   <script>
     fetch("header.html")
       .then(r => r.text())
-      .then(t => document.getElementById("header").innerHTML = t);
+      .then(t => {
+        const h = document.getElementById("header");
+        if (h) h.innerHTML = t;
+      });
 
     const btn = document.getElementById("copyBtn");
     const msg = document.getElementById("copyMsg");

@@ -1,29 +1,24 @@
 <!doctype html>
-<html lang="it">
+<html>
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Mango</title>
 
-  <!-- Redirect immediato -->
+  <!-- redirect immediato -->
   <meta http-equiv="refresh" content="0; url=docs/">
 
   <script>
-    // Redirect "forte" (Safari iPhone incluso)
+    // Safari iPhone: redirect "forte"
     (function () {
-      var target = "docs/";
-      // Se non sei già in /docs/, vai lì.
       if (!location.pathname.includes("/docs/")) {
-        location.replace(target);
+        location.replace("docs/");
       }
     })();
   </script>
 </head>
-
-<body style="font-family:system-ui; padding:20px; background:#fff; color:#111;">
-  <h1>Mango</h1>
-  <p>Reindirizzamento alla home…</p>
-  <p>Se non funziona, tocca qui:</p>
-  <p><a href="docs/" style="font-size:18px;">Apri Mango Home</a></p>
+<body style="font-family:system-ui;padding:20px">
+  <p>Reindirizzamento a Mango…</p>
+  <p>Se non funziona: <a href="docs/">Apri Mango</a></p>
 </body>
 </html>

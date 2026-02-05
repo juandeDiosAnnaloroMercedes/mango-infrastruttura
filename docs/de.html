@@ -1,34 +1,100 @@
 <!doctype html>
-<html lang="de">
+<html lang="it">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Mango</title>
-<style>
-body{font-family:system-ui;max-width:900px;margin:auto;padding:24px}
-.top a{margin-right:12px;text-decoration:none;color:#111}
-.box{border:1px solid #ddd;padding:16px;margin:16px 0}
-</style>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Mango</title>
+
+  <!-- Se hai già docs/style.css lo usiamo -->
+  <link rel="stylesheet" href="style.css" />
+
+  <style>
+    /* Fallback minimo se style.css manca */
+    body { font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif; max-width: 900px; margin: 0 auto; padding: 18px; color: #111; }
+    nav a { margin-right: 10px; text-decoration: none; }
+    nav a.active { font-weight: 700; text-decoration: underline; }
+    .box { border: 1px solid #ddd; padding: 16px; margin: 16px 0; }
+  </style>
 </head>
+
 <body>
+  <!-- Header comune (se esiste header.html) -->
+  <div id="header"></div>
+  <script>
+    fetch("header.html")
+      .then(r => r.ok ? r.text() : "")
+      .then(html => { document.getElementById("header").innerHTML = html || ""; })
+      .catch(() => {});
+  </script>
 
-<div class="top">
-<a href="index.html">IT</a>
-<a href="en.html">EN</a>
-<a href="es.html">ES</a>
-<a href="fr.html">FR</a>
-<a href="de.html">DE</a>
-<a href="zh.html">中文</a>
-</div>
+  <!-- Menu lingue (sempre funzionante) -->
+  <nav id="langbar" style="margin: 10px 0 18px;"></nav>
 
-<h1>Mango</h1>
-<p>Lokale Vertrauensinfrastruktur: erkennt echte Austausche zwischen Menschen an.</p>
+  <h1 id="title">Mango</h1>
+  <p id="subtitle"></p>
 
-<div class="box">
-Wer gegeben hat — Wer erhalten hat — Was ist passiert.
-</div>
+  <div class="box" id="box"></div>
 
-<a href="faq.html">FAQ</a>
+  <p><a id="faqLink" href="faq.html">FAQ</a></p>
 
-</body>
-</html>
+  <script>
+    // Dizionario testi
+    const T = {
+      it: {
+        label: "IT",
+        htmlLang: "it",
+        subtitle: "Infrastruttura di fiducia locale: riconosce scambi reali tra persone senza usare denaro.",
+        box: "Chi ha dato — Chi ha ricevuto — Cosa è successo.",
+        faq: "FAQ"
+      },
+      en: {
+        label: "EN",
+        htmlLang: "en",
+        subtitle: "Local trust infrastructure: recognizes real exchanges between people without using money.",
+        box: "Who gave — Who received — What happened.",
+        faq: "FAQ"
+      },
+      es: {
+        label: "ES",
+        htmlLang: "es",
+        subtitle: "Infraestructura de confianza local: reconoce intercambios reales entre personas sin usar dinero.",
+        box: "Quién dio — Quién recibió — Qué pasó.",
+        faq: "FAQ"
+      },
+      fr: {
+        label: "FR",
+        htmlLang: "fr",
+        subtitle: "Infrastructure de confiance locale : reconnaît les échanges réels entre personnes sans utiliser d’argent.",
+        box: "Qui a donné — Qui a reçu — Ce qui s’est passé.",
+        faq: "FAQ"
+      },
+      de: {
+        label: "DE",
+        htmlLang: "de",
+        subtitle: "Lokale Vertrauensinfrastruktur: erkennt reale Austausche zwischen Menschen ohne Geld.",
+        box: "Wer gab — Wer erhielt — Was geschah.",
+        faq: "FAQ"
+      },
+      zh: {
+        label: "中文",
+        htmlLang: "zh-Hant",
+        subtitle: "本地信任基礎設施：在不使用金錢的情況下，識別人與人之間的真實交換。",
+        box: "誰給了 — 誰收到了 — 發生了什麼。",
+        faq: "FAQ"
+      }
+    };
+
+    // Legge lang da ?lang=xx
+    const params = new URLSearchParams(location.search);
+    let lang = (params.get("lang") || "it").toLowerCase();
+    if (!T[lang]) lang = "it";
+
+    // Applica lingua
+    document.documentElement.lang = T[lang].htmlLang;
+    document.getElementById("subtitle").textContent = T[lang].subtitle;
+    document.getElementById("box").textContent = T[lang].box;
+    document.getElementById("faqLink").textContent = T[lang].faq;
+
+    // Barra lingue
+    const order = ["it","en","es","fr","de","zh"];
+    const bar = document.get

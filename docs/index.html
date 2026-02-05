@@ -3,40 +3,31 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Mango — Home</title>
+  <title>Mango</title>
   <style>
-    body { font-family: system-ui, -apple-system, Arial, sans-serif; margin: 0; color:#111; background:#fff; }
-    .wrap { max-width: 920px; margin: 0 auto; padding: 28px 18px 60px; }
+    body { margin:0; font-family: system-ui, -apple-system, Arial, sans-serif; background:#ffffff; color:#111111; }
     .topbar {
-      position: fixed; top: 0; left: 0; right: 0;
-      background: #fff; border-bottom: 1px solid #eee;
-      padding: 10px 14px; z-index: 9999;
-      display: flex; justify-content: flex-end; gap: 10px;
-      font-size: 14px;
+      position: sticky; top: 0;
+      background:#ffffff; border-bottom:1px solid #eaeaea;
+      padding:12px 14px; display:flex; justify-content:flex-end; gap:10px;
+      font-size:14px;
     }
-    .topbar a { color:#111; text-decoration:none; padding: 6px 8px; border-radius: 8px; }
+    .topbar a { color:#111; text-decoration:none; padding:6px 8px; border-radius:8px; }
     .topbar a:hover { background:#f2f2f2; }
-    .spacer { height: 54px; }
-    h1 { font-size: 28px; margin: 10px 0 6px; }
-    p { line-height: 1.55; }
-    .nav {
-      display: flex; flex-wrap: wrap; gap: 10px;
-      margin: 18px 0 22px;
-    }
-    .btn {
-      display: inline-block; padding: 10px 12px;
-      border: 1px solid #ddd; border-radius: 10px;
-      text-decoration: none; color:#111; background:#fafafa;
-    }
+    .wrap { max-width: 920px; margin:0 auto; padding:24px 16px 60px; }
+    h1 { margin: 10px 0 6px; font-size: 30px; }
+    h2 { margin: 26px 0 8px; font-size: 22px; }
+    p { line-height:1.6; margin: 10px 0; }
+    .nav { display:flex; flex-wrap:wrap; gap:10px; margin: 18px 0 22px; }
+    .btn { display:inline-block; padding:10px 12px; border:1px solid #ddd; border-radius:10px; background:#fafafa; color:#111; text-decoration:none; }
     .btn:hover { background:#f2f2f2; }
-    .section { margin-top: 26px; padding-top: 6px; }
-    .box { background:#f7f7f7; border:1px solid #eee; border-radius: 12px; padding: 14px; }
-    .footer { margin-top: 34px; padding-top: 18px; border-top: 1px solid #eee; }
+    .box { background:#f7f7f7; border:1px solid #eaeaea; border-radius:12px; padding:14px; }
+    .footer { margin-top: 34px; padding-top: 18px; border-top: 1px solid #eaeaea; }
   </style>
 </head>
 
 <body>
-  <!-- Barra lingue (link alle pagine lingua già presenti in /docs) -->
+  <!-- Lingue: puntano alle pagine che hai in /docs -->
   <div class="topbar">
     <a href="index.html">IT</a>
     <a href="en.html">EN</a>
@@ -46,13 +37,10 @@
     <a href="zh.html">中文</a>
   </div>
 
-  <div class="spacer"></div>
-
   <div class="wrap">
     <h1>Mango</h1>
-    <p>Infrastruttura di fiducia locale: riconosce scambi reali tra persone, senza denaro, senza numeri, senza accumulo.</p>
+    <p><strong>Infrastruttura di fiducia locale</strong>: riconosce scambi reali tra persone, senza denaro, senza numeri, senza accumulo.</p>
 
-    <!-- Pulsanti rapidi alle 3 sezioni -->
     <div class="nav">
       <a class="btn" href="#fai">Fai Mango adesso</a>
       <a class="btn" href="#riga">Scrivi una riga</a>
@@ -60,43 +48,35 @@
       <a class="btn" href="faq.html">FAQ</a>
     </div>
 
-    <!-- BLOCCO 1 -->
-    <div id="fai" class="section">
+    <div id="fai">
       <h2>Fai Mango adesso</h2>
       <p>Non serve un’app. Non serve denaro. Non serve registrarsi.</p>
       <p>Ti serve solo un’altra persona.</p>
-
       <div class="box">
         Fate uno scambio reale.<br><br>
         Poi scrivete una riga su un foglio:<br><br>
         <strong>Chi ha dato — Chi ha ricevuto — Cosa è successo.</strong>
       </div>
-
       <p>Quella riga è il primo Mango.</p>
     </div>
 
-    <!-- BLOCCO 2 -->
-    <div id="riga" class="section">
+    <div id="riga">
       <h2>Scrivi una riga</h2>
-      <p>Prendi un foglio.</p>
-      <p>Scrivi una sola riga:</p>
-
+      <p>Prendi un foglio. Scrivi una sola riga:</p>
       <div class="box">
         <strong>Chi ha dato — Chi ha ricevuto — Cosa è successo.</strong>
       </div>
-
       <p>Non servono numeri. Non servono valori.</p>
     </div>
 
-    <!-- BLOCCO 3 -->
-    <div id="cose" class="section">
+    <div id="cose">
       <h2>Cos’è Mango</h2>
       <p><strong>Mango rende visibili le relazioni umane reali.</strong></p>
       <p>Mango registra con una sola riga i fatti reali: senza numeri, senza valore, senza debito.</p>
     </div>
 
     <div class="footer">
-      <p><a class="btn" href="faq.html">Apri FAQ</a></p>
+      <a class="btn" href="faq.html">Apri FAQ</a>
     </div>
   </div>
 </body>

@@ -1,31 +1,23 @@
-charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Mango</title>
-<style>
-body{font-family:system-ui;max-width:900px;margin:auto;padding:24px}
-.top a{margin-right:12px;text-decoration:none;color:#111}
-.box{border:1px solid #ddd;padding:16px;margin:16px 0}
-</style>
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Mango</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-<div id="header"></div>
-<script>
-fetch('header.html')
-  .then(res => res.text())
-  .then(data => {
-    document.getElementById('header').innerHTML = data;
-  });
-</script>
+  <div id="header"></div>
 
-<h1>Mango</h1>
-<p>Infraestructura de confianza local: reconoce intercambios reales entre personas.</p>
+  <main class="container">
+    <h1>Mango</h1>
+  </main>
 
-<div class="box">
-Quién dio — Quién recibió — Qué pasó.
-</div>
-
-<a href="faq.html">FAQ</a>
+  <script>
+    fetch("header.html")
+      .then(r => r.text())
+      .then(t => document.getElementById("header").innerHTML = t);
+  </script>
 
 </body>
 </html>

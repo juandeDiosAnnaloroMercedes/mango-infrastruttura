@@ -8,7 +8,12 @@
   <title>Mango</title>
 </head>
 <body>
-  <p><a href="index.html?lang=it">Vai a Mango</a></p>
-  <script>location.replace("index.html?lang=it");</script>
+  <script>
+    // redirect immediato, senza dipendenze
+    location.replace("index.html?lang=it");
+  </script>
+  <noscript>
+    <p><a href="index.html?lang=it">Vai a Mango</a></p>
+  </noscript>
 </body>
 </html>

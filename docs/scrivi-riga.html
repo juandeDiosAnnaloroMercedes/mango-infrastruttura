@@ -1,37 +1,50 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="it">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-
-  <!-- BASE ASSOLUTA: MAI PIÙ ROOT, MAI PIÙ 404 -->
-  <base href="https://juandediosannaloromercedes.github.io/mango-infrastruttura/">
-
-  <title>Mango</title>
-  <link rel="stylesheet" href="style.css">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Mango — Scrivi una riga</title>
+  <link rel="stylesheet" href="style.css" />
 </head>
-
 <body>
 
-  <!-- NAVIGAZIONE UNICA, STATICA, INDISTRUTTIBILE -->
-  <header>
-    <nav>
-      <a href="index.html#fai-mango">Hai fatto Mango 🥭</a>
-      <a href="scrivi-riga.html">Scrivi una riga</a>
-      <a href="primo-scambio.html">Primo scambio</a>
-      <a href="index.html#cos-e-mango">Cos’è Mango</a>
-    </nav>
-  </header>
+  <div id="site-header"></div>
 
-  <!-- CONTENUTO PAGINA -->
-  <main class="container">
+  <nav class="nav">
+    <a href="index.html" data-lang-link>Home</a>
+    <a href="primo-scambio.html" data-lang-link>Primo scambio</a>
+    <a href="faq.html" data-lang-link>FAQ</a>
+    <select class="lang" aria-label="Lingua" data-lang-picker>
+      <option value="it">IT</option><option value="en">EN</option><option value="es">ES</option>
+      <option value="fr">FR</option><option value="de">DE</option><option value="zh">ZH</option>
+    </select>
+  </nav>
 
-    <!-- QUI METTI IL CONTENUTO SPECIFICO DELLA PAGINA -->
-    <!-- esempio:
-    <h1>Hai appena fatto Mango 🥭</h1>
-    -->
+  <main class="wrap">
+    <section class="card">
+      <h1>Scrivi una riga</h1>
+      <p class="note">Una riga descrive uno scambio reale. Senza numeri. Senza equivalenze.</p>
 
+      <label class="lbl" for="riga">La tua riga</label>
+      <textarea id="riga" class="tx" rows="6" placeholder="Esempio: Ho aiutato Marco a portare la spesa. Marco mi ha aiutato a sistemare la bici."></textarea>
+
+      <div class="row-actions">
+        <button class="btn" type="button" id="copy">Copia</button>
+        <a class="btn ghost" href="index.html#riga" data-lang-link>Torna agli esempi</a>
+      </div>
+
+      <p class="tiny">Suggerimento: incolla questa riga nel tuo registro (quaderno, foglio, documento condiviso).</p>
+    </section>
   </main>
 
+  <script>
+    // micro-funzione locale, non “blindaggio”: solo comodità copia
+    document.getElementById("copy").addEventListener("click", async () => {
+      const v = document.getElementById("riga").value || "";
+      try { await navigator.clipboard.writeText(v); alert("Copiato."); }
+      catch { alert("Seleziona e copia manualmente."); }
+    });
+  </script>
+  <script src="mango.js"></script>
 </body>
 </html>

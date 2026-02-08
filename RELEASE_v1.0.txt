@@ -1,0 +1,6 @@
+Mango v1.0
+Stable multilingual system (IT EN ES FR DE ZH)
+Persistent navigation
+No 404
+QR ready
+02 February 2026

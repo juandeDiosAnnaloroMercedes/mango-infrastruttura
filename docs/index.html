@@ -21,6 +21,9 @@ footer{text-align:center;padding:40px 20px;font-size:14px;opacity:0.6;}
 <a href="?lang=it">IT</a>
 <a href="?lang=en">EN</a>
 <a href="?lang=es">ES</a>
+<a href="?lang=fr">FR</a>
+<a href="?lang=de">DE</a>
+<a href="?lang=zh">ZH</a>
 </div>
 
 <header>
@@ -50,9 +53,10 @@ Creato da Juan de Dios Annaloro Mercedes – 02 Febbraio 2026
 
 <script>
 document.addEventListener("DOMContentLoaded",function(){
-const params=new URLSearchParams(window.location.search);
-const lang=params.get("lang")||"it";
-document.getElementById("start-btn").href="primo-scambio.html?lang="+lang;
+  const params=new URLSearchParams(window.location.search);
+  const lang=params.get("lang")||"it";
+  const btn=document.getElementById("start-btn");
+  if(btn) btn.href="primo-scambio.html?lang="+encodeURIComponent(lang);
 });
 </script>
 

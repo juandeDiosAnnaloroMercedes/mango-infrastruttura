@@ -1,30 +1,44 @@
-# MANGO  
-## Infrastruttura di fiducia
+---
 
-**MANGO** è un’infrastruttura di fiducia non monetaria,  
-non appropriabile, progettata per evitare accumulo, speculazione  
-e cattura istituzionale.
+# Mango – Infrastruttura di Fiducia
 
-Non è un progetto.  
-Non è un servizio.  
-Non è un’organizzazione.
+Mango è un’infrastruttura di fiducia locale non monetaria.
 
-MANGO rende possibile il riconoscimento di scambi reali  
-— inclusa la cura, l’aiuto, il tempo, i medicinali —  
-senza creare debito, credito o obbligo.
+Non è denaro.  
+Non è accumulabile.  
+Non è appropriabile.  
 
-Non assegna valore.  
-Non conta.  
-Non accumula.
+Ogni scambio si riconosce con una riga.  
+Una riga non rappresenta quantità.  
+Non rappresenta valore numerico.  
+Rappresenta riconoscimento.
 
-MANGO è stato creato da  
-**Juan de Dios Annaloro Mercedes**  
-il **02 febbraio 2026**,  
-in memoria di **Larimar**.
+Mango esiste per evitare accumulo, speculazione e cattura istituzionale.  
+È progettato per rimanere semplice, umano, non centralizzabile.
 
-La paternità riguarda l’origine,  
-non il controllo.
+---
 
-Questo testo è lasciato pubblico  
-per garantire la rintracciabilità dell’origine  
-anche nel tempo.
+## Stato Strutturale – Versione Stabile
+
+• Sistema multilingua attivo (IT EN ES FR DE ZH)  
+• Persistenza lingua tra le pagine  
+• Struttura GitHub Pages stabile  
+• Nessun errore 404  
+• QR ufficiale definitivo collegato alla home  
+
+---
+
+## Principio Fondativo
+
+Mango è stato creato da  
+Juan de Dios Annaloro Mercedes  
+il 02 Febbraio 2026  
+
+in memoria di Larimar.
+
+---
+
+Mango non è possesso.  
+È spazio.
+
+Una riga alla volta.

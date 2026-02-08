@@ -1,52 +1,31 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="it">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Mango — Primo scambio</title>
-  <link rel="stylesheet" href="style.css" />
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Primo Scambio – Mango</title>
+
+<script src="lang.js" defer></script>
+
+<style>
+body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;background:#fdfbf7;color:#222;line-height:1.6;text-align:center;padding:60px 20px;}
+.btn{display:inline-block;margin-top:25px;padding:12px 24px;background:#f4a825;color:white;text-decoration:none;border-radius:6px;font-weight:500;}
+</style>
 </head>
+
 <body>
 
-  <div id="site-header"></div>
+<h1 id="ps-title">Primo scambio</h1>
+<p id="ps-subtitle">Qui inizia uno scambio reale. Una riga alla volta.</p>
+<a id="ps-action" class="btn" href="index.html">Torna alla home</a>
 
-  <nav class="nav">
-    <a href="index.html" data-lang-link>Home</a>
-    <a href="index.html#riga" data-lang-link>Scrivi una riga</a>
-    <a href="faq.html" data-lang-link>FAQ</a>
-    <select class="lang" aria-label="Lingua" data-lang-picker>
-      <option value="it">IT</option><option value="en">EN</option><option value="es">ES</option>
-      <option value="fr">FR</option><option value="de">DE</option><option value="zh">ZH</option>
-    </select>
-  </nav>
+<script>
+document.addEventListener("DOMContentLoaded", function(){
+const params=new URLSearchParams(window.location.search);
+const lang=params.get("lang")||"it";
+document.getElementById("ps-action").href="index.html?lang="+lang;
+});
+</script>
 
-  <main class="wrap">
-    <section class="card">
-      <h1>Primo scambio</h1>
-      <p>Fai uno scambio reale. Poi scrivi una riga semplice e vera.</p>
-      <p class="note">Niente numeri. Niente valori. Niente accumulo.</p>
-      <p>
-        <a class="btn" href="scrivi-riga.html" data-lang-link>Scrivi la riga adesso</a>
-      </p>
-    </section>
-
-    <section class="card">
-      <h2>Esempi</h2>
-      <ul>
-        <li>Io ho aiutato. Tu mi hai aiutato.</li>
-        <li>Io ho dato. Tu mi hai dato.</li>
-        <li>Abbiamo condiviso tempo e cura.</li>
-      </ul>
-      <p class="note">Se lo scambio è sbilanciato, si riconosce lo stesso: Mango non “pareggia”.</p>
-    </section>
-
-    <section class="card">
-      <p>
-        <a class="btn ghost" href="index.html" data-lang-link>Torna alla home</a>
-      </p>
-    </section>
-  </main>
-
-  <script src="mango.js"></script>
 </body>
 </html>

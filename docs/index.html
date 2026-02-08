@@ -11,32 +11,29 @@
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
       background: #fdfbf7;
       color: #222;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      height: 100vh;
-      text-align: center;
+      line-height: 1.6;
     }
 
-    .container {
-      max-width: 600px;
-      padding: 20px;
+    header {
+      text-align: center;
+      padding: 60px 20px 40px;
     }
 
     h1 {
       font-weight: 500;
-      font-size: 28px;
-      margin-bottom: 20px;
+      font-size: 32px;
+      margin-bottom: 10px;
     }
 
-    p {
-      font-size: 16px;
-      line-height: 1.6;
-      margin-bottom: 25px;
+    section {
+      max-width: 700px;
+      margin: 40px auto;
+      padding: 0 20px;
     }
 
-    a {
+    .btn {
       display: inline-block;
+      margin-top: 15px;
       padding: 12px 24px;
       background: #f4a825;
       color: white;
@@ -45,20 +42,51 @@
       font-weight: 500;
     }
 
-    a:hover {
+    .btn:hover {
       background: #e69500;
+    }
+
+    footer {
+      text-align: center;
+      padding: 40px 20px;
+      font-size: 14px;
+      opacity: 0.6;
     }
   </style>
 </head>
 
 <body>
-  <div class="container">
+
+  <header>
     <h1>Mango 🥭</h1>
+    <p>Un’infrastruttura di fiducia locale non monetaria.<br>
+    Una riga alla volta.</p>
+  </header>
+
+  <section id="fai-mango">
+    <h2>Fai Mango adesso</h2>
+    <p>Inizia uno scambio reale. Nessun accumulo. Nessun valore numerico. Solo riconoscimento.</p>
+    <a class="btn" href="primo-scambio.html">Inizia</a>
+  </section>
+
+  <section id="scrivi-riga">
+    <h2>Scrivi una riga</h2>
+    <p>Ogni scambio si riconosce con una riga. Senza quantità. Senza equivalenze.</p>
+  </section>
+
+  <section id="cos-e-mango">
+    <h2>Cos’è Mango</h2>
     <p>
-      Un’infrastruttura di fiducia locale non monetaria.  
-      Una riga alla volta.
+      Mango è uno spazio di fiducia non appropriabile.
+      Non è denaro.
+      Non è accumulabile.
+      È un’infrastruttura creata per riconoscere scambi reali.
     </p>
-    <a href="#">Fai Mango adesso</a>
-  </div>
+  </section>
+
+  <footer>
+    Creato da Juan de Dios Annaloro Mercedes – 02 Febbraio 2026
+  </footer>
+
 </body>
 </html>

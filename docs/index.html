@@ -14,9 +14,22 @@
       line-height: 1.6;
     }
 
+    .lang-switch {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      font-size: 14px;
+    }
+
+    .lang-switch a {
+      margin-left: 10px;
+      text-decoration: none;
+      color: #444;
+    }
+
     header {
       text-align: center;
-      padding: 60px 20px 40px;
+      padding: 80px 20px 40px;
     }
 
     h1 {
@@ -42,10 +55,6 @@
       font-weight: 500;
     }
 
-    .btn:hover {
-      background: #e69500;
-    }
-
     footer {
       text-align: center;
       padding: 40px 20px;
@@ -57,24 +66,33 @@
 
 <body>
 
+  <div class="lang-switch">
+    <a href="?lang=it">IT</a>
+    <a href="?lang=en">EN</a>
+    <a href="?lang=es">ES</a>
+    <a href="?lang=fr">FR</a>
+    <a href="?lang=de">DE</a>
+    <a href="?lang=zh">ZH</a>
+  </div>
+
   <header>
     <h1>Mango 🥭</h1>
     <p>Un’infrastruttura di fiducia locale non monetaria.<br>
     Una riga alla volta.</p>
   </header>
 
-  <section id="fai-mango">
+  <section>
     <h2>Fai Mango adesso</h2>
-    <p>Inizia uno scambio reale. Nessun accumulo. Nessun valore numerico. Solo riconoscimento.</p>
+    <p>Inizia uno scambio reale. Nessun accumulo. Nessun valore numerico.</p>
     <a class="btn" href="primo-scambio.html">Inizia</a>
   </section>
 
-  <section id="scrivi-riga">
+  <section>
     <h2>Scrivi una riga</h2>
     <p>Ogni scambio si riconosce con una riga. Senza quantità. Senza equivalenze.</p>
   </section>
 
-  <section id="cos-e-mango">
+  <section>
     <h2>Cos’è Mango</h2>
     <p>
       Mango è uno spazio di fiducia non appropriabile.

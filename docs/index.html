@@ -81,7 +81,7 @@
     <p id="start-text">
       Inizia uno scambio reale. Nessun accumulo. Nessun valore numerico.
     </p>
-    <a id="start-btn" class="btn" href="primo-scambio.html">Inizia</a>
+    <a id="start-btn" class="btn" href="#">Inizia</a>
   </section>
 
   <section>
@@ -104,6 +104,17 @@
   <footer>
     Creato da Juan de Dios Annaloro Mercedes – 02 Febbraio 2026
   </footer>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function() {
+      const params = new URLSearchParams(window.location.search);
+      const lang = params.get("lang") || "it";
+      const btn = document.getElementById("start-btn");
+      if (btn) {
+        btn.href = "primo-scambio.html?lang=" + lang;
+      }
+    });
+  </script>
 
 </body>
 </html>

@@ -1,0 +1,22 @@
+Mango v1.0.1 – ARCHITECTURE FROZEN
+
+Core file structure inside /docs is permanently locked.
+
+Do NOT:
+- Rename files
+- Move files
+- Duplicate language versions
+- Change navigation system
+- Replace multilingual ?lang system
+- Introduce backend or external dependencies
+
+Official URL (permanent):
+https://juandediosannaloromercedes.github.io/mango-infrastruttura/
+
+Version token:
+MANGO_V1_STABLE
+
+Architecture freeze date:
+02 February 2026
+
+Created by Juan de Dios Annaloro Mercedes

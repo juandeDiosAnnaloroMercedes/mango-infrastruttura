@@ -55,16 +55,11 @@
     }
     a.btn:hover{background:#e69500;}
 
-    footer{
-      margin-top:26px;
-      font-size:13px;
-      opacity:.7;
-    }
+    footer{margin-top:26px;font-size:13px;opacity:.7;}
   </style>
 </head>
 
 <body>
-
   <nav class="langbar" aria-label="Language">
     <a href="?lang=it" data-lang="it">IT</a>
     <a href="?lang=en" data-lang="en">EN</a>
@@ -182,12 +177,10 @@
 
   document.documentElement.lang = lang;
 
-  // attiva lingua UI
   document.querySelectorAll(".langbar a").forEach(a=>{
     if(a.dataset.lang === lang) a.classList.add("active");
   });
 
-  // testi
   document.getElementById("subtitle").innerHTML = t.subtitle;
   document.getElementById("startTitle").textContent = t.startTitle;
   document.getElementById("startText").textContent = t.startText;
@@ -199,18 +192,15 @@
 
   document.getElementById("whatTitle").textContent = t.whatTitle;
   document.getElementById("whatText").textContent = t.whatText;
-
   document.getElementById("footerText").textContent = t.footer;
 
-  // aggiungi ?lang a link assoluti dei bottoni
-  const patch = (id) => {
+  // mantieni ?lang nei link dei bottoni
+  ["startBtn","writeBtn"].forEach(id=>{
     const a = document.getElementById(id);
     const u = new URL(a.getAttribute("href"));
     u.searchParams.set("lang", lang);
     a.setAttribute("href", u.toString());
-  };
-  patch("startBtn");
-  patch("writeBtn");
+  });
 })();
 </script>
 

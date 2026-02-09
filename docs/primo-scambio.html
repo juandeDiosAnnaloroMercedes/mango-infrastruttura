@@ -3,66 +3,38 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+<meta http-equiv="Pragma" content="no-cache">
+<meta http-equiv="Expires" content="0">
+
 <title>Mango – Primo scambio</title>
 
 <style>
-body{
-  margin:0;
-  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
-  background:#fdfbf7;
-  color:#222;
-  padding:80px 20px 40px;
-  text-align:center;
-}
-.langbar{
-  position:fixed; top:12px; left:50%;
-  transform:translateX(-50%);
-  display:flex; gap:10px;
-  background:#fff; border:1px solid #eee;
-  border-radius:14px; padding:10px 12px;
-  box-shadow:0 10px 30px rgba(0,0,0,.06);
-}
-.langbar a{
-  text-decoration:none; font-weight:900; font-size:13px;
-  padding:6px 10px; border-radius:10px; color:#111;
-}
-.langbar a.active{background:#111;color:#fff;}
-.container{max-width:760px;margin:0 auto;}
-h1{font-size:34px;margin:20px 0 12px;}
-p{font-size:16px;line-height:1.6;margin:0 auto 18px;max-width:680px;}
-.card{
-  max-width:680px;
-  margin:18px auto;
-  background:#fff;
-  border:1px solid #eee;
-  border-radius:16px;
-  padding:16px 18px;
-  text-align:left;
-}
-.card ul{margin:10px 0 0 18px;}
-.card li{margin:8px 0;}
-a.btn{
-  padding:12px 20px;
-  border-radius:12px;
-  font-weight:900;
-  text-decoration:none;
-  display:inline-block;
-  background:#111;
-  color:#fff;
-  margin-top:14px;
-}
+  body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;background:#fdfbf7;color:#222;padding:80px 20px 40px;text-align:center;}
+  .langbar{position:fixed;top:12px;left:50%;transform:translateX(-50%);display:flex;gap:10px;background:#fff;border:1px solid #eee;border-radius:14px;padding:10px 12px;box-shadow:0 10px 30px rgba(0,0,0,.06);z-index:999;}
+  .langbar a{text-decoration:none;font-weight:900;font-size:13px;padding:6px 10px;border-radius:10px;color:#111;}
+  .langbar a.active{background:#111;color:#fff;}
+  .container{max-width:760px;margin:0 auto;}
+  h1{font-size:34px;margin:20px 0 12px;}
+  p{font-size:16px;line-height:1.6;margin:0 auto 18px;max-width:680px;}
+  .card{max-width:680px;margin:18px auto;background:#fff;border:1px solid #eee;border-radius:16px;padding:16px 18px;text-align:left;}
+  .card ul{margin:10px 0 0 18px;padding:0;}
+  .card li{margin:8px 0;line-height:1.5;}
+  a.btn{display:inline-block;padding:12px 20px;border-radius:12px;font-weight:900;text-decoration:none;background:#111;color:#fff;margin-top:14px;}
+  a.btn:hover{background:#000;}
 </style>
 </head>
 
 <body>
 
-<nav class="langbar">
-  <a href="?lang=it">IT</a>
-  <a href="?lang=en">EN</a>
-  <a href="?lang=es">ES</a>
-  <a href="?lang=fr">FR</a>
-  <a href="?lang=de">DE</a>
-  <a href="?lang=zh">中文</a>
+<nav class="langbar" aria-label="Language">
+  <a href="?lang=it" data-lang="it">IT</a>
+  <a href="?lang=en" data-lang="en">EN</a>
+  <a href="?lang=es" data-lang="es">ES</a>
+  <a href="?lang=fr" data-lang="fr">FR</a>
+  <a href="?lang=de" data-lang="de">DE</a>
+  <a href="?lang=zh" data-lang="zh">中文</a>
 </nav>
 
 <div class="container">
@@ -70,7 +42,7 @@ a.btn{
   <p id="desc"></p>
 
   <div class="card">
-    <strong id="how"></strong>
+    <strong id="howTitle"></strong>
     <ul>
       <li id="l1"></li>
       <li id="l2"></li>
@@ -78,50 +50,95 @@ a.btn{
     </ul>
   </div>
 
-  <a id="homeBtn" class="btn"
-     href="https://juandediosannaloromercedes.github.io/mango-infrastruttura/">
-  </a>
+  <a class="btn" id="homeBtn"
+     href="https://juandediosannaloromercedes.github.io/mango-infrastruttura/"></a>
 </div>
 
 <script>
-const T = {
-  de:{
-    title:"Erster Austausch",
-    desc:"Du beginnst einen echten Austausch. Mango ist kein Geld und nicht akkumulativ.",
-    how:"So geht es:",
-    l1:"Mache den echten Austausch.",
-    l2:"Danach schreibe eine Zeile.",
-    l3:"Keine Mengen. Kein Zahlenwert.",
-    home:"Zurück zur Startseite"
-  },
-  it:{
-    title:"Primo scambio",
-    desc:"Stai per iniziare uno scambio reale.",
-    how:"Come fare:",
-    l1:"Fai lo scambio reale.",
-    l2:"Poi scrivi una riga.",
-    l3:"Nessuna quantità.",
-    home:"Torna alla home"
-  }
-};
+(function(){
+  const VERSION = "MANGO_V1_STABLE";
+  const T = {
+    it:{
+      title:"Primo scambio",
+      desc:"Stai per iniziare uno scambio reale. Mango non è denaro e non si accumula. Prima fai lo scambio, poi scrivi la riga.",
+      howTitle:"Come fare (semplice):",
+      l1:"Fai lo scambio reale (aiuto, oggetto, tempo, cura, accompagnamento, ecc.).",
+      l2:"Dopo lo scambio, vai su “Scrivi una riga” e descrivilo in una frase.",
+      l3:"Nessuna quantità, nessun valore numerico, nessuna equivalenza.",
+      home:"Torna alla home"
+    },
+    en:{
+      title:"First exchange",
+      desc:"You are about to start a real exchange. Mango is not money and cannot be accumulated. Do the exchange first, then write the line.",
+      howTitle:"How to do it (simple):",
+      l1:"Do the real exchange (help, object, time, care, accompaniment, etc.).",
+      l2:"After the exchange, go to “Write one line” and describe it in one sentence.",
+      l3:"No quantities, no numeric value, no equivalence.",
+      home:"Back to home"
+    },
+    es:{
+      title:"Primer intercambio",
+      desc:"Estás por iniciar un intercambio real. Mango no es dinero y no se acumula. Haz el intercambio primero, luego escribe la línea.",
+      howTitle:"Cómo hacerlo (simple):",
+      l1:"Haz el intercambio real (ayuda, objeto, tiempo, cuidado, acompañamiento, etc.).",
+      l2:"Después, ve a “Escribe una línea” y descríbelo en una frase.",
+      l3:"Sin cantidades, sin valor numérico, sin equivalencias.",
+      home:"Volver a inicio"
+    },
+    fr:{
+      title:"Premier échange",
+      desc:"Tu vas commencer un échange réel. Mango n’est pas de l’argent et ne s’accumule pas. Fais l’échange, puis écris la ligne.",
+      howTitle:"Comment faire (simple) :",
+      l1:"Fais l’échange réel (aide, objet, temps, soin, accompagnement, etc.).",
+      l2:"Ensuite, va sur “Écrire une ligne” et décris-le en une phrase.",
+      l3:"Aucune quantité, aucune valeur numérique, aucune équivalence.",
+      home:"Retour à l’accueil"
+    },
+    de:{
+      title:"Erster Austausch",
+      desc:"Du beginnst gleich einen echten Austausch. Mango ist kein Geld und nicht akkumulativ. Erst austauschen, dann die Zeile schreiben.",
+      howTitle:"So geht’s (einfach):",
+      l1:"Mache den echten Austausch (Hilfe, Gegenstand, Zeit, Fürsorge, Begleitung usw.).",
+      l2:"Danach gehe zu „Eine Zeile schreiben“ und beschreibe es in einem Satz.",
+      l3:"Keine Mengen, kein Zahlenwert, keine Äquivalenz.",
+      home:"Zurück zur Startseite"
+    },
+    zh:{
+      title:"第一次交换",
+      desc:"你将开始一次真实交换。Mango 不是金钱，也不可累积。先完成交换，然后写下一行记录。",
+      howTitle:"怎么做（很简单）：",
+      l1:"完成真实交换（帮助、物品、时间、照料、陪伴等）。",
+      l2:"交换后进入“写一行”，用一句话描述这次交换。",
+      l3:"没有数量、没有数值、没有等价换算。",
+      home:"返回首页"
+    }
+  };
 
-const params = new URLSearchParams(location.search);
-const lang = params.get("lang") || "it";
-const t = T[lang] || T.it;
+  const allowed = new Set(["it","en","es","fr","de","zh"]);
+  const params = new URLSearchParams(location.search);
+  const lang = allowed.has(params.get("lang")) ? params.get("lang") : "it";
+  const t = T[lang] || T.it;
+  document.documentElement.lang = lang;
 
-document.getElementById("title").textContent = t.title;
-document.getElementById("desc").textContent = t.desc;
-document.getElementById("how").textContent = t.how;
-document.getElementById("l1").textContent = t.l1;
-document.getElementById("l2").textContent = t.l2;
-document.getElementById("l3").textContent = t.l3;
+  document.getElementById("title").textContent = t.title;
+  document.getElementById("desc").textContent = t.desc;
+  document.getElementById("howTitle").textContent = t.howTitle;
+  document.getElementById("l1").textContent = t.l1;
+  document.getElementById("l2").textContent = t.l2;
+  document.getElementById("l3").textContent = t.l3;
 
-const homeBtn = document.getElementById("homeBtn");
-homeBtn.textContent = t.home;
+  const homeBtn = document.getElementById("homeBtn");
+  homeBtn.textContent = t.home;
 
-const u = new URL(homeBtn.href);
-u.searchParams.set("lang", lang);
-homeBtn.href = u.toString();
+  document.querySelectorAll(".langbar a").forEach(a=>{
+    if(a.dataset.lang === lang) a.classList.add("active");
+  });
+
+  const u = new URL(homeBtn.href);
+  u.searchParams.set("lang", lang);
+  u.searchParams.set("v", VERSION);
+  homeBtn.href = u.toString();
+})();
 </script>
 
 </body>

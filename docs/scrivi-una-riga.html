@@ -1,89 +1,34 @@
-<!DOCTYPE html>
+  <!DOCTYPE html>
 <html lang="it">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+<meta http-equiv="Pragma" content="no-cache">
+<meta http-equiv="Expires" content="0">
+
 <title>Mango – Scrivi una riga</title>
 
 <style>
-  body{
-    margin:0;
-    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
-    background:#fdfbf7;
-    color:#222;
-    padding:80px 20px 40px;
-    text-align:center;
-  }
-  .langbar{
-    position:fixed; top:12px; left:50%;
-    transform:translateX(-50%);
-    display:flex; gap:10px;
-    background:#fff; border:1px solid #eee;
-    border-radius:14px; padding:10px 12px;
-    box-shadow:0 10px 30px rgba(0,0,0,.06);
-    z-index:999;
-  }
-  .langbar a{
-    text-decoration:none; font-weight:900; font-size:13px;
-    padding:6px 10px; border-radius:10px; color:#111;
-  }
+  body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;background:#fdfbf7;color:#222;padding:80px 20px 40px;text-align:center;}
+  .langbar{position:fixed;top:12px;left:50%;transform:translateX(-50%);display:flex;gap:10px;background:#fff;border:1px solid #eee;border-radius:14px;padding:10px 12px;box-shadow:0 10px 30px rgba(0,0,0,.06);z-index:999;}
+  .langbar a{text-decoration:none;font-weight:900;font-size:13px;padding:6px 10px;border-radius:10px;color:#111;}
   .langbar a.active{background:#111;color:#fff;}
-
   .container{max-width:760px;margin:0 auto;}
   h1{font-size:34px;margin:20px 0 12px;}
   p{font-size:16px;line-height:1.6;margin:0 auto 18px;max-width:680px;}
-
-  textarea{
-    width:100%;
-    max-width:680px;
-    height:120px;
-    padding:12px;
-    font-size:16px;
-    border-radius:12px;
-    border:1px solid #ddd;
-    background:#fff;
-    resize:vertical;
-  }
-
-  .row{
-    display:flex;
-    gap:10px;
-    justify-content:center;
-    flex-wrap:wrap;
-    margin-top:14px;
-  }
-
-  button, a.btnlink{
-    padding:12px 18px;
-    border:none;
-    border-radius:12px;
-    font-weight:900;
-    cursor:pointer;
-    text-decoration:none;
-    display:inline-block;
-  }
-
+  textarea{width:100%;max-width:680px;height:120px;padding:12px;font-size:16px;border-radius:12px;border:1px solid #ddd;background:#fff;resize:vertical;}
+  .row{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:14px;}
+  button,a.btnlink{padding:12px 18px;border:none;border-radius:12px;font-weight:900;cursor:pointer;text-decoration:none;display:inline-block;}
   .primary{background:#f4a825;color:#fff;}
   .primary:hover{background:#e69500;}
   .dark{background:#111;color:#fff;}
   .dark:hover{background:#000;}
   .danger{background:#b00020;color:#fff;}
   .danger:hover{background:#8b0019;}
-
-  .list{
-    margin:22px auto 0;
-    max-width:680px;
-    text-align:left;
-    background:#fff;
-    border:1px solid #eee;
-    border-radius:16px;
-    padding:14px 16px;
-  }
-  .item{
-    padding:10px 0;
-    border-bottom:1px solid #f0f0f0;
-    word-break:break-word;
-  }
+  .list{margin:22px auto 0;max-width:680px;text-align:left;background:#fff;border:1px solid #eee;border-radius:16px;padding:14px 16px;}
+  .item{padding:10px 0;border-bottom:1px solid #f0f0f0;word-break:break-word;}
   .item:last-child{border-bottom:none;}
   .meta{font-size:12px;opacity:.6;margin-bottom:6px;}
 </style>
@@ -124,77 +69,23 @@
 
 <script>
 (function(){
+  const VERSION = "MANGO_V1_STABLE";
+
   const T = {
-    it:{
-      title:"Scrivi una riga",
-      desc:"Scrivi la riga dello scambio. Nessuna quantità. Nessun valore numerico. La riga viene salvata sul tuo dispositivo (non online).",
-      placeholder:"Scrivi qui la tua riga...",
-      save:"Salva riga",
-      copy:"Copia tutte",
-      clear:"Cancella tutto",
-      home:"Torna alla home",
-      none:"Nessuna riga salvata"
-    },
-    en:{
-      title:"Write one line",
-      desc:"Write the line of the exchange. No quantities. No numeric value. The line is saved on your device (not online).",
-      placeholder:"Write your line here...",
-      save:"Save line",
-      copy:"Copy all",
-      clear:"Delete all",
-      home:"Back to home",
-      none:"No saved lines"
-    },
-    es:{
-      title:"Escribe una línea",
-      desc:"Escribe la línea del intercambio. Sin cantidades. Sin valor numérico. La línea se guarda en tu dispositivo (no en línea).",
-      placeholder:"Escribe tu línea aquí...",
-      save:"Guardar línea",
-      copy:"Copiar todas",
-      clear:"Borrar todo",
-      home:"Volver a inicio",
-      none:"No hay líneas guardadas"
-    },
-    fr:{
-      title:"Écrire une ligne",
-      desc:"Écris la ligne de l’échange. Aucune quantité. Aucune valeur numérique. La ligne est enregistrée sur ton appareil (pas en ligne).",
-      placeholder:"Écris ta ligne ici...",
-      save:"Enregistrer",
-      copy:"Tout copier",
-      clear:"Tout supprimer",
-      home:"Retour à l’accueil",
-      none:"Aucune ligne enregistrée"
-    },
-    de:{
-      title:"Eine Zeile schreiben",
-      desc:"Schreibe die Zeile des Austauschs. Keine Mengen. Kein Zahlenwert. Die Zeile wird auf deinem Gerät gespeichert (nicht online).",
-      placeholder:"Schreibe deine Zeile hier...",
-      save:"Zeile speichern",
-      copy:"Alle kopieren",
-      clear:"Alles löschen",
-      home:"Zurück zur Startseite",
-      none:"Keine gespeicherten Zeilen"
-    },
-    zh:{
-      title:"写一行",
-      desc:"写下交换的一行内容。没有数量。没有数值。该内容保存在你的设备上（不在线）。",
-      placeholder:"在这里写下你的内容...",
-      save:"保存",
-      copy:"复制全部",
-      clear:"全部删除",
-      home:"返回首页",
-      none:"暂无已保存内容"
-    }
+    it:{title:"Scrivi una riga",desc:"Scrivi la riga dello scambio. Nessuna quantità. Nessun valore numerico. La riga viene salvata sul tuo dispositivo (non online).",placeholder:"Scrivi qui la tua riga...",save:"Salva riga",copy:"Copia tutte",clear:"Cancella tutto",home:"Torna alla home",none:"Nessuna riga salvata"},
+    en:{title:"Write one line",desc:"Write the line of the exchange. No quantities. No numeric value. The line is saved on your device (not online).",placeholder:"Write your line here...",save:"Save line",copy:"Copy all",clear:"Delete all",home:"Back to home",none:"No saved lines"},
+    es:{title:"Escribe una línea",desc:"Escribe la línea del intercambio. Sin cantidades. Sin valor numérico. La línea se guarda en tu dispositivo (no en línea).",placeholder:"Escribe tu línea aquí...",save:"Guardar línea",copy:"Copiar todas",clear:"Borrar todo",home:"Volver a inicio",none:"No hay líneas guardadas"},
+    fr:{title:"Écrire une ligne",desc:"Écris la ligne de l’échange. Aucune quantité. Aucune valeur numérique. La ligne est enregistrée sur ton appareil (pas en ligne).",placeholder:"Écris ta ligne ici...",save:"Enregistrer",copy:"Tout copier",clear:"Tout supprimer",home:"Retour à l’accueil",none:"Aucune ligne enregistrée"},
+    de:{title:"Eine Zeile schreiben",desc:"Schreibe die Zeile des Austauschs. Keine Mengen. Kein Zahlenwert. Die Zeile wird auf deinem Gerät gespeichert (nicht online).",placeholder:"Schreibe deine Zeile hier...",save:"Zeile speichern",copy:"Alle kopieren",clear:"Alles löschen",home:"Zurück zur Startseite",none:"Keine gespeicherten Zeilen"},
+    zh:{title:"写一行",desc:"写下交换的一行内容。没有数量。没有数值。该内容保存在你的设备上（不在线）。",placeholder:"在这里写下你的内容...",save:"保存",copy:"复制全部",clear:"全部删除",home:"返回首页",none:"暂无已保存内容"}
   };
 
   const allowed = new Set(["it","en","es","fr","de","zh"]);
   const params = new URLSearchParams(location.search);
   const lang = allowed.has(params.get("lang")) ? params.get("lang") : "it";
   const t = T[lang] || T.it;
-
   document.documentElement.lang = lang;
 
-  // UI text
   document.getElementById("title").textContent = t.title;
   document.getElementById("desc").textContent = t.desc;
 
@@ -208,51 +99,31 @@
   const homeBtn = document.getElementById("homeBtn");
   homeBtn.textContent = t.home;
 
-  // highlight language
   document.querySelectorAll(".langbar a").forEach(a=>{
     if(a.dataset.lang === lang) a.classList.add("active");
   });
 
-  // keep lang on home absolute URL
-  try{
-    const u = new URL(homeBtn.getAttribute("href"));
-    u.searchParams.set("lang", lang);
-    homeBtn.setAttribute("href", u.toString());
-  }catch(e){}
+  const hu = new URL(homeBtn.href);
+  hu.searchParams.set("lang", lang);
+  hu.searchParams.set("v", VERSION);
+  homeBtn.href = hu.toString();
 
-  // persistent storage
   const KEY = "mango_rows_v3";
   const list = document.getElementById("savedList");
   const box = document.getElementById("listBox");
 
   function esc(s){
-    return String(s)
-      .replaceAll("&","&amp;")
-      .replaceAll("<","&lt;")
-      .replaceAll(">","&gt;")
-      .replaceAll('"',"&quot;")
-      .replaceAll("'","&#039;");
+    return String(s).replaceAll("&","&amp;").replaceAll("<","&lt;").replaceAll(">","&gt;").replaceAll('"',"&quot;").replaceAll("'","&#039;");
   }
-
-  function load(){
-    try{ return JSON.parse(localStorage.getItem(KEY) || "[]"); }
-    catch(e){ return []; }
-  }
-
-  function store(rows){
-    localStorage.setItem(KEY, JSON.stringify(rows));
-  }
+  function load(){ try{return JSON.parse(localStorage.getItem(KEY)||"[]");}catch(e){return[];} }
+  function store(rows){ localStorage.setItem(KEY, JSON.stringify(rows)); }
 
   function render(){
     const rows = load();
-    if(!rows.length){
-      box.style.display="none";
-      list.innerHTML="";
-      return;
-    }
+    if(!rows.length){ box.style.display="none"; list.innerHTML=""; return; }
     box.style.display="block";
     list.innerHTML = rows.slice().reverse().map(r=>{
-      const d = new Date(r.ts);
+      const d=new Date(r.ts);
       return `<div class="item"><div class="meta">${d.toLocaleString()}</div>${esc(r.text)}</div>`;
     }).join("");
   }
@@ -271,11 +142,8 @@
     const rows = load();
     const txt = rows.map(r=>r.text).join("\n");
     if(!txt) return alert(t.none);
-    try{
-      await navigator.clipboard.writeText(txt);
-    }catch(e){
-      prompt("Copia:", txt);
-    }
+    try{ await navigator.clipboard.writeText(txt); }
+    catch(e){ prompt("Copia:", txt); }
   };
 
   document.getElementById("clearBtn").onclick = function(){

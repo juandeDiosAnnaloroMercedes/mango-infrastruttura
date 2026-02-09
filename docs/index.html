@@ -4,7 +4,6 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Mango – Infrastruttura di fiducia</title>
-  <script src="lang.js" defer></script>
 
   <style>
     body{
@@ -13,8 +12,8 @@
       background:#fdfbf7;
       color:#222;
       padding:80px 20px 40px;
+      text-align:center;
     }
-    .container{max-width:900px;margin:0 auto;}
     .langbar{
       position:fixed; top:12px; left:50%;
       transform:translateX(-50%);
@@ -25,13 +24,14 @@
       z-index:999;
     }
     .langbar a{
-      text-decoration:none; font-weight:800; font-size:13px;
+      text-decoration:none; font-weight:900; font-size:13px;
       padding:6px 10px; border-radius:10px; color:#111;
     }
     .langbar a.active{background:#111;color:#fff;}
-    header{ text-align:center; margin:30px auto 26px; }
-    h1{ margin:0 0 10px; font-size:44px; letter-spacing:-.5px; }
-    header p{ margin:0 auto; max-width:720px; font-size:18px; line-height:1.5; }
+
+    h1{font-size:44px;margin:20px 0 10px; letter-spacing:-.5px;}
+    .subtitle{font-size:18px;line-height:1.5;margin:0 auto 24px;max-width:780px;}
+
     .card{
       max-width:760px;
       margin:18px auto;
@@ -39,10 +39,12 @@
       border:1px solid #eee;
       border-radius:18px;
       padding:22px 22px;
+      text-align:left;
     }
-    .card h2{ margin:0 0 10px; font-size:28px; }
-    .card p{ margin:0 0 14px; font-size:16px; line-height:1.6; max-width:720px; }
-    .btn{
+    .card h2{margin:0 0 10px; font-size:28px;}
+    .card p{margin:0 0 14px; font-size:16px; line-height:1.6;}
+
+    a.btn{
       display:inline-block;
       padding:12px 22px;
       background:#f4a825;
@@ -51,10 +53,10 @@
       border-radius:12px;
       font-weight:900;
     }
-    .btn:hover{ background:#e69500; }
+    a.btn:hover{background:#e69500;}
+
     footer{
-      text-align:center;
-      margin:28px 0 0;
+      margin-top:26px;
       font-size:13px;
       opacity:.7;
     }
@@ -62,79 +64,155 @@
 </head>
 
 <body>
-  <!-- Switch 6 lingue -->
+
   <nav class="langbar" aria-label="Language">
     <a href="?lang=it" data-lang="it">IT</a>
     <a href="?lang=en" data-lang="en">EN</a>
     <a href="?lang=es" data-lang="es">ES</a>
     <a href="?lang=fr" data-lang="fr">FR</a>
     <a href="?lang=de" data-lang="de">DE</a>
-    <a href="?lang=zh" data-lang="zh">ZH</a>
+    <a href="?lang=zh" data-lang="zh">中文</a>
   </nav>
 
-  <main class="container">
-    <header>
-      <h1 id="title">Mango 🥭</h1>
-      <p id="subtitle">Un’infrastruttura di fiducia locale non monetaria.<br>Una riga alla volta.</p>
-    </header>
+  <h1 id="title">Mango 🥭</h1>
+  <div class="subtitle" id="subtitle"></div>
 
-    <section class="card">
-      <h2 id="start-title">Fai Mango adesso</h2>
-      <p id="start-text">Inizia uno scambio reale. Nessun accumulo. Nessun valore numerico.</p>
+  <section class="card">
+    <h2 id="startTitle"></h2>
+    <p id="startText"></p>
+    <a class="btn" id="startBtn"
+       href="https://juandediosannaloromercedes.github.io/mango-infrastruttura/primo-scambio.html"></a>
+  </section>
 
-      <!-- LINK ASSOLUTO DEFINITIVO (anti-docs.github.com) -->
-      <a id="btn-start" class="btn"
-         href="https://juandediosannaloromercedes.github.io/mango-infrastruttura/primo-scambio.html">
-        Inizia
-      </a>
-    </section>
+  <section class="card">
+    <h2 id="writeTitle"></h2>
+    <p id="writeText"></p>
+    <a class="btn" id="writeBtn"
+       href="https://juandediosannaloromercedes.github.io/mango-infrastruttura/scrivi-una-riga.html"></a>
+  </section>
 
-    <section class="card">
-      <h2 id="write-title">Scrivi una riga</h2>
-      <p id="write-text">Ogni scambio si riconosce con una riga. Senza quantità. Senza equivalenze.</p>
+  <section class="card">
+    <h2 id="whatTitle"></h2>
+    <p id="whatText"></p>
+  </section>
 
-      <!-- LINK ASSOLUTO DEFINITIVO (anti-docs.github.com) -->
-      <a id="btn-write" class="btn"
-         href="https://juandediosannaloromercedes.github.io/mango-infrastruttura/scrivi-una-riga.html">
-        Scrivi
-      </a>
-    </section>
+  <footer id="footerText"></footer>
 
-    <section class="card">
-      <h2 id="what-title">Cos’è Mango</h2>
-      <p id="what-text">Mango è uno spazio di fiducia non appropriabile. Non è denaro. Non è accumulabile.</p>
-    </section>
+<script>
+(function(){
+  const T = {
+    it:{
+      subtitle:"Un’infrastruttura di fiducia locale non monetaria.<br>Una riga alla volta.",
+      startTitle:"Fai Mango adesso",
+      startText:"Inizia uno scambio reale. Nessun accumulo. Nessun valore numerico.",
+      startBtn:"Inizia",
+      writeTitle:"Scrivi una riga",
+      writeText:"Ogni scambio si riconosce con una riga. Senza quantità. Senza equivalenze.",
+      writeBtn:"Scrivi",
+      whatTitle:"Cos’è Mango",
+      whatText:"Mango è uno spazio di fiducia non appropriabile. Non è denaro. Non è accumulabile.",
+      footer:"Creato da Juan de Dios Annaloro Mercedes – 02 Febbraio 2026"
+    },
+    en:{
+      subtitle:"A non-monetary local trust infrastructure.<br>One line at a time.",
+      startTitle:"Do Mango now",
+      startText:"Start a real exchange. No accumulation. No numeric value.",
+      startBtn:"Start",
+      writeTitle:"Write one line",
+      writeText:"Each exchange is recognized with one line. No quantities. No equivalences.",
+      writeBtn:"Write",
+      whatTitle:"What is Mango",
+      whatText:"Mango is a non-appropriable space of trust. It is not money. It is not accumulable.",
+      footer:"Created by Juan de Dios Annaloro Mercedes – 02 February 2026"
+    },
+    es:{
+      subtitle:"Una infraestructura local de confianza no monetaria.<br>Una línea a la vez.",
+      startTitle:"Haz Mango ahora",
+      startText:"Inicia un intercambio real. Sin acumulación. Sin valor numérico.",
+      startBtn:"Empezar",
+      writeTitle:"Escribe una línea",
+      writeText:"Cada intercambio se reconoce con una línea. Sin cantidades. Sin equivalencias.",
+      writeBtn:"Escribir",
+      whatTitle:"Qué es Mango",
+      whatText:"Mango es un espacio de confianza no apropiable. No es dinero. No es acumulable.",
+      footer:"Creado por Juan de Dios Annaloro Mercedes – 02 Febrero 2026"
+    },
+    fr:{
+      subtitle:"Une infrastructure locale de confiance non monétaire.<br>Une ligne à la fois.",
+      startTitle:"Faire Mango maintenant",
+      startText:"Commence un échange réel. Pas d’accumulation. Pas de valeur numérique.",
+      startBtn:"Commencer",
+      writeTitle:"Écrire une ligne",
+      writeText:"Chaque échange est reconnu par une ligne. Pas de quantités. Pas d’équivalences.",
+      writeBtn:"Écrire",
+      whatTitle:"Qu’est-ce que Mango",
+      whatText:"Mango est un espace de confiance non appropriable. Ce n’est pas de l’argent. Ce n’est pas accumulable.",
+      footer:"Créé par Juan de Dios Annaloro Mercedes – 02 Février 2026"
+    },
+    de:{
+      subtitle:"Eine nicht-monetäre lokale Vertrauens-Infrastruktur.<br>Eine Zeile nach der anderen.",
+      startTitle:"Mango jetzt machen",
+      startText:"Starte einen echten Austausch. Keine Akkumulation. Kein Zahlenwert.",
+      startBtn:"Start",
+      writeTitle:"Eine Zeile schreiben",
+      writeText:"Jeder Austausch wird mit einer Zeile anerkannt. Keine Mengen. Keine Äquivalenz.",
+      writeBtn:"Schreiben",
+      whatTitle:"Was ist Mango",
+      whatText:"Mango ist ein nicht aneignbarer Vertrauensraum. Es ist kein Geld. Es ist nicht akkumulativ.",
+      footer:"Erstellt von Juan de Dios Annaloro Mercedes – 02. Februar 2026"
+    },
+    zh:{
+      subtitle:"一种非货币的本地信任基础设施。<br>一次一行。",
+      startTitle:"现在开始 Mango",
+      startText:"开始一次真实交换。不累积。没有数值。",
+      startBtn:"开始",
+      writeTitle:"写一行",
+      writeText:"每次交换用一行来确认。没有数量。没有等价。",
+      writeBtn:"写下",
+      whatTitle:"什么是 Mango",
+      whatText:"Mango 是一个不可占有的信任空间。不是金钱。不可累积。",
+      footer:"创建者：Juan de Dios Annaloro Mercedes – 2026年2月2日"
+    }
+  };
 
-    <footer id="footer-text">Creato da Juan de Dios Annaloro Mercedes – 02 Febbraio 2026</footer>
-  </main>
+  const allowed = new Set(["it","en","es","fr","de","zh"]);
+  const params = new URLSearchParams(location.search);
+  const lang = allowed.has(params.get("lang")) ? params.get("lang") : "it";
+  const t = T[lang] || T.it;
 
-  <script>
-    (function(){
-      // lingua
-      const allowed = new Set(['it','en','es','fr','de','zh']);
-      const params = new URLSearchParams(location.search);
-      const lang = allowed.has(params.get('lang')) ? params.get('lang') : null;
+  document.documentElement.lang = lang;
 
-      if(lang){
-        document.querySelectorAll('.langbar a').forEach(a=>{
-          if(a.dataset.lang === lang) a.classList.add('active');
-        });
-      }
+  // attiva lingua UI
+  document.querySelectorAll(".langbar a").forEach(a=>{
+    if(a.dataset.lang === lang) a.classList.add("active");
+  });
 
-      // aggiungi ?lang ai link assoluti del tuo sito
-      if(!lang) return;
+  // testi
+  document.getElementById("subtitle").innerHTML = t.subtitle;
+  document.getElementById("startTitle").textContent = t.startTitle;
+  document.getElementById("startText").textContent = t.startText;
+  document.getElementById("startBtn").textContent = t.startBtn;
 
-      const patch = (id) => {
-        const a = document.getElementById(id);
-        if(!a) return;
-        const u = new URL(a.getAttribute('href'));
-        u.searchParams.set('lang', lang);
-        a.setAttribute('href', u.toString());
-      };
+  document.getElementById("writeTitle").textContent = t.writeTitle;
+  document.getElementById("writeText").textContent = t.writeText;
+  document.getElementById("writeBtn").textContent = t.writeBtn;
 
-      patch('btn-start');
-      patch('btn-write');
-    })();
-  </script>
+  document.getElementById("whatTitle").textContent = t.whatTitle;
+  document.getElementById("whatText").textContent = t.whatText;
+
+  document.getElementById("footerText").textContent = t.footer;
+
+  // aggiungi ?lang a link assoluti dei bottoni
+  const patch = (id) => {
+    const a = document.getElementById(id);
+    const u = new URL(a.getAttribute("href"));
+    u.searchParams.set("lang", lang);
+    a.setAttribute("href", u.toString());
+  };
+  patch("startBtn");
+  patch("writeBtn");
+})();
+</script>
+
 </body>
 </html>

@@ -1,15 +1,36 @@
-<h2>Fai Mango adesso</h2>
-<p>Inizia uno scambio reale. Nessun accumulo. Nessun valore numerico.</p>
+ <!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mango – Infrastruttura di fiducia</title>
+  <link rel="stylesheet" href="style.css">
+</head>
 
-<a id="btn-inizia" class="btn" href="#">Inizia</a>
+<body>
 
-<script>
-  (function () {
-    const allowed = new Set(['it','en','es','fr','de','zh']);
-    const params = new URLSearchParams(window.location.search);
-    const lang = allowed.has(params.get('lang')) ? params.get('lang') : 'it';
+  <section>
+    <h2>Fai Mango adesso</h2>
+    <p>Inizia uno scambio reale. Nessun accumulo. Nessun valore numerico.</p>
 
-    const base = 'https://juandediosannaloromercedes.github.io/mango-infrastruttura/';
-    document.getElementById('btn-inizia').href = base + 'primo-scambio.html?lang=' + lang;
-  })();
-</script>
+    <a href="primo-scambio.html" class="btn">
+      Inizia
+    </a>
+  </section>
+
+  <section>
+    <h2>Scrivi una riga</h2>
+    <p>Ogni scambio si riconosce con una riga. Senza quantità. Senza equivalenze.</p>
+  </section>
+
+  <section>
+    <h2>Cos'è Mango</h2>
+    <p>Mango è uno spazio di fiducia non appropriabile. Non è denaro. Non è accumulabile.</p>
+  </section>
+
+  <footer>
+    <p>Creato da Juan de Dios Annaloro Mercedes – 02 Febbraio 2026</p>
+  </footer>
+
+</body>
+</html>

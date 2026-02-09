@@ -1,203 +1,232 @@
 <!DOCTYPE html>
 <html lang="it">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Scrivi una riga – Mango</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mango – Scrivi una riga</title>
 
-  <script src="lang.js" defer></script>
-
-  <style>
-    body{
-      margin:0;
-      font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
-      background:#fdfbf7;
-      color:#222;
-      padding:60px 20px;
-      text-align:center;
-    }
-    .container{max-width:760px;margin:0 auto;}
-    h1{font-size:28px;margin:0 0 14px;}
-    p{font-size:16px;line-height:1.6;margin:0 auto 18px;max-width:680px;}
-    textarea{
-      width:100%;
-      max-width:680px;
-      height:120px;
-      padding:12px;
-      font-size:16px;
-      border-radius:10px;
-      border:1px solid #ddd;
-      background:#fff;
-      resize:vertical;
-    }
-    .row{
-      display:flex;
-      gap:10px;
-      justify-content:center;
-      flex-wrap:wrap;
-      margin-top:14px;
-    }
-    .btn, button.btn{
-      display:inline-block;
-      padding:12px 18px;
-      background:#f4a825;
-      color:#fff;
-      text-decoration:none;
-      border-radius:10px;
-      font-weight:700;
-      border:none;
-      cursor:pointer;
-    }
-    .btn:hover, button.btn:hover{background:#e69500;}
-    .btn.secondary, button.btn.secondary{
-      background:#111;
-    }
-    .btn.secondary:hover, button.btn.secondary:hover{
-      background:#000;
-    }
-    .list{
-      margin:22px auto 0;
-      max-width:680px;
-      text-align:left;
-      background:#fff;
-      border:1px solid #eee;
-      border-radius:14px;
-      padding:14px 16px;
-    }
-    .item{
-      padding:10px 0;
-      border-bottom:1px solid #f0f0f0;
-      word-break:break-word;
-    }
-    .item:last-child{border-bottom:none;}
-    .meta{font-size:12px;opacity:.65;margin-bottom:6px;}
-    .danger{
-      background:#b00020 !important;
-    }
-    .danger:hover{background:#8b0019 !important;}
-  </style>
+<style>
+body{
+  margin:0;
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
+  background:#fdfbf7;
+  color:#222;
+  padding:80px 20px 40px;
+  text-align:center;
+}
+.langbar{
+  position:fixed;
+  top:12px;
+  left:50%;
+  transform:translateX(-50%);
+  display:flex;
+  gap:10px;
+  background:#fff;
+  border:1px solid #eee;
+  border-radius:14px;
+  padding:10px 12px;
+  box-shadow:0 10px 30px rgba(0,0,0,.06);
+}
+.langbar a{
+  text-decoration:none;
+  font-weight:800;
+  font-size:13px;
+  padding:6px 10px;
+  border-radius:10px;
+  color:#111;
+}
+.langbar a.active{
+  background:#111;
+  color:#fff;
+}
+.container{max-width:760px;margin:0 auto;}
+h1{font-size:34px;margin:20px 0 12px;}
+p{font-size:16px;line-height:1.6;margin:0 auto 18px;max-width:680px;}
+textarea{
+  width:100%;
+  max-width:680px;
+  height:120px;
+  padding:12px;
+  font-size:16px;
+  border-radius:12px;
+  border:1px solid #ddd;
+}
+.row{
+  display:flex;
+  gap:10px;
+  justify-content:center;
+  flex-wrap:wrap;
+  margin-top:14px;
+}
+button{
+  padding:12px 18px;
+  border:none;
+  border-radius:12px;
+  font-weight:900;
+  cursor:pointer;
+}
+.primary{background:#f4a825;color:#fff;}
+.primary:hover{background:#e69500;}
+.dark{background:#111;color:#fff;}
+.danger{background:#b00020;color:#fff;}
+.list{
+  margin:22px auto 0;
+  max-width:680px;
+  text-align:left;
+  background:#fff;
+  border:1px solid #eee;
+  border-radius:16px;
+  padding:14px 16px;
+}
+.item{
+  padding:10px 0;
+  border-bottom:1px solid #f0f0f0;
+}
+.item:last-child{border-bottom:none;}
+.meta{font-size:12px;opacity:.6;margin-bottom:6px;}
+</style>
 </head>
 
 <body>
-  <div class="container">
-    <h1 id="page-title">Scrivi una riga</h1>
-    <p id="page-text">
-      Scrivi la riga dello scambio. Nessuna quantità. Nessun valore numerico.
-      La riga viene salvata sul tuo dispositivo (non online).
-    </p>
 
-    <form id="row-form">
-      <textarea id="mango-line" placeholder="Scrivi qui la tua riga..." required></textarea>
+<nav class="langbar">
+  <a href="?lang=it" data-lang="it">IT</a>
+  <a href="?lang=en" data-lang="en">EN</a>
+  <a href="?lang=es" data-lang="es">ES</a>
+  <a href="?lang=fr" data-lang="fr">FR</a>
+  <a href="?lang=de" data-lang="de">DE</a>
+  <a href="?lang=zh" data-lang="zh">中文</a>
+</nav>
 
-      <div class="row">
-        <button class="btn" type="submit">Salva riga</button>
-        <button class="btn secondary" type="button" id="copy-all">Copia tutte</button>
-        <button class="btn danger" type="button" id="clear-all">Cancella tutto</button>
-        <a class="btn secondary" id="home-link" href="index.html">Torna alla home</a>
-      </div>
-    </form>
+<div class="container">
+  <h1 id="title"></h1>
+  <p id="desc"></p>
 
-    <div class="list" id="saved-box" style="display:none;">
-      <div class="meta">Righe salvate (sul dispositivo):</div>
-      <div id="saved-list"></div>
-    </div>
+  <textarea id="lineInput" placeholder=""></textarea>
+
+  <div class="row">
+    <button class="primary" id="saveBtn"></button>
+    <button class="dark" id="copyBtn"></button>
+    <button class="danger" id="clearBtn"></button>
   </div>
 
-  <script>
-    (function(){
-      // Mantieni ?lang nel link Home
-      const p = new URLSearchParams(location.search);
-      const lang = p.get('lang');
-      const home = document.getElementById('home-link');
-      if(lang && home){
-        const u = new URL(home.getAttribute('href'), location.href);
-        u.searchParams.set('lang', lang);
-        home.setAttribute('href', u.pathname.split('/').pop() + '?' + u.searchParams.toString());
-      }
+  <div class="list" id="listBox" style="display:none;">
+    <div id="savedList"></div>
+  </div>
+</div>
 
-      const KEY = 'mango_rows_v1';
-      const form = document.getElementById('row-form');
-      const input = document.getElementById('mango-line');
-      const box = document.getElementById('saved-box');
-      const list = document.getElementById('saved-list');
-      const copyBtn = document.getElementById('copy-all');
-      const clearBtn = document.getElementById('clear-all');
+<script>
+const T = {
+  it:{
+    title:"Scrivi una riga",
+    desc:"Scrivi la riga dello scambio. Nessuna quantità. Nessun valore numerico. La riga viene salvata sul tuo dispositivo (non online).",
+    placeholder:"Scrivi qui la tua riga...",
+    save:"Salva riga",
+    copy:"Copia tutte",
+    clear:"Cancella tutto"
+  },
+  en:{
+    title:"Write one line",
+    desc:"Write the line of the exchange. No quantities. No numeric value. The line is saved on your device (not online).",
+    placeholder:"Write your line here...",
+    save:"Save line",
+    copy:"Copy all",
+    clear:"Delete all"
+  },
+  es:{
+    title:"Escribe una línea",
+    desc:"Escribe la línea del intercambio. Sin cantidades. Sin valor numérico. La línea se guarda en tu dispositivo (no en línea).",
+    placeholder:"Escribe tu línea aquí...",
+    save:"Guardar línea",
+    copy:"Copiar todas",
+    clear:"Borrar todo"
+  },
+  fr:{
+    title:"Écrire une ligne",
+    desc:"Écris la ligne de l’échange. Aucune quantité. Aucune valeur numérique. La ligne est enregistrée sur ton appareil (pas en ligne).",
+    placeholder:"Écris ta ligne ici...",
+    save:"Enregistrer",
+    copy:"Tout copier",
+    clear:"Tout supprimer"
+  },
+  de:{
+    title:"Eine Zeile schreiben",
+    desc:"Schreibe die Zeile des Austauschs. Keine Mengen. Kein Zahlenwert. Die Zeile wird auf deinem Gerät gespeichert (nicht online).",
+    placeholder:"Schreibe deine Zeile hier...",
+    save:"Zeile speichern",
+    copy:"Alle kopieren",
+    clear:"Alles löschen"
+  },
+  zh:{
+    title:"写一行",
+    desc:"写下交换的一行内容。没有数量。没有数值。该内容保存在你的设备上（不在线）。",
+    placeholder:"在这里写下你的内容...",
+    save:"保存",
+    copy:"复制全部",
+    clear:"全部删除"
+  }
+};
 
-      function load(){
-        try { return JSON.parse(localStorage.getItem(KEY) || '[]'); }
-        catch(e){ return []; }
-      }
+const params=new URLSearchParams(location.search);
+const lang=params.get("lang")||"it";
+const t=T[lang]||T.it;
 
-      function save(rows){
-        localStorage.setItem(KEY, JSON.stringify(rows));
-      }
+document.documentElement.lang=lang;
+document.getElementById("title").textContent=t.title;
+document.getElementById("desc").textContent=t.desc;
+document.getElementById("lineInput").placeholder=t.placeholder;
+document.getElementById("saveBtn").textContent=t.save;
+document.getElementById("copyBtn").textContent=t.copy;
+document.getElementById("clearBtn").textContent=t.clear;
 
-      function render(){
-        const rows = load();
-        if(rows.length === 0){
-          box.style.display = 'none';
-          list.innerHTML = '';
-          return;
-        }
-        box.style.display = 'block';
-        list.innerHTML = rows.slice().reverse().map(r => {
-          const d = new Date(r.ts);
-          const stamp = isNaN(d.getTime()) ? '' : d.toLocaleString();
-          return `
-            <div class="item">
-              <div class="meta">${stamp}</div>
-              <div>${escapeHtml(r.text)}</div>
-            </div>`;
-        }).join('');
-      }
+document.querySelectorAll(".langbar a").forEach(a=>{
+  if(a.dataset.lang===lang) a.classList.add("active");
+});
 
-      function escapeHtml(s){
-        return String(s)
-          .replaceAll('&','&amp;')
-          .replaceAll('<','&lt;')
-          .replaceAll('>','&gt;')
-          .replaceAll('"','&quot;')
-          .replaceAll("'","&#039;");
-      }
+const KEY="mango_rows_v2";
+const input=document.getElementById("lineInput");
+const list=document.getElementById("savedList");
+const box=document.getElementById("listBox");
 
-      form.addEventListener('submit', function(e){
-        e.preventDefault();
-        const text = (input.value || '').trim();
-        if(!text) return;
+function load(){return JSON.parse(localStorage.getItem(KEY)||"[]");}
+function save(rows){localStorage.setItem(KEY,JSON.stringify(rows));}
 
-        const rows = load();
-        rows.push({ ts: Date.now(), text });
-        save(rows);
+function render(){
+  const rows=load();
+  if(!rows.length){box.style.display="none";list.innerHTML="";return;}
+  box.style.display="block";
+  list.innerHTML=rows.slice().reverse().map(r=>{
+    const d=new Date(r.ts);
+    return `<div class="item"><div class="meta">${d.toLocaleString()}</div>${r.text}</div>`;
+  }).join("");
+}
 
-        input.value = '';
-        render();
-      });
+document.getElementById("saveBtn").onclick=function(){
+  const text=input.value.trim();
+  if(!text)return;
+  const rows=load();
+  rows.push({ts:Date.now(),text});
+  save(rows);
+  input.value="";
+  render();
+};
 
-      copyBtn.addEventListener('click', async function(){
-        const rows = load();
-        const out = rows.map(r => r.text).join('\n');
-        if(!out){
-          alert('Nessuna riga salvata.');
-          return;
-        }
-        try{
-          await navigator.clipboard.writeText(out);
-          alert('Copiato negli appunti.');
-        }catch(e){
-          // fallback
-          prompt('Copia manualmente:', out);
-        }
-      });
+document.getElementById("copyBtn").onclick=function(){
+  const rows=load();
+  const txt=rows.map(r=>r.text).join("\n");
+  if(!txt)return alert("Nessuna riga salvata");
+  navigator.clipboard.writeText(txt);
+};
 
-      clearBtn.addEventListener('click', function(){
-        const ok = confirm('Vuoi cancellare tutte le righe salvate su questo dispositivo?');
-        if(!ok) return;
-        localStorage.removeItem(KEY);
-        render();
-      });
+document.getElementById("clearBtn").onclick=function(){
+  if(confirm("Cancellare tutto?")){
+    localStorage.removeItem(KEY);
+    render();
+  }
+};
 
-      render();
-    })();
-  </script>
+render();
+</script>
+
 </body>
 </html>

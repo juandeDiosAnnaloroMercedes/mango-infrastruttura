@@ -4,7 +4,6 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Mango – Infrastruttura di fiducia</title>
-
   <script src="lang.js" defer></script>
 
   <style>
@@ -19,14 +18,14 @@
     .langbar{
       position:fixed; top:12px; left:50%;
       transform:translateX(-50%);
-      display:flex; gap:10px; align-items:center;
+      display:flex; gap:10px;
       background:#fff; border:1px solid #eee;
       border-radius:14px; padding:10px 12px;
       box-shadow:0 10px 30px rgba(0,0,0,.06);
       z-index:999;
     }
     .langbar a{
-      text-decoration:none; font-weight:700; font-size:13px;
+      text-decoration:none; font-weight:800; font-size:13px;
       padding:6px 10px; border-radius:10px; color:#111;
     }
     .langbar a.active{background:#111;color:#fff;}
@@ -50,7 +49,7 @@
       color:#fff;
       text-decoration:none;
       border-radius:12px;
-      font-weight:800;
+      font-weight:900;
     }
     .btn:hover{ background:#e69500; }
     footer{
@@ -63,7 +62,7 @@
 </head>
 
 <body>
-  <!-- Switch lingue -->
+  <!-- Switch 6 lingue -->
   <nav class="langbar" aria-label="Language">
     <a href="?lang=it" data-lang="it">IT</a>
     <a href="?lang=en" data-lang="en">EN</a>
@@ -82,13 +81,23 @@
     <section class="card">
       <h2 id="start-title">Fai Mango adesso</h2>
       <p id="start-text">Inizia uno scambio reale. Nessun accumulo. Nessun valore numerico.</p>
-      <a class="btn" href="primo-scambio.html">Inizia</a>
+
+      <!-- LINK ASSOLUTO DEFINITIVO (anti-docs.github.com) -->
+      <a id="btn-start" class="btn"
+         href="https://juandediosannaloromercedes.github.io/mango-infrastruttura/primo-scambio.html">
+        Inizia
+      </a>
     </section>
 
     <section class="card">
       <h2 id="write-title">Scrivi una riga</h2>
       <p id="write-text">Ogni scambio si riconosce con una riga. Senza quantità. Senza equivalenze.</p>
-      <a class="btn" href="scrivi-una-riga.html">Scrivi</a>
+
+      <!-- LINK ASSOLUTO DEFINITIVO (anti-docs.github.com) -->
+      <a id="btn-write" class="btn"
+         href="https://juandediosannaloromercedes.github.io/mango-infrastruttura/scrivi-una-riga.html">
+        Scrivi
+      </a>
     </section>
 
     <section class="card">
@@ -101,41 +110,30 @@
 
   <script>
     (function(){
-      // lingua valida
+      // lingua
       const allowed = new Set(['it','en','es','fr','de','zh']);
       const params = new URLSearchParams(location.search);
       const lang = allowed.has(params.get('lang')) ? params.get('lang') : null;
 
-      // evidenzia lingua selezionata
       if(lang){
         document.querySelectorAll('.langbar a').forEach(a=>{
           if(a.dataset.lang === lang) a.classList.add('active');
         });
       }
 
-      // REGOLA DEFINITIVA:
-      // aggiunge ?lang=xx a QUALSIASI link interno (primo-scambio, scrivi-una-riga, index, ecc.)
-      // e impedisce scappate tipo "docs/..." interpretate come dominio.
+      // aggiungi ?lang ai link assoluti del tuo sito
       if(!lang) return;
 
-      document.querySelectorAll('a[href]').forEach(a=>{
-        const href = a.getAttribute('href');
-        if(!href) return;
-
-        // lascia stare ancore e link esterni
-        if(href.startsWith('#')) return;
-        if(href.startsWith('http://') || href.startsWith('https://')) return;
-        if(href.startsWith('mailto:') || href.startsWith('tel:')) return;
-
-        // se qualcuno avesse scritto per errore "docs/..." lo correggiamo
-        const cleaned = href.replace(/^\/+/, '').replace(/^docs\//, '');
-
-        const u = new URL(cleaned, location.href);
+      const patch = (id) => {
+        const a = document.getElementById(id);
+        if(!a) return;
+        const u = new URL(a.getAttribute('href'));
         u.searchParams.set('lang', lang);
+        a.setAttribute('href', u.toString());
+      };
 
-        // scrive link relativo pulito
-        a.setAttribute('href', u.pathname.split('/').pop() + '?' + u.searchParams.toString());
-      });
+      patch('btn-start');
+      patch('btn-write');
     })();
   </script>
 </body>

@@ -1,83 +1,59 @@
 <!DOCTYPE html>
 <html lang="it">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Primo Scambio – Mango</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Primo Scambio – Mango</title>
 
-  <script src="lang.js" defer></script>
-
-  <style>
-    body{
-      margin:0;
-      font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
-      background:#fdfbf7;
-      color:#222;
-      padding:60px 20px;
-      text-align:center;
-    }
-
-    .container{
-      max-width:700px;
-      margin:0 auto;
-    }
-
-    h1{
-      font-size:28px;
-      margin-bottom:20px;
-    }
-
-    p{
-      font-size:16px;
-      line-height:1.6;
-      margin-bottom:25px;
-    }
-
-    .btn{
-      display:inline-block;
-      padding:12px 22px;
-      background:#f4a825;
-      color:#fff;
-      text-decoration:none;
-      border-radius:10px;
-      font-weight:700;
-      margin:10px;
-    }
-
-    .btn:hover{
-      background:#e69500;
-    }
-  </style>
+<style>
+body{
+  margin:0;
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
+  background:#fdfbf7;
+  color:#222;
+  padding:60px 20px;
+  text-align:center;
+}
+.container{max-width:700px;margin:0 auto;}
+.btn{
+  display:inline-block;
+  padding:12px 22px;
+  background:#f4a825;
+  color:#fff;
+  text-decoration:none;
+  border-radius:10px;
+  font-weight:700;
+}
+.btn:hover{background:#e69500;}
+</style>
 </head>
 
 <body>
 
-  <div class="container">
-    <h1 id="page-title">Primo scambio</h1>
+<div class="container">
+<h1>Primo scambio</h1>
 
-    <p id="page-text">
-      Descrivi lo scambio reale che stai iniziando.
-      Una riga. Nessuna quantità. Nessuna equivalenza.
-    </p>
+<p>
+Descrivi lo scambio reale che stai iniziando.
+Una riga. Nessuna quantità.
+</p>
 
-    <a id="home-link" class="btn" href="index.html">
-      Torna alla home
-    </a>
-  </div>
+<a id="home-btn" class="btn" href="index.html">Torna alla home</a>
 
-  <!-- Mantiene lingua quando torni alla home -->
-  <script>
-    (function(){
-      const p = new URLSearchParams(location.search);
-      const lang = p.get('lang');
-      if(!lang) return;
+</div>
 
-      const a = document.getElementById('home-link');
-      const u = new URL(a.getAttribute('href'), location.href);
-      u.searchParams.set('lang', lang);
-      a.setAttribute('href', u.pathname.split('/').pop() + '?' + u.searchParams.toString());
-    })();
-  </script>
+<script>
+(function(){
+const p=new URLSearchParams(location.search);
+const lang=p.get('lang');
+if(!lang)return;
+
+const btn=document.getElementById('home-btn');
+const u=new URL(btn.getAttribute('href'),location.href);
+u.searchParams.set('lang',lang);
+btn.setAttribute('href',u.pathname.split('/').pop()+'?'+u.searchParams.toString());
+})();
+</script>
 
 </body>
 </html>

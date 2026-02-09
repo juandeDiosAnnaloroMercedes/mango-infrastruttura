@@ -16,76 +16,188 @@
       padding:60px 20px;
       text-align:center;
     }
-    .container{
-      max-width:700px;
-      margin:0 auto;
-    }
-    h1{
-      font-size:28px;
-      margin-bottom:20px;
-    }
-    p{
-      font-size:16px;
-      line-height:1.6;
-      margin-bottom:20px;
-    }
+    .container{max-width:760px;margin:0 auto;}
+    h1{font-size:28px;margin:0 0 14px;}
+    p{font-size:16px;line-height:1.6;margin:0 auto 18px;max-width:680px;}
     textarea{
       width:100%;
-      max-width:600px;
+      max-width:680px;
       height:120px;
       padding:12px;
       font-size:16px;
-      border-radius:8px;
+      border-radius:10px;
       border:1px solid #ddd;
-      margin-bottom:20px;
+      background:#fff;
+      resize:vertical;
     }
-    .btn{
+    .row{
+      display:flex;
+      gap:10px;
+      justify-content:center;
+      flex-wrap:wrap;
+      margin-top:14px;
+    }
+    .btn, button.btn{
       display:inline-block;
-      padding:12px 22px;
+      padding:12px 18px;
       background:#f4a825;
       color:#fff;
       text-decoration:none;
       border-radius:10px;
       font-weight:700;
-      margin:10px;
+      border:none;
+      cursor:pointer;
     }
-    .btn:hover{
-      background:#e69500;
+    .btn:hover, button.btn:hover{background:#e69500;}
+    .btn.secondary, button.btn.secondary{
+      background:#111;
     }
+    .btn.secondary:hover, button.btn.secondary:hover{
+      background:#000;
+    }
+    .list{
+      margin:22px auto 0;
+      max-width:680px;
+      text-align:left;
+      background:#fff;
+      border:1px solid #eee;
+      border-radius:14px;
+      padding:14px 16px;
+    }
+    .item{
+      padding:10px 0;
+      border-bottom:1px solid #f0f0f0;
+      word-break:break-word;
+    }
+    .item:last-child{border-bottom:none;}
+    .meta{font-size:12px;opacity:.65;margin-bottom:6px;}
+    .danger{
+      background:#b00020 !important;
+    }
+    .danger:hover{background:#8b0019 !important;}
   </style>
 </head>
 
 <body>
-
   <div class="container">
-    <h1>Scrivi una riga</h1>
-
-    <p>
-      Descrivi lo scambio con una sola riga.
-      Senza quantità. Senza valore numerico.
+    <h1 id="page-title">Scrivi una riga</h1>
+    <p id="page-text">
+      Scrivi la riga dello scambio. Nessuna quantità. Nessun valore numerico.
+      La riga viene salvata sul tuo dispositivo (non online).
     </p>
 
-    <textarea placeholder="Scrivi qui la tua riga..."></textarea>
+    <form id="row-form">
+      <textarea id="mango-line" placeholder="Scrivi qui la tua riga..." required></textarea>
 
-    <br>
+      <div class="row">
+        <button class="btn" type="submit">Salva riga</button>
+        <button class="btn secondary" type="button" id="copy-all">Copia tutte</button>
+        <button class="btn danger" type="button" id="clear-all">Cancella tutto</button>
+        <a class="btn secondary" id="home-link" href="index.html">Torna alla home</a>
+      </div>
+    </form>
 
-    <a id="home-link" class="btn" href="index.html">
-      Torna alla home
-    </a>
+    <div class="list" id="saved-box" style="display:none;">
+      <div class="meta">Righe salvate (sul dispositivo):</div>
+      <div id="saved-list"></div>
+    </div>
   </div>
 
   <script>
     (function(){
+      // Mantieni ?lang nel link Home
       const p = new URLSearchParams(location.search);
       const lang = p.get('lang');
-      if(!lang) return;
+      const home = document.getElementById('home-link');
+      if(lang && home){
+        const u = new URL(home.getAttribute('href'), location.href);
+        u.searchParams.set('lang', lang);
+        home.setAttribute('href', u.pathname.split('/').pop() + '?' + u.searchParams.toString());
+      }
 
-      const a = document.getElementById('home-link');
-      const u = new URL(a.getAttribute('href'), location.href);
-      u.searchParams.set('lang', lang);
-      a.setAttribute('href', u.pathname.split('/').pop() + '?' + u.searchParams.toString());
+      const KEY = 'mango_rows_v1';
+      const form = document.getElementById('row-form');
+      const input = document.getElementById('mango-line');
+      const box = document.getElementById('saved-box');
+      const list = document.getElementById('saved-list');
+      const copyBtn = document.getElementById('copy-all');
+      const clearBtn = document.getElementById('clear-all');
+
+      function load(){
+        try { return JSON.parse(localStorage.getItem(KEY) || '[]'); }
+        catch(e){ return []; }
+      }
+
+      function save(rows){
+        localStorage.setItem(KEY, JSON.stringify(rows));
+      }
+
+      function render(){
+        const rows = load();
+        if(rows.length === 0){
+          box.style.display = 'none';
+          list.innerHTML = '';
+          return;
+        }
+        box.style.display = 'block';
+        list.innerHTML = rows.slice().reverse().map(r => {
+          const d = new Date(r.ts);
+          const stamp = isNaN(d.getTime()) ? '' : d.toLocaleString();
+          return `
+            <div class="item">
+              <div class="meta">${stamp}</div>
+              <div>${escapeHtml(r.text)}</div>
+            </div>`;
+        }).join('');
+      }
+
+      function escapeHtml(s){
+        return String(s)
+          .replaceAll('&','&amp;')
+          .replaceAll('<','&lt;')
+          .replaceAll('>','&gt;')
+          .replaceAll('"','&quot;')
+          .replaceAll("'","&#039;");
+      }
+
+      form.addEventListener('submit', function(e){
+        e.preventDefault();
+        const text = (input.value || '').trim();
+        if(!text) return;
+
+        const rows = load();
+        rows.push({ ts: Date.now(), text });
+        save(rows);
+
+        input.value = '';
+        render();
+      });
+
+      copyBtn.addEventListener('click', async function(){
+        const rows = load();
+        const out = rows.map(r => r.text).join('\n');
+        if(!out){
+          alert('Nessuna riga salvata.');
+          return;
+        }
+        try{
+          await navigator.clipboard.writeText(out);
+          alert('Copiato negli appunti.');
+        }catch(e){
+          // fallback
+          prompt('Copia manualmente:', out);
+        }
+      });
+
+      clearBtn.addEventListener('click', function(){
+        const ok = confirm('Vuoi cancellare tutte le righe salvate su questo dispositivo?');
+        if(!ok) return;
+        localStorage.removeItem(KEY);
+        render();
+      });
+
+      render();
     })();
   </script>
-
 </body>
 </html>

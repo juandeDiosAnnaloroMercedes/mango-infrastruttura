@@ -1,96 +1,142 @@
 <!DOCTYPE html>
 <html lang="it">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Mango – Infrastruttura di Fiducia</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mango – Infrastruttura di fiducia</title>
 
-<script src="lang.js" defer></script>
+  <script src="lang.js" defer></script>
 
-<style>
-body{
-  margin:0;
-  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
-  background:#fdfbf7;
-  color:#222;
-  padding:80px 20px 40px;
-  text-align:center;
-}
-.container{max-width:900px;margin:0 auto;}
-.lang-switch{
-  position:fixed;top:12px;right:12px;
-  display:flex;gap:10px;
-  background:#fff;border:1px solid #eee;
-  border-radius:10px;padding:8px 10px;
-}
-.lang-switch a{
-  text-decoration:none;font-weight:600;
-  padding:6px 8px;border-radius:8px;color:#222;
-}
-.lang-switch a.active{background:#111;color:#fff;}
-section{
-  max-width:720px;margin:22px auto;
-  padding:22px 18px;background:#fff;
-  border:1px solid #eee;border-radius:14px;
-  text-align:left;
-}
-.btn{
-  display:inline-block;
-  padding:12px 22px;
-  background:#f4a825;
-  color:#fff;text-decoration:none;
-  border-radius:10px;font-weight:700;
-}
-.btn:hover{background:#e69500;}
-</style>
+  <style>
+    body{
+      margin:0;
+      font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
+      background:#fdfbf7;
+      color:#222;
+      padding:80px 20px 40px;
+    }
+    .container{max-width:900px;margin:0 auto;}
+    .langbar{
+      position:fixed; top:12px; left:50%;
+      transform:translateX(-50%);
+      display:flex; gap:10px; align-items:center;
+      background:#fff; border:1px solid #eee;
+      border-radius:14px; padding:10px 12px;
+      box-shadow:0 10px 30px rgba(0,0,0,.06);
+      z-index:999;
+    }
+    .langbar a{
+      text-decoration:none; font-weight:700; font-size:13px;
+      padding:6px 10px; border-radius:10px; color:#111;
+    }
+    .langbar a.active{background:#111;color:#fff;}
+    header{ text-align:center; margin:30px auto 26px; }
+    h1{ margin:0 0 10px; font-size:44px; letter-spacing:-.5px; }
+    header p{ margin:0 auto; max-width:720px; font-size:18px; line-height:1.5; }
+    .card{
+      max-width:760px;
+      margin:18px auto;
+      background:#fff;
+      border:1px solid #eee;
+      border-radius:18px;
+      padding:22px 22px;
+    }
+    .card h2{ margin:0 0 10px; font-size:28px; }
+    .card p{ margin:0 0 14px; font-size:16px; line-height:1.6; max-width:720px; }
+    .btn{
+      display:inline-block;
+      padding:12px 22px;
+      background:#f4a825;
+      color:#fff;
+      text-decoration:none;
+      border-radius:12px;
+      font-weight:800;
+    }
+    .btn:hover{ background:#e69500; }
+    footer{
+      text-align:center;
+      margin:28px 0 0;
+      font-size:13px;
+      opacity:.7;
+    }
+  </style>
 </head>
 
 <body>
+  <!-- Switch lingue -->
+  <nav class="langbar" aria-label="Language">
+    <a href="?lang=it" data-lang="it">IT</a>
+    <a href="?lang=en" data-lang="en">EN</a>
+    <a href="?lang=es" data-lang="es">ES</a>
+    <a href="?lang=fr" data-lang="fr">FR</a>
+    <a href="?lang=de" data-lang="de">DE</a>
+    <a href="?lang=zh" data-lang="zh">ZH</a>
+  </nav>
 
-<div class="lang-switch">
-<a href="?lang=it" data-lang="it">IT</a>
-<a href="?lang=en" data-lang="en">EN</a>
-<a href="?lang=es" data-lang="es">ES</a>
-<a href="?lang=fr" data-lang="fr">FR</a>
-<a href="?lang=de" data-lang="de">DE</a>
-<a href="?lang=zh" data-lang="zh">ZH</a>
-</div>
+  <main class="container">
+    <header>
+      <h1 id="title">Mango 🥭</h1>
+      <p id="subtitle">Un’infrastruttura di fiducia locale non monetaria.<br>Una riga alla volta.</p>
+    </header>
 
-<div class="container">
+    <section class="card">
+      <h2 id="start-title">Fai Mango adesso</h2>
+      <p id="start-text">Inizia uno scambio reale. Nessun accumulo. Nessun valore numerico.</p>
+      <a class="btn" href="primo-scambio.html">Inizia</a>
+    </section>
 
-<h1>Mango 🥭</h1>
-<p>Un’infrastruttura di fiducia locale non monetaria.<br>Una riga alla volta.</p>
+    <section class="card">
+      <h2 id="write-title">Scrivi una riga</h2>
+      <p id="write-text">Ogni scambio si riconosce con una riga. Senza quantità. Senza equivalenze.</p>
+      <a class="btn" href="scrivi-una-riga.html">Scrivi</a>
+    </section>
 
-<section>
-<h2>Fai Mango adesso</h2>
-<p>Inizia uno scambio reale. Nessun accumulo. Nessun valore numerico.</p>
-<a id="start-btn" class="btn" href="primo-scambio.html">Inizia</a>
-</section>
+    <section class="card">
+      <h2 id="what-title">Cos’è Mango</h2>
+      <p id="what-text">Mango è uno spazio di fiducia non appropriabile. Non è denaro. Non è accumulabile.</p>
+    </section>
 
-<section>
-<h2>Cos’è Mango</h2>
-<p>Mango è uno spazio di fiducia non appropriabile. Non è denaro. Non è accumulabile.</p>
-</section>
+    <footer id="footer-text">Creato da Juan de Dios Annaloro Mercedes – 02 Febbraio 2026</footer>
+  </main>
 
-</div>
+  <script>
+    (function(){
+      // lingua valida
+      const allowed = new Set(['it','en','es','fr','de','zh']);
+      const params = new URLSearchParams(location.search);
+      const lang = allowed.has(params.get('lang')) ? params.get('lang') : null;
 
-<script>
-(function(){
-const p=new URLSearchParams(location.search);
-const lang=p.get('lang');
-if(!lang)return;
+      // evidenzia lingua selezionata
+      if(lang){
+        document.querySelectorAll('.langbar a').forEach(a=>{
+          if(a.dataset.lang === lang) a.classList.add('active');
+        });
+      }
 
-const btn=document.getElementById('start-btn');
-if(btn){
-  const u=new URL(btn.getAttribute('href'),location.href);
-  u.searchParams.set('lang',lang);
-  btn.setAttribute('href',u.pathname.split('/').pop()+'?'+u.searchParams.toString());
-}
-document.querySelectorAll('.lang-switch a').forEach(a=>{
- if(a.dataset.lang===lang)a.classList.add('active');
-});
-})();
-</script>
+      // REGOLA DEFINITIVA:
+      // aggiunge ?lang=xx a QUALSIASI link interno (primo-scambio, scrivi-una-riga, index, ecc.)
+      // e impedisce scappate tipo "docs/..." interpretate come dominio.
+      if(!lang) return;
 
+      document.querySelectorAll('a[href]').forEach(a=>{
+        const href = a.getAttribute('href');
+        if(!href) return;
+
+        // lascia stare ancore e link esterni
+        if(href.startsWith('#')) return;
+        if(href.startsWith('http://') || href.startsWith('https://')) return;
+        if(href.startsWith('mailto:') || href.startsWith('tel:')) return;
+
+        // se qualcuno avesse scritto per errore "docs/..." lo correggiamo
+        const cleaned = href.replace(/^\/+/, '').replace(/^docs\//, '');
+
+        const u = new URL(cleaned, location.href);
+        u.searchParams.set('lang', lang);
+
+        // scrive link relativo pulito
+        a.setAttribute('href', u.pathname.split('/').pop() + '?' + u.searchParams.toString());
+      });
+    })();
+  </script>
 </body>
 </html>

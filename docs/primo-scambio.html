@@ -3,57 +3,113 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Primo Scambio – Mango</title>
+<title>Mango – Primo scambio</title>
 
 <style>
-body{
-  margin:0;
-  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
-  background:#fdfbf7;
-  color:#222;
-  padding:60px 20px;
-  text-align:center;
-}
-.container{max-width:700px;margin:0 auto;}
-.btn{
-  display:inline-block;
-  padding:12px 22px;
-  background:#f4a825;
-  color:#fff;
-  text-decoration:none;
-  border-radius:10px;
-  font-weight:700;
-}
-.btn:hover{background:#e69500;}
+  body{
+    margin:0;
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
+    background:#fdfbf7;
+    color:#222;
+    padding:80px 20px 40px;
+    text-align:center;
+  }
+  .langbar{
+    position:fixed; top:12px; left:50%;
+    transform:translateX(-50%);
+    display:flex; gap:10px;
+    background:#fff; border:1px solid #eee;
+    border-radius:14px; padding:10px 12px;
+    box-shadow:0 10px 30px rgba(0,0,0,.06);
+    z-index:999;
+  }
+  .langbar a{
+    text-decoration:none; font-weight:900; font-size:13px;
+    padding:6px 10px; border-radius:10px; color:#111;
+  }
+  .langbar a.active{background:#111;color:#fff;}
+
+  .container{max-width:760px;margin:0 auto;}
+  h1{font-size:34px;margin:20px 0 12px;}
+  p{font-size:16px;line-height:1.6;margin:0 auto 18px;max-width:680px;}
+  .card{
+    max-width:680px;
+    margin:18px auto;
+    background:#fff;
+    border:1px solid #eee;
+    border-radius:16px;
+    padding:16px 18px;
+    text-align:left;
+  }
+  .card ul{margin:10px 0 0 18px; padding:0;}
+  .card li{margin:8px 0; line-height:1.5;}
+  a.btnlink{
+    padding:12px 20px;
+    border:none;
+    border-radius:12px;
+    font-weight:900;
+    cursor:pointer;
+    text-decoration:none;
+    display:inline-block;
+    background:#111;
+    color:#fff;
+    margin-top:14px;
+  }
+  a.btnlink:hover{background:#000;}
 </style>
 </head>
 
 <body>
 
+<nav class="langbar" aria-label="Language">
+  <a href="?lang=it" data-lang="it">IT</a>
+  <a href="?lang=en" data-lang="en">EN</a>
+  <a href="?lang=es" data-lang="es">ES</a>
+  <a href="?lang=fr" data-lang="fr">FR</a>
+  <a href="?lang=de" data-lang="de">DE</a>
+  <a href="?lang=zh" data-lang="zh">中文</a>
+</nav>
+
 <div class="container">
-<h1>Primo scambio</h1>
+  <h1 id="title"></h1>
+  <p id="desc"></p>
 
-<p>
-Descrivi lo scambio reale che stai iniziando.
-Una riga. Nessuna quantità.
-</p>
+  <div class="card">
+    <strong id="howTitle"></strong>
+    <ul>
+      <li id="h1"></li>
+      <li id="h2"></li>
+      <li id="h3"></li>
+    </ul>
+  </div>
 
-<a id="home-btn" class="btn" href="index.html">Torna alla home</a>
-
+  <a class="btnlink" id="homeBtn"
+     href="https://juandediosannalorcedes.github.io/mango-infrastruttura/"></a>
 </div>
 
 <script>
 (function(){
-const p=new URLSearchParams(location.search);
-const lang=p.get('lang');
-if(!lang)return;
-
-const btn=document.getElementById('home-btn');
-const u=new URL(btn.getAttribute('href'),location.href);
-u.searchParams.set('lang',lang);
-btn.setAttribute('href',u.pathname.split('/').pop()+'?'+u.searchParams.toString());
-})();
-</script>
-
-</body>
-</html>
+  const T = {
+    it:{
+      title:"Primo scambio",
+      desc:"Stai per iniziare uno scambio reale. Mango non è denaro e non si accumula. Qui ti basta capire cosa stai facendo, poi scriverai la riga.",
+      howTitle:"Come fare (semplice):",
+      h1:"Fai lo scambio reale (aiuto, oggetto, tempo, cura, accompagnamento, ecc.).",
+      h2:"Dopo lo scambio, vai su “Scrivi una riga” e descrivilo in una frase.",
+      h3:"Nessuna quantità, nessun valore numerico, nessuna equivalenza.",
+      home:"Torna alla home"
+    },
+    en:{
+      title:"First exchange",
+      desc:"You are about to start a real exchange. Mango is not money and it cannot be accumulated. Understand the exchange first, then you will write the line.",
+      howTitle:"How to do it (simple):",
+      h1:"Do the real exchange (help, object, time, care, accompaniment, etc.).",
+      h2:"After the exchange, go to “Write one line” and describe it in one sentence.",
+      h3:"No quantities, no numeric value, no equivalence.",
+      home:"Back to home"
+    },
+    es:{
+      title:"Primer intercambio",
+      desc:"Estás por iniciar un intercambio real. Mango no es dinero y no se acumula. Primero haz el intercambio, luego escribirás la línea.",
+      howTitle:"Cómo hacerlo (simple):",
+      h

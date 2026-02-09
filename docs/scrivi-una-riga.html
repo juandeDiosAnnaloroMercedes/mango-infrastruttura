@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Scrivi una riga – Mango</title>
+
+  <script src="lang.js" defer></script>
+
+  <style>
+    body{
+      margin:0;
+      font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
+      background:#fdfbf7;
+      color:#222;
+      padding:60px 20px;
+      text-align:center;
+    }
+    .container{
+      max-width:700px;
+      margin:0 auto;
+    }
+    h1{
+      font-size:28px;
+      margin-bottom:20px;
+    }
+    p{
+      font-size:16px;
+      line-height:1.6;
+      margin-bottom:20px;
+    }
+    textarea{
+      width:100%;
+      max-width:600px;
+      height:120px;
+      padding:12px;
+      font-size:16px;
+      border-radius:8px;
+      border:1px solid #ddd;
+      margin-bottom:20px;
+    }
+    .btn{
+      display:inline-block;
+      padding:12px 22px;
+      background:#f4a825;
+      color:#fff;
+      text-decoration:none;
+      border-radius:10px;
+      font-weight:700;
+      margin:10px;
+    }
+    .btn:hover{
+      background:#e69500;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="container">
+    <h1>Scrivi una riga</h1>
+
+    <p>
+      Descrivi lo scambio con una sola riga.
+      Senza quantità. Senza valore numerico.
+    </p>
+
+    <textarea placeholder="Scrivi qui la tua riga..."></textarea>
+
+    <br>
+
+    <a id="home-link" class="btn" href="index.html">
+      Torna alla home
+    </a>
+  </div>
+
+  <script>
+    (function(){
+      const p = new URLSearchParams(location.search);
+      const lang = p.get('lang');
+      if(!lang) return;
+
+      const a = document.getElementById('home-link');
+      const u = new URL(a.getAttribute('href'), location.href);
+      u.searchParams.set('lang', lang);
+      a.setAttribute('href', u.pathname.split('/').pop() + '?' + u.searchParams.toString());
+    })();
+  </script>
+
+</body>
+</html>

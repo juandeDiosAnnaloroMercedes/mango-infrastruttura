@@ -1,64 +1,12 @@
-<!DOCTYPE html>
-<html lang="it">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Mango – Infrastruttura di Fiducia</title>
-<script src="lang.js" defer></script>
-<style>
-body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;background:#fdfbf7;color:#222;line-height:1.6;}
-.lang-switch{position:absolute;top:20px;right:20px;font-size:14px;}
-.lang-switch a{margin-left:10px;text-decoration:none;color:#444;}
-header{text-align:center;padding:80px 20px 40px;}
-section{max-width:700px;margin:40px auto;padding:0 20px;}
-.btn{display:inline-block;margin-top:15px;padding:12px 24px;background:#f4a825;color:white;text-decoration:none;border-radius:6px;font-weight:500;}
-footer{text-align:center;padding:40px 20px;font-size:14px;opacity:0.6;}
-</style>
-</head>
-<body>
-
-<div class="lang-switch">
-<a href="?lang=it">IT</a>
-<a href="?lang=en">EN</a>
-<a href="?lang=es">ES</a>
-<a href="?lang=fr">FR</a>
-<a href="?lang=de">DE</a>
-<a href="?lang=zh">ZH</a>
-</div>
-
-<header>
-<h1 id="title">Mango 🥭</h1>
-<p id="subtitle">Un’infrastruttura di fiducia locale non monetaria. Una riga alla volta.</p>
-</header>
-
-<section>
-<h2 id="start-title">Fai Mango adesso</h2>
-<p id="start-text">Inizia uno scambio reale. Nessun accumulo. Nessun valore numerico.</p>
-<a id="start-btn" class="btn" href="#">Inizia</a>
-</section>
-
-<section>
-<h2 id="write-title">Scrivi una riga</h2>
-<p id="write-text">Ogni scambio si riconosce con una riga. Senza quantità. Senza equivalenze.</p>
-</section>
-
-<section>
-<h2 id="what-title">Cos’è Mango</h2>
-<p id="what-text">Mango è uno spazio di fiducia non appropriabile.</p>
-</section>
-
-<footer>
-Creato da Juan de Dios Annaloro Mercedes – 02 Febbraio 2026
-</footer>
+<a id="btn-inizia" class="btn" href="#">Inizia</a>
 
 <script>
-document.addEventListener("DOMContentLoaded",function(){
-  const params=new URLSearchParams(window.location.search);
-  const lang=params.get("lang")||"it";
-  const btn=document.getElementById("start-btn");
-  if(btn) btn.href="primo-scambio.html?lang="+encodeURIComponent(lang);
-});
-</script>
+  (function () {
+    const allowed = new Set(['it','en','es','fr','de','zh']);
+    const params = new URLSearchParams(window.location.search);
+    const lang = allowed.has(params.get('lang')) ? params.get('lang') : 'it';
 
-</body>
-</html>
+    const base = 'https://juandediosannaloromercedes.github.io/mango-infrastruttura/';
+    document.getElementById('btn-inizia').href = base + 'primo-scambio.html?lang=' + lang;
+  })();
+</script>

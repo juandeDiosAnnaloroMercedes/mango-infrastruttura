@@ -1,132 +1,214 @@
-/* ==========================================
-   MANGO — HOME DEFINITIVA (stabile iPhone)
-   Testo • Spazio • Neutro • Multilingua
-   ========================================== */
+/* ==============================
+   MANGO — Silenzio / Neutro
+   Stabile iOS (no vibrazioni)
+   ============================== */
 
-html { -webkit-text-size-adjust: 100%; }
+:root {
+  --max: 720px;
+  --pad-x: 1.25rem;
+  --pad-y: 2.25rem;
+  --border: rgba(0,0,0,.15);
+  --muted: rgba(0,0,0,.7);
+  --bg-soft: rgba(0,0,0,.035);
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
 body {
   margin: 0;
-  padding: 2.5rem 1.4rem;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
-               "Noto Sans TC", "Noto Sans CJK TC", "PingFang TC", "Heiti TC",
-               "Helvetica Neue", Arial, sans-serif;
-  line-height: 1.45;
+  padding: var(--pad-y) var(--pad-x);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, "Noto Sans TC", "PingFang TC", "Heiti TC", sans-serif;
+  line-height: 1.55;
   color: #111;
   background: #fff;
 }
 
-.wrap { max-width: 720px; margin: 0 auto; }
+.wrap {
+  max-width: var(--max);
+  margin: 0 auto;
+}
 
-h1 { font-size: 2.2rem; margin: 1.2rem 0 1rem; }
-h2 { font-size: 1.8rem; margin: 2.2rem 0 1rem; }
-p  { font-size: 1.05rem; margin: 0.7rem 0; }
-ol { margin: 0.8rem 0 0.8rem 1.3rem; padding: 0; }
-li { margin: 0.35rem 0; }
+hr {
+  border: 0;
+  border-top: 1px solid var(--border);
+  margin: 2rem 0;
+}
 
-hr { border: 0; border-top: 1px solid #d6d6d6; margin: 2.2rem 0; }
+h1 {
+  font-size: 2.1rem;
+  letter-spacing: -0.02em;
+  margin: 1.25rem 0 1rem 0;
+}
+
+h2 {
+  font-size: 1.65rem;
+  margin: 2rem 0 0.75rem 0;
+  letter-spacing: -0.01em;
+}
+
+p {
+  margin: 0.6rem 0;
+  font-size: 1.05rem;
+}
+
+.lead {
+  font-size: 1.12rem;
+  font-weight: 600;
+}
+
+.steps {
+  margin: 0.8rem 0 0.6rem 1.25rem;
+  padding: 0;
+}
+.steps li {
+  margin: 0.5rem 0;
+  font-size: 1.05rem;
+}
+.strong {
+  margin-top: 0.8rem;
+  font-size: 1.1rem;
+}
 
 /* NAV LINGUE */
 .lang-nav {
+  max-width: var(--max);
+  margin: 0 auto 1.25rem auto;
   display: flex;
-  gap: 1.2rem;
+  gap: 0.9rem;
   align-items: center;
-  max-width: 720px;
-  margin: 0 auto 1.2rem;
-  padding: 0.6rem 0;
+  flex-wrap: wrap;
 }
-.lang-nav a {
+
+.lang-link {
   text-decoration: none;
-  border-bottom: 1px solid currentColor;
   color: #111;
-  padding-bottom: 0.15rem;
-  font-weight: 600;
+  font-weight: 700;
+  border-bottom: 2px solid rgba(0,0,0,.2);
+  padding-bottom: 0.1rem;
 }
-.lang-nav a.active {
-  border-bottom-width: 3px;
+.lang-link:active {
+  opacity: 0.75;
 }
 
-/* QR */
+/* QR — STABILE iOS */
 .qr-container {
+  margin: 1.5rem 0 0.5rem 0;
   text-align: center;
-  margin: 2rem 0 0;
+  background: var(--bg-soft);
+  border: 1px solid rgba(0,0,0,.06);
+  border-radius: 18px;
+  padding: 1.25rem;
 }
-.qr-link { display: inline-block; }
 
+.qr-link {
+  display: inline-block;
+  text-decoration: none;
+}
+
+/* chiave anti-vibrazione:
+   - niente transform animati
+   - niente auto-resize subpixel
+   - img bloccata con width/height + object-fit
+*/
 .qr-img {
   display: block;
   width: 320px;
   height: 320px;
   max-width: 100%;
   margin: 0 auto;
-
-  /* anti-vibrazione Safari iOS */
+  object-fit: contain;
+  image-rendering: pixelated; /* migliore per QR su mobile */
+  -webkit-transform: translateZ(0);
   transform: translateZ(0);
   backface-visibility: hidden;
-  -webkit-backface-visibility: hidden;
-  will-change: transform;
-  image-rendering: crisp-edges;
 }
 
 .qr-text {
-  margin-top: 1.1rem;
+  margin-top: 1rem;
   font-size: 1.25rem;
+}
+.qr-text strong {
+  font-size: 1.55rem;
 }
 
 /* REGISTRO */
-.field { display: block; margin: 1rem 0 0.8rem; }
-.label { display: block; font-weight: 700; margin-bottom: 0.4rem; }
+.label {
+  display: block;
+  font-weight: 800;
+  margin: 1rem 0 0.4rem 0;
+}
 
-textarea {
+.textarea {
   width: 100%;
   box-sizing: border-box;
+  padding: 0.9rem 0.9rem;
+  border-radius: 14px;
+  border: 1px solid rgba(0,0,0,.18);
   font-size: 1.05rem;
-  padding: 0.85rem 0.9rem;
-  border: 1px solid #d6d6d6;
-  border-radius: 10px;
   outline: none;
+  background: #fff;
 }
-textarea:focus { border-color: #111; }
 
-.actions {
+.textarea:focus {
+  border-color: rgba(0,0,0,.35);
+}
+
+.btn-row {
   display: flex;
   flex-wrap: wrap;
-  gap: 0.7rem;
-  align-items: center;
-  margin: 0.8rem 0 0.8rem;
+  gap: 0.6rem;
+  margin: 0.9rem 0 0.4rem 0;
 }
 
-button {
+.btn {
   appearance: none;
-  border: 1px solid #111;
+  border: 0;
+  border-radius: 999px;
+  padding: 0.8rem 1rem;
+  font-weight: 800;
+  font-size: 1rem;
   background: #111;
   color: #fff;
-  padding: 0.65rem 0.9rem;
-  border-radius: 999px;
-  font-weight: 700;
   cursor: pointer;
 }
-button:active { transform: translateY(1px); }
 
-.file {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.6rem;
-  border: 1px solid #d6d6d6;
-  padding: 0.55rem 0.8rem;
-  border-radius: 999px;
-  font-weight: 700;
+.btn:active {
+  opacity: 0.85;
 }
-.file input { max-width: 180px; }
 
-.note { margin-top: 0.9rem; font-weight: 700; }
+.btn.btn-secondary {
+  background: #fff;
+  color: #111;
+  border: 1px solid rgba(0,0,0,.18);
+}
 
-.mini-links a { color: #111; text-decoration: none; border-bottom: 1px solid currentColor; }
-.mini-links { margin-top: 0.9rem; }
+.upload-row {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+  margin: 0.8rem 0 0.4rem 0;
+}
 
-/* Mobile */
-@media (max-width: 420px) {
-  body { padding: 2rem 1.1rem; }
-  h1 { font-size: 2rem; }
-  h2 { font-size: 1.65rem; }
-  .qr-text { font-size: 1.15rem; }
+/* input file invisibile ma accessibile via label */
+#fileUpload {
+  position: absolute;
+  left: -9999px;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
+
+.file-hint {
+  font-size: 0.95rem;
+  color: var(--muted);
+}
+
+.note {
+  font-size: 0.98rem;
+  color: var(--muted);
+  margin-top: 0.9rem;
 }

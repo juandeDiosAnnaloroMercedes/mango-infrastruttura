@@ -135,20 +135,4 @@ a img {
   backface-visibility: hidden;
   transform: translateZ(0);
 }
-<img src="mango-home-qr.jpg"
-     alt="QR Mango"
-     width="320"
-     height="320"
-     loading="eager"
-     decoding="sync"
-     style="width:320px;height:320px;display:block;">
 
-img[alt="QR Mango"] {
-  display: block;
-  width: 320px;
-  height: 320px;
-  margin: 0 auto;
-  image-rendering: crisp-edges;
-  backface-visibility: hidden;
-  transform: translateZ(0);
-}

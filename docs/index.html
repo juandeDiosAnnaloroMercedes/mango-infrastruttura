@@ -1,184 +1,36 @@
 <!DOCTYPE html>
 <html lang="it">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<!-- BLINDATURA CACHE -->
-<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
-<meta http-equiv="Pragma" content="no-cache">
-<meta http-equiv="Expires" content="0">
-
-<title>Mango – Infrastruttura di fiducia</title>
-
-<style>
-body{
-  margin:0;
-  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
-  background:#fdfbf7;
-  color:#222;
-  padding:80px 20px 40px;
-  text-align:center;
-}
-.langbar{
-  position:fixed; top:12px; left:50%;
-  transform:translateX(-50%);
-  display:flex; gap:10px;
-  background:#fff; border:1px solid #eee;
-  border-radius:14px; padding:10px 12px;
-  box-shadow:0 10px 30px rgba(0,0,0,.06);
-}
-.langbar a{
-  text-decoration:none;
-  font-weight:900;
-  font-size:13px;
-  padding:6px 10px;
-  border-radius:10px;
-  color:#111;
-}
-.langbar a.active{background:#111;color:#fff;}
-
-h1{font-size:44px;margin:20px 0 10px;}
-.subtitle{font-size:18px;margin-bottom:24px;}
-
-.card{
-  max-width:760px;
-  margin:18px auto;
-  background:#fff;
-  border:1px solid #eee;
-  border-radius:18px;
-  padding:22px;
-  text-align:left;
-}
-.card h2{margin:0 0 10px;font-size:28px;}
-.card p{margin:0 0 14px;font-size:16px;}
-
-a.btn{
-  display:inline-block;
-  padding:12px 22px;
-  background:#f4a825;
-  color:#fff;
-  text-decoration:none;
-  border-radius:12px;
-  font-weight:900;
-}
-a.btn:hover{background:#e69500;}
-
-footer{margin-top:26px;font-size:13px;opacity:.7;}
-</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mango</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
-<nav class="langbar">
-  <a href="?lang=it">IT</a>
-  <a href="?lang=en">EN</a>
-  <a href="?lang=es">ES</a>
-  <a href="?lang=fr">FR</a>
-  <a href="?lang=de">DE</a>
-  <a href="?lang=zh">中文</a>
-</nav>
+<main style="max-width:760px;margin:3rem auto;padding:0 1.5rem;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Noto Sans TC','PingFang TC','Microsoft JhengHei',Arial,sans-serif;line-height:1.7;color:#111;">
 
-<h1>Mango 🥭</h1>
-<div class="subtitle" id="subtitle"></div>
+  <h1 style="font-size:1.7rem;font-weight:600;margin-bottom:1.8rem;">Mango</h1>
 
-<section class="card">
-  <h2 id="startTitle"></h2>
-  <p id="startText"></p>
-  <a class="btn" id="startBtn"
-     href="https://juandediosannaloromercedes.github.io/mango-infrastruttura/primo-scambio.html">
-  </a>
-</section>
+  <section style="margin:3rem 0;">
+    <h2 style="font-size:1.2rem;font-weight:500;">Infrastruttura locale di fiducia</h2>
+    <p>Non monetaria.</p>
+    <p>Non accumulabile.</p>
+    <p>Non appropriabile.</p>
+  </section>
 
-<section class="card">
-  <h2 id="writeTitle"></h2>
-  <p id="writeText"></p>
-  <a class="btn" id="writeBtn"
-     href="https://juandediosannaloromercedes.github.io/mango-infrastruttura/scrivi-una-riga.html">
-  </a>
-</section>
+  <section style="margin:3rem 0;">
+    <h2 style="font-size:1.2rem;font-weight:500;">Fai Mango adesso</h2>
+    <p>Scambia qualcosa di reale.</p>
+  </section>
 
-<section class="card">
-  <h2 id="whatTitle"></h2>
-  <p id="whatText"></p>
-</section>
+  <section style="margin:3rem 0;">
+    <h2 style="font-size:1.2rem;font-weight:500;">Scrivi una riga</h2>
+    <p>Una riga = un Mango.</p>
+  </section>
 
-<footer id="footerText"></footer>
-
-<script>
-(function(){
-
-  const VERSION = "MANGO_V1_STABLE";
-
-  const T = {
-    it:{
-      subtitle:"Un’infrastruttura di fiducia locale non monetaria. Una riga alla volta.",
-      startTitle:"Fai Mango adesso",
-      startText:"Inizia uno scambio reale. Nessun accumulo. Nessun valore numerico.",
-      startBtn:"Inizia",
-      writeTitle:"Scrivi una riga",
-      writeText:"Ogni scambio si riconosce con una riga. Senza quantità. Senza equivalenze.",
-      writeBtn:"Scrivi",
-      whatTitle:"Cos’è Mango",
-      whatText:"Mango è uno spazio di fiducia non appropriabile. Non è denaro. Non è accumulabile.",
-      footer:"Creato da Juan de Dios Annaloro Mercedes – 02 Febbraio 2026"
-    },
-    de:{
-      subtitle:"Eine nicht-monetäre lokale Vertrauens-Infrastruktur. Eine Zeile nach der anderen.",
-      startTitle:"Mango jetzt machen",
-      startText:"Starte einen echten Austausch. Keine Akkumulation. Kein Zahlenwert.",
-      startBtn:"Start",
-      writeTitle:"Eine Zeile schreiben",
-      writeText:"Jeder Austausch wird mit einer Zeile anerkannt. Keine Mengen. Keine Äquivalenz.",
-      writeBtn:"Schreiben",
-      whatTitle:"Was ist Mango",
-      whatText:"Mango ist ein nicht aneignbarer Vertrauensraum. Es ist kein Geld. Es ist nicht akkumulativ.",
-      footer:"Erstellt von Juan de Dios Annaloro Mercedes – 02. Februar 2026"
-    },
-    en:{
-      subtitle:"A non-monetary local trust infrastructure. One line at a time.",
-      startTitle:"Do Mango now",
-      startText:"Start a real exchange. No accumulation. No numeric value.",
-      startBtn:"Start",
-      writeTitle:"Write one line",
-      writeText:"Each exchange is recognized with one line.",
-      writeBtn:"Write",
-      whatTitle:"What is Mango",
-      whatText:"Mango is a non-appropriable space of trust.",
-      footer:"Created by Juan de Dios Annaloro Mercedes – 02 February 2026"
-    }
-  };
-
-  const params = new URLSearchParams(location.search);
-  const lang = params.get("lang") || "it";
-  const t = T[lang] || T.it;
-
-  document.documentElement.lang = lang;
-
-  document.getElementById("subtitle").textContent = t.subtitle;
-  document.getElementById("startTitle").textContent = t.startTitle;
-  document.getElementById("startText").textContent = t.startText;
-  document.getElementById("startBtn").textContent = t.startBtn;
-
-  document.getElementById("writeTitle").textContent = t.writeTitle;
-  document.getElementById("writeText").textContent = t.writeText;
-  document.getElementById("writeBtn").textContent = t.writeBtn;
-
-  document.getElementById("whatTitle").textContent = t.whatTitle;
-  document.getElementById("whatText").textContent = t.whatText;
-  document.getElementById("footerText").textContent = t.footer;
-
-  // BLINDATURA LINK
-  ["startBtn","writeBtn"].forEach(id=>{
-    const a = document.getElementById(id);
-    const u = new URL(a.href);
-    u.searchParams.set("lang", lang);
-    u.searchParams.set("v", VERSION);
-    a.href = u.toString();
-  });
-
-})();
-</script>
+</main>
 
 </body>
 </html>

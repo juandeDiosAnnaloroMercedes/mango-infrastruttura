@@ -1,6 +1,6 @@
 /* =====================================================
-   MANGO — STILE DEFINITIVO STABILE
-   Testo pulito • Nessuna animazione • QR stabile
+   MANGO — VERSIONE DEFINITIVA STABILE
+   Nessuna animazione • QR fisso • Safari compatibile
 ===================================================== */
 
 html {
@@ -23,7 +23,20 @@ body {
   line-height: 1.6;
 }
 
-/* Titoli */
+/* NAV */
+
+nav {
+  margin-bottom: 2rem;
+}
+
+nav a {
+  margin-right: 1rem;
+  text-decoration: none;
+  color: #111;
+  font-weight: 500;
+}
+
+/* TITOLI */
 
 h1 {
   font-size: 2.2rem;
@@ -35,18 +48,13 @@ h2 {
   margin-top: 3rem;
 }
 
-h3 {
-  font-size: 1.2rem;
-  margin-top: 2rem;
-}
-
-/* Testo */
+/* TESTO */
 
 p {
   margin: 0.8rem 0;
 }
 
-/* Liste */
+/* LISTE */
 
 ul, ol {
   margin: 1rem 0 1rem 1.2rem;
@@ -57,7 +65,7 @@ li {
   margin: 0.4rem 0;
 }
 
-/* Linea separazione */
+/* LINEA */
 
 hr {
   margin: 2.5rem 0;
@@ -65,12 +73,17 @@ hr {
   border-top: 1px solid #ccc;
 }
 
-/* ===== QR STABILE DEFINITIVO ===== */
+/* QR DEFINITIVO */
+
+.qr-container {
+  text-align: center;
+  margin: 3rem 0;
+}
 
 img {
+  display: block;
   max-width: 100%;
   height: auto;
-  display: block;
 }
 
 img[alt="QR Mango"] {
@@ -82,7 +95,7 @@ img[alt="QR Mango"] {
   transform: translateZ(0);
 }
 
-/* Disabilita animazioni globali */
+/* BLOCCA ANIMAZIONI GLOBALI */
 
 * {
   animation: none !important;

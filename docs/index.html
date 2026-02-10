@@ -48,6 +48,7 @@
       font-size:1rem;
     }
     .btn.primary{ border-color:#111; }
+    .btn.ghost{ background:transparent; }
     .actions{ display:flex; gap:10px; flex-wrap:wrap; margin-top:10px; }
     .notice{
       padding:12px;
@@ -90,18 +91,19 @@
     }
     .anchor{ scroll-margin-top: 14px; }
     hr{ border:none; border-top:1px solid var(--border); margin:14px 0; }
+    ol{ padding-left:18px; }
   </style>
 </head>
 
-<body>
+<body id="top">
   <div class="wrap">
 
-    <!-- HEADER -->
+    <!-- HEADER / HOME -->
     <header class="card soft">
       <h1>Mango 🥭</h1>
 
       <!-- Lingue -->
-      <div class="langbar">
+      <div class="langbar" id="langBar">
         <a href="index.html?lang=it">IT</a>
         <a href="index.html?lang=en">EN</a>
         <a href="index.html?lang=es">ES</a>
@@ -130,20 +132,17 @@
             <a class="btn" href="#scrivi-una-riga">Scrivi una riga</a>
             <a class="btn" href="#cose-mango">Cos’è Mango</a>
           </div>
+
+          <p class="small" style="margin-top:10px;">
+            QR stabile (home): <span style="word-break:break-word;">juandediosannaloromercedes.github.io/mango-infrastruttura/</span>
+          </p>
         </div>
 
         <div class="col" style="max-width:240px;">
           <div class="small" style="margin-bottom:6px;">QR Home (stabile)</div>
-          <!-- Metti il tuo QR qui -->
           <img class="qr" src="assets/qr-home.png" alt="QR Mango — Home" />
-          <div class="small" style="margin-top:8px;">
-            juandediosannaloromercedes.github.io/mango-infrastruttura/
-          </div>
-
           <hr />
-
           <div class="small" style="margin-bottom:6px;">QR Primo scambio</div>
-          <!-- Metti il tuo QR qui -->
           <img class="qr" src="assets/qr-primo-scambio.png" alt="QR Mango — Primo scambio" />
         </div>
       </div>
@@ -151,7 +150,10 @@
 
     <!-- SEZIONE 1 -->
     <section class="card anchor" id="fai-mango-adesso">
-      <h2>Fai Mango adesso</h2>
+      <div class="actions" style="margin-top:0;">
+        <a class="btn ghost" href="#top">← Torna alla home</a>
+      </div>
+      <h2 style="margin-top:10px;">Fai Mango adesso</h2>
 
       <div data-lang="it">
         <p>Fai uno scambio reale: un gesto, un aiuto, una cura, una presenza. Mango è riconoscimento, non valore.</p>
@@ -172,7 +174,7 @@
     <!-- PRIMO SCAMBIO (stessa pagina) -->
     <section class="card anchor" id="primo-scambio">
       <div class="actions" style="margin-top:0;">
-        <a class="btn" href="#top" id="backTop">← Torna alla home</a>
+        <a class="btn ghost" href="#top">← Torna alla home</a>
       </div>
 
       <h2 style="margin-top:10px;">Primo scambio</h2>
@@ -228,14 +230,13 @@
 
       <div class="actions">
         <a class="btn primary" href="#scrivi-una-riga">Scrivi una riga adesso</a>
-        <a class="btn" href="#top">← Torna alla home</a>
       </div>
     </section>
 
-    <!-- SEZIONE 2 -->
+    <!-- SEZIONE 2: RIGA PERSISTENTE -->
     <section class="card anchor" id="scrivi-una-riga">
       <div class="actions" style="margin-top:0;">
-        <a class="btn" href="#top">← Torna alla home</a>
+        <a class="btn ghost" href="#top">← Torna alla home</a>
       </div>
 
       <h2 style="margin-top:10px;">Scrivi una riga</h2>
@@ -254,9 +255,12 @@
         <textarea id="mangoRowInput" placeholder="Esempio: Oggi ho aiutato X / Oggi Y ha aiutato me."></textarea>
 
         <div class="actions">
-          <button class="btn primary" type="submit">Salva sul dispositivo</button>
+          <button class="btn primary" type="submit" id="btnSave">Salva sul dispositivo</button>
           <button class="btn" type="button" id="mangoRowClearInput">Svuota</button>
+          <button class="btn" type="button" id="btnShare">Condividi</button>
         </div>
+
+        <p class="small" id="shareHint" style="margin-top:10px; display:none;"></p>
       </form>
 
       <div id="mangoRowSavedBox" class="card soft" style="display:none; margin-top:14px;">
@@ -271,7 +275,7 @@
     <!-- SEZIONE 3 -->
     <section class="card anchor" id="cose-mango">
       <div class="actions" style="margin-top:0;">
-        <a class="btn" href="#top">← Torna alla home</a>
+        <a class="btn ghost" href="#top">← Torna alla home</a>
       </div>
 
       <h2 style="margin-top:10px;">Cos’è Mango</h2>
@@ -314,7 +318,7 @@
   </div>
 
   <script>
-    // ====== Mango: lingua + riga locale (tutto dentro) ======
+    // ====== Mango: lingua + riga persistente (localStorage) + condivisione ======
     (function(){
       const SUPPORTED = ["it","en","es","fr","de","zh"];
       const DEFAULT_LANG = "it";
@@ -332,13 +336,15 @@
         });
       }
 
-      function setupLocalRow(){
+      function setupLocalRow(lang){
         const form = document.getElementById("mangoRowForm");
         const input = document.getElementById("mangoRowInput");
         const savedBox = document.getElementById("mangoRowSavedBox");
         const savedText = document.getElementById("mangoRowSavedText");
         const btnRemove = document.getElementById("mangoRowRemove");
         const btnClear = document.getElementById("mangoRowClearInput");
+        const btnShare = document.getElementById("btnShare");
+        const shareHint = document.getElementById("shareHint");
 
         if(!form || !input || !savedBox || !savedText || !btnRemove) return;
 
@@ -353,17 +359,33 @@
           }
         }
 
+        function getShareText(){
+          const row = (localStorage.getItem(STORAGE_KEY) || "").trim() || (input.value || "").trim();
+          const base = {
+            it: "Mango 🥭 — una riga:\n",
+            en: "Mango 🥭 — one row:\n",
+            es: "Mango 🥭 — una línea:\n",
+            fr: "Mango 🥭 — une ligne :\n",
+            de: "Mango 🥭 — eine Zeile:\n",
+            zh: "Mango 🥭 — 一行：\n"
+          }[lang] || "Mango 🥭 —\n";
+          const link = "\n\n" + "https://juandediosannaloromercedes.github.io/mango-infrastruttura/";
+          return base + (row || "") + link;
+        }
+
         form.addEventListener("submit", (e)=>{
           e.preventDefault();
           const val = (input.value || "").trim();
           if(!val) return;
           localStorage.setItem(STORAGE_KEY, val);
           render();
+          if(shareHint){ shareHint.style.display = "none"; }
         });
 
         btnRemove.addEventListener("click", ()=>{
           localStorage.removeItem(STORAGE_KEY);
           render();
+          if(shareHint){ shareHint.style.display = "none"; }
         });
 
         if(btnClear){
@@ -373,16 +395,44 @@
           });
         }
 
+        if(btnShare){
+          btnShare.addEventListener("click", async ()=>{
+            const text = getShareText();
+            // Preferisci Web Share (resta "dentro" il flusso del dispositivo)
+            if(navigator.share){
+              try{
+                await navigator.share({ text });
+                if(shareHint){ shareHint.style.display = "none"; }
+                return;
+              }catch(_e){
+                // se l'utente annulla, non facciamo nulla
+                if(shareHint){
+                  shareHint.textContent = "Condivisione annullata.";
+                  shareHint.style.display = "block";
+                }
+                return;
+              }
+            }
+            // Fallback: offri due link (WhatsApp/Email) senza auto-aprire
+            const wa = "https://wa.me/?text=" + encodeURIComponent(text);
+            const mail = "mailto:?subject=" + encodeURIComponent("Mango 🥭") + "&body=" + encodeURIComponent(text);
+
+            if(shareHint){
+              shareHint.innerHTML =
+                'Il tuo browser non supporta “Condividi”. Usa: ' +
+                '<a href="'+wa+'">WhatsApp</a> oppure <a href="'+mail+'">Email</a>.';
+              shareHint.style.display = "block";
+            }
+          });
+        }
+
         render();
       }
 
       // Init
       const lang = getLang();
       applyI18n(lang);
-      setupLocalRow();
-
-      // "top" anchor target
-      document.body.setAttribute("id","top");
+      setupLocalRow(lang);
     })();
   </script>
 </body>

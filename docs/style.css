@@ -1,4 +1,4 @@
-va/* =====================================
+ va/* =====================================
    MANGO – SILENZIO ASSOLUTO (DEFINITIVO)
    Testo • Spazio • Neutro • Multilingua
    ===================================== */
@@ -135,7 +135,13 @@ a img {
   backface-visibility: hidden;
   transform: translateZ(0);
 }
-/* --- Stabilità definitiva QR (Safari iOS fix) --- */
+<img src="mango-home-qr.jpg"
+     alt="QR Mango"
+     width="320"
+     height="320"
+     loading="eager"
+     decoding="sync"
+     style="width:320px;height:320px;display:block;">
 
 img[alt="QR Mango"] {
   display: block;

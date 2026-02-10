@@ -10,7 +10,7 @@
 <body>
   <main class="content">
 
-    <nav style="margin-bottom:2rem;display:flex;gap:1rem;flex-wrap:wrap;">
+    <nav aria-label="Lingua" style="margin-bottom:2rem;display:flex;gap:1rem;flex-wrap:wrap;">
       <a href="?lang=it">IT</a>
       <a href="?lang=en">EN</a>
       <a href="?lang=es">ES</a>
@@ -33,7 +33,6 @@
       <p data-i18n="step4">Una riga è un Mango.</p>
     </section>
 
-    <!-- REGISTRO / SCRIVI UNA RIGA -->
     <section>
       <h2 data-i18n="reg_title">Scrivi una riga</h2>
       <p data-i18n="reg_help">Scrivi una riga semplice che riconosce lo scambio. Nessun numero, nessun valore.</p>
@@ -45,6 +44,7 @@
       <div style="margin-top:0.9rem;display:flex;gap:0.7rem;flex-wrap:wrap;">
         <button id="btnSave" type="button" style="padding:0.6rem 0.9rem;border:1px solid #ddd;border-radius:10px;background:#fff;cursor:pointer;"></button>
         <button id="btnCopy" type="button" style="padding:0.6rem 0.9rem;border:1px solid #ddd;border-radius:10px;background:#fff;cursor:pointer;"></button>
+        <button id="btnExport" type="button" style="padding:0.6rem 0.9rem;border:1px solid #ddd;border-radius:10px;background:#fff;cursor:pointer;"></button>
         <button id="btnClear" type="button" style="padding:0.6rem 0.9rem;border:1px solid #ddd;border-radius:10px;background:#fff;cursor:pointer;"></button>
       </div>
 
@@ -77,6 +77,7 @@
       placeholder:"Esempio: “Io ho aiutato X con … / X ha aiutato me con …”",
       btn_save:"Salva riga",
       btn_copy:"Copia registro",
+      btn_export:"Esporta .txt",
       btn_clear:"Cancella tutto",
       reg_list_title:"Registro (solo testo)"
     },
@@ -94,6 +95,7 @@
       placeholder:"Example: “I helped X with … / X helped me with …”",
       btn_save:"Save line",
       btn_copy:"Copy registry",
+      btn_export:"Export .txt",
       btn_clear:"Clear all",
       reg_list_title:"Registry (text only)"
     },
@@ -111,6 +113,7 @@
       placeholder:"Ejemplo: “Ayudé a X con … / X me ayudó con …”",
       btn_save:"Guardar línea",
       btn_copy:"Copiar registro",
+      btn_export:"Exportar .txt",
       btn_clear:"Borrar todo",
       reg_list_title:"Registro (solo texto)"
     },
@@ -128,6 +131,7 @@
       placeholder:"Exemple : « J’ai aidé X à … / X m’a aidé à … »",
       btn_save:"Enregistrer",
       btn_copy:"Copier le registre",
+      btn_export:"Exporter .txt",
       btn_clear:"Tout effacer",
       reg_list_title:"Registre (texte seulement)"
     },
@@ -145,6 +149,7 @@
       placeholder:"Beispiel: „Ich habe X geholfen bei … / X hat mir geholfen bei …“",
       btn_save:"Zeile speichern",
       btn_copy:"Register kopieren",
+      btn_export:"Als .txt exportieren",
       btn_clear:"Alles löschen",
       reg_list_title:"Register (nur Text)"
     },
@@ -162,6 +167,7 @@
       placeholder:"例：『我幫助了 X … / X 幫助了我 …』",
       btn_save:"儲存這一行",
       btn_copy:"複製紀錄",
+      btn_export:"匯出 .txt",
       btn_clear:"全部清除",
       reg_list_title:"紀錄（僅文字）"
     }
@@ -197,8 +203,7 @@
   }
 
   function renderRegistry(arr) {
-    const pre = document.getElementById("registry");
-    pre.textContent = arr.join("\n");
+    document.getElementById("registry").textContent = arr.join("\n");
   }
 
   async function copyText(text) {
@@ -206,7 +211,6 @@
       await navigator.clipboard.writeText(text);
       return true;
     } catch {
-      // fallback
       const ta = document.createElement("textarea");
       ta.value = text;
       document.body.appendChild(ta);
@@ -215,6 +219,22 @@
       document.body.removeChild(ta);
       return ok;
     }
+  }
+
+  function exportTxt(text) {
+    const date = new Date().toISOString().slice(0, 10);
+    const filename = `mango_registro_${date}.txt`;
+    const blob = new Blob([text], { type: "text/plain;charset=utf-8" });
+    const url = URL.createObjectURL(blob);
+
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = filename;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+
+    URL.revokeObjectURL(url);
   }
 
   function applyTranslations() {
@@ -226,11 +246,12 @@
       el.textContent = t(key, lang);
     });
 
-    const lineInput = document.getElementById("lineInput");
-    lineInput.placeholder = t("placeholder", lang);
+    const input = document.getElementById("lineInput");
+    input.placeholder = t("placeholder", lang);
 
     document.getElementById("btnSave").textContent = t("btn_save", lang);
     document.getElementById("btnCopy").textContent = t("btn_copy", lang);
+    document.getElementById("btnExport").textContent = t("btn_export", lang);
     document.getElementById("btnClear").textContent = t("btn_clear", lang);
   }
 
@@ -244,6 +265,7 @@
       const input = document.getElementById("lineInput");
       const line = (input.value || "").trim();
       if (!line) return;
+
       registry.push(line);
       saveRegistry(registry);
       renderRegistry(registry);
@@ -254,6 +276,12 @@
       const text = registry.join("\n");
       if (!text) return;
       await copyText(text);
+    });
+
+    document.getElementById("btnExport").addEventListener("click", () => {
+      const text = registry.join("\n");
+      if (!text) return;
+      exportTxt(text);
     });
 
     document.getElementById("btnClear").addEventListener("click", () => {

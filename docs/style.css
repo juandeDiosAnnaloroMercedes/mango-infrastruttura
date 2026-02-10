@@ -1,5 +1,5 @@
-/* MANGO — STYLE DEFINITIVO (NEUTRO / INFRASTRUTTURA) */
-/* System font. Zero dipendenze esterne. */
+/* MANGO — CSS DEFINITIVO STABILE */
+/* System font. Layout neutro. Nessuna ombra. */
 
 html {
   -webkit-text-size-adjust: 100%;
@@ -27,7 +27,7 @@ body {
   background-color: #ffffff;
 }
 
-/* CONTENITORE PRINCIPALE */
+/* CONTENITORE */
 
 main {
   max-width: 720px;
@@ -54,7 +54,7 @@ p {
   margin: 0.4rem 0;
 }
 
-/* SEZIONI (CARD) — BIANCHE, SENZA OMBRE */
+/* SEZIONI */
 
 section {
   margin: 2rem 0;
@@ -65,7 +65,7 @@ section {
   box-shadow: none;
 }
 
-/* BOTTONI — RAFFREDDATI */
+/* BOTTONI */
 
 button,
 .btn,
@@ -87,7 +87,7 @@ a.btn:hover {
   background-color: #b98d4a;
 }
 
-/* LINK GENERICI */
+/* LINK */
 
 a {
   color: #111;
@@ -99,7 +99,7 @@ a:hover {
   text-decoration-thickness: 2px;
 }
 
-/* SELETTORE LINGUA (supporta più classi possibili) */
+/* SELETTORE LINGUA */
 
 .lang-selector,
 .language-selector,
@@ -108,14 +108,11 @@ a:hover {
   gap: 0.6rem;
   justify-content: center;
   align-items: center;
-
   margin: 1.6rem 0 1.2rem 0;
   padding: 0.8rem 1rem;
-
   border: 1px solid #e6e6e6;
   border-radius: 10px;
   background-color: #ffffff;
-  box-shadow: none;
 }
 
 .lang-selector a,
@@ -139,15 +136,7 @@ a:hover {
   background-color: #efefef;
 }
 
-/* SOTTOTITOLO (se esiste nel tuo HTML) */
-
-.subtitle,
-.tagline {
-  margin: 0 0 1.2rem 0;
-  color: #333;
-}
-
-/* OTTIMIZZAZIONE CINESE TRADIZIONALE */
+/* CINESE TRADIZIONALE */
 
 html[lang="zh"] body {
   line-height: 1.7;

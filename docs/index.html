@@ -45,12 +45,14 @@
 <div style="text-align:center;margin:40px 0;">
   <a href="primo-scambio.html">
     <img src="mango-home-qr.jpg"
-     alt="QR Mango"
-     width="320"
-     height="320"
-     loading="eager"
-     style="width:320px;height:320px;">
+         alt="QR Mango"
+         width="320"
+         height="320"
+         loading="eager"
+         decoding="sync"
+         style="width:320px;height:320px;display:block;margin:0 auto;">
   </a>
+
   <p data-i18n="qr_text">
     <strong>È successo qualcosa tra due persone. Qui puoi capirlo.</strong>
   </p>
@@ -59,7 +61,6 @@
 <hr>
 
 <section id="registro">
-
   <h2 data-i18n="reg_title">Scrivi una riga</h2>
 
   <p data-i18n="reg_help">
@@ -69,10 +70,16 @@
   <textarea id="lineInput"
             rows="3"
             style="width:100%;max-width:700px;"
-            placeholder="">
-  </textarea>
-
+            placeholder=""></textarea>
 </section>
+
+<!-- FIX DEFINITIVO iOS Safari: elimina vibrazione al ritorno (bfcache + scroll restoration) -->
+<script>
+  if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
+  window.addEventListener('pageshow', function () {
+    window.scrollTo(0, 0);
+  });
+</script>
 
 </body>
 </html>

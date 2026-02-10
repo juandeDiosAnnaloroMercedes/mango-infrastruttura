@@ -122,3 +122,16 @@ img {
 header {
   margin-bottom: 2rem;
 }
+/* --- Stabilità QR su mobile --- */
+img {
+  display: block;
+}
+
+img[alt="QR Mango"] {
+  margin: 0 auto;
+}
+
+a img {
+  backface-visibility: hidden;
+  transform: translateZ(0);
+}

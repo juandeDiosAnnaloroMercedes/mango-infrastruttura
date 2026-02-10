@@ -1,69 +1,108 @@
-<!DOCTYPE html>
-<html lang="it">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Mango</title>
+<section id="registro">
+  <h2 data-i18n="reg_title">Scrivi una riga</h2>
 
-  <link rel="stylesheet" href="./style.css?v=1">
-
-  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
-  <meta http-equiv="Pragma" content="no-cache">
-  <meta http-equiv="Expires" content="0">
-</head>
-
-<body>
-
-<nav>
-  <a href="?lang=it">IT</a>
-  <a href="?lang=en">EN</a>
-  <a href="?lang=es">ES</a>
-  <a href="?lang=fr">FR</a>
-  <a href="?lang=de">DE</a>
-  <a href="?lang=zh">中文</a>
-</nav>
-
-<h1>Mango</h1>
-
-<p>
-  Mango riconosce uno scambio reale tra persone.
-</p>
-
-<p>
-  Non è una moneta. Non misura valore. Non accumula.
-</p>
-
-<hr>
-
-<h2>Come si fa Mango</h2>
-
-<ol>
-  <li>Avviene uno scambio reale tra persone.</li>
-  <li>Si scrive una riga che riconosce che lo scambio è avvenuto.</li>
-  <li>La riga non indica quantità, non crea credito o debito, non si accumula.</li>
-</ol>
-
-<p><strong>Una riga è un Mango.</strong></p>
-
-<div class="qr-container">
-  <a href="./primo-scambio.html">
-    <img src="./mango-home-qr.jpg?v=1"
-         alt="QR Mango"
-         loading="eager"
-         decoding="async">
-  </a>
-
-  <p>
-    <strong>È successo qualcosa tra due persone. Qui puoi capirlo.</strong>
+  <p data-i18n="reg_help">
+    Scrivi una riga che riconosce uno scambio reale.
+    Nessuna quantità. Nessun numero. Nessuna equivalenza.
   </p>
-</div>
 
-<hr>
+  <textarea id="lineInput" rows="3"
+    style="width:100%;max-width:720px;display:block;margin:16px 0;padding:14px;font-size:1rem;line-height:1.4;"
+    placeholder=""></textarea>
 
-63 <section id="registro">
-64   <h2>Scrivi una riga</h2>
-65   <p>
-66     Scrivi una riga che riconosce uno scambio...
-67     Nessuna quantità...
-68   </p>
-69 </section>
+  <div style="display:flex;gap:12px;flex-wrap:wrap;margin:10px 0 18px 0;">
+    <button id="saveLineBtn" type="button"
+      style="padding:12px 16px;border-radius:12px;border:1px solid #111;background:#111;color:#fff;">
+      Salva riga
+    </button>
+
+    <button id="downloadBtn" type="button"
+      style="padding:12px 16px;border-radius:12px;border:1px solid #111;background:#fff;color:#111;">
+      Scarica registro
+    </button>
+
+    <button id="clearBtn" type="button"
+      style="padding:12px 16px;border-radius:12px;border:1px solid #111;background:#fff;color:#111;">
+      Pulisci
+    </button>
+  </div>
+
+  <hr style="max-width:720px;margin:18px 0;">
+
+  <p style="margin:0 0 10px 0;max-width:720px;">
+    <strong data-i18n="reg_import_title">Importa un registro</strong><br>
+    <span data-i18n="reg_import_help">Scegli un file .txt esportato da Mango per ripristinare le righe sul dispositivo.</span>
+  </p>
+
+  <input type="file" id="fileInput" accept=".txt"
+    style="display:block;margin:10px 0 0 0;max-width:720px;">
+</section>
+
+<script>
+/* Registro locale minimale (non rompe mango.js se già esiste) */
+(function () {
+  if (window.__MANGO_REGISTRO_READY__) return;
+  window.__MANGO_REGISTRO_READY__ = true;
+
+  const KEY = "mango_registro_lines_v1";
+  const lineInput = document.getElementById("lineInput");
+  const saveBtn = document.getElementById("saveLineBtn");
+  const dlBtn = document.getElementById("downloadBtn");
+  const clearBtn = document.getElementById("clearBtn");
+  const fileInput = document.getElementById("fileInput");
+
+  function loadLines() {
+    try { return JSON.parse(localStorage.getItem(KEY) || "[]"); }
+    catch { return []; }
+  }
+  function saveLines(lines) {
+    localStorage.setItem(KEY, JSON.stringify(lines));
+  }
+
+  function nowISO() {
+    const d = new Date();
+    const pad = (n)=> String(n).padStart(2,"0");
+    return `${d.getFullYear()}-${pad(d.getMonth()+1)}-${pad(d.getDate())} ${pad(d.getHours())}:${pad(d.getMinutes())}`;
+  }
+
+  saveBtn && saveBtn.addEventListener("click", () => {
+    const text = (lineInput?.value || "").trim();
+    if (!text) return;
+    const lines = loadLines();
+    lines.push(`${nowISO()} — ${text}`);
+    saveLines(lines);
+    lineInput.value = "";
+    alert("Riga salvata.");
+  });
+
+  dlBtn && dlBtn.addEventListener("click", () => {
+    const lines = loadLines();
+    const content = lines.join("\n");
+    const blob = new Blob([content], { type: "text/plain;charset=utf-8" });
+    const a = document.createElement("a");
+    a.href = URL.createObjectURL(blob);
+    a.download = "mango-registro.txt";
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+    setTimeout(() => URL.revokeObjectURL(a.href), 1000);
+  });
+
+  clearBtn && clearBtn.addEventListener("click", () => {
+    if (!confirm("Vuoi cancellare tutte le righe salvate su questo dispositivo?")) return;
+    saveLines([]);
+    alert("Registro pulito.");
+  });
+
+  fileInput && fileInput.addEventListener("change", async (e) => {
+    const f = e.target.files && e.target.files[0];
+    if (!f) return;
+    const text = await f.text();
+    const imported = text.split("\n").map(s=>s.trim()).filter(Boolean);
+    if (!imported.length) { alert("File vuoto."); return; }
+    saveLines(imported);
+    alert("Registro importato su questo dispositivo.");
+    fileInput.value = "";
+  });
+})();
+</script>

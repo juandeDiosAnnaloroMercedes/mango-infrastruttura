@@ -1,613 +1,389 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="it">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
-  <title>Mango</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Mango — Infrastruttura di fiducia</title>
 
-  <!-- CSS inline (un solo file definitivo) -->
   <style>
     :root{
-      --max: 900px;
-      --pad: 18px;
-      --radius: 18px;
-      --border: rgba(0,0,0,.12);
-      --muted: rgba(0,0,0,.62);
-      --black: #111;
+      --border:#e6e6e6;
+      --text:#111;
+      --muted:#666;
+      --bg:#fff;
+      --soft:#fafafa;
+      --radius:14px;
     }
     *{ box-sizing:border-box; }
-    html{ -webkit-text-size-adjust:100%; }
     body{
       margin:0;
-      padding: 22px var(--pad) 50px;
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
-      color: var(--black);
-      background:#fff;
-      line-height:1.35;
+      font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;
+      color:var(--text);
+      background:var(--bg);
     }
-    a{ color:inherit; }
-    .wrap{ max-width: var(--max); margin:0 auto; }
-    .lang-nav{
-      display:flex;
-      gap:10px;
-      flex-wrap:wrap;
-      padding:10px 0 16px;
-      border-bottom:1px solid var(--border);
-      margin-bottom: 18px;
+    .wrap{ max-width:900px; margin:0 auto; padding:18px; }
+    .card{
+      border:1px solid var(--border);
+      border-radius:var(--radius);
+      padding:16px;
+      margin:14px 0;
+      background:var(--bg);
     }
-    .lang-link{
+    .soft{ background:var(--soft); }
+    h1{ margin:8px 0 4px 0; font-size:1.6rem; }
+    h2{ margin:0 0 10px 0; }
+    p{ line-height:1.45; }
+    .small{ font-size:.95rem; color:var(--muted); }
+    .row{ display:flex; gap:14px; flex-wrap:wrap; align-items:flex-start; }
+    .col{ flex:1 1 320px; }
+    .btn{
       display:inline-block;
-      padding:10px 12px;
+      padding:12px 14px;
+      border:1px solid var(--border);
+      border-radius:12px;
+      text-decoration:none;
+      color:var(--text);
+      background:#fff;
+      cursor:pointer;
+      font-size:1rem;
+    }
+    .btn.primary{ border-color:#111; }
+    .actions{ display:flex; gap:10px; flex-wrap:wrap; margin-top:10px; }
+    .notice{
+      padding:12px;
+      border:1px dashed var(--border);
+      border-radius:12px;
+      color:var(--muted);
+      background:#fff;
+    }
+    label{ display:block; margin:0 0 6px 0; font-weight:600; }
+    textarea{
+      width:100%;
+      min-height:86px;
+      padding:12px;
+      border:1px solid var(--border);
+      border-radius:12px;
+      font-size:1rem;
+    }
+    .qr{
+      width:160px;
+      max-width:100%;
+      border:1px solid var(--border);
+      border-radius:12px;
+      padding:10px;
+      background:#fff;
+    }
+    .langbar{
+      display:flex;
+      gap:8px;
+      flex-wrap:wrap;
+      margin:10px 0 0 0;
+    }
+    .langbar a{
+      font-size:.95rem;
+      padding:8px 10px;
       border:1px solid var(--border);
       border-radius:999px;
       text-decoration:none;
-      font-weight:700;
-      font-size:14px;
-    }
-    .lang-link.is-active{
-      background:#111;
-      color:#fff;
-      border-color:#111;
-    }
-    h1{
-      font-size: 56px;
-      line-height:1.05;
-      margin: 16px 0 18px;
-      letter-spacing:-0.02em;
-    }
-    .lead{
-      font-size: 22px;
-      margin: 10px 0;
-      max-width: 46ch;
-    }
-    hr{
-      border:0;
-      border-top:1px solid var(--border);
-      margin: 22px 0;
-    }
-    h2{
-      font-size: 40px;
-      margin: 26px 0 10px;
-      letter-spacing:-0.02em;
-    }
-    ol.steps{
-      margin: 12px 0 10px 22px;
-      padding:0;
-      font-size: 22px;
-    }
-    ol.steps li{ margin: 10px 0; }
-    .strong{
-      font-size:22px;
-      font-weight:800;
-      margin: 12px 0 0;
-    }
-
-    /* CARD */
-    .card{
-      border:1px solid var(--border);
-      border-radius: var(--radius);
-      padding: 18px;
-      margin: 14px 0;
-      background: #fff;
-    }
-    .muted{ color: var(--muted); }
-    .note{
-      font-size: 18px;
-      color: var(--muted);
-      margin-top: 10px;
-    }
-
-    /* QR stabile iOS */
-    .qr-container{
-      text-align:center;
-      margin: 18px auto 4px;
-    }
-    .qr-link{ display:inline-block; text-decoration:none; }
-    img.qr{
-      display:block;
-      width: 320px;
-      height: 320px;
-      max-width: 100%;
-      margin: 0 auto;
-      image-rendering: pixelated;
-      -webkit-user-select: none;
-      user-select: none;
-      -webkit-touch-callout: none;
-      /* niente transform/transition: evita vibrazioni */
-    }
-    .qr-text{
-      font-size: 28px;
-      font-weight: 900;
-      margin: 14px 0 0;
-      text-align:center;
-    }
-    .qr-text span{
-      display:block;
-      font-weight:700;
-      margin-top:8px;
-      font-size: 22px;
-      color: var(--muted);
-    }
-
-    /* Registro */
-    label{
-      font-size: 20px;
-      font-weight: 800;
-      display:block;
-      margin: 12px 0 8px;
-    }
-    textarea{
-      width:100%;
-      min-height: 92px;
-      border:1px solid var(--border);
-      border-radius: 14px;
-      padding: 14px;
-      font-size: 22px;
-      outline:none;
-    }
-    .btn-row{
-      display:flex;
-      flex-wrap:wrap;
-      gap:12px;
-      margin: 14px 0;
-    }
-    .btn{
-      appearance:none;
-      -webkit-appearance:none;
-      border:0;
-      background:#111;
-      color:#fff;
-      border-radius: 999px;
-      padding: 14px 18px;
-      font-size: 18px;
-      font-weight: 900;
-      cursor:pointer;
-    }
-    .btn.secondary{
+      color:var(--text);
       background:#fff;
-      color:#111;
-      border:1px solid var(--border);
     }
-    .upload-row{
-      display:flex;
-      align-items:center;
-      gap:12px;
-      flex-wrap:wrap;
-      margin-top: 6px;
-    }
-    input[type="file"]{
-      font-size:16px;
-    }
-
-    /* Firma autore */
-    .credit{
-      margin-top: 18px;
-      font-size: 16px;
-      color: var(--muted);
-    }
-    .credit strong{ color:#111; }
-
-    @media (max-width: 420px){
-      h1{ font-size: 44px; }
-      h2{ font-size: 34px; }
-      .lead, ol.steps, .strong, textarea{ font-size: 20px; }
-      .qr-text{ font-size: 24px; }
-      .qr-text span{ font-size: 19px; }
-    }
+    .anchor{ scroll-margin-top: 14px; }
+    hr{ border:none; border-top:1px solid var(--border); margin:14px 0; }
   </style>
 </head>
 
 <body>
-  <!-- NAV LINGUE (stessa pagina, mantiene ?lang=xx) -->
-  <nav class="lang-nav wrap" aria-label="Lingue">
-    <a class="lang-link" href="./index.html?lang=it" data-lang="it">IT</a>
-    <a class="lang-link" href="./index.html?lang=en" data-lang="en">EN</a>
-    <a class="lang-link" href="./index.html?lang=es" data-lang="es">ES</a>
-    <a class="lang-link" href="./index.html?lang=fr" data-lang="fr">FR</a>
-    <a class="lang-link" href="./index.html?lang=de" data-lang="de">DE</a>
-    <a class="lang-link" href="./index.html?lang=zh" data-lang="zh">中文</a>
-  </nav>
+  <div class="wrap">
 
-  <main class="wrap">
-    <h1 id="t_title">Mango</h1>
+    <!-- HEADER -->
+    <header class="card soft">
+      <h1>Mango 🥭</h1>
 
-    <p class="lead" id="t_intro_1">Mango riconosce uno scambio reale tra persone.</p>
-    <p class="lead" id="t_intro_2"><strong>Non è una moneta.</strong> Non misura valore. Non accumula.</p>
-
-    <div class="credit" id="t_credit">
-      <strong>Creato da Juan de Dios Annaloro Mercedes</strong> in memoria di <strong>Larimar</strong>.
-    </div>
-
-    <hr />
-
-    <section id="come" aria-label="Come si fa Mango">
-      <h2 id="t_how_title">Come si fa Mango</h2>
-
-      <ol class="steps">
-        <li id="t_how_1">Avviene uno scambio reale tra persone.</li>
-        <li id="t_how_2">Si scrive una riga che riconosce che lo scambio è avvenuto.</li>
-        <li id="t_how_3">La riga non indica quantità, non crea credito o debito, non si accumula.</li>
-      </ol>
-
-      <p class="strong" id="t_how_4"><strong>Una riga è un Mango.</strong></p>
-
-      <!-- QR (stabile iOS) -->
-      <div class="qr-container card">
-        <a class="qr-link" href="./primo-scambio.html?lang=it" id="qr_link">
-          <!-- cache-bust leggero, ma stabile -->
-          <img class="qr" src="./mango-home-qr.jpg?v=1" alt="QR Mango" loading="eager" decoding="async" />
-        </a>
-
-        <!-- TESTO QR: UNA SOLA VOLTA (qui) -->
-        
-  
-
-    
-
-    <!-- REGISTRO -->
-    <section id="registro" aria-label="Scrivi una riga">
-      <h2 id="t_reg_title">Scrivi una riga</h2>
-
-      <p id="t_reg_help">
-        Scrivi una riga che riconosce uno scambio reale.<br />
-        Nessuna quantità. Nessun numero. Nessuna equivalenza.
-      </p>
-
-      <label for="riga" id="t_reg_label">Riga</label>
-      <textarea id="riga" placeholder='Esempio: "Io ho aiutato X con … / X ha aiutato me con …"'></textarea>
-
-      <div class="btn-row">
-        <button type="button" class="btn" id="btn_copy">Copia</button>
-        <button type="button" class="btn" id="btn_clear">Cancella</button>
-        <button type="button" class="btn" id="btn_download">Scarica riga (.txt)</button>
-        <button type="button" class="btn" id="btn_send">Invia</button>
+      <!-- Lingue -->
+      <div class="langbar">
+        <a href="index.html?lang=it">IT</a>
+        <a href="index.html?lang=en">EN</a>
+        <a href="index.html?lang=es">ES</a>
+        <a href="index.html?lang=fr">FR</a>
+        <a href="index.html?lang=de">DE</a>
+        <a href="index.html?lang=zh">ZH</a>
       </div>
 
-      <div class="upload-row">
-        <label class="btn secondary" for="fileUpload" style="margin:0;">Carica un file (.txt)</label>
-        <input id="fileUpload" type="file" accept=".txt,text/plain" />
-        <span class="muted" id="fileHint">nessun file selezionato</span>
+      <p class="small" style="margin-top:10px;">
+        Progetto nato il <b>02 febbraio 2026</b>. Mango non è moneta e non è accumulabile.
+      </p>
+
+      <div class="row" style="margin-top:10px;">
+        <div class="col">
+          <div class="notice">
+            <div data-lang="it">QR ufficiali: Home stabile + Primo scambio. Stampali e usali nel mondo reale.</div>
+            <div data-lang="en">Official QRs: Stable home + First exchange. Print and use them in the real world.</div>
+            <div data-lang="es">QR oficiales: Home estable + Primer intercambio. Imprímelos y úsalos en el mundo real.</div>
+            <div data-lang="fr">QR officiels : Accueil stable + Premier échange. Imprime-les et utilise-les dans le monde réel.</div>
+            <div data-lang="de">Offizielle QR-Codes: Stabile Startseite + Erster Austausch. Druck sie und nutze sie real.</div>
+            <div data-lang="zh">官方二维码：稳定主页 + 第一次交换。打印并在现实中使用。</div>
+          </div>
+
+          <div class="actions">
+            <a class="btn primary" href="#fai-mango-adesso">Fai Mango adesso</a>
+            <a class="btn" href="#scrivi-una-riga">Scrivi una riga</a>
+            <a class="btn" href="#cose-mango">Cos’è Mango</a>
+          </div>
+        </div>
+
+        <div class="col" style="max-width:240px;">
+          <div class="small" style="margin-bottom:6px;">QR Home (stabile)</div>
+          <!-- Metti il tuo QR qui -->
+          <img class="qr" src="assets/qr-home.png" alt="QR Mango — Home" />
+          <div class="small" style="margin-top:8px;">
+            juandediosannaloromercedes.github.io/mango-infrastruttura/
+          </div>
+
+          <hr />
+
+          <div class="small" style="margin-bottom:6px;">QR Primo scambio</div>
+          <!-- Metti il tuo QR qui -->
+          <img class="qr" src="assets/qr-primo-scambio.png" alt="QR Mango — Primo scambio" />
+        </div>
+      </div>
+    </header>
+
+    <!-- SEZIONE 1 -->
+    <section class="card anchor" id="fai-mango-adesso">
+      <h2>Fai Mango adesso</h2>
+
+      <div data-lang="it">
+        <p>Fai uno scambio reale: un gesto, un aiuto, una cura, una presenza. Mango è riconoscimento, non valore.</p>
+        <p class="small">Poi scrivi una riga (qui sotto) come memoria del reale. Niente numeri, niente conti.</p>
+      </div>
+      <div data-lang="en"><p>Do a real exchange: a gesture, help, care, presence. Mango is recognition, not value.</p><p class="small">Then write one row below as memory of the real. No numbers, no accounts.</p></div>
+      <div data-lang="es"><p>Haz un intercambio real: un gesto, ayuda, cuidado, presencia. Mango es reconocimiento, no valor.</p><p class="small">Luego escribe una línea abajo como memoria de lo real. Sin números, sin cuentas.</p></div>
+      <div data-lang="fr"><p>Fais un échange réel : un geste, une aide, une attention, une présence. Mango = reconnaissance, pas valeur.</p><p class="small">Puis écris une ligne ci-dessous. Pas de chiffres, pas de comptes.</p></div>
+      <div data-lang="de"><p>Mach einen echten Austausch: eine Geste, Hilfe, Fürsorge, Präsenz. Mango ist Anerkennung, kein Wert.</p><p class="small">Dann schreib unten eine Zeile. Keine Zahlen, keine Konten.</p></div>
+      <div data-lang="zh"><p>做一次真实交换：一个举动、帮助、照料、陪伴。Mango 是认可，不是价值。</p><p class="small">然后在下方写一行作为现实的记忆。不用数字、不做账户。</p></div>
+
+      <div class="actions">
+        <a class="btn primary" href="#primo-scambio">Vai al primo scambio</a>
+        <a class="btn" href="#scrivi-una-riga">Vai a “Scrivi una riga”</a>
+      </div>
+    </section>
+
+    <!-- PRIMO SCAMBIO (stessa pagina) -->
+    <section class="card anchor" id="primo-scambio">
+      <div class="actions" style="margin-top:0;">
+        <a class="btn" href="#top" id="backTop">← Torna alla home</a>
       </div>
 
-      <p class="note" id="t_reg_note">
-        Mango non salva online. Il registro è tuo: puoi scaricare un file e tenerlo dove vuoi.
-      </p>
+      <h2 style="margin-top:10px;">Primo scambio</h2>
+
+      <div data-lang="it">
+        <ol>
+          <li>Fai un gesto reale (aiuto, cura, scambio).</li>
+          <li>Scrivi una riga (nella sezione “Scrivi una riga”).</li>
+          <li>Fine: Mango vive nel reale, non nel conteggio.</li>
+        </ol>
+        <p class="small">Suggerimento: se siete in due, scrivete una riga semplice e vera insieme.</p>
+      </div>
+
+      <div data-lang="en">
+        <ol>
+          <li>Do a real gesture (help, care, exchange).</li>
+          <li>Write one row (in “Write one row”).</li>
+          <li>Done: Mango lives in reality, not in counting.</li>
+        </ol>
+      </div>
+
+      <div data-lang="es">
+        <ol>
+          <li>Haz un gesto real (ayuda, cuidado, intercambio).</li>
+          <li>Escribe una línea (en “Escribe una línea”).</li>
+          <li>Listo: Mango vive en lo real, no en contar.</li>
+        </ol>
+      </div>
+
+      <div data-lang="fr">
+        <ol>
+          <li>Fais un geste réel (aide, soin, échange).</li>
+          <li>Écris une ligne (dans “Écris une ligne”).</li>
+          <li>C’est tout : Mango vit dans le réel, pas dans le comptage.</li>
+        </ol>
+      </div>
+
+      <div data-lang="de">
+        <ol>
+          <li>Mach eine echte Geste (Hilfe, Fürsorge, Austausch).</li>
+          <li>Schreib eine Zeile (in “Schreib eine Zeile”).</li>
+          <li>Fertig: Mango lebt in der Realität, nicht im Zählen.</li>
+        </ol>
+      </div>
+
+      <div data-lang="zh">
+        <ol>
+          <li>做一个真实的举动（帮助、照料、交换）。</li>
+          <li>写一行文字（在“写一行”部分）。</li>
+          <li>完成：Mango 活在现实里，不在计数里。</li>
+        </ol>
+      </div>
+
+      <div class="actions">
+        <a class="btn primary" href="#scrivi-una-riga">Scrivi una riga adesso</a>
+        <a class="btn" href="#top">← Torna alla home</a>
+      </div>
     </section>
 
-    <hr />
+    <!-- SEZIONE 2 -->
+    <section class="card anchor" id="scrivi-una-riga">
+      <div class="actions" style="margin-top:0;">
+        <a class="btn" href="#top">← Torna alla home</a>
+      </div>
 
-    <section id="cos-e" aria-label="Cos’è Mango">
-      <h2 id="t_what_title">Cos’è Mango</h2>
-      <p id="t_what_1" class="lead">
-        Mango è un’infrastruttura di fiducia locale: riconosce scambi reali senza denaro, senza numeri, senza accumulo.
-      </p>
+      <h2 style="margin-top:10px;">Scrivi una riga</h2>
+
+      <div class="notice">
+        <div data-lang="it"><b>Nota:</b> la riga resta visibile <b>solo su questo dispositivo</b>. Mango non accumula e non fa bacheche.</div>
+        <div data-lang="en"><b>Note:</b> the row stays visible <b>only on this device</b>. Mango doesn’t accumulate and isn’t a public feed.</div>
+        <div data-lang="es"><b>Nota:</b> la línea queda visible <b>solo en este dispositivo</b>. Mango no acumula ni es un muro público.</div>
+        <div data-lang="fr"><b>Note :</b> la ligne reste visible <b>uniquement sur cet appareil</b>. Mango n’accumule pas et n’est pas un fil public.</div>
+        <div data-lang="de"><b>Hinweis:</b> die Zeile bleibt <b>nur auf diesem Gerät</b> sichtbar. Mango sammelt nicht und ist kein öffentlicher Feed.</div>
+        <div data-lang="zh"><b>提示：</b>这行文字只会保存在<b>本设备</b>上显示。Mango 不累积，也不是公开信息流。</div>
+      </div>
+
+      <form id="mangoRowForm" style="margin-top:12px;">
+        <label for="mangoRowInput">La tua riga</label>
+        <textarea id="mangoRowInput" placeholder="Esempio: Oggi ho aiutato X / Oggi Y ha aiutato me."></textarea>
+
+        <div class="actions">
+          <button class="btn primary" type="submit">Salva sul dispositivo</button>
+          <button class="btn" type="button" id="mangoRowClearInput">Svuota</button>
+        </div>
+      </form>
+
+      <div id="mangoRowSavedBox" class="card soft" style="display:none; margin-top:14px;">
+        <div class="small">Riga salvata (solo qui):</div>
+        <div id="mangoRowSavedText" style="margin-top:8px; white-space:pre-wrap;"></div>
+        <div class="actions">
+          <button class="btn" type="button" id="mangoRowRemove">Togli</button>
+        </div>
+      </div>
     </section>
-  </main>
+
+    <!-- SEZIONE 3 -->
+    <section class="card anchor" id="cose-mango">
+      <div class="actions" style="margin-top:0;">
+        <a class="btn" href="#top">← Torna alla home</a>
+      </div>
+
+      <h2 style="margin-top:10px;">Cos’è Mango</h2>
+
+      <div data-lang="it">
+        <p>Mango è un’infrastruttura di fiducia locale non monetaria, non appropriabile, progettata per evitare accumulo, speculazione e cattura istituzionale.</p>
+        <p class="small">Una riga = riconoscimento di uno scambio reale. Niente numeri, niente valore, niente conti.</p>
+      </div>
+
+      <div data-lang="en">
+        <p>Mango is a local trust infrastructure: non-monetary, non-appropriable, designed to prevent accumulation, speculation, and institutional capture.</p>
+        <p class="small">One row = recognition of a real exchange. No numbers, no value, no accounts.</p>
+      </div>
+
+      <div data-lang="es">
+        <p>Mango es una infraestructura local de confianza: no monetaria, no apropiable, diseñada para evitar acumulación, especulación y captura institucional.</p>
+        <p class="small">Una línea = reconocimiento de un intercambio real. Sin números, sin valor, sin cuentas.</p>
+      </div>
+
+      <div data-lang="fr">
+        <p>Mango est une infrastructure locale de confiance : non monétaire, non appropriable, conçue pour éviter l’accumulation, la spéculation et la capture institutionnelle.</p>
+        <p class="small">Une ligne = reconnaissance d’un échange réel. Pas de chiffres, pas de valeur, pas de comptes.</p>
+      </div>
+
+      <div data-lang="de">
+        <p>Mango ist eine lokale Vertrauens-Infrastruktur: nicht-monetär, nicht-aneignbar, entwickelt gegen Ansammlung, Spekulation und institutionelle Vereinnahmung.</p>
+        <p class="small">Eine Zeile = Anerkennung eines realen Austauschs. Keine Zahlen, kein Wert, keine Konten.</p>
+      </div>
+
+      <div data-lang="zh">
+        <p>Mango 是一种本地信任基础设施：非货币、不可占有，旨在避免累积、投机与制度性捕获。</p>
+        <p class="small">一行 = 对真实交换的认可。不用数字、不设价值、不做账户。</p>
+      </div>
+    </section>
+
+    <footer class="small" style="padding:14px 0 40px 0;">
+      © Mango — Juan de Dios Annaloro Mercedes (in memoria di Larimar).
+    </footer>
+
+  </div>
 
   <script>
-    // ======= STRINGHE MULTILINGUA =======
-    const STRINGS = {
-      it: {
-        title: "Mango",
-        intro_1: "Mango riconosce uno scambio reale tra persone.",
-        intro_2: "Non è una moneta. Non misura valore. Non accumula.",
-        credit: "Creato da Juan de Dios Annaloro Mercedes in memoria di Larimar.",
-        how_title: "Come si fa Mango",
-        how_1: "Avviene uno scambio reale tra persone.",
-        how_2: "Si scrive una riga che riconosce che lo scambio è avvenuto.",
-        how_3: "La riga non indica quantità, non crea credito o debito, non si accumula.",
-        how_4: "Una riga è un Mango.",
-        qr_text_1: "È successo qualcosa tra due persone.",
-        qr_text_2: "Qui puoi capirlo.",
-        reg_title: "Scrivi una riga",
-        reg_help: "Scrivi una riga che riconosce uno scambio reale.<br>Nessuna quantità. Nessun numero. Nessuna equivalenza.",
-        reg_label: "Riga",
-        reg_note: "Mango non salva online. Il registro è tuo: puoi scaricare un file e tenerlo dove vuoi.",
-        what_title: "Cos’è Mango",
-        what_1: "Mango è un’infrastruttura di fiducia locale: riconosce scambi reali senza denaro, senza numeri, senza accumulo.",
-        btn_copy: "Copia",
-        btn_clear: "Cancella",
-        btn_download: "Scarica riga (.txt)",
-        btn_send: "Invia",
-        file_none: "nessun file selezionato",
-        ph: 'Esempio: "Io ho aiutato X con … / X ha aiutato me con …"',
-        alert_empty: "Scrivi prima una riga da inviare."
-      },
-      en: {
-        title: "Mango",
-        intro_1: "Mango recognizes a real exchange between people.",
-        intro_2: "It is not money. It does not measure value. It does not accumulate.",
-        credit: "Created by Juan de Dios Annaloro Mercedes in memory of Larimar.",
-        how_title: "How Mango works",
-        how_1: "A real exchange happens between people.",
-        how_2: "You write one line acknowledging the exchange happened.",
-        how_3: "The line has no quantity, no credit/debt, no accumulation.",
-        how_4: "One line is one Mango.",
-        qr_text_1: "Something happened between two people.",
-        qr_text_2: "Here you can understand it.",
-        reg_title: "Write one line",
-        reg_help: "Write a line acknowledging a real exchange.<br>No quantity. No numbers. No equivalence.",
-        reg_label: "Line",
-        reg_note: "Mango saves nothing online. Your log is yours: download a file and keep it anywhere.",
-        what_title: "What is Mango",
-        what_1: "Mango is a local trust infrastructure: it recognizes real exchanges without money, without numbers, without accumulation.",
-        btn_copy: "Copy",
-        btn_clear: "Clear",
-        btn_download: "Download line (.txt)",
-        btn_send: "Send",
-        file_none: "no file selected",
-        ph: 'Example: "I helped X with … / X helped me with …"',
-        alert_empty: "Write a line before sending."
-      },
-      es: {
-        title: "Mango",
-        intro_1: "Mango reconoce un intercambio real entre personas.",
-        intro_2: "No es dinero. No mide valor. No acumula.",
-        credit: "Creado por Juan de Dios Annaloro Mercedes en memoria de Larimar.",
-        how_title: "Cómo se hace Mango",
-        how_1: "Ocurre un intercambio real entre personas.",
-        how_2: "Se escribe una línea que reconoce que el intercambio ocurrió.",
-        how_3: "La línea no indica cantidad, no crea crédito/deuda, no se acumula.",
-        how_4: "Una línea es un Mango.",
-        qr_text_1: "Pasó algo entre dos personas.",
-        qr_text_2: "Aquí puedes entenderlo.",
-        reg_title: "Escribe una línea",
-        reg_help: "Escribe una línea que reconoce un intercambio real.<br>Sin cantidad. Sin números. Sin equivalencia.",
-        reg_label: "Línea",
-        reg_note: "Mango no guarda nada online. El registro es tuyo: descarga un archivo y guárdalo donde quieras.",
-        what_title: "Qué es Mango",
-        what_1: "Mango es una infraestructura local de confianza: reconoce intercambios reales sin dinero, sin números, sin acumulación.",
-        btn_copy: "Copiar",
-        btn_clear: "Borrar",
-        btn_download: "Descargar línea (.txt)",
-        btn_send: "Enviar",
-        file_none: "ningún archivo seleccionado",
-        ph: 'Ejemplo: "Yo ayudé a X con … / X me ayudó con …"',
-        alert_empty: "Escribe una línea antes de enviar."
-      },
-      fr: {
-        title: "Mango",
-        intro_1: "Mango reconnaît un échange réel entre personnes.",
-        intro_2: "Ce n’est pas de l’argent. Ne mesure pas la valeur. N’accumule pas.",
-        credit: "Créé par Juan de Dios Annaloro Mercedes en mémoire de Larimar.",
-        how_title: "Comment faire Mango",
-        how_1: "Un échange réel a lieu entre personnes.",
-        how_2: "On écrit une ligne qui reconnaît que l’échange a eu lieu.",
-        how_3: "La ligne n’indique pas de quantité, ne crée ni crédit ni dette, ne s’accumule pas.",
-        how_4: "Une ligne = un Mango.",
-        qr_text_1: "Quelque chose s’est passé entre deux personnes.",
-        qr_text_2: "Ici, tu peux le comprendre.",
-        reg_title: "Écrire une ligne",
-        reg_help: "Écris une ligne qui reconnaît un échange réel.<br>Pas de quantité. Pas de chiffres. Pas d’équivalence.",
-        reg_label: "Ligne",
-        reg_note: "Mango n’enregistre rien en ligne. Le registre est à toi : télécharge un fichier et garde-le où tu veux.",
-        what_title: "Qu’est-ce que Mango",
-        what_1: "Mango est une infrastructure locale de confiance : il reconnaît des échanges réels sans argent, sans chiffres, sans accumulation.",
-        btn_copy: "Copier",
-        btn_clear: "Effacer",
-        btn_download: "Télécharger (.txt)",
-        btn_send: "Envoyer",
-        file_none: "aucun fichier sélectionné",
-        ph: 'Exemple : "J’ai aidé X avec … / X m’a aidé avec …"',
-        alert_empty: "Écris une ligne avant d’envoyer."
-      },
-      de: {
-        title: "Mango",
-        intro_1: "Mango erkennt einen echten Austausch zwischen Menschen an.",
-        intro_2: "Es ist kein Geld. Misst keinen Wert. Akkumuliert nicht.",
-        credit: "Erstellt von Juan de Dios Annaloro Mercedes im Gedenken an Larimar.",
-        how_title: "So funktioniert Mango",
-        how_1: "Ein echter Austausch findet statt.",
-        how_2: "Man schreibt eine Zeile, die den Austausch bestätigt.",
-        how_3: "Keine Menge, kein Kredit/Schuld, keine Akkumulation.",
-        how_4: "Eine Zeile ist ein Mango.",
-        qr_text_1: "Zwischen zwei Menschen ist etwas passiert.",
-        qr_text_2: "Hier kannst du es verstehen.",
-        reg_title: "Eine Zeile schreiben",
-        reg_help: "Schreibe eine Zeile, die einen echten Austausch anerkennt.<br>Keine Menge. Keine Zahlen. Keine Gleichsetzung.",
-        reg_label: "Zeile",
-        reg_note: "Mango speichert nichts online. Dein Register gehört dir: lade eine Datei herunter und bewahre sie auf.",
-        what_title: "Was ist Mango",
-        what_1: "Mango ist eine lokale Vertrauens-Infrastruktur: erkennt echte Austausche ohne Geld, ohne Zahlen, ohne Akkumulation an.",
-        btn_copy: "Kopieren",
-        btn_clear: "Löschen",
-        btn_download: "Als .txt laden",
-        btn_send: "Senden",
-        file_none: "keine Datei ausgewählt",
-        ph: 'Beispiel: "Ich half X mit … / X half mir mit …"',
-        alert_empty: "Schreibe eine Zeile vor dem Senden."
-      },
-      zh: {
-        title: "Mango",
-        intro_1: "Mango 认可人与人之间真实发生的交换。",
-        intro_2: "它不是货币。不衡量价值。不累积。",
-        credit: "由 Juan de Dios Annaloro Mercedes 创建，以纪念 Larimar。",
-        how_title: "如何使用 Mango",
-        how_1: "人与人之间发生真实交换。",
-        how_2: "写下一行，确认交换已发生。",
-        how_3: "这一行不写数量、不形成债权/债务、不累积。",
-        how_4: "一行就是一个 Mango。",
-        qr_text_1: "两个人之间发生了什么。",
-        qr_text_2: "在这里你可以理解它。",
-        reg_title: "写一行",
-        reg_help: "写一行来确认真实交换。<br>无数量。无数字。无等价。",
-        reg_label: "这一行",
-        reg_note: "Mango 不在线保存。记录属于你：可下载文件自行保存。",
-        what_title: "什么是 Mango",
-        what_1: "Mango 是一种本地信任基础设施：认可真实交换，不用货币、数字与累积。",
-        btn_copy: "复制",
-        btn_clear: "清空",
-        btn_download: "下载 (.txt)",
-        btn_send: "发送",
-        file_none: "未选择文件",
-        ph: "示例：我帮助了X… / X帮助了我…",
-        alert_empty: "请先写一行再发送。"
-      }
-    };
+    // ====== Mango: lingua + riga locale (tutto dentro) ======
+    (function(){
+      const SUPPORTED = ["it","en","es","fr","de","zh"];
+      const DEFAULT_LANG = "it";
+      const STORAGE_KEY = "mango_riga_v1";
 
-    function getLang(){
-      const p = new URLSearchParams(location.search);
-      const l = (p.get("lang") || "it").toLowerCase();
-      return STRINGS[l] ? l : "it";
-    }
-
-    function setText(id, value){
-      const el = document.getElementById(id);
-      if (el) el.textContent = value;
-    }
-
-    function applyLang(lang){
-      document.documentElement.lang = lang;
-      const s = STRINGS[lang];
-
-      setText("t_title", s.title);
-      setText("t_intro_1", s.intro_1);
-      document.getElementById("t_intro_2").innerHTML = "<strong>" + s.intro_2.split(".")[0] + ".</strong> " + s.intro_2.split(".").slice(1).join(".").trim();
-      document.getElementById("t_credit").innerHTML = s.credit.replace("Juan de Dios Annaloro Mercedes", "<strong>Juan de Dios Annaloro Mercedes</strong>").replace("Larimar", "<strong>Larimar</strong>");
-
-      setText("t_how_title", s.how_title);
-      setText("t_how_1", s.how_1);
-      setText("t_how_2", s.how_2);
-      setText("t_how_3", s.how_3);
-      document.getElementById("t_how_4").innerHTML = "<strong>" + s.how_4 + "</strong>";
-
-      setText("t_qr_text_1", s.qr_text_1);
-      setText("t_qr_text_2", s.qr_text_2);
-
-      setText("t_reg_title", s.reg_title);
-      document.getElementById("t_reg_help").innerHTML = s.reg_help;
-      setText("t_reg_label", s.reg_label);
-      setText("t_reg_note", s.reg_note);
-
-      setText("t_what_title", s.what_title);
-      setText("t_what_1", s.what_1);
-
-      setText("btn_copy", s.btn_copy);
-      setText("btn_clear", s.btn_clear);
-      setText("btn_download", s.btn_download);
-      setText("btn_send", s.btn_send);
-
-      const ta = document.getElementById("riga");
-      if (ta) ta.placeholder = s.ph;
-
-      const hint = document.getElementById("fileHint");
-      if (hint && hint.textContent.trim() === "") hint.textContent = s.file_none;
-
-      // link QR mantiene la lingua
-      const qrLink = document.getElementById("qr_link");
-      if (qrLink) qrLink.href = "./primo-scambio.html?lang=" + lang;
-
-      // evidenzia lingua
-      document.querySelectorAll(".lang-link").forEach(a=>{
-        a.classList.toggle("is-active", a.dataset.lang === lang);
-      });
-    }
-
-    // ======= REGISTRO LOCALE (NO ONLINE) =======
-    const STORAGE_KEY = "mango_registro_riga_v1";
-
-    function saveDraft(){
-      const ta = document.getElementById("riga");
-      if (!ta) return;
-      localStorage.setItem(STORAGE_KEY, ta.value || "");
-    }
-
-    function loadDraft(){
-      const ta = document.getElementById("riga");
-      if (!ta) return;
-      ta.value = localStorage.getItem(STORAGE_KEY) || "";
-    }
-
-    function copyText(){
-      const ta = document.getElementById("riga");
-      if (!ta) return;
-      ta.focus();
-      ta.select();
-      try { document.execCommand("copy"); } catch(e){}
-      ta.setSelectionRange(ta.value.length, ta.value.length);
-    }
-
-    function clearText(){
-      const ta = document.getElementById("riga");
-      if (!ta) return;
-      ta.value = "";
-      saveDraft();
-    }
-
-    function downloadTxt(){
-      const ta = document.getElementById("riga");
-      const content = (ta?.value || "").trim();
-      const blob = new Blob([content], { type: "text/plain;charset=utf-8" });
-      const url = URL.createObjectURL(blob);
-
-      const a = document.createElement("a");
-      a.href = url;
-      a.download = "mango-riga.txt";
-      document.body.appendChild(a);
-      a.click();
-      a.remove();
-
-      URL.revokeObjectURL(url);
-    }
-
-    async function sendText(){
-      const ta = document.getElementById("riga");
-      const text = (ta?.value || "").trim();
-      const lang = getLang();
-      const s = STRINGS[lang];
-
-      if (!text){
-        alert(s.alert_empty);
-        return;
+      function getLang(){
+        const p = new URLSearchParams(location.search);
+        const q = (p.get("lang") || "").toLowerCase();
+        return SUPPORTED.includes(q) ? q : DEFAULT_LANG;
       }
 
-      if (navigator.share){
-        try{
-          await navigator.share({ title: "Mango — una riga", text });
-          return;
-        }catch(e){
-          return;
+      function applyI18n(lang){
+        document.querySelectorAll("[data-lang]").forEach(el=>{
+          el.style.display = (el.getAttribute("data-lang") === lang) ? "" : "none";
+        });
+      }
+
+      function setupLocalRow(){
+        const form = document.getElementById("mangoRowForm");
+        const input = document.getElementById("mangoRowInput");
+        const savedBox = document.getElementById("mangoRowSavedBox");
+        const savedText = document.getElementById("mangoRowSavedText");
+        const btnRemove = document.getElementById("mangoRowRemove");
+        const btnClear = document.getElementById("mangoRowClearInput");
+
+        if(!form || !input || !savedBox || !savedText || !btnRemove) return;
+
+        function render(){
+          const saved = localStorage.getItem(STORAGE_KEY);
+          if(saved && saved.trim()){
+            savedText.textContent = saved;
+            savedBox.style.display = "block";
+          }else{
+            savedText.textContent = "";
+            savedBox.style.display = "none";
+          }
         }
+
+        form.addEventListener("submit", (e)=>{
+          e.preventDefault();
+          const val = (input.value || "").trim();
+          if(!val) return;
+          localStorage.setItem(STORAGE_KEY, val);
+          render();
+        });
+
+        btnRemove.addEventListener("click", ()=>{
+          localStorage.removeItem(STORAGE_KEY);
+          render();
+        });
+
+        if(btnClear){
+          btnClear.addEventListener("click", ()=>{
+            input.value = "";
+            input.focus();
+          });
+        }
+
+        render();
       }
 
-      const subject = encodeURIComponent("Mango — una riga");
-      const body = encodeURIComponent(text);
-      window.location.href = `mailto:?subject=${subject}&body=${body}`;
-    }
+      // Init
+      const lang = getLang();
+      applyI18n(lang);
+      setupLocalRow();
 
-    function handleUpload(file){
-      if (!file) return;
-      const hint = document.getElementById("fileHint");
-      if (hint) hint.textContent = file.name;
-
-      const reader = new FileReader();
-      reader.onload = () => {
-        const ta = document.getElementById("riga");
-        if (!ta) return;
-        ta.value = (reader.result || "").toString();
-        saveDraft();
-      };
-      reader.readAsText(file);
-    }
-
-    // ======= INIT =======
-    const lang = getLang();
-    applyLang(lang);
-    loadDraft();
-
-    const ta = document.getElementById("riga");
-    ta.addEventListener("input", saveDraft);
-
-    document.getElementById("btn_copy").addEventListener("click", copyText);
-    document.getElementById("btn_clear").addEventListener("click", clearText);
-    document.getElementById("btn_download").addEventListener("click", downloadTxt);
-    document.getElementById("btn_send").addEventListener("click", sendText);
-
-    const fileUpload = document.getElementById("fileUpload");
-    fileUpload.addEventListener("change", (e) => {
-      const f = e.target.files && e.target.files[0];
-      handleUpload(f);
-    });
+      // "top" anchor target
+      document.body.setAttribute("id","top");
+    })();
   </script>
 </body>
-</html>   
+</html>

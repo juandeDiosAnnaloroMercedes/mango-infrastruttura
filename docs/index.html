@@ -10,10 +10,10 @@
 <body>
   <!--
     MANGO — HOME DEFINITIVA (V1)
-    - 6 lingue via ?lang=it|en|es|fr|de|zh (con normalizzazione zh)
+    - 6 lingue via ?lang=it|en|es|fr|de|zh (normalizza anche zh-hant/zh_tw/zh_cn)
     - Registro: una riga = un Mango (solo testo, nessun numero/valore)
     - Pulsanti: Salva / Copia / Esporta TXT / Importa TXT / Cancella
-    - QR unico definitivo (link stabile home)
+    - QR unico definitivo (link stabile home) con dimensioni fissate (anti-tremolio)
     - Footer: autore, memoria Larimar, data nascita 02 febbraio 2026
   -->
 
@@ -76,7 +76,7 @@
       <h2 data-i18n="qr_title">QR ufficiale</h2>
       <p data-i18n="qr_help">Questo è il QR unico definitivo della home Mango (link stabile).</p>
 
-      <!-- ANTI-TREMOLIO: width/height fissano lo spazio prima del caricamento -->
+      <!-- ANTI-TREMOLIO: width/height riservano spazio prima del caricamento -->
       <img
         id="qrHome"
         src="qr-home.png"
@@ -110,187 +110,158 @@
   <script>
     const SUPPORTED_LANGS = ["it","en","es","fr","de","zh"];
     const DEFAULT_LANG = "it";
-    const STORAGE_KEY = "mango_registry_lines_v1"; // stabile
+    const STORAGE_KEY = "mango_registry_lines_v1";
 
     const translations = {
       it: {
-        title: "Mango",
-        intro1: "Mango riconosce uno scambio reale tra persone.",
-        intro2: "Non è una moneta. Non misura valore. Non accumula.",
-
-        how_title: "Come si fa Mango",
-        step1: "1. Avviene uno scambio reale tra persone.",
-        step2: "2. Si scrive una riga che riconosce che lo scambio è avvenuto.",
-        step3: "3. La riga non indica quantità, non crea credito o debito, non si accumula.",
-        step4: "Una riga è un Mango.",
-
-        reg_title: "Scrivi una riga",
-        reg_help: "Scrivi una riga semplice che riconosce lo scambio. Nessun numero, nessun valore.",
-        reg_list_title: "Registro (solo testo)",
-        placeholder: "Esempio: “Io ho aiutato X con … / X ha aiutato me con …”",
-        btn_save: "Salva riga",
-        btn_copy: "Copia registro",
-        btn_export: "Esporta .txt",
-        btn_import: "Importa .txt",
-        btn_clear: "Cancella tutto",
-
-        qr_title: "QR ufficiale",
-        qr_help: "Questo è il QR unico definitivo della home Mango (link stabile).",
-        qr_phrase: "Mango non accumula. Non misura. Non obbliga.",
-
-        creator: "Creato da Juan de Dios Annaloro Mercedes.",
-        memory: "In memoria di Larimar.",
-        born: "Nato il 02 febbraio 2026."
+        title:"Mango",
+        intro1:"Mango riconosce uno scambio reale tra persone.",
+        intro2:"Non è una moneta. Non misura valore. Non accumula.",
+        how_title:"Come si fa Mango",
+        step1:"1. Avviene uno scambio reale tra persone.",
+        step2:"2. Si scrive una riga che riconosce che lo scambio è avvenuto.",
+        step3:"3. La riga non indica quantità, non crea credito o debito, non si accumula.",
+        step4:"Una riga è un Mango.",
+        reg_title:"Scrivi una riga",
+        reg_help:"Scrivi una riga semplice che riconosce lo scambio. Nessun numero, nessun valore.",
+        reg_list_title:"Registro (solo testo)",
+        placeholder:"Esempio: “Io ho aiutato X con … / X ha aiutato me con …”",
+        btn_save:"Salva riga",
+        btn_copy:"Copia registro",
+        btn_export:"Esporta .txt",
+        btn_import:"Importa .txt",
+        btn_clear:"Cancella tutto",
+        qr_title:"QR ufficiale",
+        qr_help:"Questo è il QR unico definitivo della home Mango (link stabile).",
+        qr_phrase:"Mango non accumula. Non misura. Non obbliga.",
+        creator:"Creato da Juan de Dios Annaloro Mercedes.",
+        memory:"In memoria di Larimar.",
+        born:"Nato il 02 febbraio 2026."
       },
-
       en: {
-        title: "Mango",
-        intro1: "Mango recognizes a real exchange between people.",
-        intro2: "It is not a currency. It does not measure value. It does not accumulate.",
-
-        how_title: "How to do Mango",
-        step1: "1. A real exchange happens between people.",
-        step2: "2. One line is written to acknowledge that the exchange happened.",
-        step3: "3. The line does not indicate quantities, creates no credit or debt, and does not accumulate.",
-        step4: "One line is one Mango.",
-
-        reg_title: "Write one line",
-        reg_help: "Write a simple line acknowledging the exchange. No numbers, no value.",
-        reg_list_title: "Registry (text only)",
-        placeholder: "Example: “I helped X with … / X helped me with …”",
-        btn_save: "Save line",
-        btn_copy: "Copy registry",
-        btn_export: "Export .txt",
-        btn_import: "Import .txt",
-        btn_clear: "Clear all",
-
-        qr_title: "Official QR",
-        qr_help: "This is the one definitive QR for the Mango home (stable link).",
-        qr_phrase: "Mango does not accumulate. It does not measure. It does not oblige.",
-
-        creator: "Created by Juan de Dios Annaloro Mercedes.",
-        memory: "In memory of Larimar.",
-        born: "Born on 02 February 2026."
+        title:"Mango",
+        intro1:"Mango recognizes a real exchange between people.",
+        intro2:"It is not a currency. It does not measure value. It does not accumulate.",
+        how_title:"How to do Mango",
+        step1:"1. A real exchange happens between people.",
+        step2:"2. One line is written to acknowledge that the exchange happened.",
+        step3:"3. The line does not indicate quantities, creates no credit or debt, and does not accumulate.",
+        step4:"One line is one Mango.",
+        reg_title:"Write one line",
+        reg_help:"Write a simple line acknowledging the exchange. No numbers, no value.",
+        reg_list_title:"Registry (text only)",
+        placeholder:"Example: “I helped X with … / X helped me with …”",
+        btn_save:"Save line",
+        btn_copy:"Copy registry",
+        btn_export:"Export .txt",
+        btn_import:"Import .txt",
+        btn_clear:"Clear all",
+        qr_title:"Official QR",
+        qr_help:"This is the one definitive QR for the Mango home (stable link).",
+        qr_phrase:"Mango does not accumulate. It does not measure. It does not oblige.",
+        creator:"Created by Juan de Dios Annaloro Mercedes.",
+        memory:"In memory of Larimar.",
+        born:"Born on 02 February 2026."
       },
-
       es: {
-        title: "Mango",
-        intro1: "Mango reconoce un intercambio real entre personas.",
-        intro2: "No es una moneda. No mide el valor. No se acumula.",
-
-        how_title: "Cómo hacer Mango",
-        step1: "1. Ocurre un intercambio real entre personas.",
-        step2: "2. Se escribe una línea para reconocer que ocurrió.",
-        step3: "3. La línea no indica cantidades, no crea crédito ni deuda, y no se acumula.",
-        step4: "Una línea es un Mango.",
-
-        reg_title: "Escribe una línea",
-        reg_help: "Escribe una línea simple que reconozca el intercambio. Sin números, sin valor.",
-        reg_list_title: "Registro (solo texto)",
-        placeholder: "Ejemplo: “Ayudé a X con … / X me ayudó con …”",
-        btn_save: "Guardar línea",
-        btn_copy: "Copiar registro",
-        btn_export: "Exportar .txt",
-        btn_import: "Importar .txt",
-        btn_clear: "Borrar todo",
-
-        qr_title: "QR oficial",
-        qr_help: "Este es el único QR definitivo de la home de Mango (enlace estable).",
-        qr_phrase: "Mango no se acumula. No mide. No obliga.",
-
-        creator: "Creado por Juan de Dios Annaloro Mercedes.",
-        memory: "En memoria de Larimar.",
-        born: "Nacido el 02 de febrero de 2026."
+        title:"Mango",
+        intro1:"Mango reconoce un intercambio real entre personas.",
+        intro2:"No es una moneda. No mide el valor. No se acumula.",
+        how_title:"Cómo hacer Mango",
+        step1:"1. Ocurre un intercambio real entre personas.",
+        step2:"2. Se escribe una línea para reconocer que ocurrió.",
+        step3:"3. La línea no indica cantidades, no crea crédito ni deuda, y no se acumula.",
+        step4:"Una línea es un Mango.",
+        reg_title:"Escribe una línea",
+        reg_help:"Escribe una línea simple que reconozca el intercambio. Sin números, sin valor.",
+        reg_list_title:"Registro (solo texto)",
+        placeholder:"Ejemplo: “Ayudé a X con … / X me ayudó con …”",
+        btn_save:"Guardar línea",
+        btn_copy:"Copiar registro",
+        btn_export:"Exportar .txt",
+        btn_import:"Importar .txt",
+        btn_clear:"Borrar todo",
+        qr_title:"QR oficial",
+        qr_help:"Este es el único QR definitivo de la home de Mango (enlace estable).",
+        qr_phrase:"Mango no se acumula. No mide. No obliga.",
+        creator:"Creado por Juan de Dios Annaloro Mercedes.",
+        memory:"En memoria de Larimar.",
+        born:"Nacido el 02 de febrero de 2026."
       },
-
       fr: {
-        title: "Mango",
-        intro1: "Mango reconnaît un échange réel entre personnes.",
-        intro2: "Ce n’est pas une monnaie. Il ne mesure pas la valeur. Il ne s’accumule pas.",
-
-        how_title: "Comment faire Mango",
-        step1: "1. Un échange réel a lieu entre personnes.",
-        step2: "2. Une ligne est écrite pour reconnaître que l’échange a eu lieu.",
-        step3: "3. La ligne n’indique aucune quantité, ne crée ni crédit ni dette et ne s’accumule pas.",
-        step4: "Une ligne est un Mango.",
-
-        reg_title: "Écris une ligne",
-        reg_help: "Écris une ligne simple qui reconnaît l’échange. Pas de chiffres, pas de valeur.",
-        reg_list_title: "Registre (texte seulement)",
-        placeholder: "Exemple : « J’ai aidé X à … / X m’a aidé à … »",
-        btn_save: "Enregistrer",
-        btn_copy: "Copier le registre",
-        btn_export: "Exporter .txt",
-        btn_import: "Importer .txt",
-        btn_clear: "Tout effacer",
-
-        qr_title: "QR officiel",
-        qr_help: "Voici le QR unique définitif de la page d’accueil Mango (lien stable).",
-        qr_phrase: "Mango ne s’accumule pas. Il ne mesure pas. Il n’oblige pas.",
-
-        creator: "Créé par Juan de Dios Annaloro Mercedes.",
-        memory: "En mémoire de Larimar.",
-        born: "Né le 02 février 2026."
+        title:"Mango",
+        intro1:"Mango reconnaît un échange réel entre personnes.",
+        intro2:"Ce n’est pas une monnaie. Il ne mesure pas la valeur. Il ne s’accumule pas.",
+        how_title:"Comment faire Mango",
+        step1:"1. Un échange réel a lieu entre personnes.",
+        step2:"2. Une ligne est écrite pour reconnaître que l’échange a eu lieu.",
+        step3:"3. La ligne n’indique aucune quantité, ne crée ni crédit ni dette et ne s’accumule pas.",
+        step4:"Une ligne est un Mango.",
+        reg_title:"Écris une ligne",
+        reg_help:"Écris une ligne simple qui reconnaît l’échange. Pas de chiffres, pas de valeur.",
+        reg_list_title:"Registre (texte seulement)",
+        placeholder:"Exemple : « J’ai aidé X à … / X m’a aidé à … »",
+        btn_save:"Enregistrer",
+        btn_copy:"Copier le registre",
+        btn_export:"Exporter .txt",
+        btn_import:"Importer .txt",
+        btn_clear:"Tout effacer",
+        qr_title:"QR officiel",
+        qr_help:"Voici le QR unique définitif de la page d’accueil Mango (lien stable).",
+        qr_phrase:"Mango ne s’accumule pas. Il ne mesure pas. Il n’oblige pas.",
+        creator:"Créé par Juan de Dios Annaloro Mercedes.",
+        memory:"En mémoire de Larimar.",
+        born:"Né le 02 février 2026."
       },
-
       de: {
-        title: "Mango",
-        intro1: "Mango erkennt einen realen Austausch zwischen Menschen an.",
-        intro2: "Es ist keine Währung. Es misst keinen Wert. Es sammelt sich nicht an.",
-
-        how_title: "Wie man Mango macht",
-        step1: "1. Ein realer Austausch findet zwischen Menschen statt.",
-        step2: "2. Eine Zeile wird geschrieben, um anzuerkennen, dass es stattgefunden hat.",
-        step3: "3. Die Zeile enthält keine Mengenangaben, schafft weder Kredit noch Schuld und sammelt sich nicht an.",
-        step4: "Eine Zeile ist ein Mango.",
-
-        reg_title: "Schreibe eine Zeile",
-        reg_help: "Schreibe eine einfache Zeile, die den Austausch anerkennt. Keine Zahlen, kein Wert.",
-        reg_list_title: "Register (nur Text)",
-        placeholder: "Beispiel: „Ich habe X geholfen bei … / X hat mir geholfen bei …“",
-        btn_save: "Zeile speichern",
-        btn_copy: "Register kopieren",
-        btn_export: "Als .txt exportieren",
-        btn_import: ".txt importieren",
-        btn_clear: "Alles löschen",
-
-        qr_title: "Offizieller QR",
-        qr_help: "Dies ist der einzige definitive QR der Mango-Startseite (stabiler Link).",
-        qr_phrase: "Mango sammelt nicht an. Es misst nicht. Es verpflichtet nicht.",
-
-        creator: "Erstellt von Juan de Dios Annaloro Mercedes.",
-        memory: "Im Gedenken an Larimar.",
-        born: "Geboren am 02. Februar 2026."
+        title:"Mango",
+        intro1:"Mango erkennt einen realen Austausch zwischen Menschen an.",
+        intro2:"Es ist keine Währung. Es misst keinen Wert. Es sammelt sich nicht an.",
+        how_title:"Wie man Mango macht",
+        step1:"1. Ein realer Austausch findet zwischen Menschen statt.",
+        step2:"2. Eine Zeile wird geschrieben, um anzuerkennen, dass es stattgefunden hat.",
+        step3:"3. Die Zeile enthält keine Mengenangaben, schafft weder Kredit noch Schuld und sammelt sich nicht an.",
+        step4:"Eine Zeile ist ein Mango.",
+        reg_title:"Schreibe eine Zeile",
+        reg_help:"Schreibe eine einfache Zeile, die den Austausch anerkennt. Keine Zahlen, kein Wert.",
+        reg_list_title:"Register (nur Text)",
+        placeholder:"Beispiel: „Ich habe X geholfen bei … / X hat mir geholfen bei …“",
+        btn_save:"Zeile speichern",
+        btn_copy:"Register kopieren",
+        btn_export:"Als .txt exportieren",
+        btn_import:".txt importieren",
+        btn_clear:"Alles löschen",
+        qr_title:"Offizieller QR",
+        qr_help:"Dies ist der einzige definitive QR der Mango-Startseite (stabiler Link).",
+        qr_phrase:"Mango sammelt nicht an. Es misst nicht. Es verpflichtet nicht.",
+        creator:"Erstellt von Juan de Dios Annaloro Mercedes.",
+        memory:"Im Gedenken an Larimar.",
+        born:"Geboren am 02. Februar 2026."
       },
-
       zh: {
-        title: "Mango",
-        intro1: "Mango 用來承認人與人之間真實發生的交換。",
-        intro2: "它不是貨幣。它不衡量價值。它不可累積。",
-
-        how_title: "如何進行 Mango",
-        step1: "1. 人與人之間發生真實的交換。",
-        step2: "2. 寫下一行來承認這個交換已經發生。",
-        step3: "3. 這一行不表示數量、不產生信用或債務、也不可累積。",
-        step4: "一行就是一個 Mango。",
-
-        reg_title: "寫下一行",
-        reg_help: "寫下一行簡單文字來承認交換。不要數字，不要價值。",
-        reg_list_title: "紀錄（僅文字）",
-        placeholder: "例：『我幫助了 X … / X 幫助了我 …』",
-        btn_save: "儲存這一行",
-        btn_copy: "複製紀錄",
-        btn_export: "匯出 .txt",
-        btn_import: "匯入 .txt",
-        btn_clear: "全部清除",
-
-        qr_title: "官方 QR",
-        qr_help: "這是 Mango 首頁唯一且最終的 QR（穩定連結）。",
-        qr_phrase: "Mango 不可累積。不衡量。不造成義務。",
-
-        creator: "由 Juan de Dios Annaloro Mercedes 創建。",
-        memory: "為紀念 Larimar。",
-        born: "誕生於 2026 年 2 月 2 日。"
+        title:"Mango",
+        intro1:"Mango 用來承認人與人之間真實發生的交換。",
+        intro2:"它不是貨幣。它不衡量價值。它不可累積。",
+        how_title:"如何進行 Mango",
+        step1:"1. 人與人之間發生真實的交換。",
+        step2:"2. 寫下一行來承認這個交換已經發生。",
+        step3:"3. 這一行不表示數量、不產生信用或債務、也不可累積。",
+        step4:"一行就是一個 Mango。",
+        reg_title:"寫下一行",
+        reg_help:"寫下一行簡單文字來承認交換。不要數字，不要價值。",
+        reg_list_title:"紀錄（僅文字）",
+        placeholder:"例：『我幫助了 X … / X 幫助了我 …』",
+        btn_save:"儲存這一行",
+        btn_copy:"複製紀錄",
+        btn_export:"匯出 .txt",
+        btn_import:"匯入 .txt",
+        btn_clear:"全部清除",
+        qr_title:"官方 QR",
+        qr_help:"這是 Mango 首頁唯一且最終的 QR（穩定連結）。",
+        qr_phrase:"Mango 不可累積。不衡量。不造成義務。",
+        creator:"由 Juan de Dios Annaloro Mercedes 創建。",
+        memory:"為紀念 Larimar。",
+        born:"誕生於 2026 年 2 月 2 日。"
       }
     };
 

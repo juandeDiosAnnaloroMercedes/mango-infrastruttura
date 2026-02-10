@@ -1,7 +1,8 @@
-/* =========================
-   MANGO – STILE DEFINITIVO
-   Minimal • Multilingua • Neutro
-   ========================= */
+/* =====================================
+   MANGO – STILE DEFINITIVO UFFICIALE
+   Minimal • Neutro • Multilingua
+   Nessuna grafica decorativa
+   ===================================== */
 
 html {
   -webkit-text-size-adjust: 100%;
@@ -35,16 +36,9 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-/* Rimozione totale grafica mango */
-img,
-.mango-graphic,
-svg {
-  display: none !important;
-}
-
-/* =========================
-   GERARCHIA DEFINITIVA
-   ========================= */
+/* =====================================
+   GERARCHIA TIPOGRAFICA DEFINITIVA
+   ===================================== */
 
 h1 {
   font-weight: 600;
@@ -78,7 +72,10 @@ section {
   margin: 3rem 0;
 }
 
-/* Link puliti e neutri */
+/* =====================================
+   LINK NEUTRI E COERENTI
+   ===================================== */
+
 a {
   color: inherit;
   text-decoration: underline;
@@ -86,4 +83,16 @@ a {
 
 a:hover {
   opacity: 0.7;
+}
+
+/* =====================================
+   EVENTUALI ELEMENTI DECORATIVI MANGO
+   (se presenti in HTML)
+   ===================================== */
+
+.mango-graphic,
+.mango-image,
+.decorative-mango,
+svg.mango {
+  display: none !important;
 }

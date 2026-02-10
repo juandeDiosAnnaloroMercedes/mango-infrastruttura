@@ -1,73 +1,84 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="it">
 <head>
-  <meta charset="utf-8" />
+  <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Mango</title>
-  <link rel="stylesheet" href="./style.css?v=1" />
+  <link rel="stylesheet" href="./style.css" />
+  <script defer src="./lang-nav.js"></script>
+  <script defer src="./lang.js"></script>
 </head>
 
 <body>
-  <!-- NAV LINGUE -->
-  <nav class="lang-nav" aria-label="Language">
-    <a href="./?lang=it" data-lang="it">IT</a>
-    <a href="./?lang=en" data-lang="en">EN</a>
-    <a href="./?lang=es" data-lang="es">ES</a>
-    <a href="./?lang=fr" data-lang="fr">FR</a>
-    <a href="./?lang=de" data-lang="de">DE</a>
-    <a href="./?lang=zh" data-lang="zh">中文</a>
+
+  <!-- NAV LINGUE (usa ?lang=it|en|es|fr|de|zh) -->
+  <nav class="lang-nav" aria-label="Lingua">
+    <a href="./index.html?lang=it" data-lang="it">IT</a>
+    <a href="./index.html?lang=en" data-lang="en">EN</a>
+    <a href="./index.html?lang=es" data-lang="es">ES</a>
+    <a href="./index.html?lang=fr" data-lang="fr">FR</a>
+    <a href="./index.html?lang=de" data-lang="de">DE</a>
+    <a href="./index.html?lang=zh" data-lang="zh">中文</a>
   </nav>
 
-  <main class="container">
-    <!-- HERO / COS'È -->
-    <header class="hero" id="cos-e">
-      <h1>Mango</h1>
+  <main class="wrap">
+    <h1>Mango</h1>
 
-      <p data-i18n="intro_1">Mango riconosce uno scambio reale tra persone.</p>
-      <p data-i18n="intro_2"><strong>Non è una moneta.</strong> Non misura valore. Non accumula.</p>
+    <p data-i18n="intro_1">Mango riconosce uno scambio reale tra persone.</p>
+    <p data-i18n="intro_2"><strong>Non è una moneta.</strong> Non misura valore. Non accumula.</p>
 
-      <div class="meta">
-        <p data-i18n="meta_birth"><strong>Nato:</strong> 02 febbraio 2026</p>
-        <p data-i18n="meta_rule"><strong>Regola:</strong> una riga = un Mango (senza numeri, senza quantità)</p>
-      </div>
-    </header>
+    <hr>
 
-    <hr />
-
-    <!-- FAI MANGO ADESSO -->
-    <section id="fai-adesso">
+    <section id="come">
       <h2 data-i18n="how_title">Come si fa Mango</h2>
-      <ol class="how">
+      <ol>
         <li data-i18n="how_1">Avviene uno scambio reale tra persone.</li>
         <li data-i18n="how_2">Si scrive una riga che riconosce che lo scambio è avvenuto.</li>
         <li data-i18n="how_3">La riga non indica quantità, non crea credito o debito, non si accumula.</li>
       </ol>
-      <p class="strong" data-i18n="how_4"><strong>Una riga è un Mango.</strong></p>
+      <p data-i18n="how_4"><strong>Una riga è un Mango.</strong></p>
 
       <!-- QR -->
-      <div class="qr-container">
+      <div class="qr-container" aria-label="QR Mango">
         <a class="qr-link" href="./primo-scambio.html">
-          <img class="qr-img" src="./mango-home-qr.jpg?v=1" alt="QR Mango" width="320" height="320" decoding="async" loading="eager">
+          <img
+            class="qr-img"
+            src="./mango-home-qr.jpg?v=1"
+            alt="QR Mango"
+            width="320"
+            height="320"
+            loading="eager"
+            decoding="async"
+          />
         </a>
-        <p class="qr-text" data-i18n="qr_text"><strong>È successo qualcosa tra due persone.</strong><br/>Qui puoi capirlo.</p>
+
+        <p class="qr-text" data-i18n="qr_text">
+          <strong>È successo qualcosa tra due persone.</strong><br>
+          Qui puoi capirlo.
+        </p>
       </div>
     </section>
 
-    <hr />
+    <hr>
 
-    <!-- SCRIVI UNA RIGA / REGISTRO -->
+    <!-- REGISTRO (come prima: download + upload + copia + cancella) -->
     <section id="registro">
       <h2 data-i18n="reg_title">Scrivi una riga</h2>
+
       <p data-i18n="reg_help">
-        Scrivi una riga che riconosce uno scambio reale.<br/>
+        Scrivi una riga che riconosce uno scambio reale.<br>
         Nessuna quantità. Nessun numero. Nessuna equivalenza.
       </p>
 
-      <label class="sr-only" for="lineInput">Riga</label>
-      <textarea id="lineInput" rows="4" placeholder="Esempio: “Io ho aiutato X con … / X ha aiutato me con …”"></textarea>
+      <label class="field">
+        <span class="label" data-i18n="reg_label">Riga</span>
+        <textarea id="lineInput" rows="3" placeholder='Esempio: "Io ho aiutato X con ... / X ha aiutato me con ..."' ></textarea>
+      </label>
 
       <div class="actions">
         <button id="downloadBtn" type="button" data-i18n="btn_download">Scarica riga (.txt)</button>
+        <button id="copyBtn" type="button" data-i18n="btn_copy">Copia</button>
+        <button id="clearBtn" type="button" data-i18n="btn_clear">Cancella</button>
 
         <label class="file">
           <span data-i18n="btn_upload">Carica un file (opzionale)</span>
@@ -78,233 +89,85 @@
       <p class="note" data-i18n="reg_note">
         Mango non salva online. Il registro è tuo: puoi scaricare un file e tenerlo dove vuoi.
       </p>
+
+      <!-- Link rapido alla pagina dedicata (se esiste) -->
+      <p class="mini-links">
+        <a href="./scrivi-una-riga.html" data-i18n="reg_open_page">Apri la pagina “Scrivi una riga”</a>
+      </p>
     </section>
 
-    <hr />
+    <hr>
 
-    <!-- COS'È MANGO (breve) -->
-    <section id="cos-e-mango">
+    <section id="cos">
       <h2 data-i18n="what_title">Cos’è Mango</h2>
-
       <p data-i18n="what_1">
         Mango è un’infrastruttura di fiducia locale: riconosce scambi reali senza denaro, senza numeri, senza accumulo.
       </p>
-
-      <p data-i18n="what_2">
-        Mango non è appropriabile: se qualcuno aggiunge conteggi, valori o equivalenze, <strong>non è Mango</strong>.
-      </p>
-
-      <p data-i18n="what_3">
-        Creato da Juan de Dios Annaloro Mercedes (in memoria di Larimar).
+      <p class="mini-links">
+        <a href="./statuto-permanente.html" data-i18n="what_statute">Statuto permanente</a>
+        <span> · </span>
+        <a href="./licenza.html" data-i18n="what_license">Licenza</a>
+        <span> · </span>
+        <a href="./non-appropriazione.html" data-i18n="what_nonapp">Non-appropriazione</a>
       </p>
     </section>
+
   </main>
 
   <script>
-    // --- i18n integrato (6 lingue) + compatibile con ?lang=xx ---
-    const STRINGS = {
-      it: {
-        intro_1: "Mango riconosce uno scambio reale tra persone.",
-        intro_2: "Non è una moneta. Non misura valore. Non accumula.",
-        meta_birth: "Nato: 02 febbraio 2026",
-        meta_rule: "Regola: una riga = un Mango (senza numeri, senza quantità)",
-        how_title: "Come si fa Mango",
-        how_1: "Avviene uno scambio reale tra persone.",
-        how_2: "Si scrive una riga che riconosce che lo scambio è avvenuto.",
-        how_3: "La riga non indica quantità, non crea credito o debito, non si accumula.",
-        how_4: "Una riga è un Mango.",
-        qr_text: "È successo qualcosa tra due persone.\nQui puoi capirlo.",
-        reg_title: "Scrivi una riga",
-        reg_help: "Scrivi una riga che riconosce uno scambio reale.\nNessuna quantità. Nessun numero. Nessuna equivalenza.",
-        btn_download: "Scarica riga (.txt)",
-        btn_upload: "Carica un file (opzionale)",
-        reg_note: "Mango non salva online. Il registro è tuo: puoi scaricare un file e tenerlo dove vuoi.",
-        what_title: "Cos’è Mango",
-        what_1: "Mango è un’infrastruttura di fiducia locale: riconosce scambi reali senza denaro, senza numeri, senza accumulo.",
-        what_2: "Mango non è appropriabile: se qualcuno aggiunge conteggi, valori o equivalenze, non è Mango.",
-        what_3: "Creato da Juan de Dios Annaloro Mercedes (in memoria di Larimar)."
-      },
-      en: {
-        intro_1: "Mango recognizes a real exchange between people.",
-        intro_2: "It is not money. It does not measure value. It does not accumulate.",
-        meta_birth: "Born: 02 February 2026",
-        meta_rule: "Rule: one line = one Mango (no numbers, no quantities)",
-        how_title: "How Mango works",
-        how_1: "A real exchange happens between people.",
-        how_2: "You write one line acknowledging the exchange happened.",
-        how_3: "The line shows no quantity, creates no credit/debt, and does not accumulate.",
-        how_4: "One line is one Mango.",
-        qr_text: "Something happened between two people.\nHere you can understand it.",
-        reg_title: "Write a line",
-        reg_help: "Write one line acknowledging a real exchange.\nNo quantity. No numbers. No equivalence.",
-        btn_download: "Download line (.txt)",
-        btn_upload: "Upload a file (optional)",
-        reg_note: "Mango does not save online. The register is yours: download a file and keep it wherever you want.",
-        what_title: "What is Mango",
-        what_1: "Mango is a local trust infrastructure: it recognizes real exchanges without money, without numbers, without accumulation.",
-        what_2: "Mango is non-appropriable: if someone adds counting, values, or equivalences, it is not Mango.",
-        what_3: "Created by Juan de Dios Annaloro Mercedes (in memory of Larimar)."
-      },
-      es: {
-        intro_1: "Mango reconoce un intercambio real entre personas.",
-        intro_2: "No es dinero. No mide valor. No se acumula.",
-        meta_birth: "Nacido: 02 febrero 2026",
-        meta_rule: "Regla: una línea = un Mango (sin números, sin cantidades)",
-        how_title: "Cómo se hace Mango",
-        how_1: "Ocurre un intercambio real entre personas.",
-        how_2: "Se escribe una línea que reconoce que el intercambio ocurrió.",
-        how_3: "La línea no indica cantidad, no crea crédito/deuda, no se acumula.",
-        how_4: "Una línea es un Mango.",
-        qr_text: "Pasó algo entre dos personas.\nAquí puedes entenderlo.",
-        reg_title: "Escribe una línea",
-        reg_help: "Escribe una línea que reconoce un intercambio real.\nSin cantidad. Sin números. Sin equivalencia.",
-        btn_download: "Descargar línea (.txt)",
-        btn_upload: "Subir un archivo (opcional)",
-        reg_note: "Mango no guarda en línea. El registro es tuyo: descarga un archivo y guárdalo donde quieras.",
-        what_title: "Qué es Mango",
-        what_1: "Mango es una infraestructura local de confianza: reconoce intercambios reales sin dinero, sin números, sin acumulación.",
-        what_2: "Mango no es apropiable: si alguien añade conteos, valores o equivalencias, no es Mango.",
-        what_3: "Creado por Juan de Dios Annaloro Mercedes (en memoria de Larimar)."
-      },
-      fr: {
-        intro_1: "Mango reconnaît un échange réel entre personnes.",
-        intro_2: "jama0 - [replace below] 
-      },
-      de: {
-        intro_1: "Mango erkennt einen realen Austausch zwischen Menschen an.",
-        intro_2: "Es ist kein Geld. Es misst keinen Wert. Es sammelt sich nicht an.",
-        meta_birth: "Geboren: 02. Februar 2026",
-        meta_rule: "Regel: eine Zeile = ein Mango (keine Zahlen, keine Mengen)",
-        how_title: "So funktioniert Mango",
-        how_1: "Ein realer Austausch findet zwischen Menschen statt.",
-        how_2: "Du schreibst eine Zeile, die den Austausch bestätigt.",
-        how_3: "Die Zeile enthält keine Menge, erzeugt keine Schuld/Guthaben und sammelt sich nicht an.",
-        how_4: "Eine Zeile ist ein Mango.",
-        qr_text: "Zwischen zwei Menschen ist etwas passiert.\nHier kannst du es verstehen.",
-        reg_title: "Schreibe eine Zeile",
-        reg_help: "Schreibe eine Zeile, die einen realen Austausch anerkennt.\nKeine Menge. Keine Zahlen. Keine Gleichsetzung.",
-        btn_download: "Zeile herunterladen (.txt)",
-        btn_upload: "Datei hochladen (optional)",
-        reg_note: "Mango speichert nicht online. Das Register gehört dir: lade eine Datei herunter und bewahre sie auf.",
-        what_title: "Was ist Mango",
-        what_1: "Mango ist eine lokale Vertrauens-Infrastruktur: es erkennt reale Austausche ohne Geld, ohne Zahlen, ohne Ansammlung an.",
-        what_2: "Mango ist nicht aneignungsfähig: wenn jemand Zählungen, Werte oder Gleichsetzungen hinzufügt, ist es nicht Mango.",
-        what_3: "Erstellt von Juan de Dios Annaloro Mercedes (im Gedenken an Larimar)."
-      },
-      zh: {
-        intro_1: "Mango 用来承认人与人之间真实发生的交换。",
-        intro_2: "它不是货币。不衡量价值。不累积。",
-        meta_birth: "诞生：2026年2月2日",
-        meta_rule: "规则：一行 = 一个 Mango（无数字、无数量）",
-        how_title: "如何做 Mango",
-        how_1: "人与人之间发生真实交换。",
-        how_2: "写下一行文字，承认交换已经发生。",
-        how_3: "这行不写数量、不产生债权债务、不累积。",
-        how_4: "一行就是一个 Mango。",
-        qr_text: "两个人之间发生了某件事。\n在这里你可以理解它。",
-        reg_title: "写一行",
-        reg_help: "写一行文字承认真实交换。\n无数量。无数字。无等价换算。",
-        btn_download: "下载这一行 (.txt)",
-        btn_upload: "上传文件（可选）",
-        reg_note: "Mango 不在线保存。登记属于你：下载文件并保存在你想要的地方。",
-        what_title: "什么是 Mango",
-        what_1: "Mango 是一种本地信任基础设施：不使用金钱、不用数字、不累积，只承认真实交换。",
-        what_2: "Mango 不可被占有：若加入计数、价值或等价换算，就不是 Mango。",
-        what_3: "由 Juan de Dios Annaloro Mercedes 创建（纪念 Larimar）。"
-      }
-    };
-
-    // (FR) fix rapido: se vuoi FR perfetto lo aggiungo dopo, ma intanto non rompe niente:
-    STRINGS.fr = {
-      intro_1: "Mango reconnaît un échange réel entre personnes.",
-      intro_2: "Ce n’est pas de l’argent. Ça ne mesure pas la valeur. Ça ne s’accumule pas.",
-      meta_birth: "Né : 02 février 2026",
-      meta_rule: "Règle : une ligne = un Mango (pas de chiffres, pas de quantités)",
-      how_title: "Comment faire Mango",
-      how_1: "Un échange réel a lieu entre des personnes.",
-      how_2: "On écrit une ligne qui reconnaît que l’échange a eu lieu.",
-      how_3: "La ligne n’indique aucune quantité, ne crée ni crédit ni dette, ne s’accumule pas.",
-      how_4: "Une ligne est un Mango.",
-      qr_text: "Quelque chose s’est passé entre deux personnes.\nIci tu peux le comprendre.",
-      reg_title: "Écris une ligne",
-      reg_help: "Écris une ligne qui reconnaît un échange réel.\nAucune quantité. Aucun chiffre. Aucune équivalence.",
-      btn_download: "Télécharger la ligne (.txt)",
-      btn_upload: "Importer un fichier (optionnel)",
-      reg_note: "Mango ne sauvegarde pas en ligne. Le registre est à toi : télécharge un fichier et garde-le où tu veux.",
-      what_title: "Qu’est-ce que Mango",
-      what_1: "Mango est une infrastructure locale de confiance : il reconnaît les échanges réels sans argent, sans chiffres, sans accumulation.",
-      what_2: "Mango n’est pas appropriable : si quelqu’un ajoute des comptages, des valeurs ou des équivalences, ce n’est pas Mango.",
-      what_3: "Créé par Juan de Dios Annaloro Mercedes (en mémoire de Larimar)."
-    };
-
-    function getLang() {
-      const p = new URLSearchParams(location.search);
-      const l = (p.get("lang") || "it").toLowerCase();
-      return STRINGS[l] ? l : "it";
-    }
-
-    function applyLang(lang) {
-      document.documentElement.lang = lang;
-      // evidenzia lingua
-      document.querySelectorAll(".lang-nav a").forEach(a => {
-        a.classList.toggle("active", a.dataset.lang === lang);
-      });
-      // testi
-      document.querySelectorAll("[data-i18n]").forEach(el => {
-        const key = el.getAttribute("data-i18n");
-        const v = STRINGS[lang][key];
-        if (!v) return;
-        el.innerHTML = v.replace(/\n/g, "<br/>");
-      });
-      // aggiungi ?lang=xx a tutti i link interni
-      document.querySelectorAll('a[href]').forEach(a => {
-        const href = a.getAttribute("href");
-        if (!href) return;
-        if (href.startsWith("http")) return;
-        if (href.startsWith("#")) return;
-        const u = new URL(href, location.href);
-        if (u.origin !== location.origin) return;
-        u.searchParams.set("lang", lang);
-        a.setAttribute("href", u.pathname + "?" + u.searchParams.toString());
-      });
-    }
-
-    // Registro: download + upload
-    function downloadText(filename, text) {
-      const blob = new Blob([text], { type: "text/plain;charset=utf-8" });
-      const url = URL.createObjectURL(blob);
-      const a = document.createElement("a");
-      a.href = url;
-      a.download = filename;
-      document.body.appendChild(a);
-      a.click();
-      a.remove();
-      URL.revokeObjectURL(url);
-    }
-
-    const lang = getLang();
-    applyLang(lang);
-
+    // REGISTRO — locale (nessun server)
     const lineInput = document.getElementById("lineInput");
     const downloadBtn = document.getElementById("downloadBtn");
+    const copyBtn = document.getElementById("copyBtn");
+    const clearBtn = document.getElementById("clearBtn");
     const fileInput = document.getElementById("fileInput");
 
     downloadBtn.addEventListener("click", () => {
       const txt = (lineInput.value || "").trim();
-      if (!txt) {
-        lineInput.focus();
-        return;
-      }
-      const stamp = new Date().toISOString().slice(0,10);
-      downloadText(`mango-riga-${stamp}.txt`, txt + "\n");
+      if (!txt) return;
+      const blob = new Blob([txt + "\n"], { type: "text/plain;charset=utf-8" });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = "mango-riga.txt";
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+      URL.revokeObjectURL(url);
     });
 
-    fileInput.addEventListener("change", async () => {
-      const f = fileInput.files && fileInput.files[0];
-      if (!f) return;
-      const t = await f.text();
-      lineInput.value = t.trim();
+    copyBtn.addEventListener("click", async () => {
+      const txt = (lineInput.value || "").trim();
+      if (!txt) return;
+      try {
+        await navigator.clipboard.writeText(txt);
+      } catch (e) {
+        // fallback iOS
+        lineInput.focus();
+        lineInput.select();
+        document.execCommand("copy");
+        lineInput.setSelectionRange(0, 0);
+      }
+    });
+
+    clearBtn.addEventListener("click", () => {
+      lineInput.value = "";
+      lineInput.focus();
+    });
+
+    fileInput.addEventListener("change", async (ev) => {
+      const file = ev.target.files && ev.target.files[0];
+      if (!file) return;
+      try {
+        const text = await file.text();
+        lineInput.value = (text || "").trim();
+        lineInput.focus();
+      } catch (e) {
+        // ignora
+      }
+      fileInput.value = "";
     });
   </script>
+
 </body>
 </html>

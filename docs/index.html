@@ -10,7 +10,7 @@
 <body>
   <main class="content">
 
-    <nav aria-label="Lingua" style="margin: 0 0 2rem 0; display: flex; gap: 0.9rem; flex-wrap: wrap;">
+    <nav style="margin-bottom:2rem;display:flex;gap:1rem;flex-wrap:wrap;">
       <a href="?lang=it">IT</a>
       <a href="?lang=en">EN</a>
       <a href="?lang=es">ES</a>
@@ -21,144 +21,111 @@
 
     <section>
       <h1 data-i18n="title">Mango</h1>
-
-      <p data-i18n="p1">Mango riconosce uno scambio reale tra persone.</p>
-      <p data-i18n="p2">Non è una moneta.</p>
-      <p data-i18n="p3">Non misura valore.</p>
-      <p data-i18n="p4">Non accumula.</p>
+      <p data-i18n="intro1">Mango riconosce uno scambio reale tra persone.</p>
+      <p data-i18n="intro2">Non è una moneta. Non misura valore. Non accumula.</p>
     </section>
 
     <section>
-      <h2 data-i18n="h2">Una riga</h2>
+      <h2 data-i18n="how_title">Come si fa Mango</h2>
 
-      <p data-i18n="p5">Quando avviene uno scambio reale, si può scrivere una riga che lo riconosce.</p>
-      <p data-i18n="p6">Una riga è un Mango.</p>
-      <p data-i18n="p7">La riga non indica quantità.</p>
-      <p data-i18n="p8">Non crea credito o debito.</p>
-      <p data-i18n="p9">Rende visibile la relazione.</p>
+      <p data-i18n="step1">1. Avviene uno scambio reale tra persone.</p>
+      <p data-i18n="step2">2. Si scrive una riga che riconosce che lo scambio è avvenuto.</p>
+      <p data-i18n="step3">3. La riga non indica quantità, non crea credito o debito, non si accumula.</p>
+      <p data-i18n="step4">Una riga è un Mango.</p>
     </section>
 
   </main>
 
-  <script>
-    const SUPPORTED_LANGS = ["it", "en", "es", "fr", "de", "zh"];
-    const DEFAULT_LANG = "it";
+<script>
+const SUPPORTED_LANGS = ["it","en","es","fr","de","zh"];
+const DEFAULT_LANG = "it";
 
-    const translations = {
-      it: {
-        title: "Mango",
-        p1: "Mango riconosce uno scambio reale tra persone.",
-        p2: "Non è una moneta.",
-        p3: "Non misura valore.",
-        p4: "Non accumula.",
-        h2: "Una riga",
-        p5: "Quando avviene uno scambio reale, si può scrivere una riga che lo riconosce.",
-        p6: "Una riga è un Mango.",
-        p7: "La riga non indica quantità.",
-        p8: "Non crea credito o debito.",
-        p9: "Rende visibile la relazione."
-      },
+const translations = {
 
-      en: {
-        title: "Mango",
-        p1: "Mango recognizes a real exchange between people.",
-        p2: "It is not a currency.",
-        p3: "It does not measure value.",
-        p4: "It does not accumulate.",
-        h2: "One line",
-        p5: "When a real exchange happens, you can write one line to acknowledge it.",
-        p6: "One line is one Mango.",
-        p7: "The line does not indicate quantities.",
-        p8: "It creates no credit or debt.",
-        p9: "It makes the relationship visible."
-      },
+it: {
+title:"Mango",
+intro1:"Mango riconosce uno scambio reale tra persone.",
+intro2:"Non è una moneta. Non misura valore. Non accumula.",
+how_title:"Come si fa Mango",
+step1:"1. Avviene uno scambio reale tra persone.",
+step2:"2. Si scrive una riga che riconosce che lo scambio è avvenuto.",
+step3:"3. La riga non indica quantità, non crea credito o debito, non si accumula.",
+step4:"Una riga è un Mango."
+},
 
-      es: {
-        title: "Mango",
-        p1: "Mango reconoce un intercambio real entre personas.",
-        p2: "No es una moneda.",
-        p3: "No mide el valor.",
-        p4: "No se acumula.",
-        h2: "Una línea",
-        p5: "Cuando ocurre un intercambio real, se puede escribir una línea para reconocerlo.",
-        p6: "Una línea es un Mango.",
-        p7: "La línea no indica cantidades.",
-        p8: "No crea crédito ni deuda.",
-        p9: "Hace visible la relación."
-      },
+en: {
+title:"Mango",
+intro1:"Mango recognizes a real exchange between people.",
+intro2:"It is not a currency. It does not measure value. It does not accumulate.",
+how_title:"How to do Mango",
+step1:"1. A real exchange happens between people.",
+step2:"2. One line is written to acknowledge that the exchange happened.",
+step3:"3. The line does not indicate quantities, creates no credit or debt, and does not accumulate.",
+step4:"One line is one Mango."
+},
 
-      fr: {
-        title: "Mango",
-        p1: "Mango reconnaît un échange réel entre personnes.",
-        p2: "Ce n’est pas une monnaie.",
-        p3: "Il ne mesure pas la valeur.",
-        p4: "Il ne s’accumule pas.",
-        h2: "Une ligne",
-        p5: "Quand un échange réel a lieu, on peut écrire une ligne pour le reconnaître.",
-        p6: "Une ligne est un Mango.",
-        p7: "La ligne n’indique aucune quantité.",
-        p8: "Elle ne crée ni crédit ni dette.",
-        p9: "Elle rend la relation visible."
-      },
+es: {
+title:"Mango",
+intro1:"Mango reconoce un intercambio real entre personas.",
+intro2:"No es una moneda. No mide el valor. No se acumula.",
+how_title:"Cómo hacer Mango",
+step1:"1. Ocurre un intercambio real entre personas.",
+step2:"2. Se escribe una línea para reconocer que el intercambio ocurrió.",
+step3:"3. La línea no indica cantidades, no crea crédito ni deuda, y no se acumula.",
+step4:"Una línea es un Mango."
+},
 
-      de: {
-        title: "Mango",
-        p1: "Mango erkennt einen realen Austausch zwischen Menschen an.",
-        p2: "Es ist keine Währung.",
-        p3: "Es misst keinen Wert.",
-        p4: "Es sammelt sich nicht an.",
-        h2: "Eine Zeile",
-        p5: "Wenn ein realer Austausch stattfindet, kann man eine Zeile schreiben, die ihn anerkennt.",
-        p6: "Eine Zeile ist ein Mango.",
-        p7: "Die Zeile enthält keine Mengenangaben.",
-        p8: "Sie schafft weder Kredit noch Schuld.",
-        p9: "Sie macht die Beziehung sichtbar."
-      },
+fr: {
+title:"Mango",
+intro1:"Mango reconnaît un échange réel entre personnes.",
+intro2:"Ce n’est pas une monnaie. Il ne mesure pas la valeur. Il ne s’accumule pas.",
+how_title:"Comment faire Mango",
+step1:"1. Un échange réel a lieu entre personnes.",
+step2:"2. Une ligne est écrite pour reconnaître que l’échange a eu lieu.",
+step3:"3. La ligne n’indique aucune quantité, ne crée ni crédit ni dette et ne s’accumule pas.",
+step4:"Une ligne est un Mango."
+},
 
-      zh: {
-        title: "Mango",
-        p1: "Mango 用來承認人與人之間真實發生的交換。",
-        p2: "它不是貨幣。",
-        p3: "它不衡量價值。",
-        p4: "它不可累積。",
-        h2: "一行",
-        p5: "當一個真實交換發生時，可以寫下一行來承認它。",
-        p6: "一行就是一個 Mango。",
-        p7: "這一行不表示數量。",
-        p8: "不產生信用或債務。",
-        p9: "它讓關係變得可見。"
-      }
-    };
+de: {
+title:"Mango",
+intro1:"Mango erkennt einen realen Austausch zwischen Menschen an.",
+intro2:"Es ist keine Währung. Es misst keinen Wert. Es sammelt sich nicht an.",
+how_title:"Wie man Mango macht",
+step1:"1. Ein realer Austausch findet zwischen Menschen statt.",
+step2:"2. Eine Zeile wird geschrieben, um den Austausch anzuerkennen.",
+step3:"3. Die Zeile enthält keine Mengenangaben, schafft weder Kredit noch Schuld und sammelt sich nicht an.",
+step4:"Eine Zeile ist ein Mango."
+},
 
-    function getLang() {
-      const params = new URLSearchParams(window.location.search);
-      const raw = (params.get("lang") || "").toLowerCase().trim();
+zh: {
+title:"Mango",
+intro1:"Mango 用來承認人與人之間真實發生的交換。",
+intro2:"它不是貨幣。它不衡量價值。它不可累積。",
+how_title:"如何進行 Mango",
+step1:"1. 人與人之間發生真實的交換。",
+step2:"2. 寫下一行來承認這個交換已經發生。",
+step3:"3. 這一行不表示數量、不產生信用或債務、也不可累積。",
+step4:"一行就是一個 Mango。"
+}
+};
 
-      const normalized = raw
-        .replace("-", "_")
-        .replace("zh_hant", "zh")
-        .replace("zh_tw", "zh")
-        .replace("zh_cn", "zh");
+function getLang(){
+const params=new URLSearchParams(window.location.search);
+const raw=(params.get("lang")||"").toLowerCase().trim();
+return SUPPORTED_LANGS.includes(raw)?raw:DEFAULT_LANG;
+}
 
-      return SUPPORTED_LANGS.includes(normalized) ? normalized : DEFAULT_LANG;
-    }
+function applyTranslations(){
+const lang=getLang();
+document.documentElement.setAttribute("lang",lang==="zh"?"zh-Hant":lang);
+document.querySelectorAll("[data-i18n]").forEach(el=>{
+const key=el.getAttribute("data-i18n");
+el.textContent=translations[lang][key];
+});
+}
 
-    function t(key, lang) {
-      return (translations[lang] && translations[lang][key]) ?? translations.it[key] ?? "";
-    }
+document.addEventListener("DOMContentLoaded",applyTranslations);
+</script>
 
-    function applyTranslations() {
-      const lang = getLang();
-
-      document.documentElement.setAttribute("lang", lang === "zh" ? "zh-Hant" : lang);
-
-      document.querySelectorAll("[data-i18n]").forEach(el => {
-        const key = el.getAttribute("data-i18n");
-        el.textContent = t(key, lang);
-      });
-    }
-
-    document.addEventListener("DOMContentLoaded", applyTranslations);
-  </script>
 </body>
 </html>

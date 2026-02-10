@@ -2,14 +2,13 @@
 <html lang="it">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Mango</title>
-
-  <link rel="stylesheet" href="./style.css?v=1" />
+  <link rel="stylesheet" href="./style.css" />
 </head>
 
 <body>
-  <!-- NAV LINGUE (NO REDIRECT) -->
+  <!-- NAV LINGUE -->
   <nav class="lang-nav" aria-label="Lingue">
     <a class="lang-link" href="./index.html?lang=it">IT</a>
     <a class="lang-link" href="./index.html?lang=en">EN</a>
@@ -25,42 +24,49 @@
     <p class="lead" id="t_intro_1">Mango riconosce uno scambio reale tra persone.</p>
     <p class="lead" id="t_intro_2">Non è una moneta. Non misura valore. Non accumula.</p>
 
+    <!-- PATERNITÀ + MEMORIA -->
+    <p class="byline" id="t_author_line">
+      Creato da Juan de Dios Annaloro Mercedes in memoria di Larimar.
+    </p>
+
     <hr />
 
-    <section id="come" aria-labelledby="t_how_title">
+    <section id="come" aria-label="Come si fa Mango">
       <h2 id="t_how_title">Come si fa Mango</h2>
+
       <ol class="steps">
         <li id="t_how_1">Avviene uno scambio reale tra persone.</li>
         <li id="t_how_2">Si scrive una riga che riconosce che lo scambio è avvenuto.</li>
         <li id="t_how_3">La riga non indica quantità, non crea credito o debito, non si accumula.</li>
       </ol>
-      <p class="strong" id="t_how_4"><strong>Una riga è un Mango.</strong></p>
 
-      <!-- QR (stabile iOS) -->
+      <p class="strong" id="t_how_4"><strong>Una riga è un Mango.</strong></p>
+    </section>
+
+    <!-- QR (stabile iOS) -->
+    <section id="qr" aria-label="QR Mango">
       <div class="qr-container">
-        <a class="qr-link" href="./primo-scambio.html">
-          <img
-            class="qr-img"
-            src="./mango-home-qr.jpg?v=1"
-            alt="QR Mango"
-            width="320"
-            height="320"
-            decoding="sync"
-            loading="eager"
-          />
+        <a href="./primo-scambio.html">
+          <img class="qr-img"
+               src="./mango-home-qr.jpg?v=1"
+               alt="QR Mango"
+               width="320"
+               height="320"
+               loading="eager"
+               decoding="async" />
         </a>
 
         <p class="qr-text">
           <strong id="t_qr_text_1">È successo qualcosa tra due persone.</strong><br />
-          <p class="qr-text">
-  <strong id="t_qr_text_1"></strong>
-  <span id="t_qr_text_2"></span>
-</p>
-        
-    
+          <span id="t_qr_text_2">Qui puoi capirlo.</span>
+        </p>
+      </div>
+    </section>
 
-    
-    <section id="registro" aria-labelledby="t_reg_title">
+    <hr />
+
+    <!-- REGISTRO -->
+    <section id="registro" aria-label="Registro locale Mango">
       <h2 id="t_reg_title">Scrivi una riga</h2>
 
       <p id="t_reg_help">
@@ -68,14 +74,8 @@
         Nessuna quantità. Nessun numero. Nessuna equivalenza.
       </p>
 
-      <label class="label" for="riga" id="t_reg_label">Riga</label>
-
-      <textarea
-        id="riga"
-        class="textarea"
-        rows="4"
-        placeholder='Esempio: "Io ho aiutato X con ... / X ha aiutato me con ..."'
-      ></textarea>
+      <label for="riga" id="t_reg_label">Riga</label>
+      <textarea id="riga" rows="3" placeholder='Esempio: "Io ho aiutato X con ... / X ha aiutato me con ..."' spellcheck="false"></textarea>
 
       <div class="btn-row">
         <button class="btn" id="btn_copy" type="button">Copia</button>
@@ -84,7 +84,7 @@
       </div>
 
       <div class="upload-row">
-        <label class="btn btn-secondary" for="fileUpload">Carica un file (.txt)</label>
+        <label class="file-btn" for="fileUpload" id="t_reg_upload_btn">Carica un file (.txt)</label>
         <input id="fileUpload" type="file" accept=".txt,text/plain" />
         <span class="file-hint" id="fileHint">nessun file selezionato</span>
       </div>
@@ -96,165 +96,198 @@
 
     <hr />
 
-    <section id="cos-e" aria-labelledby="t_what_title">
-      <h2 id="t_what_title">Cos’è Mango</h2>
+    <!-- COS'È -->
+    <section id="cose" aria-label="Cos'è Mango">
+      <h2 id="t_what_title">Cos'è Mango</h2>
       <p id="t_what_1">
-        Mango è un’infrastruttura di fiducia locale: riconosce scambi reali senza denaro, senza numeri, senza accumulo.
+        Mango è un'infrastruttura di fiducia locale: riconosce scambi reali senza denaro, senza numeri, senza accumulo.
+      </p>
+      <p id="t_what_2">
+        Mango non è appropriabile: se introduci numeri, conteggi o equivalenze, non è Mango.
       </p>
     </section>
+
+    <hr />
+
+    <footer class="foot">
+      <a class="foot-link" href="./licenza.html" id="t_footer_license">Licenza / Non-appropriazione</a>
+    </footer>
   </main>
 
   <script>
-    // ====== i18n minimo, NO redirect, NO loop ======
+    // ====== TESTI MULTILINGUA (HOME) ======
     const STRINGS = {
       it: {
         title: "Mango",
         intro_1: "Mango riconosce uno scambio reale tra persone.",
         intro_2: "Non è una moneta. Non misura valore. Non accumula.",
+        author: "Creato da Juan de Dios Annaloro Mercedes in memoria di Larimar.",
         how_title: "Come si fa Mango",
         how_1: "Avviene uno scambio reale tra persone.",
         how_2: "Si scrive una riga che riconosce che lo scambio è avvenuto.",
         how_3: "La riga non indica quantità, non crea credito o debito, non si accumula.",
-        how_4: "Una riga è un Mango.",
+        how_4: "<strong>Una riga è un Mango.</strong>",
         qr_text_1: "È successo qualcosa tra due persone.",
         qr_text_2: "Qui puoi capirlo.",
         reg_title: "Scrivi una riga",
-        reg_help: "Scrivi una riga che riconosce uno scambio reale.\nNessuna quantità. Nessun numero. Nessuna equivalenza.",
+        reg_help: "Scrivi una riga che riconosce uno scambio reale.<br>Nessuna quantità. Nessun numero. Nessuna equivalenza.",
         reg_label: "Riga",
+        reg_upload_btn: "Carica un file (.txt)",
         reg_note: "Mango non salva online. Il registro è tuo: puoi scaricare un file e tenerlo dove vuoi.",
-        what_title: "Cos’è Mango",
-        what_1: "Mango è un’infrastruttura di fiducia locale: riconosce scambi reali senza denaro, senza numeri, senza accumulo.",
+        what_title: "Cos'è Mango",
+        what_1: "Mango è un'infrastruttura di fiducia locale: riconosce scambi reali senza denaro, senza numeri, senza accumulo.",
+        what_2: "Mango non è appropriabile: se introduci numeri, conteggi o equivalenze, non è Mango.",
+        footer_license: "Licenza / Non-appropriazione",
+        ph: 'Esempio: "Io ho aiutato X con ... / X ha aiutato me con ..."',
         btn_copy: "Copia",
         btn_clear: "Cancella",
         btn_download: "Scarica riga (.txt)",
-        upload_btn: "Carica un file (.txt)",
-        file_none: "nessun file selezionato",
-        placeholder: 'Esempio: "Io ho aiutato X con ... / X ha aiutato me con ..."'
+        file_none: "nessun file selezionato"
       },
+
       en: {
         title: "Mango",
         intro_1: "Mango recognizes a real exchange between people.",
         intro_2: "It is not money. It does not measure value. It does not accumulate.",
-        how_title: "How to do Mango",
+        author: "Created by Juan de Dios Annaloro Mercedes in memory of Larimar.",
+        how_title: "How Mango works",
         how_1: "A real exchange happens between people.",
-        how_2: "You write a line acknowledging that the exchange happened.",
+        how_2: "You write one line acknowledging the exchange happened.",
         how_3: "The line shows no quantity, creates no credit or debt, and does not accumulate.",
-        how_4: "One line is one Mango.",
+        how_4: "<strong>One line is one Mango.</strong>",
         qr_text_1: "Something happened between two people.",
         qr_text_2: "You can understand it here.",
         reg_title: "Write a line",
-        reg_help: "Write one line that acknowledges a real exchange.\nNo quantity. No numbers. No equivalence.",
+        reg_help: "Write one line recognizing a real exchange.<br>No quantity. No numbers. No equivalence.",
         reg_label: "Line",
-        reg_note: "Mango does not save online. The log is yours: download a file and keep it wherever you want.",
+        reg_upload_btn: "Upload a file (.txt)",
+        reg_note: "Mango saves nothing online. The log is yours: download a file and keep it wherever you want.",
         what_title: "What is Mango",
         what_1: "Mango is a local trust infrastructure: it recognizes real exchanges without money, without numbers, without accumulation.",
+        what_2: "Mango cannot be appropriated: if you add numbers, counting, or equivalences, it is not Mango.",
+        footer_license: "License / Non-appropriation",
+        ph: 'Example: "I helped X with ... / X helped me with ..."',
         btn_copy: "Copy",
         btn_clear: "Clear",
         btn_download: "Download line (.txt)",
-        upload_btn: "Upload a file (.txt)",
-        file_none: "no file selected",
-        placeholder: 'Example: "I helped X with ... / X helped me with ..."'
+        file_none: "no file selected"
       },
+
       es: {
         title: "Mango",
         intro_1: "Mango reconoce un intercambio real entre personas.",
-        intro_2: "No es dinero. No mide valor. No se acumula.",
+        intro_2: "No es dinero. No mide valor. No acumula.",
+        author: "Creado por Juan de Dios Annaloro Mercedes en memoria de Larimar.",
         how_title: "Cómo se hace Mango",
         how_1: "Ocurre un intercambio real entre personas.",
         how_2: "Se escribe una línea que reconoce que el intercambio ocurrió.",
-        how_3: "La línea no indica cantidad, no crea crédito o deuda, no se acumula.",
-        how_4: "Una línea es un Mango.",
+        how_3: "La línea no indica cantidad, no crea crédito ni deuda, no se acumula.",
+        how_4: "<strong>Una línea es un Mango.</strong>",
         qr_text_1: "Pasó algo entre dos personas.",
         qr_text_2: "Aquí puedes entenderlo.",
         reg_title: "Escribe una línea",
-        reg_help: "Escribe una línea que reconozca un intercambio real.\nSin cantidad. Sin números. Sin equivalencia.",
+        reg_help: "Escribe una línea que reconozca un intercambio real.<br>Sin cantidad. Sin números. Sin equivalencias.",
         reg_label: "Línea",
+        reg_upload_btn: "Subir un archivo (.txt)",
         reg_note: "Mango no guarda en línea. El registro es tuyo: descarga un archivo y guárdalo donde quieras.",
         what_title: "Qué es Mango",
-        what_1: "Mango es una infraestructura de confianza local: reconoce intercambios reales sin dinero, sin números, sin acumulación.",
+        what_1: "Mango es una infraestructura local de confianza: reconoce intercambios reales sin dinero, sin números, sin acumulación.",
+        what_2: "Mango no es apropiable: si introduces números, conteos o equivalencias, no es Mango.",
+        footer_license: "Licencia / No apropiación",
+        ph: 'Ejemplo: "Yo ayudé a X con ... / X me ayudó con ..."',
         btn_copy: "Copiar",
         btn_clear: "Borrar",
         btn_download: "Descargar línea (.txt)",
-        upload_btn: "Subir un archivo (.txt)",
-        file_none: "ningún archivo seleccionado",
-        placeholder: 'Ejemplo: "Ayudé a X con ... / X me ayudó con ..."'
+        file_none: "ningún archivo seleccionado"
       },
+
       fr: {
         title: "Mango",
         intro_1: "Mango reconnaît un échange réel entre personnes.",
-        intro_2: "Ce n’est pas une monnaie. Ne mesure pas la valeur. Ne s’accumule pas.",
+        intro_2: "Ce n’est pas de l’argent. Ça ne mesure pas la valeur. Ça ne s’accumule pas.",
+        author: "Créé par Juan de Dios Annaloro Mercedes en mémoire de Larimar.",
         how_title: "Comment faire Mango",
         how_1: "Un échange réel a lieu entre personnes.",
         how_2: "On écrit une ligne reconnaissant que l’échange a eu lieu.",
-        how_3: "La ligne n’indique aucune quantité, ne crée ni crédit ni dette, ne s’accumule pas.",
-        how_4: "Une ligne est un Mango.",
+        how_3: "La ligne n’indique aucune quantité, ne crée ni crédit ni dette, et ne s’accumule pas.",
+        how_4: "<strong>Une ligne est un Mango.</strong>",
         qr_text_1: "Quelque chose s’est passé entre deux personnes.",
         qr_text_2: "Tu peux le comprendre ici.",
-        reg_title: "Écris une ligne",
-        reg_help: "Écris une ligne qui reconnaît un échange réel.\nAucune quantité. Aucun nombre. Aucune équivalence.",
+        reg_title: "Écrire une ligne",
+        reg_help: "Écris une ligne qui reconnaît un échange réel.<br>Aucune quantité. Aucun nombre. Aucune équivalence.",
         reg_label: "Ligne",
-        reg_note: "Mango ne sauvegarde pas en ligne. Le registre est à toi : télécharge un fichier et garde-le où tu veux.",
+        reg_upload_btn: "Importer un fichier (.txt)",
+        reg_note: "Mango n’enregistre rien en ligne. Le registre est à toi : télécharge un fichier et garde-le où tu veux.",
         what_title: "Qu’est-ce que Mango",
-        what_1: "Mango est une infrastructure de confiance locale : il reconnaît des échanges réels sans argent, sans nombres, sans accumulation.",
+        what_1: "Mango est une infrastructure locale de confiance : elle reconnaît des échanges réels sans argent, sans nombres, sans accumulation.",
+        what_2: "Mango n’est pas appropriable : si tu ajoutes des nombres, des comptages ou des équivalences, ce n’est pas Mango.",
+        footer_license: "Licence / Non-appropriation",
+        ph: 'Exemple : "J’ai aidé X avec ... / X m’a aidé avec ..."',
         btn_copy: "Copier",
         btn_clear: "Effacer",
-        btn_download: "Télécharger la ligne (.txt)",
-        upload_btn: "Importer un fichier (.txt)",
-        file_none: "aucun fichier sélectionné",
-        placeholder: 'Exemple : "J’ai aidé X avec ... / X m’a aidé avec ..."'
+        btn_download: "Télécharger (.txt)",
+        file_none: "aucun fichier sélectionné"
       },
+
       de: {
         title: "Mango",
-        intro_1: "Mango erkennt einen realen Austausch zwischen Menschen an.",
-        intro_2: "Es ist kein Geld. Misst keinen Wert. Sammelt sich nicht an.",
-        how_title: "So geht Mango",
-        how_1: "Ein realer Austausch zwischen Menschen findet statt.",
+        intro_1: "Mango erkennt einen echten Austausch zwischen Menschen an.",
+        intro_2: "Es ist kein Geld. Es misst keinen Wert. Es sammelt sich nicht an.",
+        author: "Geschaffen von Juan de Dios Annaloro Mercedes im Gedenken an Larimar.",
+        how_title: "So funktioniert Mango",
+        how_1: "Ein echter Austausch zwischen Menschen findet statt.",
         how_2: "Man schreibt eine Zeile, die anerkennt, dass der Austausch stattgefunden hat.",
-        how_3: "Die Zeile enthält keine Menge, erzeugt weder Kredit noch Schuld und sammelt sich nicht an.",
-        how_4: "Eine Zeile ist ein Mango.",
+        how_3: "Die Zeile enthält keine Menge, erzeugt weder Guthaben noch Schuld und sammelt sich nicht an.",
+        how_4: "<strong>Eine Zeile ist ein Mango.</strong>",
         qr_text_1: "Zwischen zwei Menschen ist etwas passiert.",
         qr_text_2: "Hier kannst du es verstehen.",
-        reg_title: "Schreibe eine Zeile",
-        reg_help: "Schreibe eine Zeile, die einen realen Austausch anerkennt.\nKeine Menge. Keine Zahlen. Keine Äquivalenz.",
+        reg_title: "Eine Zeile schreiben",
+        reg_help: "Schreibe eine Zeile, die einen echten Austausch anerkennt.<br>Keine Menge. Keine Zahlen. Keine Gleichsetzung.",
         reg_label: "Zeile",
-        reg_note: "Mango speichert nicht online. Das Register gehört dir: Lade eine Datei herunter und behalte sie, wo du willst.",
+        reg_upload_btn: "Datei hochladen (.txt)",
+        reg_note: "Mango speichert nichts online. Das Register gehört dir: Datei herunterladen und speichern, wo du willst.",
         what_title: "Was ist Mango",
-        what_1: "Mango ist eine lokale Vertrauens-Infrastruktur: Es erkennt reale Austausche ohne Geld, ohne Zahlen, ohne Akkumulation an.",
+        what_1: "Mango ist eine lokale Vertrauens-Infrastruktur: Es erkennt echte Austausche ohne Geld, ohne Zahlen, ohne Akkumulation an.",
+        what_2: "Mango ist nicht aneigenbar: Wenn du Zahlen, Zählung oder Äquivalenzen einführst, ist es nicht Mango.",
+        footer_license: "Lizenz / Nicht-Aneignung",
+        ph: 'Beispiel: "Ich habe X geholfen mit ... / X hat mir geholfen mit ..."',
         btn_copy: "Kopieren",
         btn_clear: "Löschen",
-        btn_download: "Zeile herunterladen (.txt)",
-        upload_btn: "Datei hochladen (.txt)",
-        file_none: "keine Datei ausgewählt",
-        placeholder: 'Beispiel: "Ich habe X geholfen mit ... / X hat mir geholfen mit ..."'
+        btn_download: "Zeile laden (.txt)",
+        file_none: "keine Datei ausgewählt"
       },
+
       zh: {
         title: "Mango",
-        intro_1: "Mango 用来确认人与人之间真实发生的交换。",
-        intro_2: "它不是货币，不衡量价值，也不会累积。",
+        intro_1: "Mango 认可人与人之间真实发生的交换。",
+        intro_2: "它不是货币。不衡量价值。不累积。",
+        author: "由 Juan de Dios Annaloro Mercedes 创立，以纪念 Larimar。",
         how_title: "如何做 Mango",
-        how_1: "两个人之间发生真实交换。",
-        how_2: "写下一行文字，确认交换已经发生。",
-        how_3: "这一行不写数量、不产生信用或债务，也不累积。",
-        how_4: "一行就是一个 Mango。",
+        how_1: "人与人之间发生真实交换。",
+        how_2: "写下一行，确认交换已经发生。",
+        how_3: "这一行不写数量，不产生债权债务，不累积。",
+        how_4: "<strong>一行就是一个 Mango。</strong>",
         qr_text_1: "两个人之间发生了什么。",
         qr_text_2: "你可以在这里理解。",
         reg_title: "写一行",
-        reg_help: "写一行来确认真实交换。\n无数量。无数字。无等价。",
-        reg_label: "这一行",
+        reg_help: "写一行来确认真实交换。<br>无数量。无数字。无等价。",
+        reg_label: "一行",
+        reg_upload_btn: "上传文件 (.txt)",
         reg_note: "Mango 不在线保存。记录属于你：下载文件并保存到你想要的地方。",
         what_title: "什么是 Mango",
-        what_1: "Mango 是一种本地信任基础设施：确认真实交换，不用金钱、不用数字、不累积。",
+        what_1: "Mango 是本地信任基础设施：不使用金钱、不使用数字、不累积，只认可真实交换。",
+        what_2: "Mango 不可被占有：如果引入数字、计数或等价，就不是 Mango。",
+        footer_license: "许可 / 非占有",
+        ph: '示例：“我帮助了 X … / X 帮助了我 …”',
         btn_copy: "复制",
-        btn_clear: "清除",
-        btn_download: "下载这一行 (.txt)",
-        upload_btn: "上传文件 (.txt)",
-        file_none: "未选择文件",
-        placeholder: '示例：“我帮助了 X ... / X 帮助了我 ...”'
+        btn_clear: "清空",
+        btn_download: "下载 (.txt)",
+        file_none: "未选择文件"
       }
     };
 
     function getLang() {
-      const p = new URLSearchParams(window.location.search);
+      const p = new URLSearchParams(location.search);
       const lang = (p.get("lang") || "it").toLowerCase();
       return STRINGS[lang] ? lang : "it";
     }
@@ -264,43 +297,53 @@
       if (el) el.textContent = value;
     }
 
+    function setHTML(id, value) {
+      const el = document.getElementById(id);
+      if (el) el.innerHTML = value;
+    }
+
     function applyLang(lang) {
       document.documentElement.lang = lang;
-
       const s = STRINGS[lang];
+
       setText("t_title", s.title);
       setText("t_intro_1", s.intro_1);
       setText("t_intro_2", s.intro_2);
+      setText("t_author_line", s.author);
 
       setText("t_how_title", s.how_title);
       setText("t_how_1", s.how_1);
       setText("t_how_2", s.how_2);
       setText("t_how_3", s.how_3);
-      document.getElementById("t_how_4").innerHTML = "<strong>" + s.how_4 + "</strong>";
+      setHTML("t_how_4", s.how_4);
 
       setText("t_qr_text_1", s.qr_text_1);
       setText("t_qr_text_2", s.qr_text_2);
 
       setText("t_reg_title", s.reg_title);
-      document.getElementById("t_reg_help").innerHTML = s.reg_help.replace(/\n/g, "<br/>");
+      setHTML("t_reg_help", s.reg_help);
       setText("t_reg_label", s.reg_label);
+      setText("t_reg_upload_btn", s.reg_upload_btn);
       setText("t_reg_note", s.reg_note);
 
       setText("t_what_title", s.what_title);
       setText("t_what_1", s.what_1);
+      setText("t_what_2", s.what_2);
 
-      // Bottoni
-      document.getElementById("btn_copy").textContent = s.btn_copy;
-      document.getElementById("btn_clear").textContent = s.btn_clear;
-      document.getElementById("btn_download").textContent = s.btn_download;
-      document.querySelector('label[for="fileUpload"]').textContent = s.upload_btn;
+      setText("t_footer_license", s.footer_license);
 
-      // Placeholder
       const ta = document.getElementById("riga");
-      ta.placeholder = s.placeholder;
+      if (ta) ta.placeholder = s.ph;
 
-      // Hint file
-      document.getElementById("fileHint").textContent = s.file_none;
+      const btnCopy = document.getElementById("btn_copy");
+      const btnClear = document.getElementById("btn_clear");
+      const btnDl = document.getElementById("btn_download");
+      if (btnCopy) btnCopy.textContent = s.btn_copy;
+      if (btnClear) btnClear.textContent = s.btn_clear;
+      if (btnDl) btnDl.textContent = s.btn_download;
+
+      const hint = document.getElementById("fileHint");
+      if (hint && !hint.textContent) hint.textContent = s.file_none;
     }
 
     // ====== Registro locale (no online) ======
@@ -308,51 +351,56 @@
 
     function saveDraft() {
       const ta = document.getElementById("riga");
+      if (!ta) return;
       localStorage.setItem(STORAGE_KEY, ta.value || "");
     }
+
     function loadDraft() {
       const ta = document.getElementById("riga");
+      if (!ta) return;
       ta.value = localStorage.getItem(STORAGE_KEY) || "";
     }
 
     function copyText() {
       const ta = document.getElementById("riga");
+      if (!ta) return;
       ta.focus();
       ta.select();
-      try {
-        document.execCommand("copy");
-      } catch (e) {}
-      ta.setSelectionRange(ta.value.length, ta.value.length);
+      try { document.execCommand("copy"); } catch(e) {}
+      ta.setSelectionRange((ta.value || "").length, (ta.value || "").length);
     }
 
     function clearText() {
       const ta = document.getElementById("riga");
+      if (!ta) return;
       ta.value = "";
       saveDraft();
     }
 
     function downloadTxt() {
       const ta = document.getElementById("riga");
-      const content = (ta.value || "").trim();
+      const content = (ta && ta.value ? ta.value : "").trim();
       const blob = new Blob([content], { type: "text/plain;charset=utf-8" });
+      const url = URL.createObjectURL(blob);
       const a = document.createElement("a");
-      a.href = URL.createObjectURL(blob);
+      a.href = url;
       a.download = "mango-riga.txt";
       document.body.appendChild(a);
       a.click();
       a.remove();
-      URL.revokeObjectURL(a.href);
+      setTimeout(() => URL.revokeObjectURL(url), 500);
     }
 
     function handleUpload(file) {
       if (!file) return;
       const hint = document.getElementById("fileHint");
-      hint.textContent = file.name;
+      if (hint) hint.textContent = file.name;
 
       const reader = new FileReader();
       reader.onload = () => {
         const ta = document.getElementById("riga");
-        ta.value = (reader.result || "").toString();
+        if (!ta) return;
+        ta.value = String(reader.result || "");
         saveDraft();
       };
       reader.readAsText(file);
@@ -365,14 +413,17 @@
     loadDraft();
 
     const ta = document.getElementById("riga");
-    ta.addEventListener("input", saveDraft);
+    if (ta) ta.addEventListener("input", saveDraft);
 
-    document.getElementById("btn_copy").addEventListener("click", copyText);
-    document.getElementById("btn_clear").addEventListener("click", clearText);
-    document.getElementById("btn_download").addEventListener("click", downloadTxt);
+    document.getElementById("btn_copy")?.addEventListener("click", copyText);
+    document.getElementById("btn_clear")?.addEventListener("click", clearText);
+    document.getElementById("btn_download")?.addEventListener("click", downloadTxt);
 
     const fileUpload = document.getElementById("fileUpload");
-    fileUpload.addEventListener("change", (e) => handleUpload(e.target.files && e.target.files[0]));
+    fileUpload?.addEventListener("change", (e) => {
+      const f = e.target.files && e.target.files[0];
+      handleUpload(f);
+    });
   </script>
 </body>
 </html>

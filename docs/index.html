@@ -10,7 +10,7 @@
 <body>
   <main class="content">
 
-    <nav aria-label="Lingua" style="margin-bottom:2rem;display:flex;gap:1rem;flex-wrap:wrap;">
+    <nav style="margin-bottom:2rem;display:flex;gap:1rem;flex-wrap:wrap;">
       <a href="?lang=it">IT</a>
       <a href="?lang=en">EN</a>
       <a href="?lang=es">ES</a>
@@ -21,275 +21,238 @@
 
     <section>
       <h1 data-i18n="title">Mango</h1>
-      <p data-i18n="intro1">Mango riconosce uno scambio reale tra persone.</p>
-      <p data-i18n="intro2">Non è una moneta. Non misura valore. Non accumula.</p>
+      <p data-i18n="intro1"></p>
+      <p data-i18n="intro2"></p>
     </section>
 
     <section>
-      <h2 data-i18n="how_title">Come si fa Mango</h2>
-      <p data-i18n="step1">1. Avviene uno scambio reale tra persone.</p>
-      <p data-i18n="step2">2. Si scrive una riga che riconosce che lo scambio è avvenuto.</p>
-      <p data-i18n="step3">3. La riga non indica quantità, non crea credito o debito, non si accumula.</p>
-      <p data-i18n="step4">Una riga è un Mango.</p>
+      <h2 data-i18n="how_title"></h2>
+      <p data-i18n="step1"></p>
+      <p data-i18n="step2"></p>
+      <p data-i18n="step3"></p>
+      <p data-i18n="step4"></p>
     </section>
 
     <section>
-      <h2 data-i18n="reg_title">Scrivi una riga</h2>
-      <p data-i18n="reg_help">Scrivi una riga semplice che riconosce lo scambio. Nessun numero, nessun valore.</p>
+      <h2 data-i18n="reg_title"></h2>
+      <p data-i18n="reg_help"></p>
 
       <textarea id="lineInput" rows="3"
-        style="width:100%;max-width:760px;box-sizing:border-box;padding:0.9rem;border:1px solid #ddd;border-radius:10px;"
-        placeholder=""></textarea>
+        style="width:100%;max-width:760px;padding:0.9rem;border:1px solid #ddd;border-radius:10px;"></textarea>
 
       <div style="margin-top:0.9rem;display:flex;gap:0.7rem;flex-wrap:wrap;">
-        <button id="btnSave" type="button" style="padding:0.6rem 0.9rem;border:1px solid #ddd;border-radius:10px;background:#fff;cursor:pointer;"></button>
-        <button id="btnCopy" type="button" style="padding:0.6rem 0.9rem;border:1px solid #ddd;border-radius:10px;background:#fff;cursor:pointer;"></button>
-        <button id="btnExport" type="button" style="padding:0.6rem 0.9rem;border:1px solid #ddd;border-radius:10px;background:#fff;cursor:pointer;"></button>
-        <button id="btnClear" type="button" style="padding:0.6rem 0.9rem;border:1px solid #ddd;border-radius:10px;background:#fff;cursor:pointer;"></button>
+        <button id="btnSave"></button>
+        <button id="btnCopy"></button>
+        <button id="btnExport"></button>
+        <button id="btnImport"></button>
+        <button id="btnClear"></button>
       </div>
 
-      <div style="margin-top:1.2rem;">
-        <p data-i18n="reg_list_title" style="margin-bottom:0.6rem;">Registro (solo testo)</p>
-        <pre id="registry"
-          style="white-space:pre-wrap;word-break:break-word;width:100%;max-width:760px;box-sizing:border-box;padding:1rem;border:1px solid #eee;border-radius:12px;background:#fafafa;min-height:120px;"></pre>
-      </div>
+      <input type="file" id="fileInput" accept=".txt" style="display:none;" />
+
+      <pre id="registry"
+        style="margin-top:1rem;white-space:pre-wrap;border:1px solid #eee;padding:1rem;border-radius:12px;background:#fafafa;"></pre>
+    </section>
+
+    <section style="margin-top:4rem;font-size:0.9rem;opacity:0.7;">
+      <p data-i18n="creator"></p>
+      <p data-i18n="memory"></p>
     </section>
 
   </main>
 
 <script>
-  const SUPPORTED_LANGS = ["it","en","es","fr","de","zh"];
-  const DEFAULT_LANG = "it";
-  const STORAGE_KEY = "mango_registry_lines_v1";
+const SUPPORTED_LANGS=["it","en","es","fr","de","zh"];
+const DEFAULT_LANG="it";
+const STORAGE_KEY="mango_registry_lines_v2";
 
-  const translations = {
-    it: {
-      title:"Mango",
-      intro1:"Mango riconosce uno scambio reale tra persone.",
-      intro2:"Non è una moneta. Non misura valore. Non accumula.",
-      how_title:"Come si fa Mango",
-      step1:"1. Avviene uno scambio reale tra persone.",
-      step2:"2. Si scrive una riga che riconosce che lo scambio è avvenuto.",
-      step3:"3. La riga non indica quantità, non crea credito o debito, non si accumula.",
-      step4:"Una riga è un Mango.",
-      reg_title:"Scrivi una riga",
-      reg_help:"Scrivi una riga semplice che riconosce lo scambio. Nessun numero, nessun valore.",
-      placeholder:"Esempio: “Io ho aiutato X con … / X ha aiutato me con …”",
-      btn_save:"Salva riga",
-      btn_copy:"Copia registro",
-      btn_export:"Esporta .txt",
-      btn_clear:"Cancella tutto",
-      reg_list_title:"Registro (solo testo)"
-    },
-    en: {
-      title:"Mango",
-      intro1:"Mango recognizes a real exchange between people.",
-      intro2:"It is not a currency. It does not measure value. It does not accumulate.",
-      how_title:"How to do Mango",
-      step1:"1. A real exchange happens between people.",
-      step2:"2. One line is written to acknowledge that the exchange happened.",
-      step3:"3. The line does not indicate quantities, creates no credit or debt, and does not accumulate.",
-      step4:"One line is one Mango.",
-      reg_title:"Write one line",
-      reg_help:"Write a simple line acknowledging the exchange. No numbers, no value.",
-      placeholder:"Example: “I helped X with … / X helped me with …”",
-      btn_save:"Save line",
-      btn_copy:"Copy registry",
-      btn_export:"Export .txt",
-      btn_clear:"Clear all",
-      reg_list_title:"Registry (text only)"
-    },
-    es: {
-      title:"Mango",
-      intro1:"Mango reconoce un intercambio real entre personas.",
-      intro2:"No es una moneda. No mide el valor. No se acumula.",
-      how_title:"Cómo hacer Mango",
-      step1:"1. Ocurre un intercambio real entre personas.",
-      step2:"2. Se escribe una línea para reconocer que el intercambio ocurrió.",
-      step3:"3. La línea no indica cantidades, no crea crédito ni deuda, y no se acumula.",
-      step4:"Una línea es un Mango.",
-      reg_title:"Escribe una línea",
-      reg_help:"Escribe una línea simple que reconozca el intercambio. Sin números, sin valor.",
-      placeholder:"Ejemplo: “Ayudé a X con … / X me ayudó con …”",
-      btn_save:"Guardar línea",
-      btn_copy:"Copiar registro",
-      btn_export:"Exportar .txt",
-      btn_clear:"Borrar todo",
-      reg_list_title:"Registro (solo texto)"
-    },
-    fr: {
-      title:"Mango",
-      intro1:"Mango reconnaît un échange réel entre personnes.",
-      intro2:"Ce n’est pas une monnaie. Il ne mesure pas la valeur. Il ne s’accumule pas.",
-      how_title:"Comment faire Mango",
-      step1:"1. Un échange réel a lieu entre personnes.",
-      step2:"2. Une ligne est écrite pour reconnaître que l’échange a eu lieu.",
-      step3:"3. La ligne n’indique aucune quantité, ne crée ni crédit ni dette et ne s’accumule pas.",
-      step4:"Une ligne est un Mango.",
-      reg_title:"Écris une ligne",
-      reg_help:"Écris une ligne simple qui reconnaît l’échange. Pas de chiffres, pas de valeur.",
-      placeholder:"Exemple : « J’ai aidé X à … / X m’a aidé à … »",
-      btn_save:"Enregistrer",
-      btn_copy:"Copier le registre",
-      btn_export:"Exporter .txt",
-      btn_clear:"Tout effacer",
-      reg_list_title:"Registre (texte seulement)"
-    },
-    de: {
-      title:"Mango",
-      intro1:"Mango erkennt einen realen Austausch zwischen Menschen an.",
-      intro2:"Es ist keine Währung. Es misst keinen Wert. Es sammelt sich nicht an.",
-      how_title:"Wie man Mango macht",
-      step1:"1. Ein realer Austausch findet zwischen Menschen statt.",
-      step2:"2. Eine Zeile wird geschrieben, um den Austausch anzuerkennen.",
-      step3:"3. Die Zeile enthält keine Mengenangaben, schafft weder Kredit noch Schuld und sammelt sich nicht an.",
-      step4:"Eine Zeile ist ein Mango.",
-      reg_title:"Schreibe eine Zeile",
-      reg_help:"Schreibe eine einfache Zeile, die den Austausch anerkennt. Keine Zahlen, kein Wert.",
-      placeholder:"Beispiel: „Ich habe X geholfen bei … / X hat mir geholfen bei …“",
-      btn_save:"Zeile speichern",
-      btn_copy:"Register kopieren",
-      btn_export:"Als .txt exportieren",
-      btn_clear:"Alles löschen",
-      reg_list_title:"Register (nur Text)"
-    },
-    zh: {
-      title:"Mango",
-      intro1:"Mango 用來承認人與人之間真實發生的交換。",
-      intro2:"它不是貨幣。它不衡量價值。它不可累積。",
-      how_title:"如何進行 Mango",
-      step1:"1. 人與人之間發生真實的交換。",
-      step2:"2. 寫下一行來承認這個交換已經發生。",
-      step3:"3. 這一行不表示數量、不產生信用或債務、也不可累積。",
-      step4:"一行就是一個 Mango。",
-      reg_title:"寫下一行",
-      reg_help:"寫下一行簡單文字來承認交換。不要數字，不要價值。",
-      placeholder:"例：『我幫助了 X … / X 幫助了我 …』",
-      btn_save:"儲存這一行",
-      btn_copy:"複製紀錄",
-      btn_export:"匯出 .txt",
-      btn_clear:"全部清除",
-      reg_list_title:"紀錄（僅文字）"
-    }
-  };
+const translations={
+it:{
+title:"Mango",
+intro1:"Mango riconosce uno scambio reale tra persone.",
+intro2:"Non è una moneta. Non misura valore. Non accumula.",
+how_title:"Come si fa Mango",
+step1:"1. Avviene uno scambio reale tra persone.",
+step2:"2. Si scrive una riga che riconosce che lo scambio è avvenuto.",
+step3:"3. La riga non indica quantità, non crea credito o debito, non si accumula.",
+step4:"Una riga è un Mango.",
+reg_title:"Scrivi una riga",
+reg_help:"Scrivi una riga semplice. Nessun numero, nessun valore.",
+btnSave:"Salva riga",
+btnCopy:"Copia registro",
+btnExport:"Esporta .txt",
+btnImport:"Importa .txt",
+btnClear:"Cancella tutto",
+creator:"Creato da Juan de Dios Annaloro Mercedes.",
+memory:"In memoria di Larimar."
+},
+en:{
+title:"Mango",
+intro1:"Mango recognizes a real exchange between people.",
+intro2:"It is not a currency. It does not measure value. It does not accumulate.",
+how_title:"How to do Mango",
+step1:"1. A real exchange happens between people.",
+step2:"2. One line is written to acknowledge it.",
+step3:"3. The line does not indicate quantities, creates no credit or debt, and does not accumulate.",
+step4:"One line is one Mango.",
+reg_title:"Write one line",
+reg_help:"Write a simple line. No numbers, no value.",
+btnSave:"Save line",
+btnCopy:"Copy registry",
+btnExport:"Export .txt",
+btnImport:"Import .txt",
+btnClear:"Clear all",
+creator:"Created by Juan de Dios Annaloro Mercedes.",
+memory:"In memory of Larimar."
+},
+es:{
+title:"Mango",
+intro1:"Mango reconoce un intercambio real entre personas.",
+intro2:"No es una moneda. No mide el valor. No se acumula.",
+how_title:"Cómo hacer Mango",
+step1:"1. Ocurre un intercambio real entre personas.",
+step2:"2. Se escribe una línea para reconocerlo.",
+step3:"3. La línea no indica cantidades, no crea crédito ni deuda y no se acumula.",
+step4:"Una línea es un Mango.",
+reg_title:"Escribe una línea",
+reg_help:"Escribe una línea simple. Sin números, sin valor.",
+btnSave:"Guardar línea",
+btnCopy:"Copiar registro",
+btnExport:"Exportar .txt",
+btnImport:"Importar .txt",
+btnClear:"Borrar todo",
+creator:"Creado por Juan de Dios Annaloro Mercedes.",
+memory:"En memoria de Larimar."
+},
+fr:{
+title:"Mango",
+intro1:"Mango reconnaît un échange réel entre personnes.",
+intro2:"Ce n’est pas une monnaie. Il ne mesure pas la valeur. Il ne s’accumule pas.",
+how_title:"Comment faire Mango",
+step1:"1. Un échange réel a lieu.",
+step2:"2. Une ligne est écrite pour le reconnaître.",
+step3:"3. La ligne n’indique aucune quantité, ne crée ni crédit ni dette et ne s’accumule pas.",
+step4:"Une ligne est un Mango.",
+reg_title:"Écris une ligne",
+reg_help:"Écris une ligne simple. Pas de chiffres, pas de valeur.",
+btnSave:"Enregistrer",
+btnCopy:"Copier",
+btnExport:"Exporter .txt",
+btnImport:"Importer .txt",
+btnClear:"Tout effacer",
+creator:"Créé par Juan de Dios Annaloro Mercedes.",
+memory:"En mémoire de Larimar."
+},
+de:{
+title:"Mango",
+intro1:"Mango erkennt einen realen Austausch an.",
+intro2:"Es ist keine Währung. Es misst keinen Wert. Es sammelt sich nicht an.",
+how_title:"Wie man Mango macht",
+step1:"1. Ein realer Austausch findet statt.",
+step2:"2. Eine Zeile wird geschrieben.",
+step3:"3. Sie enthält keine Mengenangaben und sammelt sich nicht an.",
+step4:"Eine Zeile ist ein Mango.",
+reg_title:"Schreibe eine Zeile",
+reg_help:"Eine einfache Zeile. Keine Zahlen, kein Wert.",
+btnSave:"Speichern",
+btnCopy:"Kopieren",
+btnExport:"Exportieren .txt",
+btnImport:"Importieren .txt",
+btnClear:"Löschen",
+creator:"Erstellt von Juan de Dios Annaloro Mercedes.",
+memory:"Im Gedenken an Larimar."
+},
+zh:{
+title:"Mango",
+intro1:"Mango 用來承認真實的交換。",
+intro2:"它不是貨幣，不衡量價值，也不可累積。",
+how_title:"如何進行 Mango",
+step1:"1. 發生真實的交換。",
+step2:"2. 寫下一行來承認。",
+step3:"3. 不表示數量，不產生信用或債務。",
+step4:"一行就是一個 Mango。",
+reg_title:"寫下一行",
+reg_help:"寫下一行簡單文字。不要數字，不要價值。",
+btnSave:"儲存",
+btnCopy:"複製",
+btnExport:"匯出 .txt",
+btnImport:"匯入 .txt",
+btnClear:"清除全部",
+creator:"由 Juan de Dios Annaloro Mercedes 創建。",
+memory:"為紀念 Larimar。"
+}
+};
 
-  function getLang() {
-    const params = new URLSearchParams(window.location.search);
-    const raw = (params.get("lang") || "").toLowerCase().trim();
-    const normalized = raw
-      .replace("-", "_")
-      .replace("zh_hant", "zh")
-      .replace("zh_tw", "zh")
-      .replace("zh_cn", "zh");
-    return SUPPORTED_LANGS.includes(normalized) ? normalized : DEFAULT_LANG;
-  }
+function getLang(){
+const p=new URLSearchParams(window.location.search);
+const l=(p.get("lang")||"").toLowerCase();
+return SUPPORTED_LANGS.includes(l)?l:DEFAULT_LANG;
+}
 
-  function t(key, lang) {
-    return (translations[lang] && translations[lang][key]) ?? translations.it[key] ?? "";
-  }
+function applyTranslations(){
+const lang=getLang();
+document.documentElement.setAttribute("lang",lang);
+document.querySelectorAll("[data-i18n]").forEach(el=>{
+const key=el.getAttribute("data-i18n");
+el.textContent=translations[lang][key];
+});
+}
 
-  function loadRegistry() {
-    try {
-      const raw = localStorage.getItem(STORAGE_KEY);
-      const arr = raw ? JSON.parse(raw) : [];
-      return Array.isArray(arr) ? arr : [];
-    } catch {
-      return [];
-    }
-  }
+function loadRegistry(){
+try{return JSON.parse(localStorage.getItem(STORAGE_KEY)||"[]");}
+catch{return[];}
+}
+function saveRegistry(arr){localStorage.setItem(STORAGE_KEY,JSON.stringify(arr));}
+function render(arr){document.getElementById("registry").textContent=arr.join("\n");}
 
-  function saveRegistry(arr) {
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(arr));
-  }
+document.addEventListener("DOMContentLoaded",()=>{
+applyTranslations();
+let reg=loadRegistry();
+render(reg);
 
-  function renderRegistry(arr) {
-    document.getElementById("registry").textContent = arr.join("\n");
-  }
+document.getElementById("btnSave").onclick=()=>{
+const v=lineInput.value.trim();
+if(!v)return;
+reg.push(v);
+saveRegistry(reg);
+render(reg);
+lineInput.value="";
+};
 
-  async function copyText(text) {
-    try {
-      await navigator.clipboard.writeText(text);
-      return true;
-    } catch {
-      const ta = document.createElement("textarea");
-      ta.value = text;
-      document.body.appendChild(ta);
-      ta.select();
-      const ok = document.execCommand("copy");
-      document.body.removeChild(ta);
-      return ok;
-    }
-  }
+document.getElementById("btnCopy").onclick=()=>{
+navigator.clipboard.writeText(reg.join("\n"));
+};
 
-  function exportTxt(text) {
-    const date = new Date().toISOString().slice(0, 10);
-    const filename = `mango_registro_${date}.txt`;
-    const blob = new Blob([text], { type: "text/plain;charset=utf-8" });
-    const url = URL.createObjectURL(blob);
+document.getElementById("btnExport").onclick=()=>{
+const blob=new Blob([reg.join("\n")],{type:"text/plain"});
+const a=document.createElement("a");
+a.href=URL.createObjectURL(blob);
+a.download="mango_registro.txt";
+a.click();
+};
 
-    const a = document.createElement("a");
-    a.href = url;
-    a.download = filename;
-    document.body.appendChild(a);
-    a.click();
-    document.body.removeChild(a);
+document.getElementById("btnImport").onclick=()=>{
+document.getElementById("fileInput").click();
+};
 
-    URL.revokeObjectURL(url);
-  }
+document.getElementById("fileInput").onchange=(e)=>{
+const file=e.target.files[0];
+if(!file)return;
+const reader=new FileReader();
+reader.onload=()=>{
+reg=reader.result.split("\n").filter(l=>l.trim()!=="");
+saveRegistry(reg);
+render(reg);
+};
+reader.readAsText(file);
+};
 
-  function applyTranslations() {
-    const lang = getLang();
-    document.documentElement.setAttribute("lang", lang === "zh" ? "zh-Hant" : lang);
-
-    document.querySelectorAll("[data-i18n]").forEach(el => {
-      const key = el.getAttribute("data-i18n");
-      el.textContent = t(key, lang);
-    });
-
-    const input = document.getElementById("lineInput");
-    input.placeholder = t("placeholder", lang);
-
-    document.getElementById("btnSave").textContent = t("btn_save", lang);
-    document.getElementById("btnCopy").textContent = t("btn_copy", lang);
-    document.getElementById("btnExport").textContent = t("btn_export", lang);
-    document.getElementById("btnClear").textContent = t("btn_clear", lang);
-  }
-
-  document.addEventListener("DOMContentLoaded", () => {
-    applyTranslations();
-
-    let registry = loadRegistry();
-    renderRegistry(registry);
-
-    document.getElementById("btnSave").addEventListener("click", () => {
-      const input = document.getElementById("lineInput");
-      const line = (input.value || "").trim();
-      if (!line) return;
-
-      registry.push(line);
-      saveRegistry(registry);
-      renderRegistry(registry);
-      input.value = "";
-    });
-
-    document.getElementById("btnCopy").addEventListener("click", async () => {
-      const text = registry.join("\n");
-      if (!text) return;
-      await copyText(text);
-    });
-
-    document.getElementById("btnExport").addEventListener("click", () => {
-      const text = registry.join("\n");
-      if (!text) return;
-      exportTxt(text);
-    });
-
-    document.getElementById("btnClear").addEventListener("click", () => {
-      registry = [];
-      saveRegistry(registry);
-      renderRegistry(registry);
-    });
-  });
+document.getElementById("btnClear").onclick=()=>{
+reg=[];
+saveRegistry(reg);
+render(reg);
+};
+});
 </script>
 
 </body>

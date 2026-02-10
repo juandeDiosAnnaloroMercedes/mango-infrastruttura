@@ -135,3 +135,14 @@ a img {
   backface-visibility: hidden;
   transform: translateZ(0);
 }
+/* --- Stabilità definitiva QR (Safari iOS fix) --- */
+
+img[alt="QR Mango"] {
+  display: block;
+  width: 320px;
+  height: 320px;
+  margin: 0 auto;
+  image-rendering: crisp-edges;
+  backface-visibility: hidden;
+  transform: translateZ(0);
+}

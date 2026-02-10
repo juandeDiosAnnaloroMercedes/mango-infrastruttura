@@ -1,36 +1,65 @@
 <!DOCTYPE html>
 <html lang="it">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Mango</title>
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="style.css" />
 </head>
 
 <body>
-
   <main>
+
+    <!-- Selettore lingue (usa ?lang=xx) -->
+    <nav class="lang-selector" aria-label="Lingua">
+      <a href="./?lang=it" class="active">IT</a>
+      <a href="./?lang=en">EN</a>
+      <a href="./?lang=es">ES</a>
+      <a href="./?lang=fr">FR</a>
+      <a href="./?lang=de">DE</a>
+      <a href="./?lang=zh">中文</a>
+    </nav>
 
     <h1>Mango</h1>
 
-    <section>
-      <h2>Infrastruttura locale di fiducia</h2>
-      <p>Non monetaria.</p>
-      <p>Non accumulabile.</p>
-      <p>Non appropriabile.</p>
-    </section>
+    <p class="subtitle">
+      Un’infrastruttura di fiducia locale non monetaria. Una riga alla volta.
+    </p>
 
     <section>
       <h2>Fai Mango adesso</h2>
-      <p>Scambia qualcosa di reale.</p>
+      <p>Inizia uno scambio reale. Nessun accumulo. Nessun valore numerico.</p>
+      <a class="btn" href="./primo-scambio.html?lang=it">Inizia</a>
     </section>
 
     <section>
       <h2>Scrivi una riga</h2>
-      <p>Una riga = un Mango.</p>
+      <p>Ogni scambio si riconosce con una riga. Senza quantità. Senza equivalenze.</p>
+      <a class="btn" href="./scrivi-una-riga.html?lang=it">Scrivi</a>
+    </section>
+
+    <section>
+      <h2>Cos’è Mango</h2>
+      <p>Mango è uno spazio di fiducia non appropriabile.</p>
+      <p>Non è denaro. Non è accumulabile.</p>
+      <p>Una riga = riconoscimento di uno scambio reale.</p>
     </section>
 
   </main>
 
+  <!-- Attiva il link "active" in base al parametro lang -->
+  <script>
+    (function () {
+      const params = new URLSearchParams(window.location.search);
+      const lang = (params.get("lang") || "it").toLowerCase();
+
+      document.documentElement.lang = lang;
+
+      document.querySelectorAll(".lang-selector a").forEach(a => {
+        const href = a.getAttribute("href") || "";
+        a.classList.toggle("active", href.includes("lang=" + lang));
+      });
+    })();
+  </script>
 </body>
 </html>

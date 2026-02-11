@@ -1,37 +1,133 @@
 <!doctype html>
 <html lang="it">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Kit Mango</title>
-  <meta name="description" content="Scarica il Kit Mango ufficiale (PDF unico completo)." />
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Kit Mango 🥭</title>
+
   <style>
-    body{margin:0;font-family:-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica,Arial,sans-serif;line-height:1.45;}
-    .wrap{max-width:720px;margin:0 auto;padding:28px 18px;}
-    h1{margin:0 0 10px 0;font-size:34px;letter-spacing:0.2px}
-    p{margin:0 0 14px 0;font-size:18px}
-    .card{margin-top:18px;padding:18px;border:1px solid rgba(0,0,0,.12);border-radius:14px;}
-    .btn{display:inline-block;margin-top:10px;padding:14px 16px;border-radius:12px;text-decoration:none;font-size:18px;border:1px solid rgba(0,0,0,.18);}
-    .small{font-size:14px;opacity:.75;margin-top:10px}
-    .hr{height:1px;background:rgba(0,0,0,.12);margin:18px 0}
+    :root{
+      --border:#e6e6e6;
+      --text:#111;
+      --muted:#666;
+      --bg:#ffffff;
+      --radius:14px;
+    }
+
+    *{ box-sizing:border-box; }
+
+    body{
+      margin:0;
+      font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;
+      background:var(--bg);
+      color:var(--text);
+    }
+
+    .wrap{
+      max-width:800px;
+      margin:0 auto;
+      padding:24px 18px 60px 18px;
+    }
+
+    h1{
+      margin:0 0 12px 0;
+      font-size:2rem;
+    }
+
+    p{
+      line-height:1.5;
+      margin:10px 0;
+    }
+
+    .card{
+      border:1px solid var(--border);
+      border-radius:var(--radius);
+      padding:20px;
+      margin:20px 0;
+      background:#fff;
+    }
+
+    .btn{
+      display:inline-block;
+      padding:12px 16px;
+      border:1px solid var(--border);
+      border-radius:12px;
+      text-decoration:none;
+      color:var(--text);
+      background:#fff;
+      font-size:1rem;
+      cursor:pointer;
+    }
+
+    .btn.primary{
+      border-color:#111;
+      font-weight:600;
+    }
+
+    .actions{
+      margin-top:15px;
+      display:flex;
+      gap:12px;
+      flex-wrap:wrap;
+    }
+
+    .back{
+      margin-bottom:20px;
+    }
+
+    .small{
+      font-size:0.95rem;
+      color:var(--muted);
+    }
+
+    footer{
+      margin-top:40px;
+      font-size:0.9rem;
+      color:var(--muted);
+    }
   </style>
 </head>
-<body>
-  <div class="wrap">
-    <h1>Kit Mango</h1>
-    <p>Il Kit Mango è pubblico e gratuito.</p>
 
-    <div class="card">
-      <p><b>Scarica il PDF unico completo</b></p>
-      <a class="btn" href="./kit-mango.pdf" download>Scarica il Kit (PDF)</a>
-      <div class="small">Se il download non parte, tocca e apri il PDF nel browser.</div>
+<body>
+
+  <div class="wrap">
+
+    <!-- BOTTONE TORNA ALLA HOME -->
+    <div class="back">
+      <a href="index.html" class="btn">
+        ← Torna alla Home
+      </a>
     </div>
 
-    <div class="hr"></div>
+    <h1>Kit Mango 🥭</h1>
 
-    <p class="small">
-      Mango — creato da <b>Juan de Dios Annaloro Mercedes</b> (02 febbraio 2026) — in memoria di Larimar.
+    <p>
+      Il Kit Mango è pubblico e gratuito.
     </p>
+
+    <div class="card">
+      <h3>Scarica il PDF unico completo</h3>
+
+      <div class="actions">
+        <a href="kit-mango.pdf" class="btn primary" download>
+          Scarica il Kit (PDF)
+        </a>
+      </div>
+
+      <p class="small">
+        Se il download non parte, apri il PDF direttamente nel browser.
+      </p>
+    </div>
+
+    <footer>
+      <p>
+        Mango — creato da <strong>Juan de Dios Annaloro Mercedes</strong><br>
+        Data di nascita: 02 febbraio 2026<br>
+        In memoria di Larimar
+      </p>
+    </footer>
+
   </div>
+
 </body>
 </html>

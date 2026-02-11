@@ -6,11 +6,29 @@
   <title>Mango — Infrastruttura di fiducia</title>
 
   <style>
-    :root{ --border:#e6e6e6; --text:#111; --muted:#666; --bg:#fff; --soft:#fafafa; --radius:14px; }
+    :root{
+      --border:#e6e6e6;
+      --text:#111;
+      --muted:#666;
+      --bg:#fff;
+      --soft:#fafafa;
+      --radius:14px;
+    }
     *{ box-sizing:border-box; }
-    body{ margin:0; font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif; color:var(--text); background:var(--bg); }
+    body{
+      margin:0;
+      font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;
+      color:var(--text);
+      background:var(--bg);
+    }
     .wrap{ max-width:900px; margin:0 auto; padding:18px; }
-    .card{ border:1px solid var(--border); border-radius:var(--radius); padding:16px; margin:14px 0; background:var(--bg); }
+    .card{
+      border:1px solid var(--border);
+      border-radius:var(--radius);
+      padding:16px;
+      margin:14px 0;
+      background:var(--bg);
+    }
     .soft{ background:var(--soft); }
     h1{ margin:8px 0 4px 0; font-size:1.6rem; }
     h2{ margin:0 0 10px 0; }
@@ -18,20 +36,62 @@
     .small{ font-size:.95rem; color:var(--muted); }
     .row{ display:flex; gap:14px; flex-wrap:wrap; align-items:flex-start; }
     .col{ flex:1 1 320px; }
-    .btn{ display:inline-block; padding:12px 14px; border:1px solid var(--border); border-radius:12px; text-decoration:none; color:var(--text); background:#fff; cursor:pointer; font-size:1rem; }
+    .btn{
+      display:inline-block;
+      padding:12px 14px;
+      border:1px solid var(--border);
+      border-radius:12px;
+      text-decoration:none;
+      color:var(--text);
+      background:#fff;
+      cursor:pointer;
+      font-size:1rem;
+    }
     .btn.primary{ border-color:#111; }
     .btn.ghost{ background:transparent; }
     .actions{ display:flex; gap:10px; flex-wrap:wrap; margin-top:10px; }
-    .notice{ padding:12px; border:1px dashed var(--border); border-radius:12px; color:var(--muted); background:#fff; }
+    .notice{
+      padding:12px;
+      border:1px dashed var(--border);
+      border-radius:12px;
+      color:var(--muted);
+      background:#fff;
+    }
     label{ display:block; margin:0 0 6px 0; font-weight:600; }
-    textarea{ width:100%; min-height:86px; padding:12px; border:1px solid var(--border); border-radius:12px; font-size:1rem; }
-    .qr{ width:180px; max-width:100%; border:1px solid var(--border); border-radius:12px; padding:10px; background:#fff; }
-    .langbar{ display:flex; gap:8px; flex-wrap:wrap; margin:10px 0 0 0; }
-    .langbar a{ font-size:.95rem; padding:8px 10px; border:1px solid var(--border); border-radius:999px; text-decoration:none; color:var(--text); background:#fff; }
+    textarea{
+      width:100%;
+      min-height:86px;
+      padding:12px;
+      border:1px solid var(--border);
+      border-radius:12px;
+      font-size:1rem;
+    }
+    .qr{
+      width:160px;
+      max-width:100%;
+      border:1px solid var(--border);
+      border-radius:12px;
+      padding:10px;
+      background:#fff;
+    }
+    .langbar{
+      display:flex;
+      gap:8px;
+      flex-wrap:wrap;
+      margin:10px 0 0 0;
+    }
+    .langbar a{
+      font-size:.95rem;
+      padding:8px 10px;
+      border:1px solid var(--border);
+      border-radius:999px;
+      text-decoration:none;
+      color:var(--text);
+      background:#fff;
+    }
     .anchor{ scroll-margin-top: 14px; }
     hr{ border:none; border-top:1px solid var(--border); margin:14px 0; }
     ol{ padding-left:18px; }
-    ul{ padding-left:18px; }
   </style>
 </head>
 
@@ -52,12 +112,7 @@
       </div>
 
       <p class="small" style="margin-top:10px;">
-        <span data-lang="it">Progetto nato il <b>02 febbraio 2026</b>. Mango non è moneta e non è accumulabile.</span>
-        <span data-lang="en">Project born on <b>02 Feb 2026</b>. Mango is not money and cannot be accumulated.</span>
-        <span data-lang="es">Proyecto nacido el <b>02 feb 2026</b>. Mango no es dinero y no es acumulable.</span>
-        <span data-lang="fr">Projet né le <b>02 fév 2026</b>. Mango n’est pas une monnaie et ne s’accumule pas.</span>
-        <span data-lang="de">Projektstart <b>02. Feb 2026</b>. Mango ist kein Geld und nicht ansammelbar.</span>
-        <span data-lang="zh">项目诞生于 <b>2026年2月2日</b>。Mango 不是货币，不能累积。</span>
+        Progetto nato il <b>02 febbraio 2026</b>. Mango non è moneta e non è accumulabile.
       </p>
 
       <div class="row" style="margin-top:10px;">
@@ -78,11 +133,11 @@
           </div>
 
           <p class="small" style="margin-top:10px;">
-            https://juandediosannaloromercedes.github.io/mango-infrastruttura/
+            QR stabile (home): <span style="word-break:break-word;">juandediosannaloromercedes.github.io/mango-infrastruttura/</span>
           </p>
         </div>
 
-        <div class="col" style="max-width:260px;">
+        <div class="col" style="max-width:240px;">
           <div class="small" style="margin-bottom:6px;">QR Home (stabile)</div>
           <img class="qr" src="assets/qr-home.png" alt="QR Mango — Home" />
         </div>
@@ -91,17 +146,20 @@
 
     <!-- SEZIONE 1 -->
     <section class="card anchor" id="fai-mango-adesso">
-      <div class="actions" style="margin-top:0;"><a class="btn ghost" href="#top">← Torna alla home</a></div>
+      <div class="actions" style="margin-top:0;">
+        <a class="btn ghost" href="#top">← Torna alla home</a>
+      </div>
       <h2 style="margin-top:10px;">Fai Mango adesso</h2>
 
       <div data-lang="it">
         <p>Fai uno scambio reale: un gesto, un aiuto, una cura, una presenza. Mango è riconoscimento, non valore.</p>
+        <p class="small">Poi scrivi una riga (qui sotto) come memoria del reale. Niente numeri, niente conti.</p>
       </div>
-      <div data-lang="en"><p>Do a real exchange: a gesture, help, care, presence. Mango is recognition, not value.</p></div>
-      <div data-lang="es"><p>Haz un intercambio real: un gesto, ayuda, cuidado, presencia. Mango es reconocimiento, no valor.</p></div>
-      <div data-lang="fr"><p>Fais un échange réel : un geste, une aide, une attention, une présence. Mango = reconnaissance, pas valeur.</p></div>
-      <div data-lang="de"><p>Mach einen echten Austausch: eine Geste, Hilfe, Fürsorge, Präsenz. Mango ist Anerkennung, kein Wert.</p></div>
-      <div data-lang="zh"><p>做一次真实交换：一个举动、帮助、照料、陪伴。Mango 是认可，不是价值。</p></div>
+      <div data-lang="en"><p>Do a real exchange: a gesture, help, care, presence. Mango is recognition, not value.</p><p class="small">Then write one row below as memory of the real. No numbers, no accounts.</p></div>
+      <div data-lang="es"><p>Haz un intercambio real: un gesto, ayuda, cuidado, presencia. Mango es reconocimiento, no valor.</p><p class="small">Luego escribe una línea abajo como memoria de lo real. Sin números, sin cuentas.</p></div>
+      <div data-lang="fr"><p>Fais un échange réel : un geste, une aide, une attention, une présence. Mango = reconnaissance, pas valeur.</p><p class="small">Puis écris une ligne ci-dessous. Pas de chiffres, pas de comptes.</p></div>
+      <div data-lang="de"><p>Mach einen echten Austausch: eine Geste, Hilfe, Fürsorge, Präsenz. Mango ist Anerkennung, kein Wert.</p><p class="small">Dann schreib unten eine Zeile. Keine Zahlen, keine Konten.</p></div>
+      <div data-lang="zh"><p>做一次真实交换：一个举动、帮助、照料、陪伴。Mango 是认可，不是价值。</p><p class="small">然后在下方写一行作为现实的记忆。不用数字、不做账户。</p></div>
 
       <div class="actions">
         <a class="btn primary" href="#primo-scambio">Vai al primo scambio</a>
@@ -111,30 +169,72 @@
 
     <!-- PRIMO SCAMBIO -->
     <section class="card anchor" id="primo-scambio">
-      <div class="actions" style="margin-top:0;"><a class="btn ghost" href="#top">← Torna alla home</a></div>
+      <div class="actions" style="margin-top:0;">
+        <a class="btn ghost" href="#top">← Torna alla home</a>
+      </div>
+
       <h2 style="margin-top:10px;">Primo scambio</h2>
 
       <div data-lang="it">
         <ol>
           <li>Fai un gesto reale (aiuto, cura, scambio).</li>
-          <li>Scrivi una riga (sezione “Scrivi una riga”).</li>
+          <li>Scrivi una riga (nella sezione “Scrivi una riga”).</li>
           <li>Fine: Mango vive nel reale, non nel conteggio.</li>
         </ol>
+        <p class="small">Suggerimento: se siete in due, scrivete una riga semplice e vera insieme.</p>
       </div>
-      <div data-lang="en"><ol><li>Do a real gesture.</li><li>Write one row.</li><li>Done: Mango lives in reality, not in counting.</li></ol></div>
-      <div data-lang="es"><ol><li>Haz un gesto real.</li><li>Escribe una línea.</li><li>Listo: Mango vive en lo real, no en contar.</li></ol></div>
-      <div data-lang="fr"><ol><li>Fais un geste réel.</li><li>Écris une ligne.</li><li>C’est tout : Mango vit dans le réel, pas dans le comptage.</li></ol></div>
-      <div data-lang="de"><ol><li>Mach eine echte Geste.</li><li>Schreib eine Zeile.</li><li>Fertig: Mango lebt in der Realität, nicht im Zählen.</li></ol></div>
-      <div data-lang="zh"><ol><li>做一个真实的举动。</li><li>写一行。</li><li>完成：Mango 活在现实里，不在计数里。</li></ol></div>
+
+      <div data-lang="en">
+        <ol>
+          <li>Do a real gesture (help, care, exchange).</li>
+          <li>Write one row (in “Write one row”).</li>
+          <li>Done: Mango lives in reality, not in counting.</li>
+        </ol>
+      </div>
+
+      <div data-lang="es">
+        <ol>
+          <li>Haz un gesto real (ayuda, cuidado, intercambio).</li>
+          <li>Escribe una línea (en “Escribe una línea”).</li>
+          <li>Listo: Mango vive en lo real, no en contar.</li>
+        </ol>
+      </div>
+
+      <div data-lang="fr">
+        <ol>
+          <li>Fais un geste réel (aide, soin, échange).</li>
+          <li>Écris une ligne (dans “Écris une ligne”).</li>
+          <li>C’est tout : Mango vit dans le réel, pas dans le comptage.</li>
+        </ol>
+      </div>
+
+      <div data-lang="de">
+        <ol>
+          <li>Mach eine echte Geste (Hilfe, Fürsorge, Austausch).</li>
+          <li>Schreib eine Zeile (in “Schreib eine Zeile”).</li>
+          <li>Fertig: Mango lebt in der Realität, nicht im Zählen.</li>
+        </ol>
+      </div>
+
+      <div data-lang="zh">
+        <ol>
+          <li>做一个真实的举动（帮助、照料、交换）。</li>
+          <li>写一行文字（在“写一行”部分）。</li>
+          <li>完成：Mango 活在现实里，不在计数里。</li>
+        </ol>
+      </div>
 
       <div class="actions">
         <a class="btn primary" href="#scrivi-una-riga">Scrivi una riga adesso</a>
       </div>
     </section>
 
-    <!-- SCRIVI UNA RIGA (persistente locale) -->
+    <!-- SEZIONE 2: RIGA PERSISTENTE -->
     <section class="card anchor" id="scrivi-una-riga">
-      <div class="actions" style="margin-top:0;"><a class="btn ghost" href="#top">← Torna alla home</a></div>
+      <div class="actions" style="margin-top:0;">
+        <a class="btn ghost" href="#top">← Torna alla home</a>
+      </div>
+
       <h2 style="margin-top:10px;">Scrivi una riga</h2>
 
       <div class="notice">
@@ -149,6 +249,7 @@
       <form id="mangoRowForm" style="margin-top:12px;">
         <label for="mangoRowInput">La tua riga</label>
         <textarea id="mangoRowInput" placeholder="Esempio: Oggi ho aiutato X / Oggi Y ha aiutato me."></textarea>
+
         <div class="actions">
           <button class="btn primary" type="submit">Salva sul dispositivo</button>
           <button class="btn" type="button" id="mangoRowClearInput">Svuota</button>
@@ -164,79 +265,42 @@
       </div>
     </section>
 
-    <!-- COS'È MANGO (più completo) -->
+    <!-- SEZIONE 3 -->
     <section class="card anchor" id="cose-mango">
-      <div class="actions" style="margin-top:0;"><a class="btn ghost" href="#top">← Torna alla home</a></div>
+      <div class="actions" style="margin-top:0;">
+        <a class="btn ghost" href="#top">← Torna alla home</a>
+      </div>
+
       <h2 style="margin-top:10px;">Cos’è Mango</h2>
 
       <div data-lang="it">
-        <p><b>Mango</b> è un’infrastruttura di fiducia locale <b>non monetaria</b>, <b>non appropriabile</b>, progettata per evitare <b>accumulo</b>, <b>speculazione</b> e <b>cattura istituzionale</b>.</p>
-        <ul>
-          <li><b>Una riga</b> = riconoscimento di uno scambio reale (non un valore).</li>
-          <li><b>Niente numeri</b>, niente conteggi, niente equivalenze: se introduci numeri, <b>non è Mango</b>.</li>
-          <li><b>Durata / temporalità</b>: Mango non si accumula nel tempo (non è un capitale).</li>
-        </ul>
-        <p class="small">Creatore dell’idea: <b>Juan de Dios Annaloro Mercedes</b>, in memoria di sua sorella <b>Larimar</b>.</p>
-
-        <hr />
-        <h3 style="margin:0 0 8px 0;">Mini-FAQ</h3>
-        <p><b>Serve un’età minima?</b> No: non c’è un’età anagrafica minima. Serve capacità di partecipare consapevolmente a scambi non accumulabili.</p>
+        <p>Mango è un’infrastruttura di fiducia locale non monetaria, non appropriabile, progettata per evitare accumulo, speculazione e cattura istituzionale.</p>
+        <p class="small">Una riga = riconoscimento di uno scambio reale. Niente numeri, niente valore, niente conti.</p>
       </div>
 
-      <!-- Traduzioni brevi chiave (non lunghissime) -->
       <div data-lang="en">
-        <p><b>Mango</b> is a local trust infrastructure: <b>non-monetary</b>, <b>non-appropriable</b>, designed to prevent <b>accumulation</b>, <b>speculation</b>, and <b>institutional capture</b>.</p>
-        <ul>
-          <li><b>One row</b> = recognition of a real exchange (not a value).</li>
-          <li><b>No numbers</b>, no counting, no equivalences: if you add numbers, it’s <b>not Mango</b>.</li>
-          <li><b>Time principle</b>: Mango cannot be accumulated over time.</li>
-        </ul>
-        <p class="small">Creator: <b>Juan de Dios Annaloro Mercedes</b>, in memory of <b>Larimar</b>.</p>
-        <hr /><p><b>Minimum age?</b> No. It requires conscious participation in non-accumulative exchanges.</p>
+        <p>Mango is a local trust infrastructure: non-monetary, non-appropriable, designed to prevent accumulation, speculation, and institutional capture.</p>
+        <p class="small">One row = recognition of a real exchange. No numbers, no value, no accounts.</p>
       </div>
 
       <div data-lang="es">
-        <p><b>Mango</b> es una infraestructura local de confianza: <b>no monetaria</b>, <b>no apropiable</b>, diseñada para evitar <b>acumulación</b>, <b>especulación</b> y <b>captura institucional</b>.</p>
-        <ul>
-          <li><b>Una línea</b> = reconocimiento de un intercambio real (no un valor).</li>
-          <li><b>Sin números</b>: si introduces números, <b>no es Mango</b>.</li>
-          <li><b>Tiempo</b>: no se acumula con el tiempo.</li>
-        </ul>
-        <p class="small">Creador: <b>Juan de Dios Annaloro Mercedes</b>, en memoria de <b>Larimar</b>.</p>
-        <hr /><p><b>¿Edad mínima?</b> No. Se requiere participación consciente.</p>
+        <p>Mango es una infraestructura local de confianza: no monetaria, no apropiable, diseñada para evitar acumulación, especulación y captura institucional.</p>
+        <p class="small">Una línea = reconocimiento de un intercambio real. Sin números, sin valor, sin cuentas.</p>
       </div>
 
       <div data-lang="fr">
-        <p><b>Mango</b> est une infrastructure locale de confiance : <b>non monétaire</b>, <b>non appropriable</b>, conçue pour éviter <b>l’accumulation</b>, la <b>spéculation</b> et la <b>capture institutionnelle</b>.</p>
-        <ul>
-          <li><b>Une ligne</b> = reconnaissance d’un échange réel (pas une valeur).</li>
-          <li><b>Pas de chiffres</b> : si tu ajoutes des chiffres, ce n’est <b>pas Mango</b>.</li>
-          <li><b>Temps</b> : Mango ne s’accumule pas dans le temps.</li>
-        </ul>
-        <p class="small">Créateur : <b>Juan de Dios Annaloro Mercedes</b>, en mémoire de <b>Larimar</b>.</p>
-        <hr /><p><b>Âge minimum ?</b> Non. Il faut une participation consciente.</p>
+        <p>Mango est une infrastructure locale de confiance : non monétaire, non appropriable, conçue pour éviter l’accumulation, la spéculation et la capture institutionnelle.</p>
+        <p class="small">Une ligne = reconnaissance d’un échange réel. Pas de chiffres, pas de valeur, pas de comptes.</p>
       </div>
 
       <div data-lang="de">
-        <p><b>Mango</b> ist eine lokale Vertrauens-Infrastruktur: <b>nicht-monetär</b>, <b>nicht-aneignbar</b>, entwickelt gegen <b>Ansammlung</b>, <b>Spekulation</b> und <b>institutionelle Vereinnahmung</b>.</p>
-        <ul>
-          <li><b>Eine Zeile</b> = Anerkennung eines realen Austauschs (kein Wert).</li>
-          <li><b>Keine Zahlen</b>: mit Zahlen ist es <b>nicht Mango</b>.</li>
-          <li><b>Zeit</b>: Mango sammelt sich nicht über die Zeit an.</li>
-        </ul>
-        <p class="small">Urheber: <b>Juan de Dios Annaloro Mercedes</b>, im Gedenken an <b>Larimar</b>.</p>
-        <hr /><p><b>Mindestalter?</b> Nein. Bewusste Teilnahme ist nötig.</p>
+        <p>Mango ist eine lokale Vertrauens-Infrastruktur: nicht-monetär, nicht-aneignbar, entwickelt gegen Ansammlung, Spekulation und institutionelle Vereinnahmung.</p>
+        <p class="small">Eine Zeile = Anerkennung eines realen Austauschs. Keine Zahlen, kein Wert, keine Konten.</p>
       </div>
 
       <div data-lang="zh">
-        <p><b>Mango</b> 是一种本地信任基础设施：<b>非货币</b>、<b>不可占有</b>，旨在避免<b>累积</b>、<b>投机</b>与<b>制度性捕获</b>。</p>
-        <ul>
-          <li><b>一行</b> = 对真实交换的认可（不是价值）。</li>
-          <li><b>不用数字</b>：一旦引入数字，就<b>不是 Mango</b>。</li>
-          <li><b>时间原则</b>：Mango 不能随时间累积。</li>
-        </ul>
-        <p class="small">创意者：<b>Juan de Dios Annaloro Mercedes</b>，纪念 <b>Larimar</b>。</p>
-        <hr /><p><b>最低年龄？</b>没有。需要有意识地参与非累积交换。</p>
+        <p>Mango 是一种本地信任基础设施：非货币、不可占有，旨在避免累积、投机与制度性捕获。</p>
+        <p class="small">一行 = 对真实交换的认可。不用数字、不设价值、不做账户。</p>
       </div>
     </section>
 
@@ -271,6 +335,7 @@
         const savedText = document.getElementById("mangoRowSavedText");
         const btnRemove = document.getElementById("mangoRowRemove");
         const btnClear = document.getElementById("mangoRowClearInput");
+
         if(!form || !input || !savedBox || !savedText || !btnRemove) return;
 
         function render(){

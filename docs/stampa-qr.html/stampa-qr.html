@@ -1,59 +1,92 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="it">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Mango 🥭 — Stampa & QR</title>
+  <meta charset="UTF-8">
+  <title>Mango — Stampa QR</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <style>
-    :root{ --border:#e6e6e6; --text:#111; --muted:#666; --bg:#fff; --radius:14px; }
-    *{ box-sizing:border-box; }
-    body{ margin:0; font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif; color:var(--text); background:var(--bg); }
-    .wrap{ max-width:900px; margin:0 auto; padding:18px; }
-    .card{ border:1px solid var(--border); border-radius:var(--radius); padding:18px; margin:14px 0; background:#fff; }
-    .center{ text-align:center; }
-    h1{ margin:10px 0 0 0; font-size:2.2rem; }
-    p{ line-height:1.45; margin:10px 0; }
-    .big{ font-size:2rem; font-weight:800; margin:14px 0 6px 0; }
-    .mid{ font-size:1.35rem; font-weight:700; margin:0 0 18px 0; }
-    .qr{ width:220px; max-width:70vw; border:1px solid var(--border); border-radius:12px; padding:10px; background:#fff; display:inline-block; }
-    .actions{ display:flex; gap:12px; justify-content:center; flex-wrap:wrap; margin-top:12px; }
-    .btn{ display:inline-block; padding:14px 18px; border:1px solid var(--border); border-radius:12px; text-decoration:none; color:var(--text); background:#fff; cursor:pointer; font-size:1.05rem; }
-    .btn.primary{ border-color:#111; }
-    .small{ color:var(--muted); font-size:.95rem; }
+    body{
+      margin:0;
+      font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;
+      background:#fff;
+      color:#111;
+      text-align:center;
+      padding:40px 20px;
+    }
+
+    h1{
+      font-size:2.2rem;
+      margin-bottom:40px;
+    }
+
+    .qr{
+      width:200px;
+      margin:20px auto 40px auto;
+    }
+
+    .big{
+      font-size:1.8rem;
+      font-weight:700;
+      margin:40px 0 10px 0;
+    }
+
+    .sub{
+      font-size:1.2rem;
+      margin-bottom:40px;
+    }
+
+    .buttons{
+      display:flex;
+      justify-content:center;
+      gap:20px;
+      flex-wrap:wrap;
+      margin-top:20px;
+    }
+
+    .btn{
+      padding:14px 22px;
+      border:1px solid #111;
+      border-radius:14px;
+      text-decoration:none;
+      color:#111;
+      background:#fff;
+      font-size:1rem;
+      cursor:pointer;
+    }
+
+    .footer{
+      margin-top:60px;
+      font-size:0.9rem;
+      color:#666;
+    }
+
     @media print{
-      .actions{ display:none !important; }
-      body{ background:#fff; }
-      .card{ border:none; }
+      .buttons{
+        display:none;
+      }
     }
   </style>
 </head>
 
 <body>
-  <div class="wrap">
 
-    <div class="card center">
-      <h1>Mango 🥭</h1>
+  <h1>Mango 🥭</h1>
 
-      <!-- QR (solo immagine, nessun testo duplicato qui) -->
-      <div style="margin:18px 0 10px 0;">
-        <img class="qr" src="assets/qr-home.png" alt="QR Mango — Home" />
-      </div>
+  <img src="assets/qr-home.png" class="qr" alt="QR Mango Home">
 
-      <!-- TESTO UNA SOLA VOLTA -->
-      <div class="big">È successo qualcosa tra due persone.</div>
-      <div class="mid">Qui puoi capirlo.</div>
+  <div class="big">È successo qualcosa tra due persone.</div>
+  <div class="sub">Qui puoi capirlo.</div>
 
-      <div class="actions">
-        <a class="btn primary" href="index.html">← Torna alla Home</a>
-        <button class="btn" type="button" onclick="window.print()">Stampa</button>
-      </div>
-
-      <p class="small" style="margin-top:18px;">
-        QR ufficiale unico: home stabile.
-      </p>
-    </div>
-
+  <div class="buttons">
+    <a href="index.html" class="btn">← Torna alla Home</a>
+    <button onclick="window.print()" class="btn">Stampa</button>
   </div>
+
+  <div class="footer">
+    Mango — Juan de Dios Annaloro Mercedes<br>
+    In memoria di Larimar — 02 febbraio 2026
+  </div>
+
 </body>
 </html>

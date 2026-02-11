@@ -1,100 +1,380 @@
-<!doctype html>
-<html lang="it">
-<head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Mango 🥭 — Infrastruttura di fiducia</title>
-
-<style>
-:root{ --border:#e6e6e6; --text:#111; --muted:#666; --bg:#fff; --soft:#fafafa; --radius:14px; }
-*{ box-sizing:border-box; }
-body{ margin:0; font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif; color:var(--text); background:var(--bg); }
-.wrap{ max-width:900px; margin:0 auto; padding:18px; }
-.card{ border:1px solid var(--border); border-radius:var(--radius); padding:16px; margin:14px 0; background:var(--bg); }
-.soft{ background:var(--soft); }
-h1{ margin:8px 0 4px 0; font-size:1.6rem; }
-h2{ margin:0 0 10px 0; }
-h3{ margin:14px 0 8px 0; }
-p{ line-height:1.45; margin:10px 0; }
-.small{ font-size:.95rem; color:var(--muted); }
-.row{ display:flex; gap:14px; flex-wrap:wrap; align-items:flex-start; }
-.col{ flex:1 1 320px; }
-.btn{ display:inline-block; padding:12px 14px; border:1px solid var(--border); border-radius:12px; text-decoration:none; color:var(--text); background:#fff; cursor:pointer; font-size:1rem; }
-.btn.primary{ border-color:#111; }
-.btn.ghost{ background:transparent; }
-.actions{ display:flex; gap:10px; flex-wrap:wrap; margin-top:10px; }
-.notice{ padding:12px; border:1px dashed var(--border); border-radius:12px; color:var(--muted); background:#fff; }
-.qr{ width:180px; max-width:100%; border:1px solid var(--border); border-radius:12px; padding:10px; background:#fff; }
-.langbar{ display:flex; gap:8px; flex-wrap:wrap; margin:10px 0 0 0; }
-.langbar a{ font-size:.95rem; padding:8px 10px; border:1px solid var(--border); border-radius:999px; text-decoration:none; color:var(--text); background:#fff; }
-</style>
-</head>
-
-<body id="top">
-<div class="wrap">
-
-<header class="card soft">
-<h1>Mango 🥭</h1>
-
-<div class="langbar">
-<a href="index.html?lang=it">IT</a>
-<a href="index.html?lang=en">EN</a>
-<a href="index.html?lang=es">ES</a>
-<a href="index.html?lang=fr">FR</a>
-<a href="index.html?lang=de">DE</a>
-<a href="index.html?lang=zh">ZH</a>
-</div>
-
-<div data-lang="it">
-<p class="small">Progetto nato il <b>02 febbraio 2026</b>. Mango non è moneta e non è accumulabile.</p>
-<div class="notice">QR ufficiale unico: punta alla home stabile.</div>
-</div>
-
-<div class="actions">
-<a class="btn primary" href="#fai-mango-adesso" data-i18n="cta_do">Fai Mango adesso</a>
-<a class="btn" href="#scrivi-una-riga" data-i18n="cta_row">Scrivi una riga</a>
-<a class="btn" href="kit.html" data-i18n="cta_kit">Kit</a>
-<a class="btn" href="#origine-reale" data-i18n="cta_origin">Origine reale</a>
-<a class="btn" href="#faq-fondamentali" data-i18n="cta_faq">FAQ</a>
-<a class="btn" href="#cose-mango" data-i18n="cta_what">Cos’è Mango</a>
-</div>
-
-<div class="row" style="margin-top:12px;">
-<div class="col">
-<p class="small">QR stabile (home): juandediosannaloromercedes.github.io/mango-infrastruttura/</p>
-</div>
-<div class="col" style="max-width:260px;">
-<img class="qr" src="assets/qr-home.png" alt="QR Mango — Home" />
-</div>
-</div>
-
-</header>
-
-<footer class="small" style="padding:40px 0;">
-© Mango — Juan de Dios Annaloro Mercedes (in memoria di Larimar).
-</footer>
-
-</div>
-
-<script>
-(function(){
-const map = {
-it:{cta_do:"Fai Mango adesso",cta_row:"Scrivi una riga",cta_kit:"Kit",cta_origin:"Origine reale",cta_faq:"FAQ",cta_what:"Cos’è Mango"},
-en:{cta_do:"Do Mango now",cta_row:"Write one row",cta_kit:"Kit",cta_origin:"Real Origin",cta_faq:"FAQ",cta_what:"What is Mango"},
-es:{cta_do:"Haz Mango ahora",cta_row:"Escribe una línea",cta_kit:"Kit",cta_origin:"Origen real",cta_faq:"FAQ",cta_what:"¿Qué es Mango?"},
-fr:{cta_do:"Fais Mango maintenant",cta_row:"Écris une ligne",cta_kit:"Kit",cta_origin:"Origine réelle",cta_faq:"FAQ",cta_what:"Qu’est-ce que Mango"},
-de:{cta_do:"Mach Mango jetzt",cta_row:"Schreib eine Zeile",cta_kit:"Kit",cta_origin:"Realer Ursprung",cta_faq:"FAQ",cta_what:"Was ist Mango"},
-zh:{cta_do:"现在做 Mango",cta_row:"写一行",cta_kit:"工具包",cta_origin:"真实起源",cta_faq:"FAQ",cta_what:"Mango 是什么"}
-};
-
-const params=new URLSearchParams(location.search);
-const lang=map[params.get("lang")]?params.get("lang"):"it";
-document.querySelectorAll("[data-i18n]").forEach(el=>{
-const key=el.getAttribute("data-i18n");
-el.textContent=map[lang][key];
-});
-})();
-</script>
-
-</body>
-</html>
+Mango 🥭
+IT
+EN
+ES
+FR
+DE
+ZH
+Progetto nato il 02 febbraio 2026. Mango non è moneta e non è accumulabile.
+QR ufficiale unico: punta alla home stabile. Stampalo e usalo nel mondo reale.
+Project born on 02 February 2026. Mango is not money and cannot be accumulated.
+Single official QR: it points to the stable home. Print it and use it in the real world.
+Proyecto nacido el 02 febrero 2026. Mango no es dinero y no es acumulable.
+QR oficial único: apunta a la home estable. Imprímelo y úsalo en el mundo real.
+Projet né le 02 février 2026. Mango n’est pas une monnaie et ne s’accumule pas.
+QR officiel unique : il pointe vers l’accueil stable. Imprime-le et utilise-le dans le monde réel.
+Projektstart 02. Februar 2026. Mango ist kein Geld und nicht ansammelbar.
+Einziger offizieller QR: führt zur stabilen Startseite. Druck ihn und nutze ihn in der Realität.
+项目诞生于 2026年2月2日。Mango 不是货币，不能累积。
+唯一官方二维码：指向稳定主页。打印并在现实中使用。
+Fai Mango adesso
+Scrivi una riga
+Kit
+Origine reale
+FAQ
+Cos’è Mango
+QR stabile (home): juandediosannaloromercedes.github.io/mango-infrastruttura/
+Stable QR (home): juandediosannaloromercedes.github.io/mango-infrastruttura/
+QR estable (home): juandediosannaloromercedes.github.io/mango-infrastruttura/
+QR stable (accueil) : juandediosannaloromercedes.github.io/mango-infrastruttura/
+Stabiler QR (Startseite): juandediosannaloromercedes.github.io/mango-infrastruttura/
+稳定主页二维码：juandediosannaloromercedes.github.io/mango-infrastruttura/
+QR Home (stabile)
+Home QR (stable)
+QR Home (estable)
+QR Accueil (stable)
+QR Startseite (stabil)
+主页二维码（稳定）
+← Torna alla home
+Fai Mango adesso
+Fai uno scambio reale: un gesto, un aiuto, una cura, una presenza. Mango è riconoscimento, non valore.
+Vai al primo scambio
+Vai a “Scrivi una riga”
+Do Mango now
+Do a real exchange: a gesture, help, care, presence. Mango is recognition, not value.
+Go to first exchange
+Go to “Write one row”
+Haz Mango ahora
+Haz un intercambio real: un gesto, ayuda, cuidado, presencia. Mango es reconocimiento, no valor.
+Ir al primer intercambio
+Ir a “Escribe una línea”
+Fais Mango maintenant
+Fais un échange réel : un geste, une aide, une attention, une présence. Mango = reconnaissance, pas valeur.
+Aller au premier échange
+Aller à “Écris une ligne”
+Mach Mango jetzt
+Mach einen echten Austausch: eine Geste, Hilfe, Fürsorge, Präsenz. Mango ist Anerkennung, kein Wert.
+Zum ersten Austausch
+Zu “Schreib eine Zeile”
+现在做 Mango
+做一次真实交换：一个举动、帮助、照料、陪伴。Mango 是认可，不是价值。
+去“第一次交换”
+去“写一行”
+← Torna alla home
+Primo scambio
+	1	Fai un gesto reale (aiuto, cura, scambio).
+	2	Scrivi una riga (sezione “Scrivi una riga”).
+	3	Fine: Mango vive nel reale, non nel conteggio.
+Scrivi una riga adesso
+First exchange
+	1	Do a real gesture (help, care, exchange).
+	2	Write one row (“Write one row”).
+	3	Done: Mango lives in reality, not in counting.
+Write a row now
+Primer intercambio
+	1	Haz un gesto real (ayuda, cuidado, intercambio).
+	2	Escribe una línea (“Escribe una línea”).
+	3	Listo: Mango vive en lo real, no en contar.
+Escribe una línea ahora
+Premier échange
+	1	Fais un geste réel (aide, soin, échange).
+	2	Écris une ligne (“Écris une ligne”).
+	3	C’est tout : Mango vit dans le réel, pas dans le comptage.
+Écris une ligne maintenant
+Erster Austausch
+	1	Mach eine echte Geste (Hilfe, Fürsorge, Austausch).
+	2	Schreib eine Zeile (“Schreib eine Zeile”).
+	3	Fertig: Mango lebt in der Realität, nicht im Zählen.
+Jetzt eine Zeile schreiben
+第一次交换
+	1	做一个真实的举动（帮助、照料、交换）。
+	2	写一行（“写一行”）。
+	3	完成：Mango 活在现实里，不在计数里。
+现在写一行
+← Torna alla home
+Scrivi una riga
+Nota: la riga resta visibile solo su questo dispositivo. Mango non accumula e non fa bacheche.
+La tua riga
+Salva sul dispositivo
+Svuota
+Write one row
+Note: the row stays visible only on this device. Mango doesn’t accumulate and isn’t a public feed.
+Your row
+Save on this device
+Clear
+Escribe una línea
+Nota: la línea queda visible solo en este dispositivo. Mango no acumula ni es un muro público.
+Tu línea
+Guardar en este dispositivo
+Borrar
+Écris une ligne
+Note : la ligne reste visible uniquement sur cet appareil. Mango n’accumule pas et n’est pas un fil public.
+Ta ligne
+Enregistrer sur cet appareil
+Effacer
+Schreib eine Zeile
+Hinweis: die Zeile bleibt nur auf diesem Gerät sichtbar. Mango sammelt nicht und ist kein öffentlicher Feed.
+Deine Zeile
+Auf diesem Gerät speichern
+Leeren
+写一行
+提示：这行文字只会保存在本设备上显示。Mango 不累积，也不是公开信息流。
+你的一行
+保存到本设备
+清空
+← Torna alla home
+Origine reale e fondazione
+Prima che Mango diventasse parola, era gesto.
+Durante la mia attività musicale regalavo mango 🥭 e magliette alle persone presenti. Non chiedevo nulla in cambio. Non c’era prezzo. Non c’era conteggio.
+Il gesto generava una risposta reale: presenza, scambio umano, riconoscimento reciproco.
+Da quell’esperienza concreta mi sono posto una domanda: è possibile riconoscere uno scambio reale senza trasformarlo in valore economico?
+Mango nasce da questa domanda.
+Formalizzazione
+Ho concepito e formalizzato Mango come infrastruttura di fiducia locale non monetaria, non appropriabile e non accumulabile.
+Una riga rappresenta il riconoscimento di uno scambio reale. Non contiene numeri. Non rappresenta valore. Non genera saldo.
+Dichiarazione di origine
+Mango è stato ideato da me, Juan de Dios Annaloro Mercedes.
+L’infrastruttura è dedicata alla memoria di mia sorella Larimar.
+Real Origin and Foundation
+Before Mango became a word, it was a gesture.
+During my musical activity, I used to give mangoes 🥭 and T-shirts to people present. I asked nothing in return. There was no price. No counting.
+The gesture generated a real response: presence, human exchange, mutual recognition.
+From that concrete experience I asked myself: is it possible to recognize a real exchange without turning it into economic value?
+Mango was born from this question.
+Formalization
+I conceived and formalized Mango as a local trust infrastructure: non-monetary, non-appropriable, and non-accumulative.
+One row represents recognition of a real exchange. It contains no numbers. It represents no value. It creates no balance.
+Declaration of Origin
+Mango was conceived by me, Juan de Dios Annaloro Mercedes.
+The infrastructure is dedicated to the memory of my sister Larimar.
+Origen real y fundación
+Antes de que Mango fuera una palabra, fue un gesto.
+Durante mi actividad musical regalaba mangos 🥭 y camisetas a las personas presentes. No pedía nada a cambio. No había precio. No había conteo.
+El gesto generaba una respuesta real: presencia, intercambio humano, reconocimiento mutuo.
+De esa experiencia concreta me hice una pregunta: ¿es posible reconocer un intercambio real sin convertirlo en valor económico?
+Mango nació de esa pregunta.
+Formalización
+Concebí y formalicé Mango como infraestructura de confianza local: no monetaria, no apropiable y no acumulable.
+Una línea representa el reconocimiento de un intercambio real. No contiene números. No representa valor. No crea saldo.
+Declaración de origen
+Mango fue ideado por mí, Juan de Dios Annaloro Mercedes.
+La infraestructura está dedicada a la memoria de mi hermana Larimar.
+Origine réelle et fondation
+Avant que Mango devienne un mot, c’était un geste.
+Pendant mon activité musicale, j’offrais des mangues 🥭 et des t-shirts aux personnes présentes. Je ne demandais rien en échange. Pas de prix. Pas de comptage.
+Le geste produisait une réponse réelle : présence, échange humain, reconnaissance mutuelle.
+De cette expérience concrète, je me suis posé une question : peut-on reconnaître un échange réel sans le transformer en valeur économique ?
+Mango est né de cette question.
+Formalisation
+J’ai conçu et formalisé Mango comme infrastructure locale de confiance : non monétaire, non appropriable et non accumulative.
+Une ligne représente la reconnaissance d’un échange réel. Aucun chiffre. Aucune valeur. Aucun solde.
+Déclaration d’origine
+Mango a été imaginé par moi, Juan de Dios Annaloro Mercedes.
+L’infrastructure est dédiée à la mémoire de ma sœur Larimar.
+Realer Ursprung und Gründung
+Bevor Mango ein Wort wurde, war es eine Geste.
+Während meiner musikalischen Tätigkeit verschenkte ich Mangos 🥭 und T-Shirts an anwesende Menschen. Ich verlangte nichts dafür. Kein Preis. Kein Zählen.
+Die Geste erzeugte eine reale Antwort: Präsenz, menschlicher Austausch, gegenseitige Anerkennung.
+Aus dieser konkreten Erfahrung entstand die Frage: Kann man einen realen Austausch anerkennen, ohne ihn in wirtschaftlichen Wert zu verwandeln?
+Mango entstand aus dieser Frage.
+Formalisierung
+Ich habe Mango als lokale Vertrauens-Infrastruktur konzipiert und formalisiert: nicht-monetär, nicht aneignbar und nicht ansammelbar.
+Eine Zeile ist die Anerkennung eines realen Austauschs. Keine Zahlen. Kein Wert. Kein Saldo.
+Ursprungserklärung
+Mango wurde von mir erdacht: Juan de Dios Annaloro Mercedes.
+Die Infrastruktur ist dem Andenken meiner Schwester Larimar gewidmet.
+真实起源与奠基
+在 Mango 成为一个词之前，它先是一个举动。
+在我的音乐活动期间，我会把芒果 🥭 和 T 恤送给在场的人。我不要求任何回报。没有价格。没有计数。
+这个举动带来真实回应：在场、人与人的交换、相互认可。
+从这段具体经历我提出一个问题：能否认可真实交换，而不把它变成经济价值？
+Mango 就诞生于这个问题。
+形式化
+我将 Mango 构想并形式化为一种本地信任基础设施：非货币、不可占有、不可累积。
+一行文字代表对真实交换的认可：不用数字、不设价值、不形成余额。
+起源声明
+Mango 由我提出：Juan de Dios Annaloro Mercedes。
+该基础设施献给我妹妹 Larimar 的记忆。
+← Torna alla home
+FAQ fondamentali
+1. Mango è una moneta?
+No. Non è valuta, non è convertibile, non rappresenta valore economico.
+2. Mango si può accumulare?
+No. Non prevede saldo, conteggio o accumulo nel tempo.
+3. Cosa rappresenta una riga?
+Una riga rappresenta il riconoscimento di uno scambio reale tra persone. Non contiene numeri né equivalenze.
+4. Mango è un baratto?
+No. Il baratto implica equivalenza. Mango riconosce lo scambio senza calcolo di valore.
+5. Serve registrarsi?
+No. Non esiste iscrizione, profilo o registro centrale.
+6. La riga è pubblica?
+No. Resta sul dispositivo che la scrive. Mango non crea classifiche né bacheche.
+7. Esiste un’età minima?
+Non è definita un’età anagrafica. Serve capacità consapevole di partecipare a uno scambio reale non accumulabile.
+8. Chi ha ideato Mango?
+Mango è stato ideato da Juan de Dios Annaloro Mercedes, a partire da esperienza reale di scambio vissuto. È dedicato alla memoria di Larimar.
+Perché queste 8?
+Coprono e bloccano le interpretazioni sbagliate più comuni:
+	•	Moneta ✗
+	•	Accumulo ✗
+	•	Valore ✗
+	•	Baratto ✗
+	•	Registro centrale ✗
+	•	Pubblicità/Feed ✗
+	•	Età
+	•	Origine
+Core FAQs
+1. Is Mango a currency?
+No. It is not money, not convertible, and does not represent economic value.
+2. Can Mango be accumulated?
+No. There is no balance, counting, or accumulation over time.
+3. What does one row represent?
+A row represents recognition of a real exchange between people. No numbers, no equivalences.
+4. Is Mango barter?
+No. Barter implies equivalence. Mango recognizes exchange without value calculation.
+5. Is registration required?
+No. No signup, no profile, no central registry.
+6. Is the row public?
+No. It stays on the device that writes it. No rankings, no public boards.
+7. Is there a minimum age?
+No fixed age. Conscious participation in a real non-accumulative exchange is required.
+8. Who created Mango?
+Mango was created by Juan de Dios Annaloro Mercedes, based on lived real exchange. Dedicated to Larimar.
+Why these 8?
+They block the most common wrong interpretations:
+	•	Currency ✗
+	•	Accumulation ✗
+	•	Value ✗
+	•	Barter ✗
+	•	Central registry ✗
+	•	Public feed ✗
+	•	Age
+	•	Origin
+Preguntas clave (FAQ)
+1. ¿Mango es dinero?
+No. No es una moneda, no es convertible y no representa valor económico.
+2. ¿Se puede acumular Mango?
+No. No hay saldo, conteo ni acumulación con el tiempo.
+3. ¿Qué representa una línea?
+Una línea reconoce un intercambio real entre personas. No contiene números ni equivalencias.
+4. ¿Mango es trueque?
+No. El trueque implica equivalencia. Mango reconoce el intercambio sin cálculo de valor.
+5. ¿Hay que registrarse?
+No. No existe inscripción, perfil ni registro central.
+6. ¿La línea es pública?
+No. Se queda en el dispositivo que la escribe. Mango no crea rankings ni muros públicos.
+7. ¿Hay edad mínima?
+No hay una edad fija. Se requiere participación consciente en un intercambio real no acumulable.
+8. ¿Quién creó Mango?
+Mango fue creado por Juan de Dios Annaloro Mercedes, a partir de un intercambio real vivido. Dedicado a Larimar.
+¿Por qué estas 8?
+Bloquean las interpretaciones equivocadas más comunes:
+	•	Dinero ✗
+	•	Acumulación ✗
+	•	Valor ✗
+	•	Trueque ✗
+	•	Registro central ✗
+	•	Muro público/Feed ✗
+	•	Edad
+	•	Origen
+FAQ essentielles
+1. Mango est-il une monnaie ?
+Non. Ce n’est pas une monnaie, ce n’est pas convertible et cela ne représente pas une valeur économique.
+2. Peut-on accumuler Mango ?
+Non. Il n’y a pas de solde, pas de comptage, pas d’accumulation dans le temps.
+3. Que représente une ligne ?
+Une ligne reconnaît un échange réel entre personnes. Aucun chiffre, aucune équivalence.
+4. Mango est-il du troc ?
+Non. Le troc implique une équivalence. Mango reconnaît l’échange sans calcul de valeur.
+5. Faut-il s’inscrire ?
+Non. Pas d’inscription, pas de profil, pas de registre central.
+6. La ligne est-elle publique ?
+Non. Elle reste sur l’appareil qui l’écrit. Mango ne crée ni classements ni fil public.
+7. Y a-t-il un âge minimum ?
+Pas d’âge fixe. Il faut une participation consciente à un échange réel non accumulable.
+8. Qui a créé Mango ?
+Mango a été créé par Juan de Dios Annaloro Mercedes, à partir d’un échange réel vécu. Dédié à Larimar.
+Pourquoi ces 8 ?
+Elles bloquent les mauvaises interprétations les plus fréquentes :
+	•	Monnaie ✗
+	•	Accumulation ✗
+	•	Valeur ✗
+	•	Troc ✗
+	•	Registre central ✗
+	•	Fil public/Feed ✗
+	•	Âge
+	•	Origine
+Grundlegende FAQ
+1. Ist Mango eine Währung?
+Nein. Es ist kein Geld, nicht umtauschbar und stellt keinen wirtschaftlichen Wert dar.
+2. Kann man Mango ansammeln?
+Nein. Es gibt keinen Kontostand, kein Zählen und keine Ansammlung über die Zeit.
+3. Was bedeutet eine Zeile?
+Eine Zeile ist die Anerkennung eines realen Austauschs zwischen Menschen. Keine Zahlen, keine Äquivalenzen.
+4. Ist Mango Tauschhandel?
+Nein. Tauschhandel setzt Äquivalenz voraus. Mango erkennt Austausch ohne Wertberechnung an.
+5. Muss man sich registrieren?
+Nein. Keine Anmeldung, kein Profil, kein zentrales Register.
+6. Ist die Zeile öffentlich?
+Nein. Sie bleibt auf dem Gerät, das sie schreibt. Keine Rankings, keine öffentlichen Boards.
+7. Gibt es ein Mindestalter?
+Kein festes Alter. Erforderlich ist bewusste Teilnahme an einem realen, nicht ansammelbaren Austausch.
+8. Wer hat Mango geschaffen?
+Mango wurde von Juan de Dios Annaloro Mercedes geschaffen, basierend auf gelebtem realem Austausch. Gewidmet Larimar.
+Warum diese 8?
+Sie blockieren die häufigsten Fehlinterpretationen:
+	•	Geld ✗
+	•	Ansammlung ✗
+	•	Wert ✗
+	•	Tauschhandel ✗
+	•	Zentrales Register ✗
+	•	Öffentlicher Feed ✗
+	•	Alter
+	•	Ursprung
+核心常见问题
+1. Mango 是货币吗？
+不是。它不是货币，不可兑换，也不代表经济价值。
+2. Mango 能累积吗？
+不能。没有余额、没有计数、不会随时间累积。
+3. “一行”代表什么？
+一行表示对人与人之间真实交换的认可。不用数字，也没有等价换算。
+4. Mango 是以物易物吗？
+不是。以物易物强调等价。Mango 认可交换，但不进行价值计算。
+5. 需要注册吗？
+不需要。没有注册、没有账号、没有中央登记册。
+6. 这行文字是公开的吗？
+不是。它只保存在书写的设备上。没有排行榜，也没有公开墙。
+7. 有最低年龄吗？
+没有固定年龄。需要有意识地参与真实且不可累积的交换。
+8. 谁提出了 Mango？
+Mango 由 Juan de Dios Annaloro Mercedes 提出，源于真实交换的亲身经历。献给 Larimar。
+为什么是这 8 条？
+它们阻止最常见的误解：
+	•	货币 ✗
+	•	累积 ✗
+	•	价值 ✗
+	•	等价交换 ✗
+	•	中央登记 ✗
+	•	公开信息流 ✗
+	•	年龄
+	•	起源
+← Torna alla home
+Cos’è Mango
+Mango è un’infrastruttura di fiducia locale non monetaria, non appropriabile, progettata per evitare accumulo, speculazione e cattura istituzionale.
+Una riga = riconoscimento di uno scambio reale. Niente numeri, niente valore, niente conti.
+What is Mango
+Mango is a local trust infrastructure: non-monetary, non-appropriable, designed to prevent accumulation, speculation, and institutional capture.
+One row = recognition of a real exchange. No numbers, no value, no accounts.
+¿Qué es Mango?
+Mango es una infraestructura local de confianza: no monetaria, no apropiable, diseñada para evitar acumulación, especulación y captura institucional.
+Una línea = reconocimiento de un intercambio real. Sin números, sin valor, sin cuentas.
+Qu’est-ce que Mango
+Mango est une infrastructure locale de confiance : non monétaire, non appropriable, conçue pour éviter l’accumulation, la spéculation et la capture institutionnelle.
+Une ligne = reconnaissance d’un échange réel. Pas de chiffres, pas de valeur, pas de comptes.
+Was ist Mango
+Mango ist eine lokale Vertrauens-Infrastruktur: nicht-monetär, nicht-aneignbar, entwickelt gegen Ansammlung, Spekulation und institutionelle Vereinnahmung.
+Eine Zeile = Anerkennung eines realen Austauschs. Keine Zahlen, kein Wert, keine Konten.
+Mango 是什么
+Mango 是一种本地信任基础设施：非货币、不可占有，旨在避免累积、投机与制度性捕获。
+一行 = 对真实交换的认可。不用数字、不设价值、不做账户。
+© Mango — Juan de Dios Annaloro Mercedes (in memoria di Larimar). © Mango — Juan de Dios Annaloro Mercedes (in memory of Larimar). © Mango — Juan de Dios Annaloro Mercedes (en memoria de Larimar). © Mango — Juan de Dios Annaloro Mercedes (en mémoire de Larimar). © Mango — Juan de Dios Annaloro Mercedes (im Gedenken an Larimar). © Mango — Juan de Dios Annaloro Mercedes（纪念 Larimar）。

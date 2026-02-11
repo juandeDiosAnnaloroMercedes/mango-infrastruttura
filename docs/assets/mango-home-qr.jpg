@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <title>Stampa & QR — Mango</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    body{
+      font-family: -apple-system,BlinkMacSystemFont,sans-serif;
+      text-align:center;
+      padding:40px 20px;
+      background:#ffffff;
+    }
+
+    h1{
+      margin-bottom:30px;
+    }
+
+    img{
+      width:260px;
+      max-width:90%;
+      margin:20px auto;
+    }
+
+    .btn{
+      display:inline-block;
+      margin:12px;
+      padding:12px 18px;
+      border:2px solid #111;
+      border-radius:12px;
+      text-decoration:none;
+      font-weight:600;
+      color:#111;
+    }
+
+    .btn:hover{
+      background:#111;
+      color:#fff;
+    }
+
+    .print{
+      background:#111;
+      color:#fff;
+    }
+
+    @media print {
+      .no-print{
+        display:none;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <h1>QR ufficiale Mango</h1>
+
+  <img src="assets/mango-home-qr.jpg" alt="QR Mango">
+
+  <p>È successo qualcosa tra due persone.<br>Qui puoi capirlo.</p>
+
+  <div class="no-print">
+    <a href="index.html" class="btn">← Torna alla Home</a>
+    <button onclick="window.print()" class="btn print">🖨 Stampa</button>
+  </div>
+
+</body>
+</html>

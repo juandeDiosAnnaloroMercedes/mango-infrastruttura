@@ -14,6 +14,7 @@
     .soft{ background:var(--soft); }
     h1{ margin:8px 0 4px 0; font-size:1.6rem; }
     h2{ margin:0 0 10px 0; }
+    h3{ margin:14px 0 8px 0; }
     p{ line-height:1.45; margin:10px 0; }
     .small{ font-size:.95rem; color:var(--muted); }
     .row{ display:flex; gap:14px; flex-wrap:wrap; align-items:flex-start; }
@@ -29,16 +30,14 @@
     .langbar{ display:flex; gap:8px; flex-wrap:wrap; margin:10px 0 0 0; }
     .langbar a{ font-size:.95rem; padding:8px 10px; border:1px solid var(--border); border-radius:999px; text-decoration:none; color:var(--text); background:#fff; }
     .anchor{ scroll-margin-top: 14px; }
-    hr{ border:none; border-top:1px solid var(--border); margin:14px 0; }
     ol{ padding-left:18px; margin:10px 0; }
-    ul{ padding-left:18px; margin:10px 0; }
   </style>
 </head>
 
 <body id="top">
   <div class="wrap">
 
-    <!-- HEADER (contiene SOLO struttura, testo dentro data-lang) -->
+    <!-- HEADER -->
     <header class="card soft">
       <h1>Mango 🥭</h1>
 
@@ -51,32 +50,27 @@
         <a href="index.html?lang=zh">ZH</a>
       </div>
 
-      <!-- TESTO HEADER (tutto tradotto) -->
+      <!-- Header text fully i18n -->
       <div data-lang="it">
         <p class="small">Progetto nato il <b>02 febbraio 2026</b>. Mango non è moneta e non è accumulabile.</p>
         <div class="notice">QR ufficiale unico: punta alla home stabile. Stampalo e usalo nel mondo reale.</div>
       </div>
-
       <div data-lang="en">
         <p class="small">Project born on <b>02 February 2026</b>. Mango is not money and cannot be accumulated.</p>
         <div class="notice">Single official QR: it points to the stable home. Print it and use it in the real world.</div>
       </div>
-
       <div data-lang="es">
         <p class="small">Proyecto nacido el <b>02 febrero 2026</b>. Mango no es dinero y no es acumulable.</p>
         <div class="notice">QR oficial único: apunta a la home estable. Imprímelo y úsalo en el mundo real.</div>
       </div>
-
       <div data-lang="fr">
         <p class="small">Projet né le <b>02 février 2026</b>. Mango n’est pas une monnaie et ne s’accumule pas.</p>
         <div class="notice">QR officiel unique : il pointe vers l’accueil stable. Imprime-le et utilise-le dans le monde réel.</div>
       </div>
-
       <div data-lang="de">
         <p class="small">Projektstart <b>02. Februar 2026</b>. Mango ist kein Geld und nicht ansammelbar.</p>
         <div class="notice">Einziger offizieller QR: führt zur stabilen Startseite. Druck ihn und nutze ihn in der Realität.</div>
       </div>
-
       <div data-lang="zh">
         <p class="small">项目诞生于 <b>2026年2月2日</b>。Mango 不是货币，不能累积。</p>
         <div class="notice">唯一官方二维码：指向稳定主页。打印并在现实中使用。</div>
@@ -85,6 +79,7 @@
       <div class="actions">
         <a class="btn primary" href="#fai-mango-adesso" data-i18n="cta_do">Fai Mango adesso</a>
         <a class="btn" href="#scrivi-una-riga" data-i18n="cta_row">Scrivi una riga</a>
+        <a class="btn" href="#origine-reale" data-i18n="cta_origin">Origine reale</a>
         <a class="btn" href="#cose-mango" data-i18n="cta_what">Cos’è Mango</a>
       </div>
 
@@ -106,7 +101,7 @@
           <div data-lang="de" class="small" style="margin-bottom:6px;">QR Startseite (stabil)</div>
           <div data-lang="zh" class="small" style="margin-bottom:6px;">主页二维码（稳定）</div>
 
-          <!-- UN SOLO QR -->
+          <!-- SINGLE OFFICIAL QR -->
           <img class="qr" src="assets/qr-home.png" alt="QR Mango — Home" />
         </div>
       </div>
@@ -240,7 +235,6 @@
     <section class="card anchor" id="scrivi-una-riga">
       <div class="actions" style="margin-top:0;"><a class="btn ghost" href="#top" data-i18n="back">← Torna alla home</a></div>
 
-      <!-- Tutto il testo della sezione è tradotto -->
       <div data-lang="it">
         <h2>Scrivi una riga</h2>
         <div class="notice"><b>Nota:</b> la riga resta visibile <b>solo su questo dispositivo</b>. Mango non accumula e non fa bacheche.</div>
@@ -258,7 +252,7 @@
         <h2>Write one row</h2>
         <div class="notice"><b>Note:</b> the row stays visible <b>only on this device</b>. Mango doesn’t accumulate and isn’t a public feed.</div>
         <form id="mangoRowForm_en" style="margin-top:12px;">
-          <label for="mangoRowInput">Your row</label>
+          <label for="mangoRowInput_en">Your row</label>
           <textarea id="mangoRowInput_en" placeholder="Example: Today I helped X / Today Y helped me."></textarea>
           <div class="actions">
             <button class="btn primary" type="submit">Save on this device</button>
@@ -319,7 +313,6 @@
         </form>
       </div>
 
-      <!-- Box salvata (comune, testo tradotto) -->
       <div id="mangoRowSavedBox" class="card soft" style="display:none; margin-top:14px;">
         <div id="savedLabel" class="small">Riga salvata (solo qui):</div>
         <div id="mangoRowSavedText" style="margin-top:8px; white-space:pre-wrap;"></div>
@@ -328,12 +321,114 @@
         </div>
       </div>
     </section>
-330  </section>
 
-     ← QUI INCOLLA TUTTO IL BLOCCO ORIGINE REALE
+    <!-- ORIGINE REALE E FONDAZIONE -->
+    <section class="card anchor" id="origine-reale">
+      <div class="actions" style="margin-top:0;"><a class="btn ghost" href="#top" data-i18n="back">← Torna alla home</a></div>
 
-332  <!-- COS'È MANGO -->
-333  <section class="card anchor" id="cose-mango">
+      <div data-lang="it">
+        <h2>Origine reale e fondazione</h2>
+        <p>Prima che Mango diventasse parola, era gesto.</p>
+        <p>Durante la mia attività musicale regalavo mango 🥭 e magliette alle persone presenti. Non chiedevo nulla in cambio. Non c’era prezzo. Non c’era conteggio.</p>
+        <p>Il gesto generava una risposta reale: presenza, scambio umano, riconoscimento reciproco.</p>
+        <p>Da quell’esperienza concreta mi sono posto una domanda: è possibile riconoscere uno scambio reale senza trasformarlo in valore economico?</p>
+        <p>Mango nasce da questa domanda.</p>
+
+        <h3>Formalizzazione</h3>
+        <p>Ho concepito e formalizzato Mango come infrastruttura di fiducia locale non monetaria, non appropriabile e non accumulabile.</p>
+        <p>Una riga rappresenta il riconoscimento di uno scambio reale. Non contiene numeri. Non rappresenta valore. Non genera saldo.</p>
+
+        <h3>Dichiarazione di origine</h3>
+        <p>Mango è stato ideato da me, Juan de Dios Annaloro Mercedes.</p>
+        <p>L’infrastruttura è dedicata alla memoria di mia sorella Larimar.</p>
+      </div>
+
+      <div data-lang="en">
+        <h2>Real Origin and Foundation</h2>
+        <p>Before Mango became a word, it was a gesture.</p>
+        <p>During my musical activity, I used to give mangoes 🥭 and T-shirts to people present. I asked nothing in return. There was no price. No counting.</p>
+        <p>The gesture generated a real response: presence, human exchange, mutual recognition.</p>
+        <p>From that concrete experience I asked myself: is it possible to recognize a real exchange without turning it into economic value?</p>
+        <p>Mango was born from this question.</p>
+
+        <h3>Formalization</h3>
+        <p>I conceived and formalized Mango as a local trust infrastructure: non-monetary, non-appropriable, and non-accumulative.</p>
+        <p>One row represents recognition of a real exchange. It contains no numbers. It represents no value. It creates no balance.</p>
+
+        <h3>Declaration of Origin</h3>
+        <p>Mango was conceived by me, Juan de Dios Annaloro Mercedes.</p>
+        <p>The infrastructure is dedicated to the memory of my sister Larimar.</p>
+      </div>
+
+      <div data-lang="es">
+        <h2>Origen real y fundación</h2>
+        <p>Antes de que Mango fuera una palabra, fue un gesto.</p>
+        <p>Durante mi actividad musical regalaba mangos 🥭 y camisetas a las personas presentes. No pedía nada a cambio. No había precio. No había conteo.</p>
+        <p>El gesto generaba una respuesta real: presencia, intercambio humano, reconocimiento mutuo.</p>
+        <p>De esa experiencia concreta me hice una pregunta: ¿es posible reconocer un intercambio real sin convertirlo en valor económico?</p>
+        <p>Mango nació de esa pregunta.</p>
+
+        <h3>Formalización</h3>
+        <p>Concebí y formalicé Mango como infraestructura de confianza local: no monetaria, no apropiable y no acumulable.</p>
+        <p>Una línea representa el reconocimiento de un intercambio real. No contiene números. No representa valor. No crea saldo.</p>
+
+        <h3>Declaración de origen</h3>
+        <p>Mango fue ideado por mí, Juan de Dios Annaloro Mercedes.</p>
+        <p>La infraestructura está dedicada a la memoria de mi hermana Larimar.</p>
+      </div>
+
+      <div data-lang="fr">
+        <h2>Origine réelle et fondation</h2>
+        <p>Avant que Mango devienne un mot, c’était un geste.</p>
+        <p>Pendant mon activité musicale, j’offrais des mangues 🥭 et des t-shirts aux personnes présentes. Je ne demandais rien en échange. Pas de prix. Pas de comptage.</p>
+        <p>Le geste produisait une réponse réelle : présence, échange humain, reconnaissance mutuelle.</p>
+        <p>De cette expérience concrète, je me suis posé une question : peut-on reconnaître un échange réel sans le transformer en valeur économique ?</p>
+        <p>Mango est né de cette question.</p>
+
+        <h3>Formalisation</h3>
+        <p>J’ai conçu et formalisé Mango comme infrastructure locale de confiance : non monétaire, non appropriable et non accumulative.</p>
+        <p>Une ligne représente la reconnaissance d’un échange réel. Aucun chiffre. Aucune valeur. Aucun solde.</p>
+
+        <h3>Déclaration d’origine</h3>
+        <p>Mango a été imaginé par moi, Juan de Dios Annaloro Mercedes.</p>
+        <p>L’infrastructure est dédiée à la mémoire de ma sœur Larimar.</p>
+      </div>
+
+      <div data-lang="de">
+        <h2>Realer Ursprung und Gründung</h2>
+        <p>Bevor Mango ein Wort wurde, war es eine Geste.</p>
+        <p>Während meiner musikalischen Tätigkeit verschenkte ich Mangos 🥭 und T-Shirts an anwesende Menschen. Ich verlangte nichts dafür. Kein Preis. Kein Zählen.</p>
+        <p>Die Geste erzeugte eine reale Antwort: Präsenz, menschlicher Austausch, gegenseitige Anerkennung.</p>
+        <p>Aus dieser konkreten Erfahrung entstand die Frage: Kann man einen realen Austausch anerkennen, ohne ihn in wirtschaftlichen Wert zu verwandeln?</p>
+        <p>Mango entstand aus dieser Frage.</p>
+
+        <h3>Formalisierung</h3>
+        <p>Ich habe Mango als lokale Vertrauens-Infrastruktur konzipiert und formalisiert: nicht-monetär, nicht aneignbar und nicht ansammelbar.</p>
+        <p>Eine Zeile ist die Anerkennung eines realen Austauschs. Keine Zahlen. Kein Wert. Kein Saldo.</p>
+
+        <h3>Ursprungserklärung</h3>
+        <p>Mango wurde von mir erdacht: Juan de Dios Annaloro Mercedes.</p>
+        <p>Die Infrastruktur ist dem Andenken meiner Schwester Larimar gewidmet.</p>
+      </div>
+
+      <div data-lang="zh">
+        <h2>真实起源与奠基</h2>
+        <p>在 Mango 成为一个词之前，它先是一个举动。</p>
+        <p>在我的音乐活动期间，我会把芒果 🥭 和 T 恤送给在场的人。我不要求任何回报。没有价格。没有计数。</p>
+        <p>这个举动带来真实回应：在场、人与人的交换、相互认可。</p>
+        <p>从这段具体经历我提出一个问题：能否认可真实交换，而不把它变成经济价值？</p>
+        <p>Mango 就诞生于这个问题。</p>
+
+        <h3>形式化</h3>
+        <p>我将 Mango 构想并形式化为一种本地信任基础设施：非货币、不可占有、不可累积。</p>
+        <p>一行文字代表对真实交换的认可：不用数字、不设价值、不形成余额。</p>
+
+        <h3>起源声明</h3>
+        <p>Mango 由我提出：Juan de Dios Annaloro Mercedes。</p>
+        <p>该基础设施献给我妹妹 Larimar 的记忆。</p>
+      </div>
+    </section>
+
     <!-- COS'È MANGO -->
     <section class="card anchor" id="cose-mango">
       <div class="actions" style="margin-top:0;"><a class="btn ghost" href="#top" data-i18n="back">← Torna alla home</a></div>
@@ -342,42 +437,36 @@
         <h2>Cos’è Mango</h2>
         <p>Mango è un’infrastruttura di fiducia locale non monetaria, non appropriabile, progettata per evitare accumulo, speculazione e cattura istituzionale.</p>
         <p class="small">Una riga = riconoscimento di uno scambio reale. Niente numeri, niente valore, niente conti.</p>
-        <p class="small">© Mango — Juan de Dios Annaloro Mercedes (in memoria di Larimar).</p>
       </div>
 
       <div data-lang="en">
         <h2>What is Mango</h2>
         <p>Mango is a local trust infrastructure: non-monetary, non-appropriable, designed to prevent accumulation, speculation, and institutional capture.</p>
         <p class="small">One row = recognition of a real exchange. No numbers, no value, no accounts.</p>
-        <p class="small">© Mango — Juan de Dios Annaloro Mercedes (in memory of Larimar).</p>
       </div>
 
       <div data-lang="es">
         <h2>¿Qué es Mango?</h2>
         <p>Mango es una infraestructura local de confianza: no monetaria, no apropiable, diseñada para evitar acumulación, especulación y captura institucional.</p>
         <p class="small">Una línea = reconocimiento de un intercambio real. Sin números, sin valor, sin cuentas.</p>
-        <p class="small">© Mango — Juan de Dios Annaloro Mercedes (en memoria de Larimar).</p>
       </div>
 
       <div data-lang="fr">
         <h2>Qu’est-ce que Mango</h2>
         <p>Mango est une infrastructure locale de confiance : non monétaire, non appropriable, conçue pour éviter l’accumulation, la spéculation et la capture institutionnelle.</p>
         <p class="small">Une ligne = reconnaissance d’un échange réel. Pas de chiffres, pas de valeur, pas de comptes.</p>
-        <p class="small">© Mango — Juan de Dios Annaloro Mercedes (en mémoire de Larimar).</p>
       </div>
 
       <div data-lang="de">
         <h2>Was ist Mango</h2>
         <p>Mango ist eine lokale Vertrauens-Infrastruktur: nicht-monetär, nicht-aneignbar, entwickelt gegen Ansammlung, Spekulation und institutionelle Vereinnahmung.</p>
         <p class="small">Eine Zeile = Anerkennung eines realen Austauschs. Keine Zahlen, kein Wert, keine Konten.</p>
-        <p class="small">© Mango — Juan de Dios Annaloro Mercedes (im Gedenken an Larimar).</p>
       </div>
 
       <div data-lang="zh">
         <h2>Mango 是什么</h2>
         <p>Mango 是一种本地信任基础设施：非货币、不可占有，旨在避免累积、投机与制度性捕获。</p>
         <p class="small">一行 = 对真实交换的认可。不用数字、不设价值、不做账户。</p>
-        <p class="small">© Mango — Juan de Dios Annaloro Mercedes（纪念 Larimar）。</p>
       </div>
     </section>
 
@@ -409,19 +498,18 @@
           el.style.display = (el.getAttribute("data-lang") === lang) ? "" : "none";
         });
 
-        // aggiorna CTA e "torna" senza testi fissi fuori dai blocchi
         const map = {
-          it: { back:"← Torna alla home", cta_do:"Fai Mango adesso", cta_row:"Scrivi una riga", cta_what:"Cos’è Mango",
+          it: { back:"← Torna alla home", cta_do:"Fai Mango adesso", cta_row:"Scrivi una riga", cta_what:"Cos’è Mango", cta_origin:"Origine reale",
                 savedLabel:"Riga salvata (solo qui):", remove:"Togli" },
-          en: { back:"← Back to home", cta_do:"Do Mango now", cta_row:"Write one row", cta_what:"What is Mango",
+          en: { back:"← Back to home", cta_do:"Do Mango now", cta_row:"Write one row", cta_what:"What is Mango", cta_origin:"Real Origin",
                 savedLabel:"Saved row (only here):", remove:"Remove" },
-          es: { back:"← Volver a inicio", cta_do:"Haz Mango ahora", cta_row:"Escribe una línea", cta_what:"¿Qué es Mango?",
+          es: { back:"← Volver a inicio", cta_do:"Haz Mango ahora", cta_row:"Escribe una línea", cta_what:"¿Qué es Mango?", cta_origin:"Origen real",
                 savedLabel:"Línea guardada (solo aquí):", remove:"Quitar" },
-          fr: { back:"← Retour à l’accueil", cta_do:"Fais Mango maintenant", cta_row:"Écris une ligne", cta_what:"Qu’est-ce que Mango",
+          fr: { back:"← Retour à l’accueil", cta_do:"Fais Mango maintenant", cta_row:"Écris une ligne", cta_what:"Qu’est-ce que Mango", cta_origin:"Origine réelle",
                 savedLabel:"Ligne enregistrée (ici seulement) :", remove:"Retirer" },
-          de: { back:"← Zur Startseite", cta_do:"Mach Mango jetzt", cta_row:"Schreib eine Zeile", cta_what:"Was ist Mango",
+          de: { back:"← Zur Startseite", cta_do:"Mach Mango jetzt", cta_row:"Schreib eine Zeile", cta_what:"Was ist Mango", cta_origin:"Realer Ursprung",
                 savedLabel:"Gespeicherte Zeile (nur hier):", remove:"Entfernen" },
-          zh: { back:"← 返回主页", cta_do:"现在做 Mango", cta_row:"写一行", cta_what:"Mango 是什么",
+          zh: { back:"← 返回主页", cta_do:"现在做 Mango", cta_row:"写一行", cta_what:"Mango 是什么", cta_origin:"真实起源",
                 savedLabel:"已保存的一行（仅此设备）：", remove:"删除" }
         }[lang];
 
@@ -429,6 +517,7 @@
         document.querySelectorAll('[data-i18n="cta_do"]').forEach(a=>a.textContent = map.cta_do);
         document.querySelectorAll('[data-i18n="cta_row"]').forEach(a=>a.textContent = map.cta_row);
         document.querySelectorAll('[data-i18n="cta_what"]').forEach(a=>a.textContent = map.cta_what);
+        document.querySelectorAll('[data-i18n="cta_origin"]').forEach(a=>a.textContent = map.cta_origin);
 
         const savedLabel = document.getElementById("savedLabel");
         if(savedLabel) savedLabel.textContent = map.savedLabel;
@@ -436,8 +525,6 @@
         if(removeBtn) removeBtn.textContent = map.remove;
       }
 
-      // Riga persistente: usiamo UNA sola riga comune (stesso STORAGE_KEY),
-      // ma form/input diversi per lingua. Scrive sempre nello stesso posto.
       function setupLocalRow(){
         const savedBox = document.getElementById("mangoRowSavedBox");
         const savedText = document.getElementById("mangoRowSavedText");
@@ -481,7 +568,6 @@
           render();
         });
 
-        // lega tutti i form delle lingue
         bind("mangoRowForm","mangoRowInput","mangoRowClearInput");
         bind("mangoRowForm_en","mangoRowInput_en","mangoRowClearInput_en");
         bind("mangoRowForm_es","mangoRowInput_es","mangoRowClearInput_es");

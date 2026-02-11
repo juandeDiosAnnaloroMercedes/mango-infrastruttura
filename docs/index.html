@@ -21,17 +21,18 @@
       background:var(--bg);
       line-height:1.45;
     }
-    .wrap{ max-width:980px; margin:0 auto; padding:18px 14px 60px; }
+    .wrap{ max-width:980px; margin:0 auto; padding:18px 14px 70px; }
     .topbar{
       display:flex; gap:10px; align-items:center; justify-content:space-between;
       padding:10px 0 14px; border-bottom:1px solid var(--border);
     }
-    .brand{ font-weight:700; }
+    .brand{ font-weight:800; letter-spacing:.2px; }
     .langbar{ display:flex; gap:8px; flex-wrap:wrap; }
     .langbar a{
       text-decoration:none; color:var(--text);
       border:1px solid var(--border);
       padding:6px 10px; border-radius:999px; font-size:.95rem;
+      background:#fff;
     }
     .langbar a.active{ background:var(--soft); border-color:#cfcfcf; }
 
@@ -46,6 +47,7 @@
     h1{ margin:18px 0 8px; font-size:1.9rem; }
     h2{ margin:0 0 10px; font-size:1.35rem; }
     p{ margin:10px 0; }
+
     .grid{ display:grid; grid-template-columns: 1fr; gap:14px; margin-top:14px; }
     @media(min-width:860px){ .grid{ grid-template-columns: 1.15fr .85fr; } }
 
@@ -56,6 +58,7 @@
       background:#fff;
     }
     .anchor{ scroll-margin-top:18px; }
+
     .actions{ display:flex; gap:10px; flex-wrap:wrap; margin-top:10px; }
     .btn{
       display:inline-block;
@@ -65,9 +68,10 @@
       padding:10px 12px;
       border-radius:12px;
       background:#fff;
-      font-weight:600;
+      font-weight:700;
     }
     .btn.primary{ background:var(--soft); border-color:#cfcfcf; }
+
     .qrbox{
       display:flex; align-items:center; justify-content:center;
       padding:12px; margin-top:10px;
@@ -76,23 +80,37 @@
       background:#fff;
     }
     img.qr{
-      max-width:240px;
+      max-width:260px;
       width:100%;
       height:auto;
       border-radius:10px;
       border:1px solid var(--border);
       background:#fff;
     }
+
     .hr{ height:1px; background:var(--border); margin:18px 0; }
-    .foot{
-      margin-top:22px;
-      border-top:1px solid var(--border);
-      padding-top:14px;
-      color:var(--muted);
-      font-size:.95rem;
+
+    .print-card{
+      border:1px solid var(--border);
+      border-radius:14px;
+      padding:14px;
+      background:#fff;
+      margin-top:14px;
     }
+    .print-actions{ display:flex; gap:10px; flex-wrap:wrap; margin-top:10px; }
+
+    /* Multilingua */
     [data-lang]{ display:none; }
     [data-lang].show{ display:block; }
+
+    /* PRINT */
+    @media print{
+      .topbar, .langbar, .no-print { display:none !important; }
+      body{ background:#fff; }
+      .wrap{ max-width:none; padding:0; }
+      .card, .print-card{ border:none; border-radius:0; }
+      img.qr{ max-width:320px; }
+    }
   </style>
 </head>
 
@@ -111,7 +129,7 @@
       </div>
     </div>
 
-    <!-- HERO / NOTA -->
+    <!-- HERO -->
     <div data-lang="it">
       <h1>Mango – Infrastruttura di fiducia locale</h1>
       <p class="small">Progetto nato il <b>02 febbraio 2026</b>. Creato da <b>Juan de Dios Annaloro Mercedes</b>, in memoria di <b>Larimar</b>.</p>
@@ -167,18 +185,17 @@
     </div>
 
     <div class="grid">
-      <!-- Colonna sinistra: 3 sezioni -->
+      <!-- SINISTRA -->
       <div>
-
         <!-- SEZIONE 1 -->
         <section class="card anchor" id="fai-mango">
-          <div data-lang="it" class="show">
+          <div data-lang="it">
             <h2>Fai Mango adesso</h2>
             <p>Fai uno scambio reale: un gesto, un aiuto, un dono, un servizio. Poi riconoscilo con una riga.</p>
             <div class="actions">
               <a class="btn primary" href="primo-scambio.html">Primo scambio</a>
               <a class="btn" href="scrivi-una-riga.html">Scrivi una riga</a>
-              <a class="btn" href="stampa-qr.html">Stampa e QR</a>
+              <a class="btn" href="#stampa-qr">Stampa e QR</a>
             </div>
           </div>
 
@@ -188,7 +205,7 @@
             <div class="actions">
               <a class="btn primary" href="primo-scambio.html">First exchange</a>
               <a class="btn" href="scrivi-una-riga.html">Write one line</a>
-              <a class="btn" href="stampa-qr.html">Print & QR</a>
+              <a class="btn" href="#stampa-qr">Print & QR</a>
             </div>
           </div>
 
@@ -198,7 +215,7 @@
             <div class="actions">
               <a class="btn primary" href="primo-scambio.html">Primer intercambio</a>
               <a class="btn" href="scrivi-una-riga.html">Escribe una línea</a>
-              <a class="btn" href="stampa-qr.html">Imprimir & QR</a>
+              <a class="btn" href="#stampa-qr">Imprimir & QR</a>
             </div>
           </div>
 
@@ -208,7 +225,7 @@
             <div class="actions">
               <a class="btn primary" href="primo-scambio.html">Premier échange</a>
               <a class="btn" href="scrivi-una-riga.html">Écrire une ligne</a>
-              <a class="btn" href="stampa-qr.html">Imprimer & QR</a>
+              <a class="btn" href="#stampa-qr">Imprimer & QR</a>
             </div>
           </div>
 
@@ -218,7 +235,7 @@
             <div class="actions">
               <a class="btn primary" href="primo-scambio.html">Erster Austausch</a>
               <a class="btn" href="scrivi-una-riga.html">Eine Zeile schreiben</a>
-              <a class="btn" href="stampa-qr.html">Druck & QR</a>
+              <a class="btn" href="#stampa-qr">Druck & QR</a>
             </div>
           </div>
 
@@ -228,63 +245,58 @@
             <div class="actions">
               <a class="btn primary" href="primo-scambio.html">第一次交換</a>
               <a class="btn" href="scrivi-una-riga.html">寫下一行</a>
-              <a class="btn" href="stampa-qr.html">列印 & QR</a>
+              <a class="btn" href="#stampa-qr">列印 & QR</a>
             </div>
           </div>
         </section>
 
         <!-- SEZIONE 2 -->
-        <section class="card anchor" id="scrivi-riga" style="margin-top:14px;">
+        <section class="card anchor" id="scrivi" style="margin-top:14px;">
           <div data-lang="it">
             <h2>Scrivi una riga</h2>
             <p>Una riga riconosce uno scambio reale. Non rappresenta quantità. Non è un saldo. Non crea credito o debito.</p>
             <div class="actions">
-              <a class="btn primary" href="scrivi-una-riga.html">Vai alla pagina “Scrivi una riga”</a>
+              <a class="btn primary" href="scrivi-una-riga.html">Vai alla pagina</a>
               <a class="btn" href="faq.html">FAQ</a>
             </div>
           </div>
-
           <div data-lang="en">
             <h2>Write one line</h2>
-            <p>One line acknowledges a real exchange. It is not a quantity. Not a balance. No credit or debt.</p>
+            <p>One line acknowledges a real exchange. Not a quantity. Not a balance. No credit or debt.</p>
             <div class="actions">
-              <a class="btn primary" href="scrivi-una-riga.html">Go to “Write one line”</a>
+              <a class="btn primary" href="scrivi-una-riga.html">Open page</a>
               <a class="btn" href="faq.html">FAQ</a>
             </div>
           </div>
-
           <div data-lang="es">
             <h2>Escribe una línea</h2>
             <p>Una línea reconoce un intercambio real. No es cantidad. No es saldo. No crea crédito ni deuda.</p>
             <div class="actions">
-              <a class="btn primary" href="scrivi-una-riga.html">Ir a “Escribe una línea”</a>
+              <a class="btn primary" href="scrivi-una-riga.html">Abrir página</a>
               <a class="btn" href="faq.html">FAQ</a>
             </div>
           </div>
-
           <div data-lang="fr">
             <h2>Écris une ligne</h2>
-            <p>Une ligne reconnaît un échange réel. Ce n’est pas une quantité. Pas de solde. Pas de crédit ni dette.</p>
+            <p>Une ligne reconnaît un échange réel. Pas une quantité. Pas de solde. Pas de crédit/dette.</p>
             <div class="actions">
-              <a class="btn primary" href="scrivi-una-riga.html">Aller à “Écrire une ligne”</a>
+              <a class="btn primary" href="scrivi-una-riga.html">Ouvrir la page</a>
               <a class="btn" href="faq.html">FAQ</a>
             </div>
           </div>
-
           <div data-lang="de">
             <h2>Schreibe eine Zeile</h2>
             <p>Eine Zeile erkennt einen realen Austausch an. Keine Menge. Kein Kontostand. Kein Kredit/Schuld.</p>
             <div class="actions">
-              <a class="btn primary" href="scrivi-una-riga.html">Zu “Eine Zeile schreiben”</a>
+              <a class="btn primary" href="scrivi-una-riga.html">Seite öffnen</a>
               <a class="btn" href="faq.html">FAQ</a>
             </div>
           </div>
-
           <div data-lang="zh">
             <h2>寫下一行</h2>
-            <p>「一行」承認一次真實交換。它不是數量，不是餘額，不產生信用或負債。</p>
+            <p>「一行」承認一次真實交換。不是數量、不是餘額、不產生信用或負債。</p>
             <div class="actions">
-              <a class="btn primary" href="scrivi-una-riga.html">前往「寫下一行」</a>
+              <a class="btn primary" href="scrivi-una-riga.html">開啟頁面</a>
               <a class="btn" href="faq.html">FAQ</a>
             </div>
           </div>
@@ -302,7 +314,6 @@
               <a class="btn" href="faq.html">FAQ</a>
             </div>
           </div>
-
           <div data-lang="en">
             <h2>What is Mango</h2>
             <p>Mango is a non-monetary local trust infrastructure.</p>
@@ -313,7 +324,6 @@
               <a class="btn" href="faq.html">FAQ</a>
             </div>
           </div>
-
           <div data-lang="es">
             <h2>Qué es Mango</h2>
             <p>Mango es una infraestructura local de confianza no monetaria.</p>
@@ -324,29 +334,26 @@
               <a class="btn" href="faq.html">FAQ</a>
             </div>
           </div>
-
           <div data-lang="fr">
             <h2>Qu’est-ce que Mango</h2>
             <p>Mango est une infrastructure locale de confiance non monétaire.</p>
-            <p><b>Règle centrale :</b> l’échange est reconnu par une ligne. Pas de nombres, pas d’équivalences, pas d’accumulation dans le temps.</p>
+            <p><b>Règle centrale :</b> l’échange est reconnu par une ligne. Pas de nombres, pas d’équivalences, pas d’accumulation.</p>
             <div class="actions">
               <a class="btn" href="kit.html">Kit</a>
               <a class="btn" href="licenza.html">Licence</a>
               <a class="btn" href="faq.html">FAQ</a>
             </div>
           </div>
-
           <div data-lang="de">
             <h2>Was ist Mango</h2>
             <p>Mango ist eine nicht-monetäre lokale Vertrauens-Infrastruktur.</p>
-            <p><b>Kernregel:</b> Austausch wird durch eine Zeile anerkannt. Keine Zahlen, keine Entsprechungen, keine Akkumulation über Zeit.</p>
+            <p><b>Kernregel:</b> Austausch wird durch eine Zeile anerkannt. Keine Zahlen, keine Entsprechungen, keine Akkumulation.</p>
             <div class="actions">
               <a class="btn" href="kit.html">Kit</a>
               <a class="btn" href="licenza.html">Lizenz</a>
               <a class="btn" href="faq.html">FAQ</a>
             </div>
           </div>
-
           <div data-lang="zh">
             <h2>Mango 是什麼</h2>
             <p>Mango 是一種非貨幣的在地信任基礎設施。</p>
@@ -359,10 +366,91 @@
           </div>
         </section>
 
+        <!-- STAMPA & QR (NELLA STESSA PAGINA) -->
+        <section class="print-card anchor" id="stampa-qr">
+          <div data-lang="it">
+            <h2>Stampa e QR</h2>
+            <p>Questa sezione è pensata per stampare in modo semplice.</p>
+            <div class="print-actions no-print">
+              <button class="btn primary" type="button" onclick="window.print()">Stampa questa pagina</button>
+              <a class="btn" href="index.html">Torna su</a>
+            </div>
+            <div class="qrbox">
+              <img class="qr" src="mango-home-qr.jpg" alt="QR Mango Home" />
+            </div>
+            <p class="small"><b>Permanente:</b> Mango non è accumulabile nel tempo. Qualsiasi sistema con numeri, conteggi o equivalenze non è Mango.</p>
+          </div>
+
+          <div data-lang="en">
+            <h2>Print & QR</h2>
+            <p>This section is designed for simple printing.</p>
+            <div class="print-actions no-print">
+              <button class="btn primary" type="button" onclick="window.print()">Print this page</button>
+              <a class="btn" href="index.html">Back to top</a>
+            </div>
+            <div class="qrbox">
+              <img class="qr" src="mango-home-qr.jpg" alt="QR Mango Home" />
+            </div>
+            <p class="small"><b>Permanent:</b> Mango is not accumulable over time. Any system introducing numbers, counting, or equivalences is not Mango.</p>
+          </div>
+
+          <div data-lang="es">
+            <h2>Imprimir & QR</h2>
+            <p>Esta sección está pensada para imprimir fácilmente.</p>
+            <div class="print-actions no-print">
+              <button class="btn primary" type="button" onclick="window.print()">Imprimir esta página</button>
+              <a class="btn" href="index.html">Volver arriba</a>
+            </div>
+            <div class="qrbox">
+              <img class="qr" src="mango-home-qr.jpg" alt="QR Mango Home" />
+            </div>
+            <p class="small"><b>Permanente:</b> Mango no es acumulable en el tiempo. Cualquier sistema con números, conteos o equivalencias no es Mango.</p>
+          </div>
+
+          <div data-lang="fr">
+            <h2>Imprimer & QR</h2>
+            <p>Cette section est faite pour une impression simple.</p>
+            <div class="print-actions no-print">
+              <button class="btn primary" type="button" onclick="window.print()">Imprimer cette page</button>
+              <a class="btn" href="index.html">Retour en haut</a>
+            </div>
+            <div class="qrbox">
+              <img class="qr" src="mango-home-qr.jpg" alt="QR Mango Home" />
+            </div>
+            <p class="small"><b>Permanente :</b> Mango n’est pas accumulable dans le temps. Tout système avec nombres, comptage ou équivalences n’est pas Mango.</p>
+          </div>
+
+          <div data-lang="de">
+            <h2>Druck & QR</h2>
+            <p>Dieser Abschnitt ist für einfaches Drucken gedacht.</p>
+            <div class="print-actions no-print">
+              <button class="btn primary" type="button" onclick="window.print()">Diese Seite drucken</button>
+              <a class="btn" href="index.html">Nach oben</a>
+            </div>
+            <div class="qrbox">
+              <img class="qr" src="mango-home-qr.jpg" alt="QR Mango Home" />
+            </div>
+            <p class="small"><b>Permanent:</b> Mango ist nicht über Zeit akkumuliert. Systeme mit Zahlen, Zählung oder Entsprechungen sind nicht Mango.</p>
+          </div>
+
+          <div data-lang="zh">
+            <h2>列印 & QR</h2>
+            <p>此區塊用於簡單列印。</p>
+            <div class="print-actions no-print">
+              <button class="btn primary" type="button" onclick="window.print()">列印此頁</button>
+              <a class="btn" href="index.html">回到上方</a>
+            </div>
+            <div class="qrbox">
+              <img class="qr" src="mango-home-qr.jpg" alt="QR Mango Home" />
+            </div>
+            <p class="small"><b>永久原則：</b>Mango 不可隨時間累積。任何引入數字、計數或等價換算的系統都不是 Mango。</p>
+          </div>
+        </section>
+
       </div>
 
-      <!-- Colonna destra: QR -->
-      <aside class="card">
+      <!-- DESTRA: QR sempre visibile -->
+      <aside class="card no-print">
         <div data-lang="it">
           <h2>QR (Home)</h2>
           <p class="small">Questo QR porta sempre a questa home (link stabile).</p>
@@ -396,46 +484,25 @@
 
         <div class="hr"></div>
 
-        <div data-lang="it">
-          <p class="small"><b>Nota:</b> Se vedi 404, di solito è un percorso con “/” davanti. Qui usiamo sempre link relativi (es: <code>stampa-qr.html</code>).</p>
+        <div data-lang="it" class="small">
+          <b>Anti-404:</b> il bottone “Stampa e QR” è un anchor interno (#stampa-qr).
         </div>
-        <div data-lang="en">
-          <p class="small"><b>Note:</b> If you see 404, it’s usually a path starting with “/”. Here we use relative links (e.g. <code>stampa-qr.html</code>).</p>
+        <div data-lang="en" class="small">
+          <b>Anti-404:</b> “Print & QR” is an internal anchor (#stampa-qr).
         </div>
-        <div data-lang="es">
-          <p class="small"><b>Nota:</b> Si ves 404, suele ser por rutas con “/” al inicio. Aquí usamos enlaces relativos (ej. <code>stampa-qr.html</code>).</p>
+        <div data-lang="es" class="small">
+          <b>Anti-404:</b> “Imprimir & QR” es un ancla interna (#stampa-qr).
         </div>
-        <div data-lang="fr">
-          <p class="small"><b>Note :</b> Un 404 vient souvent d’un lien qui commence par “/”. Ici on utilise des liens relatifs (ex. <code>stampa-qr.html</code>).</p>
+        <div data-lang="fr" class="small">
+          <b>Anti-404 :</b> “Imprimer & QR” est une ancre interne (#stampa-qr).
         </div>
-        <div data-lang="de">
-          <p class="small"><b>Hinweis:</b> Ein 404 kommt oft von Links, die mit “/” beginnen. Hier nutzen wir relative Links (z.B. <code>stampa-qr.html</code>).</p>
+        <div data-lang="de" class="small">
+          <b>Anti-404:</b> “Druck & QR” ist ein interner Anker (#stampa-qr).
         </div>
-        <div data-lang="zh">
-          <p class="small"><b>提示：</b> 出現 404 通常是因為連結以「/」開頭。此處使用相對連結（例如 <code>stampa-qr.html</code>）。</p>
+        <div data-lang="zh" class="small">
+          <b>防 404：</b>「列印 & QR」為頁內連結（#stampa-qr）。
         </div>
       </aside>
-    </div>
-
-    <div class="foot">
-      <div data-lang="it">
-        <b>Permanente:</b> Mango non è accumulabile nel tempo. Qualsiasi sistema che introduca numeri, conteggi o equivalenze non è Mango.
-      </div>
-      <div data-lang="en">
-        <b>Permanent:</b> Mango is not accumulable over time. Any system that introduces numbers, counting, or equivalences is not Mango.
-      </div>
-      <div data-lang="es">
-        <b>Permanente:</b> Mango no es acumulable en el tiempo. Cualquier sistema con números, conteos o equivalencias no es Mango.
-      </div>
-      <div data-lang="fr">
-        <b>Permanente :</b> Mango n’est pas accumulable dans le temps. Tout système qui introduit nombres, comptage ou équivalences n’est pas Mango.
-      </div>
-      <div data-lang="de">
-        <b>Permanent:</b> Mango ist nicht über Zeit akkumuliert. Systeme mit Zahlen, Zählung oder Entsprechungen sind nicht Mango.
-      </div>
-      <div data-lang="zh">
-        <b>永久原則：</b>Mango 不可隨時間累積。任何引入數字、計數或等價換算的系統都不是 Mango。
-      </div>
     </div>
 
   </div>
@@ -447,15 +514,12 @@
       let lang = (params.get("lang") || "it").toLowerCase();
       if(!allowed.includes(lang)) lang = "it";
 
-      // show blocks
       document.querySelectorAll("[data-lang]").forEach(el => {
         el.classList.toggle("show", el.getAttribute("data-lang") === lang);
       });
 
-      // set <html lang="">
       document.documentElement.setAttribute("lang", lang);
 
-      // highlight active
       document.querySelectorAll("#langbar a").forEach(a => {
         a.classList.toggle("active", a.getAttribute("data-setlang") === lang);
       });

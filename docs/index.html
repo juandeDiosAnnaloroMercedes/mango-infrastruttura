@@ -1,4 +1,3 @@
-
 <!doctype html>
 <html lang="it">
 <head>
@@ -83,6 +82,7 @@
         <a class="btn primary" href="#fai-mango-adesso" data-i18n="cta_do">Fai Mango adesso</a>
         <a class="btn" href="#scrivi-una-riga" data-i18n="cta_row">Scrivi una riga</a>
         <a class="btn" href="kit.html" data-i18n="cta_kit">Kit</a>
+        <a class="btn" href="stampa.html" data-i18n="cta_print">Stampa & QR</a>
         <a class="btn" href="#origine-reale" data-i18n="cta_origin">Origine reale</a>
         <a class="btn" href="#faq-fondamentali" data-i18n="cta_faq">FAQ</a>
         <a class="btn" href="#cose-mango" data-i18n="cta_what">Cos’è Mango</a>
@@ -105,6 +105,7 @@
               <div class="actions" style="margin-top:0;">
                 <a class="btn primary" href="kit.html">Apri pagina Kit</a>
                 <a class="btn" href="kit-mango.pdf" download>Scarica PDF</a>
+                <a class="btn" href="stampa.html">Stampa & QR</a>
               </div>
             </div>
             <div data-lang="en">
@@ -113,6 +114,7 @@
               <div class="actions" style="margin-top:0;">
                 <a class="btn primary" href="kit.html">Open Kit page</a>
                 <a class="btn" href="kit-mango.pdf" download>Download PDF</a>
+                <a class="btn" href="stampa.html">Print & QR</a>
               </div>
             </div>
             <div data-lang="es">
@@ -121,6 +123,7 @@
               <div class="actions" style="margin-top:0;">
                 <a class="btn primary" href="kit.html">Abrir página Kit</a>
                 <a class="btn" href="kit-mango.pdf" download>Descargar PDF</a>
+                <a class="btn" href="stampa.html">Imprimir & QR</a>
               </div>
             </div>
             <div data-lang="fr">
@@ -129,6 +132,7 @@
               <div class="actions" style="margin-top:0;">
                 <a class="btn primary" href="kit.html">Ouvrir la page Kit</a>
                 <a class="btn" href="kit-mango.pdf" download>Télécharger PDF</a>
+                <a class="btn" href="stampa.html">Imprimer & QR</a>
               </div>
             </div>
             <div data-lang="de">
@@ -137,6 +141,7 @@
               <div class="actions" style="margin-top:0;">
                 <a class="btn primary" href="kit.html">Kit-Seite öffnen</a>
                 <a class="btn" href="kit-mango.pdf" download>PDF herunterladen</a>
+                <a class="btn" href="stampa.html">Druck & QR</a>
               </div>
             </div>
             <div data-lang="zh">
@@ -145,6 +150,7 @@
               <div class="actions" style="margin-top:0;">
                 <a class="btn primary" href="kit.html">打开工具包页面</a>
                 <a class="btn" href="kit-mango.pdf" download>下载 PDF</a>
+                <a class="btn" href="stampa.html">打印&二维码</a>
               </div>
             </div>
           </div>
@@ -796,17 +802,17 @@
         });
 
         const map = {
-          it: { back:"← Torna alla home", cta_do:"Fai Mango adesso", cta_row:"Scrivi una riga", cta_kit:"Kit", cta_what:"Cos’è Mango", cta_origin:"Origine reale", cta_faq:"FAQ",
+          it: { back:"← Torna alla home", cta_do:"Fai Mango adesso", cta_row:"Scrivi una riga", cta_kit:"Kit", cta_print:"Stampa & QR", cta_what:"Cos’è Mango", cta_origin:"Origine reale", cta_faq:"FAQ",
                 savedLabel:"Riga salvata (solo qui):", remove:"Togli" },
-          en: { back:"← Back to home", cta_do:"Do Mango now", cta_row:"Write one row", cta_kit:"Kit", cta_what:"What is Mango", cta_origin:"Real Origin", cta_faq:"FAQ",
+          en: { back:"← Back to home", cta_do:"Do Mango now", cta_row:"Write one row", cta_kit:"Kit", cta_print:"Print & QR", cta_what:"What is Mango", cta_origin:"Real Origin", cta_faq:"FAQ",
                 savedLabel:"Saved row (only here):", remove:"Remove" },
-          es: { back:"← Volver a inicio", cta_do:"Haz Mango ahora", cta_row:"Escribe una línea", cta_kit:"Kit", cta_what:"¿Qué es Mango?", cta_origin:"Origen real", cta_faq:"FAQ",
+          es: { back:"← Volver a inicio", cta_do:"Haz Mango ahora", cta_row:"Escribe una línea", cta_kit:"Kit", cta_print:"Imprimir & QR", cta_what:"¿Qué es Mango?", cta_origin:"Origen real", cta_faq:"FAQ",
                 savedLabel:"Línea guardada (solo aquí):", remove:"Quitar" },
-          fr: { back:"← Retour à l’accueil", cta_do:"Fais Mango maintenant", cta_row:"Écris une ligne", cta_kit:"Kit", cta_what:"Qu’est-ce que Mango", cta_origin:"Origine réelle", cta_faq:"FAQ",
+          fr: { back:"← Retour à l’accueil", cta_do:"Fais Mango maintenant", cta_row:"Écris une ligne", cta_kit:"Kit", cta_print:"Imprimer & QR", cta_what:"Qu’est-ce que Mango", cta_origin:"Origine réelle", cta_faq:"FAQ",
                 savedLabel:"Ligne enregistrée (ici seulement) :", remove:"Retirer" },
-          de: { back:"← Zur Startseite", cta_do:"Mach Mango jetzt", cta_row:"Schreib eine Zeile", cta_kit:"Kit", cta_what:"Was ist Mango", cta_origin:"Realer Ursprung", cta_faq:"FAQ",
+          de: { back:"← Zur Startseite", cta_do:"Mach Mango jetzt", cta_row:"Schreib eine Zeile", cta_kit:"Kit", cta_print:"Druck & QR", cta_what:"Was ist Mango", cta_origin:"Realer Ursprung", cta_faq:"FAQ",
                 savedLabel:"Gespeicherte Zeile (nur hier):", remove:"Entfernen" },
-          zh: { back:"← 返回主页", cta_do:"现在做 Mango", cta_row:"写一行", cta_kit:"工具包", cta_what:"Mango 是什么", cta_origin:"真实起源", cta_faq:"FAQ",
+          zh: { back:"← 返回主页", cta_do:"现在做 Mango", cta_row:"写一行", cta_kit:"工具包", cta_print:"打印&二维码", cta_what:"Mango 是什么", cta_origin:"真实起源", cta_faq:"FAQ",
                 savedLabel:"已保存的一行（仅此设备）：", remove:"删除" }
         }[lang];
 
@@ -814,6 +820,7 @@
         document.querySelectorAll('[data-i18n="cta_do"]').forEach(a=>a.textContent = map.cta_do);
         document.querySelectorAll('[data-i18n="cta_row"]').forEach(a=>a.textContent = map.cta_row);
         document.querySelectorAll('[data-i18n="cta_kit"]').forEach(a=>a.textContent = map.cta_kit);
+        document.querySelectorAll('[data-i18n="cta_print"]').forEach(a=>a.textContent = map.cta_print);
         document.querySelectorAll('[data-i18n="cta_what"]').forEach(a=>a.textContent = map.cta_what);
         document.querySelectorAll('[data-i18n="cta_origin"]').forEach(a=>a.textContent = map.cta_origin);
         document.querySelectorAll('[data-i18n="cta_faq"]').forEach(a=>a.textContent = map.cta_faq);

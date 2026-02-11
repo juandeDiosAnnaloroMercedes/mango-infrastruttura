@@ -1,47 +1,53 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="it">
 <head>
-  <meta charset="UTF-8">
-  <title>Mango — Stampa QR</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Mango — Stampa & QR</title>
 
   <style>
     body{
       margin:0;
       font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;
+      text-align:center;
       background:#fff;
       color:#111;
-      text-align:center;
+    }
+
+    .wrap{
+      max-width:700px;
+      margin:0 auto;
       padding:40px 20px;
     }
 
     h1{
-      font-size:2.2rem;
-      margin-bottom:40px;
+      font-size:2rem;
+      margin-bottom:30px;
     }
 
     .qr{
-      width:200px;
-      margin:20px auto 40px auto;
+      width:220px;
+      max-width:90%;
+      margin:20px auto;
     }
 
-    .big{
-      font-size:1.8rem;
-      font-weight:700;
-      margin:40px 0 10px 0;
+    .claim{
+      font-size:1.3rem;
+      font-weight:600;
+      margin-top:30px;
     }
 
     .sub{
-      font-size:1.2rem;
-      margin-bottom:40px;
+      font-size:1.1rem;
+      margin-top:10px;
     }
 
     .buttons{
+      margin-top:40px;
       display:flex;
       justify-content:center;
       gap:20px;
       flex-wrap:wrap;
-      margin-top:20px;
     }
 
     .btn{
@@ -50,43 +56,84 @@
       border-radius:14px;
       text-decoration:none;
       color:#111;
-      background:#fff;
       font-size:1rem;
+      background:#fff;
       cursor:pointer;
     }
 
-    .footer{
+    footer{
       margin-top:60px;
-      font-size:0.9rem;
+      font-size:.9rem;
       color:#666;
     }
 
     @media print{
-      .buttons{
-        display:none;
-      }
+      .buttons{ display:none; }
     }
   </style>
 </head>
 
 <body>
+  <div class="wrap">
 
-  <h1>Mango 🥭</h1>
+    <h1>Mango 🥭</h1>
 
-  <img src="assets/qr-home.png" class="qr" alt="QR Mango Home">
+    <img src="assets/qr-home.png" class="qr" alt="QR Mango Home">
 
-  <div class="big">È successo qualcosa tra due persone.</div>
-  <div class="sub">Qui puoi capirlo.</div>
+    <!-- TESTI MULTILINGUA -->
+    <div id="text-it">
+      <div class="claim">È successo qualcosa tra due persone.</div>
+      <div class="sub">Qui puoi capirlo.</div>
+    </div>
 
-  <div class="buttons">
-    <a href="index.html" class="btn">← Torna alla Home</a>
-    <button onclick="window.print()" class="btn">Stampa</button>
+    <div id="text-en" style="display:none">
+      <div class="claim">Something happened between two people.</div>
+      <div class="sub">Here you can understand it.</div>
+    </div>
+
+    <div id="text-es" style="display:none">
+      <div class="claim">Ha sucedido algo entre dos personas.</div>
+      <div class="sub">Aquí puedes entenderlo.</div>
+    </div>
+
+    <div id="text-fr" style="display:none">
+      <div class="claim">Quelque chose s’est passé entre deux personnes.</div>
+      <div class="sub">Ici tu peux le comprendre.</div>
+    </div>
+
+    <div id="text-de" style="display:none">
+      <div class="claim">Zwischen zwei Menschen ist etwas passiert.</div>
+      <div class="sub">Hier kannst du es verstehen.</div>
+    </div>
+
+    <div id="text-zh" style="display:none">
+      <div class="claim">两个人之间发生了一些事情。</div>
+      <div class="sub">你可以在这里理解它。</div>
+    </div>
+
+    <!-- BOTTONI -->
+    <div class="buttons">
+      <a class="btn" href="index.html">← Torna alla Home</a>
+      <button class="btn" onclick="window.print()">Stampa</button>
+    </div>
+
+    <footer>
+      Mango — Juan de Dios Annaloro Mercedes  
+      <br>In memoria di Larimar — 02 febbraio 2026
+    </footer>
+
   </div>
 
-  <div class="footer">
-    Mango — Juan de Dios Annaloro Mercedes<br>
-    In memoria di Larimar — 02 febbraio 2026
-  </div>
+  <script>
+    const lang = new URLSearchParams(window.location.search).get("lang") || "it";
+    const supported = ["it","en","es","fr","de","zh"];
+
+    if(supported.includes(lang)){
+      document.querySelectorAll('[id^="text-"]').forEach(el => el.style.display="none");
+      const active = document.getElementById("text-"+lang);
+      if(active) active.style.display="block";
+    }
+  </script>
 
 </body>
 </html>

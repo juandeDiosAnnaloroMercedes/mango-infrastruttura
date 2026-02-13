@@ -1,167 +1,419 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="it">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Scrivi una riga – Mango</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Scrivi una riga — Mango</title>
 
-<style>
-body{
-  margin:0;
-  font-family:-apple-system,system-ui,Segoe UI,Roboto,Arial,sans-serif;
-  background:#f7f7f7;
-  text-align:center;
-}
-.langbar{
-  margin:20px auto;
-}
-.langbar a{
-  text-decoration:none;
-  font-weight:700;
-  margin:0 8px;
-  color:#111;
-}
-.container{
-  max-width:700px;
-  margin:0 auto;
-  padding:20px;
-}
-h1{font-size:32px;margin-bottom:10px;}
-p{font-size:16px;line-height:1.5;}
-.note{
-  margin-top:10px;
-  font-size:14px;
-  opacity:.7;
-}
-textarea{
-  width:100%;
-  max-width:650px;
-  height:140px;
-  border-radius:14px;
-  border:1px solid #ddd;
-  padding:15px;
-  font-size:16px;
-}
-.row{
-  margin-top:15px;
-}
-button{
-  padding:12px 20px;
-  border:none;
-  border-radius:20px;
-  font-weight:700;
-  margin:6px;
-  cursor:pointer;
-}
-.primary{background:#f4a825;color:white;}
-.dark{background:#111;color:white;}
-.danger{background:#b00020;color:white;}
-.list{
-  margin-top:25px;
-  text-align:left;
-}
-.item{
-  padding:10px 0;
-  border-bottom:1px solid #eee;
-}
-.meta{
-  font-size:12px;
-  opacity:.6;
-}
-</style>
+  <style>
+    :root{
+      --bg:#fbfaf7;
+      --text:#111;
+      --muted:#555;
+      --border:#e7e3dd;
+      --card:#fff;
+      --yellow:#f4a62a;
+      --black:#111;
+      --red:#b00020;
+      --shadow: 0 6px 20px rgba(0,0,0,.06);
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family:-apple-system,system-ui,Segoe UI,Roboto,Arial,sans-serif;
+      background:var(--bg);
+      color:var(--text);
+    }
+    .langbar{
+      position:fixed;
+      top:14px;
+      left:50%;
+      transform:translateX(-50%);
+      display:flex;
+      gap:10px;
+      padding:10px 14px;
+      border:1px solid var(--border);
+      background:var(--card);
+      border-radius:14px;
+      box-shadow:var(--shadow);
+      z-index:999;
+    }
+    .langbar a{
+      text-decoration:none;
+      font-weight:800;
+      color:var(--text);
+      padding:8px 10px;
+      border-radius:10px;
+      border:1px solid transparent;
+      display:inline-block;
+      min-width:34px;
+      text-align:center;
+    }
+    .langbar a.active{
+      border-color:var(--border);
+      background:#f2efe9;
+    }
+
+    .container{
+      max-width:760px;
+      margin:0 auto;
+      padding:92px 16px 60px;
+    }
+    h1{
+      font-size:44px;
+      margin:0 0 10px;
+      letter-spacing:-.5px;
+      text-align:center;
+    }
+    p#desc{
+      margin:0 auto 18px;
+      max-width:640px;
+      text-align:center;
+      font-size:18px;
+      color:var(--muted);
+      line-height:1.45;
+    }
+
+    textarea{
+      width:100%;
+      max-width:680px;
+      height:220px;
+      padding:14px 14px;
+      margin:0 auto;
+      display:block;
+      font-size:18px;
+      border-radius:14px;
+      border:2px solid var(--border);
+      outline:none;
+      background:var(--card);
+      box-shadow:var(--shadow);
+      resize:vertical;
+    }
+    textarea:focus{
+      border-color:#d8d0c6;
+    }
+
+    .row{
+      display:flex;
+      gap:12px;
+      justify-content:center;
+      flex-wrap:wrap;
+      margin:18px 0 14px;
+    }
+    button, a.btnlink{
+      border:none;
+      cursor:pointer;
+      font-weight:900;
+      font-size:16px;
+      padding:14px 22px;
+      border-radius:999px;
+      box-shadow:var(--shadow);
+      text-decoration:none;
+      display:inline-block;
+      color:#fff;
+    }
+    button.primary{ background:var(--yellow); color:#fff; }
+    button.dark{ background:var(--black); }
+    button.danger{ background:var(--red); }
+
+    .homewrap{
+      display:flex;
+      justify-content:center;
+      margin-top:10px;
+    }
+    a.btnlink.dark{ background:var(--black); }
+
+    .list{
+      margin:22px auto 0;
+      max-width:680px;
+      border:1px solid var(--border);
+      border-radius:14px;
+      background:var(--card);
+      box-shadow:var(--shadow);
+      overflow:hidden;
+    }
+    .item{
+      padding:12px 14px;
+      border-bottom:1px solid var(--border);
+      font-size:16px;
+      line-height:1.35;
+      white-space:pre-wrap;
+    }
+    .item:last-child{ border-bottom:none; }
+
+    .meta{
+      font-size:13px;
+      opacity:.75;
+      margin-bottom:6px;
+    }
+
+    .note{
+      margin:18px auto 0;
+      max-width:680px;
+      padding:14px 14px;
+      border:1px solid var(--border);
+      border-radius:14px;
+      background:#f2efe9;
+      color:#222;
+      box-shadow:var(--shadow);
+    }
+  </style>
 </head>
 
 <body>
 
-<div class="langbar">
-  <a href="?lang=it">IT</a>
-  <a href="?lang=en">EN</a>
-  <a href="?lang=es">ES</a>
-  <a href="?lang=fr">FR</a>
-  <a href="?lang=de">DE</a>
-  <a href="?lang=zh">中文</a>
-</div>
+  <nav class="langbar" aria-label="Language">
+    <a href="?lang=it" data-lang="it">IT</a>
+    <a href="?lang=en" data-lang="en">EN</a>
+    <a href="?lang=es" data-lang="es">ES</a>
+    <a href="?lang=fr" data-lang="fr">FR</a>
+    <a href="?lang=de" data-lang="de">DE</a>
+    <a href="?lang=zh" data-lang="zh">中文</a>
+  </nav>
 
-<div class="container">
+  <div class="container">
+    <h1 id="title">Scrivi una riga</h1>
+    <p id="desc">Scrivi la riga dello scambio. Nessuna quantità. Nessun valore numerico. La riga viene salvata sul tuo dispositivo (non online).</p>
 
-<h1 id="title">Scrivi una riga</h1>
-<p id="desc">
-Scrivi la riga dello scambio. Nessuna quantità. Nessun valore numerico.
-La riga viene salvata sul tuo dispositivo (non online).
-</p>
+    <textarea id="lineInput" placeholder="Scrivi qui la tua riga..."></textarea>
 
-<p class="note" id="note">
-Le cose belle qui non si inviano. Si salvano.
-</p>
+    <div class="row">
+      <button class="primary" id="saveBtn" type="button">Salva riga</button>
+      <button class="dark" id="copyBtn" type="button">Copia tutte</button>
+      <button class="danger" id="clearBtn" type="button">Cancella tutto</button>
+    </div>
 
-<textarea id="lineInput" placeholder="Scrivi qui la tua riga..."></textarea>
+    <div class="homewrap">
+      <a class="btnlink dark" id="homeBtn" href="index.html">Torna alla home</a>
+    </div>
 
-<div class="row">
-  <button class="primary" onclick="saveLine()">Salva riga</button>
-  <button class="dark" onclick="copyAll()">Copia tutte</button>
-  <button class="danger" onclick="clearAll()">Cancella tutto</button>
-</div>
+    <div class="note" id="noteBox" style="display:none"></div>
 
-<div class="row">
-  <button class="dark" onclick="goHome()">Torna alla home</button>
-</div>
+    <div class="list" id="listBox" style="display:none">
+      <div id="savedList"></div>
+    </div>
+  </div>
 
-<div class="list" id="savedList"></div>
+  <script>
+  (function(){
+    "use strict";
 
-</div>
+    const VERSION = "MANGO_SCRIVI_RIGA_V1_PERMANENTE";
 
-<script>
-const STORAGE_KEY = "mango_lines_v1";
+    const T = {
+      it:{
+        title:"Scrivi una riga",
+        desc:"Scrivi la riga dello scambio. Nessuna quantità. Nessun valore numerico. La riga viene salvata sul tuo dispositivo (non online).",
+        placeholder:"Scrivi qui la tua riga...",
+        save:"Salva riga",
+        copy:"Copia tutte",
+        clear:"Cancella tutto",
+        home:"Torna alla home",
+        note:"Qui le cose belle non si inviano: si salvano sul dispositivo.",
+        copied:"Copiato negli appunti.",
+        empty:"Scrivi qualcosa prima di salvare.",
+        cleared:"Tutto cancellato."
+      },
+      en:{
+        title:"Write one line",
+        desc:"Write the line of the exchange. No quantity. No numeric value. The line is saved on your device (not online).",
+        placeholder:"Write your line here...",
+        save:"Save line",
+        copy:"Copy all",
+        clear:"Clear all",
+        home:"Back to home",
+        note:"Beautiful things are not sent here: they are saved on your device.",
+        copied:"Copied to clipboard.",
+        empty:"Write something before saving.",
+        cleared:"Everything cleared."
+      },
+      es:{
+        title:"Escribe una línea",
+        desc:"Escribe la línea del intercambio. Sin cantidad. Sin valor numérico. La línea se guarda en tu dispositivo (no online).",
+        placeholder:"Escribe tu línea aquí...",
+        save:"Guardar línea",
+        copy:"Copiar todo",
+        clear:"Borrar todo",
+        home:"Volver al inicio",
+        note:"Aquí las cosas bellas no se envían: se guardan en tu dispositivo.",
+        copied:"Copiado al portapapeles.",
+        empty:"Escribe algo antes de guardar.",
+        cleared:"Todo borrado."
+      },
+      fr:{
+        title:"Écrire une ligne",
+        desc:"Écris la ligne de l’échange. Aucune quantité. Aucune valeur numérique. La ligne est enregistrée sur ton appareil (pas en ligne).",
+        placeholder:"Écris ta ligne ici...",
+        save:"Enregistrer",
+        copy:"Tout copier",
+        clear:"Tout effacer",
+        home:"Retour à l’accueil",
+        note:"Ici, les belles choses ne s’envoient pas : elles se sauvegardent sur l’appareil.",
+        copied:"Copié dans le presse-papiers.",
+        empty:"Écris quelque chose avant d’enregistrer.",
+        cleared:"Tout effacé."
+      },
+      de:{
+        title:"Eine Zeile schreiben",
+        desc:"Schreibe die Zeile des Austauschs. Keine Menge. Kein numerischer Wert. Die Zeile wird auf deinem Gerät gespeichert (nicht online).",
+        placeholder:"Schreibe deine Zeile hier...",
+        save:"Zeile speichern",
+        copy:"Alles kopieren",
+        clear:"Alles löschen",
+        home:"Zur Startseite",
+        note:"Schöne Dinge werden hier nicht gesendet: sie werden auf dem Gerät gespeichert.",
+        copied:"In die Zwischenablage kopiert.",
+        empty:"Schreibe etwas, bevor du speicherst.",
+        cleared:"Alles gelöscht."
+      },
+      zh:{
+        title:"寫一行",
+        desc:"寫下交換的一行內容。沒有數量，沒有數值。此行只會儲存在你的裝置上（不在線上）。",
+        placeholder:"在此寫下你的內容...",
+        save:"儲存",
+        copy:"全部複製",
+        clear:"全部刪除",
+        home:"返回首頁",
+        note:"美好的事情不在這裡送出：只保存在你的裝置上。",
+        copied:"已複製到剪貼簿。",
+        empty:"請先寫點內容再儲存。",
+        cleared:"已全部清除。"
+      }
+    };
 
-function getLines(){
-  return JSON.parse(localStorage.getItem(STORAGE_KEY) || "[]");
-}
+    const allowed = new Set(["it","en","es","fr","de","zh"]);
+    const params = new URLSearchParams(location.search);
+    let lang = (params.get("lang") || "it").toLowerCase();
+    if(!allowed.has(lang)) lang = "it";
+    const t = T[lang] || T.it;
 
-function saveLine(){
-  const input = document.getElementById("lineInput");
-  const text = input.value.trim();
-  if(!text) return;
-  const lines = getLines();
-  lines.push({
-    text:text,
-    date:new Date().toLocaleString()
-  });
-  localStorage.setItem(STORAGE_KEY, JSON.stringify(lines));
-  input.value="";
-  render();
-}
+    document.documentElement.lang = lang;
 
-function render(){
-  const box = document.getElementById("savedList");
-  const lines = getLines();
-  box.innerHTML="";
-  lines.forEach(l=>{
-    box.innerHTML += `
-      <div class="item">
-        <div class="meta">${l.date}</div>
-        <div>${l.text}</div>
-      </div>
-    `;
-  });
-}
+    // UI elements
+    const titleEl = document.getElementById("title");
+    const descEl  = document.getElementById("desc");
+    const input   = document.getElementById("lineInput");
+    const saveBtn = document.getElementById("saveBtn");
+    const copyBtn = document.getElementById("copyBtn");
+    const clearBtn= document.getElementById("clearBtn");
+    const homeBtn = document.getElementById("homeBtn");
+    const listBox = document.getElementById("listBox");
+    const savedList = document.getElementById("savedList");
+    const noteBox = document.getElementById("noteBox");
 
-function copyAll(){
-  const lines = getLines();
-  const text = lines.map(l => l.date + " — " + l.text).join("\n");
-  navigator.clipboard.writeText(text);
-}
+    // Set texts
+    titleEl.textContent = t.title;
+    descEl.textContent  = t.desc;
+    input.placeholder   = t.placeholder;
+    saveBtn.textContent = t.save;
+    copyBtn.textContent = t.copy;
+    clearBtn.textContent= t.clear;
+    homeBtn.textContent = t.home;
 
-function clearAll(){
-  localStorage.removeItem(STORAGE_KEY);
-  render();
-}
+    // Keep lang in home link
+    try{
+      const hu = new URL(homeBtn.getAttribute("href"), location.href);
+      hu.searchParams.set("lang", lang);
+      hu.searchParams.set("v", VERSION);
+      homeBtn.href = hu.pathname + "?" + hu.searchParams.toString();
+    }catch(e){}
 
-function goHome(){
-  window.location.href="index.html";
-}
+    // Highlight active lang
+    document.querySelectorAll(".langbar a").forEach(a=>{
+      a.classList.toggle("active", a.dataset.lang === lang);
+    });
 
-render();
-</script>
+    const KEY = "MANGO_SCRIVI_RIGA_LINES_V1";
+
+    function nowStamp(){
+      const d = new Date();
+      const pad = n => String(n).padStart(2,"0");
+      return `${pad(d.getDate())}/${pad(d.getMonth()+1)}/${d.getFullYear()}, ${pad(d.getHours())}:${pad(d.getMinutes())}:${pad(d.getSeconds())}`;
+    }
+
+    function load(){
+      try{
+        const raw = localStorage.getItem(KEY);
+        const arr = raw ? JSON.parse(raw) : [];
+        return Array.isArray(arr) ? arr : [];
+      }catch(e){
+        return [];
+      }
+    }
+
+    function save(arr){
+      localStorage.setItem(KEY, JSON.stringify(arr));
+    }
+
+    function render(){
+      const arr = load();
+      if(arr.length === 0){
+        listBox.style.display = "none";
+        savedList.innerHTML = "";
+        return;
+      }
+      listBox.style.display = "block";
+      savedList.innerHTML = "";
+      arr.slice().reverse().forEach(item=>{
+        const wrap = document.createElement("div");
+        wrap.className = "item";
+        const meta = document.createElement("div");
+        meta.className = "meta";
+        meta.textContent = item.ts;
+        const text = document.createElement("div");
+        text.textContent = item.text;
+        wrap.appendChild(meta);
+        wrap.appendChild(text);
+        savedList.appendChild(wrap);
+      });
+    }
+
+    function flashNote(msg){
+      noteBox.style.display = "block";
+      noteBox.textContent = msg;
+      setTimeout(()=>{ noteBox.style.display = "none"; }, 1800);
+    }
+
+    // Buttons
+    saveBtn.addEventListener("click", ()=>{
+      const v = (input.value || "").trim();
+      if(!v){ flashNote(t.empty); return; }
+      const arr = load();
+      arr.push({ ts: nowStamp(), text: v });
+      save(arr);
+      input.value = "";
+      render();
+      flashNote(t.note);
+    });
+
+    copyBtn.addEventListener("click", async ()=>{
+      const arr = load();
+      if(arr.length === 0){ flashNote(t.empty); return; }
+      const out = arr.map(x=>`${x.ts} — ${x.text}`).join("\n");
+      try{
+        await navigator.clipboard.writeText(out);
+        flashNote(t.copied);
+      }catch(e){
+        // fallback
+        const ta = document.createElement("textarea");
+        ta.value = out;
+        document.body.appendChild(ta);
+        ta.select();
+        document.execCommand("copy");
+        document.body.removeChild(ta);
+        flashNote(t.copied);
+      }
+    });
+
+    clearBtn.addEventListener("click", ()=>{
+      localStorage.removeItem(KEY);
+      render();
+      flashNote(t.cleared);
+    });
+
+    render();
+  })();
+  </script>
 
 </body>
 </html>

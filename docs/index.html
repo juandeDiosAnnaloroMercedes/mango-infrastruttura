@@ -20,8 +20,10 @@
     .grid{display:grid;grid-template-columns:1fr;gap:14px;margin-top:18px}
     .card{background:var(--card);border:1px solid var(--border);border-radius:var(--r);padding:16px;box-shadow:var(--shadow)}
     .card h2{margin:0 0 10px;font-size:18px;color:#111}
+    .card h3{margin:14px 0 8px;font-size:16px;color:#111}
     .card p,.card li{color:#1f2937;font-size:15px;line-height:1.55}
     ul{margin:10px 0 0 18px}
+    hr{border:0;border-top:1px solid var(--border);margin:14px 0}
     .btnrow{display:flex;gap:10px;flex-wrap:wrap;margin-top:12px}
     .btn{border:0;background:#111;color:#fff;padding:12px 14px;border-radius:14px;font-weight:900;cursor:pointer;text-decoration:none;display:inline-flex;align-items:center;gap:8px}
     .btn.secondary{background:#fff;color:#111;border:1px solid var(--border)}
@@ -31,6 +33,7 @@
     .footer{margin-top:22px;padding-top:18px;border-top:1px solid var(--border);color:var(--muted);font-size:14px;line-height:1.5}
     .mono{font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono","Courier New",monospace;font-size:13px}
     .small{font-size:13px;color:var(--muted)}
+    .eq{font-weight:950;font-size:18px;color:#111;margin:10px 0 0}
   </style>
 </head>
 
@@ -76,9 +79,69 @@
         <li id="t_write_li3"></li>
       </ul>
       <div class="btnrow">
-        <a class="btn" href="#contact">✉️ <span id="t_btn_contact"></span></a>
+        <a class="btn" href="#register">📜 <span id="t_btn_register"></span></a>
+        <a class="btn secondary" href="#contact">✉️ <span id="t_btn_contact"></span></a>
       </div>
       <p class="small" id="t_write_note"></p>
+    </article>
+
+    <!-- REGISTRO INTEGRATO (HOME UNICA, PERMANENTE) -->
+    <article class="card" id="register">
+      <h2 id="t_reg_title"></h2>
+
+      <p id="t_reg_intro1"></p>
+      <p id="t_reg_intro2"></p>
+
+      <div class="eq" id="t_reg_eq"></div>
+
+      <p id="t_reg_no"></p>
+
+      <hr>
+
+      <h3 id="t_reg_time_h"></h3>
+      <p id="t_reg_time_p1"></p>
+      <p id="t_reg_time_p2"></p>
+
+      <hr>
+
+      <h3 id="t_reg_struct_h"></h3>
+      <p id="t_reg_struct_p1"></p>
+      <p id="t_reg_struct_p2"></p>
+
+      <hr>
+
+      <h3 id="t_reg_how_h"></h3>
+      <p id="t_reg_how_p"></p>
+      <ul>
+        <li id="t_reg_how_li1"></li>
+        <li id="t_reg_how_li2"></li>
+        <li id="t_reg_how_li3"></li>
+        <li id="t_reg_how_li4"></li>
+      </ul>
+
+      <p class="small" id="t_reg_balance_note"></p>
+
+      <hr>
+
+      <h3 id="t_reg_examples_h"></h3>
+      <p id="t_reg_examples_p"></p>
+
+      <hr>
+
+      <h3 id="t_reg_anticapture_h"></h3>
+      <p id="t_reg_anticapture_p1"></p>
+      <p id="t_reg_anticapture_p2"></p>
+
+      <hr>
+
+      <h3 id="t_reg_live_h"></h3>
+      <p id="t_reg_live_p"></p>
+      <p class="small" id="t_reg_live_note"></p>
+
+      <div class="btnrow">
+        <a class="btn secondary" href="#write">⬆️ <span id="t_btn_back_write"></span></a>
+        <a class="btn" href="#contact">✉️ <span id="t_btn_contact2"></span></a>
+      </div>
     </article>
 
     <article class="card" id="what">
@@ -126,105 +189,470 @@
   const DEFAULT_LANG = "it";
 
   const T = {
-    it:{title:"Un’infrastruttura di fiducia locale non monetaria.",subtitle:"Mango riconosce scambi reali tra persone con una riga, senza quantità né valore numerico.",
-      do_title:"Fai Mango adesso",do_text:"Se è successo qualcosa di reale tra due persone (aiuto, tempo, cura, presenza, gesto), Mango lo riconosce. Non valuta. Non misura. Non accumula.",
+    it:{
+      title:"Un’infrastruttura di fiducia locale non monetaria.",
+      subtitle:"Mango riconosce scambi reali tra persone con una riga, senza quantità né valore numerico.",
+
+      do_title:"Fai Mango adesso",
+      do_text:"Se è successo qualcosa di reale tra due persone (aiuto, tempo, cura, presenza, gesto), Mango lo riconosce. Non valuta. Non misura. Non accumula.",
       do_note:"Principio chiave: una riga = riconoscimento. Nessun numero. Nessuna equivalenza.",
-      btn_first:"Scrivi una riga",btn_about:"Cos’è Mango",btn_contact:"Contatti",btn_press:"Scrivi (stampa)",btn_top:"Torna su",
-      write_title:"Scrivi una riga",write_text:"Una riga descrive lo scambio reale. Deve restare umana, semplice, non contabile.",
-      write_li1:"Non inserire quantità, prezzi, numeri o equivalenze.",write_li2:"Descrivi l’azione reale (chi, cosa, quando) in modo sobrio.",
+
+      btn_first:"Scrivi una riga",
+      btn_about:"Cos’è Mango",
+      btn_contact:"Contatti",
+      btn_press:"Scrivi (stampa)",
+      btn_top:"Torna su",
+
+      write_title:"Scrivi una riga",
+      write_text:"Una riga descrive lo scambio reale. Deve restare umana, semplice, non contabile.",
+      write_li1:"Non inserire quantità, prezzi, numeri o equivalenze.",
+      write_li2:"Descrivi l’azione reale (chi, cosa, quando) in modo sobrio.",
       write_li3:"Se lo scambio è sbilanciato, Mango non lo trasforma in debito: lo rende visibile e curabile.",
       write_note:"Suggerimento: usa parole concrete (aiutato, accompagnato, ascoltato, riparato, portato, cucinato…).",
-      what_title:"Cos’è Mango",what_text1:"Mango non è una moneta. Non è credito. Non è un sistema economico alternativo.",
+
+      // REGISTRO
+      btn_register:"Vai al Registro",
+      reg_title:"Registro pubblico Mango",
+      reg_intro1:"Qui vivono le righe reali. Il Registro è un luogo di riconoscimento scritto: serve a dire “questo è accaduto, tra persone, nel mondo reale”.",
+      reg_intro2:"Ogni riga riconosce uno scambio realmente accaduto. Non è credito. Non è debito. Non è un conto.",
+      reg_eq:"Una riga = 🥭",
+      reg_no:"Nessun numero. Nessuna equivalenza. Nessuna accumulazione.",
+
+      reg_time_h:"Principio del tempo",
+      reg_time_p1:"Questo Registro non è un feed. Non spinge il nuovo sopra il vecchio.",
+      reg_time_p2:"Se una cosa è passata, rimane nel passato. Le righe restano in ordine naturale. Mango ha una temporalità esplicita: non è progettato per durare come accumulo.",
+
+      reg_struct_h:"Principio strutturale",
+      reg_struct_p1:"Il Registro non misura. Non somma. Non calcola.",
+      reg_struct_p2:"Le righe non si contano. Restano. Qualsiasi uso che introduce numeri, conteggi o equivalenze non è Mango.",
+
+      reg_how_h:"Come si scrive una riga",
+      reg_how_p:"Scrivi semplice. Scrivi umano. Scrivi reale. Una riga descrive un gesto o uno scambio effettivamente accaduto.",
+      reg_how_li1:"Niente prezzi, niente quantità, niente calcoli.",
+      reg_how_li2:"Niente “valore” misurato: solo cosa è accaduto.",
+      reg_how_li3:"Se vuoi, usa solo nomi di battesimo o iniziali: la privacy è parte della cura.",
+      reg_how_li4:"Meglio pochi dettagli veri che tanti dettagli “perfetti”.",
+      reg_balance_note:"Se lo scambio è sbilanciato, Mango non lo pareggia con numeri: lo rende visibile e curabile nel tempo umano, con gesti reali.",
+
+      reg_examples_h:"Esempi (solo esempi, senza formato obbligatorio)",
+      reg_examples_p:"— Oggi al mercato, A. ha aiutato B. a portare le cassette fino a casa.\n— Ieri, C. ha accompagnato D. a una visita e poi gli ha riportato i documenti.\n— Nel quartiere, E. ha riparato una sedia a F. senza chiedere nulla.\n— Dopo una giornata difficile, G. ha cucinato per H. e gli ha lasciato il pasto fuori dalla porta.",
+
+      reg_anticapture_h:"Non appropriazione e anti-cattura",
+      reg_anticapture_p1:"Mango è progettato per evitare accumulo, speculazione e cattura istituzionale.",
+      reg_anticapture_p2:"Nessuno può trasformare questo Registro in punti, ranking, reputazione o credito sociale. Se diventa conteggio o moneta, non è Mango.",
+
+      reg_live_h:"Righe vive",
+      reg_live_p:"Questo spazio è pronto ad accogliere la prima riga reale.",
+      reg_live_note:"Nota: le righe non devono essere numerate e non deve comparire alcun totale o contatore.",
+
+      btn_back_write:"Torna a “Scrivi una riga”",
+      btn_contact2:"Contatti",
+
+      what_title:"Cos’è Mango",
+      what_text1:"Mango non è una moneta. Non è credito. Non è un sistema economico alternativo.",
       what_text2:"È un’infrastruttura di fiducia locale: riconosce scambi reali senza trasformarli in valore numerico.",
-      what_li1:"Non accumulabile.",what_li2:"Non quantificabile.",what_li3:"Non appropriabile.",what_li4:"Temporalità esplicita.",
-      qr_main:"È successo qualcosa tra due persone.",qr_sub:"Qui puoi capirlo.",
-      contact_title:"Contatto (istituzioni / giornalisti)",contact_text:"Per richieste stampa, scuole, associazioni o istituzioni puoi scrivere qui:",
+      what_li1:"Non accumulabile.",
+      what_li2:"Non quantificabile.",
+      what_li3:"Non appropriabile.",
+      what_li4:"Temporalità esplicita.",
+
+      qr_main:"È successo qualcosa tra due persone.",
+      qr_sub:"Qui puoi capirlo.",
+
+      contact_title:"Contatto (istituzioni / giornalisti)",
+      contact_text:"Per richieste stampa, scuole, associazioni o istituzioni puoi scrivere qui:",
       contact_note:"Questo indirizzo è pubblico sul sito (così i giornalisti lo trovano).",
+
       footer1:"Creato da Juan de Dios Annaloro Mercedes — 02 febbraio 2026 — In memoria di Larimar.",
       footer2:"Mango è praticabile e trasmissibile, ma non possedibile o centralizzabile."
     },
-    en:{title:"A non-monetary local trust infrastructure.",subtitle:"Mango recognizes real exchanges with one line, with no quantities and no numeric value.",
-      do_title:"Do Mango now",do_text:"If something real happened between two people (help, time, care, presence, a gesture), Mango recognizes it. It doesn’t price it. It doesn’t measure it. It doesn’t accumulate.",
+
+    en:{
+      title:"A non-monetary local trust infrastructure.",
+      subtitle:"Mango recognizes real exchanges with one line, with no quantities and no numeric value.",
+
+      do_title:"Do Mango now",
+      do_text:"If something real happened between two people (help, time, care, presence, a gesture), Mango recognizes it. It doesn’t price it. It doesn’t measure it. It doesn’t accumulate.",
       do_note:"Core rule: one line = recognition. No numbers. No equivalences.",
-      btn_first:"Write a line",btn_about:"What is Mango",btn_contact:"Contact",btn_press:"Write (press)",btn_top:"Back to top",
-      write_title:"Write a line",write_text:"A line describes the real exchange. Keep it human, simple, non-accounting.",
-      write_li1:"No quantities, prices, numbers, or equivalences.",write_li2:"Describe the real action (who, what, when) soberly.",
+
+      btn_first:"Write a line",
+      btn_about:"What is Mango",
+      btn_contact:"Contact",
+      btn_press:"Write (press)",
+      btn_top:"Back to top",
+
+      write_title:"Write a line",
+      write_text:"A line describes the real exchange. Keep it human, simple, non-accounting.",
+      write_li1:"No quantities, prices, numbers, or equivalences.",
+      write_li2:"Describe the real action (who, what, when) soberly.",
       write_li3:"If unbalanced, Mango doesn’t turn it into debt: it makes it visible and care-able.",
       write_note:"Tip: use concrete verbs (helped, accompanied, listened, repaired, carried, cooked…).",
-      what_title:"What is Mango",what_text1:"Mango is not money. Not credit. Not an alternative economic system.",
+
+      // REGISTER
+      btn_register:"Go to the Register",
+      reg_title:"Mango public Register",
+      reg_intro1:"Here live the real lines. The Register is a place of written recognition: it says “this happened, between people, in the real world”.",
+      reg_intro2:"Each line recognizes a real exchange. It is not credit. It is not debt. It is not an account.",
+      reg_eq:"One line = 🥭",
+      reg_no:"No numbers. No equivalences. No accumulation.",
+
+      reg_time_h:"Time principle",
+      reg_time_p1:"This Register is not a feed. It does not push the new above the old.",
+      reg_time_p2:"If something is past, it stays in the past. Lines remain in natural order. Mango has explicit temporality: it is not designed to last as accumulation.",
+
+      reg_struct_h:"Structural principle",
+      reg_struct_p1:"The Register does not measure. It does not sum. It does not calculate.",
+      reg_struct_p2:"Lines are not counted. They remain. Any use that introduces numbers, counting, or equivalences is not Mango.",
+
+      reg_how_h:"How to write a line",
+      reg_how_p:"Write simple. Write human. Write real. A line describes a gesture or exchange that truly happened.",
+      reg_how_li1:"No prices, no quantities, no calculations.",
+      reg_how_li2:"No measured “value”: only what happened.",
+      reg_how_li3:"If you want, use first names or initials: privacy is part of care.",
+      reg_how_li4:"Better a few true details than many “perfect” details.",
+      reg_balance_note:"If unbalanced, Mango does not equalize with numbers: it makes it visible and care-able over human time, with real gestures.",
+
+      reg_examples_h:"Examples (only examples, no mandatory format)",
+      reg_examples_p:"— Today at the market, A. helped B. carry the crates home.\n— Yesterday, C. accompanied D. to an appointment and then returned the documents.\n— In the neighborhood, E. repaired a chair for F. asking nothing.\n— After a hard day, G. cooked for H. and left the meal at the door.",
+
+      reg_anticapture_h:"Non-appropriation and anti-capture",
+      reg_anticapture_p1:"Mango is designed to prevent accumulation, speculation, and institutional capture.",
+      reg_anticapture_p2:"No one can turn this Register into points, ranking, reputation, or social credit. If it becomes counting or money, it is not Mango.",
+
+      reg_live_h:"Living lines",
+      reg_live_p:"This space is ready to host the first real line.",
+      reg_live_note:"Note: lines must not be numbered and no total/counter should appear.",
+
+      btn_back_write:"Back to “Write a line”",
+      btn_contact2:"Contact",
+
+      what_title:"What is Mango",
+      what_text1:"Mango is not money. Not credit. Not an alternative economic system.",
       what_text2:"It is a local trust infrastructure: recognizing real exchanges without turning them into numeric value.",
-      what_li1:"Non-accumulative.",what_li2:"Non-quantifiable.",what_li3:"Non-appropriable.",what_li4:"Explicit temporality.",
-      qr_main:"Something happened between two people.",qr_sub:"Here you can understand it.",
-      contact_title:"Contact (institutions / press)",contact_text:"For press, schools, associations or institutions, write here:",
+      what_li1:"Non-accumulative.",
+      what_li2:"Non-quantifiable.",
+      what_li3:"Non-appropriable.",
+      what_li4:"Explicit temporality.",
+
+      qr_main:"Something happened between two people.",
+      qr_sub:"Here you can understand it.",
+
+      contact_title:"Contact (institutions / press)",
+      contact_text:"For press, schools, associations or institutions, write here:",
       contact_note:"This email is public on the site (so journalists can find it).",
+
       footer1:"Created by Juan de Dios Annaloro Mercedes — 02 Feb 2026 — In memory of Larimar.",
       footer2:"Mango can be practiced and transmitted, but not owned or centralized."
     },
-    es:{title:"Una infraestructura local de confianza no monetaria.",subtitle:"Mango reconoce intercambios reales con una línea, sin cantidades ni valor numérico.",
-      do_title:"Haz Mango ahora",do_text:"Si ocurrió algo real entre dos personas, Mango lo reconoce. No lo valora. No lo mide. No lo acumula.",
+
+    es:{
+      title:"Una infraestructura local de confianza no monetaria.",
+      subtitle:"Mango reconoce intercambios reales con una línea, sin cantidades ni valor numérico.",
+
+      do_title:"Haz Mango ahora",
+      do_text:"Si ocurrió algo real entre dos personas, Mango lo reconoce. No lo valora. No lo mide. No lo acumula.",
       do_note:"Regla: una línea = reconocimiento. Sin números. Sin equivalencias.",
-      btn_first:"Escribe una línea",btn_about:"Qué es Mango",btn_contact:"Contacto",btn_press:"Escribir (prensa)",btn_top:"Volver arriba",
-      write_title:"Escribe una línea",write_text:"Una línea describe el intercambio real. Humano y simple.",
-      write_li1:"Sin cantidades, precios, números ni equivalencias.",write_li2:"Describe la acción real (quién, qué, cuándo).",
+
+      btn_first:"Escribe una línea",
+      btn_about:"Qué es Mango",
+      btn_contact:"Contacto",
+      btn_press:"Escribir (prensa)",
+      btn_top:"Volver arriba",
+
+      write_title:"Escribe una línea",
+      write_text:"Una línea describe el intercambio real. Humano y simple.",
+      write_li1:"Sin cantidades, precios, números ni equivalencias.",
+      write_li2:"Describe la acción real (quién, qué, cuándo).",
       write_li3:"Si es desequilibrado, no es deuda: se vuelve visible y cuidable.",
       write_note:"Usa verbos concretos.",
-      what_title:"Qué es Mango",what_text1:"No es dinero. No es crédito. No es un sistema alternativo.",
+
+      // REGISTRO
+      btn_register:"Ir al Registro",
+      reg_title:"Registro público Mango",
+      reg_intro1:"Aquí viven las líneas reales. El Registro es un lugar de reconocimiento escrito: dice “esto ocurrió, entre personas, en el mundo real”.",
+      reg_intro2:"Cada línea reconoce un intercambio real. No es crédito. No es deuda. No es una cuenta.",
+      reg_eq:"Una línea = 🥭",
+      reg_no:"Sin números. Sin equivalencias. Sin acumulación.",
+
+      reg_time_h:"Principio del tiempo",
+      reg_time_p1:"Este Registro no es un feed. No empuja lo nuevo por encima de lo viejo.",
+      reg_time_p2:"Si algo es pasado, queda en el pasado. Las líneas permanecen en orden natural. Mango tiene temporalidad explícita: no está diseñado para durar como acumulación.",
+
+      reg_struct_h:"Principio estructural",
+      reg_struct_p1:"El Registro no mide. No suma. No calcula.",
+      reg_struct_p2:"Las líneas no se cuentan. Permanecen. Cualquier uso que introduzca números o equivalencias no es Mango.",
+
+      reg_how_h:"Cómo escribir una línea",
+      reg_how_p:"Escribe simple. Escribe humano. Escribe real. Una línea describe un gesto o intercambio que realmente sucedió.",
+      reg_how_li1:"Sin precios, sin cantidades, sin cálculos.",
+      reg_how_li2:"Sin “valor” medido: solo lo que ocurrió.",
+      reg_how_li3:"Si quieres, usa nombres o iniciales: la privacidad es parte del cuidado.",
+      reg_how_li4:"Mejor pocos detalles verdaderos que muchos “perfectos”.",
+      reg_balance_note:"Si es desequilibrado, Mango no lo iguala con números: lo vuelve visible y cuidable con gestos reales.",
+
+      reg_examples_h:"Ejemplos (solo ejemplos, sin formato obligatorio)",
+      reg_examples_p:"— Hoy en el mercado, A. ayudó a B. a llevar las cajas a casa.\n— Ayer, C. acompañó a D. a una cita y luego le devolvió los documentos.\n— En el barrio, E. reparó una silla a F. sin pedir nada.\n— Tras un día difícil, G. cocinó para H. y dejó la comida en la puerta.",
+
+      reg_anticapture_h:"No apropiación y anti-captura",
+      reg_anticapture_p1:"Mango está diseñado para evitar acumulación, especulación y captura institucional.",
+      reg_anticapture_p2:"Nadie puede convertir este Registro en puntos, ranking, reputación o crédito social. Si se vuelve conteo o dinero, no es Mango.",
+
+      reg_live_h:"Líneas vivas",
+      reg_live_p:"Este espacio está listo para la primera línea real.",
+      reg_live_note:"Nota: no numerar líneas y no mostrar totales/contadores.",
+
+      btn_back_write:"Volver a “Escribe una línea”",
+      btn_contact2:"Contacto",
+
+      what_title:"Qué es Mango",
+      what_text1:"No es dinero. No es crédito. No es un sistema alternativo.",
       what_text2:"Es confianza local: reconocer sin convertir en valor numérico.",
-      what_li1:"No acumulable.",what_li2:"No cuantificable.",what_li3:"No apropiable.",what_li4:"Temporalidad explícita.",
-      qr_main:"Pasó algo entre dos personas.",qr_sub:"Aquí puedes entenderlo.",
-      contact_title:"Contacto (instituciones / prensa)",contact_text:"Para prensa o instituciones, escribe aquí:",
+      what_li1:"No acumulable.",
+      what_li2:"No cuantificable.",
+      what_li3:"No apropiable.",
+      what_li4:"Temporalidad explícita.",
+
+      qr_main:"Pasó algo entre dos personas.",
+      qr_sub:"Aquí puedes entenderlo.",
+
+      contact_title:"Contacto (instituciones / prensa)",
+      contact_text:"Para prensa o instituciones, escribe aquí:",
       contact_note:"Email público para que periodistas lo encuentren.",
+
       footer1:"Creado por Juan de Dios Annaloro Mercedes — 02 feb 2026 — En memoria de Larimar.",
       footer2:"Se practica y se transmite, pero no se posee ni se centraliza."
     },
-    fr:{title:"Une infrastructure locale de confiance non monétaire.",subtitle:"Mango reconnaît des échanges réels par une ligne, sans quantités ni valeur numérique.",
-      do_title:"Fais Mango maintenant",do_text:"Si quelque chose de réel s’est passé entre deux personnes, Mango le reconnaît. Il ne mesure pas. Il n’accumule pas.",
+
+    fr:{
+      title:"Une infrastructure locale de confiance non monétaire.",
+      subtitle:"Mango reconnaît des échanges réels par une ligne, sans quantités ni valeur numérique.",
+
+      do_title:"Fais Mango maintenant",
+      do_text:"Si quelque chose de réel s’est passé entre deux personnes, Mango le reconnaît. Il ne mesure pas. Il n’accumule pas.",
       do_note:"Règle : une ligne = reconnaissance. Pas de chiffres. Pas d’équivalences.",
-      btn_first:"Écrire une ligne",btn_about:"Qu’est-ce que Mango",btn_contact:"Contact",btn_press:"Écrire (presse)",btn_top:"Haut de page",
-      write_title:"Écrire une ligne",write_text:"Une ligne décrit l’échange réel. Humain et simple.",
-      write_li1:"Aucune quantité/prix/chiffre.",write_li2:"Décrire l’action réelle (qui, quoi, quand).",
+
+      btn_first:"Écrire une ligne",
+      btn_about:"Qu’est-ce que Mango",
+      btn_contact:"Contact",
+      btn_press:"Écrire (presse)",
+      btn_top:"Haut de page",
+
+      write_title:"Écrire une ligne",
+      write_text:"Une ligne décrit l’échange réel. Humain et simple.",
+      write_li1:"Aucune quantité/prix/chiffre.",
+      write_li2:"Décrire l’action réelle (qui, quoi, quand).",
       write_li3:"Déséquilibre ≠ dette : visible et soignable.",
       write_note:"Utilise des verbes concrets.",
-      what_title:"Qu’est-ce que Mango",what_text1:"Ce n’est pas une monnaie. Ni un crédit. Ni un système alternatif.",
+
+      // REGISTRE
+      btn_register:"Aller au Registre",
+      reg_title:"Registre public Mango",
+      reg_intro1:"Ici vivent les lignes réelles. Le Registre est un lieu de reconnaissance écrite : il dit « ceci est arrivé, entre des personnes, dans le monde réel ».",
+      reg_intro2:"Chaque ligne reconnaît un échange réel. Ce n’est pas un crédit. Ce n’est pas une dette. Ce n’est pas un compte.",
+      reg_eq:"Une ligne = 🥭",
+      reg_no:"Pas de chiffres. Pas d’équivalences. Pas d’accumulation.",
+
+      reg_time_h:"Principe du temps",
+      reg_time_p1:"Ce Registre n’est pas un feed. Il ne pousse pas le nouveau au-dessus de l’ancien.",
+      reg_time_p2:"Si c’est passé, ça reste dans le passé. Les lignes restent dans l’ordre naturel. Mango a une temporalité explicite : il n’est pas conçu pour durer comme accumulation.",
+
+      reg_struct_h:"Principe structurel",
+      reg_struct_p1:"Le Registre ne mesure pas. Il ne somme pas. Il ne calcule pas.",
+      reg_struct_p2:"Les lignes ne se comptent pas. Elles restent. Tout usage qui introduit chiffres/compte/équivalences n’est pas Mango.",
+
+      reg_how_h:"Comment écrire une ligne",
+      reg_how_p:"Écris simple. Écris humain. Écris réel. Une ligne décrit un geste ou un échange réellement arrivé.",
+      reg_how_li1:"Pas de prix, pas de quantités, pas de calculs.",
+      reg_how_li2:"Pas de « valeur » mesurée : seulement ce qui est arrivé.",
+      reg_how_li3:"Si tu veux, utilise des prénoms ou des initiales : la confidentialité fait partie du soin.",
+      reg_how_li4:"Mieux vaut quelques détails vrais que des détails « parfaits ».",
+      reg_balance_note:"Si c’est déséquilibré, Mango ne l’égalise pas par des chiffres : il le rend visible et soignable avec des gestes réels.",
+
+      reg_examples_h:"Exemples (seulement des exemples, sans format obligatoire)",
+      reg_examples_p:"— Aujourd’hui au marché, A. a aidé B. à porter les caisses.\n— Hier, C. a accompagné D. à un rendez-vous puis a rendu les documents.\n— Dans le quartier, E. a réparé une chaise pour F. sans rien demander.\n— Après une journée difficile, G. a cuisiné pour H. et a laissé le repas à la porte.",
+
+      reg_anticapture_h:"Non-appropriation et anti-capture",
+      reg_anticapture_p1:"Mango est conçu pour éviter accumulation, spéculation et capture institutionnelle.",
+      reg_anticapture_p2:"Personne ne peut transformer ce Registre en points, classement, réputation ou crédit social. Si cela devient comptage ou monnaie, ce n’est pas Mango.",
+
+      reg_live_h:"Lignes vivantes",
+      reg_live_p:"Cet espace est prêt à accueillir la première ligne réelle.",
+      reg_live_note:"Note : ne pas numéroter les lignes et ne pas afficher de total/compteur.",
+
+      btn_back_write:"Retour à « Écrire une ligne »",
+      btn_contact2:"Contact",
+
+      what_title:"Qu’est-ce que Mango",
+      what_text1:"Ce n’est pas une monnaie. Ni un crédit. Ni un système alternatif.",
       what_text2:"C’est la confiance locale : reconnaître sans valeur numérique.",
-      what_li1:"Non accumulable.",what_li2:"Non quantifiable.",what_li3:"Non appropriable.",what_li4:"Temporalité explicite.",
-      qr_main:"Quelque chose s’est passé entre deux personnes.",qr_sub:"Ici tu peux comprendre.",
-      contact_title:"Contact (institutions / presse)",contact_text:"Pour la presse ou les institutions :",
+      what_li1:"Non accumulable.",
+      what_li2:"Non quantifiable.",
+      what_li3:"Non appropriable.",
+      what_li4:"Temporalité explicite.",
+
+      qr_main:"Quelque chose s’est passé entre deux personnes.",
+      qr_sub:"Ici tu peux comprendre.",
+
+      contact_title:"Contact (institutions / presse)",
+      contact_text:"Pour la presse ou les institutions :",
       contact_note:"Email public pour que les journalistes le trouvent.",
+
       footer1:"Créé par Juan de Dios Annaloro Mercedes — 02 fév 2026 — En mémoire de Larimar.",
       footer2:"Praticable et transmissible, mais non possédable ni centralisable."
     },
-    de:{title:"Eine nicht-monetäre lokale Vertrauens-Infrastruktur.",subtitle:"Mango erkennt reale Austausche mit einer Zeile an – ohne Mengen und Zahlenwert.",
-      do_title:"Mach Mango jetzt",do_text:"Wenn zwischen zwei Menschen etwas Reales passiert ist, erkennt Mango es an. Es misst nicht. Es häuft nicht an.",
+
+    de:{
+      title:"Eine nicht-monetäre lokale Vertrauens-Infrastruktur.",
+      subtitle:"Mango erkennt reale Austausche mit einer Zeile an – ohne Mengen und Zahlenwert.",
+
+      do_title:"Mach Mango jetzt",
+      do_text:"Wenn zwischen zwei Menschen etwas Reales passiert ist, erkennt Mango es an. Es misst nicht. Es häuft nicht an.",
       do_note:"Regel: eine Zeile = Anerkennung. Keine Zahlen. Keine Äquivalenzen.",
-      btn_first:"Eine Zeile schreiben",btn_about:"Was ist Mango",btn_contact:"Kontakt",btn_press:"Schreiben (Presse)",btn_top:"Nach oben",
-      write_title:"Eine Zeile schreiben",write_text:"Eine Zeile beschreibt den realen Austausch. Menschlich und einfach.",
-      write_li1:"Keine Mengen/Preise/Zahlen.",write_li2:"Beschreibe die reale Handlung (wer, was, wann).",
+
+      btn_first:"Eine Zeile schreiben",
+      btn_about:"Was ist Mango",
+      btn_contact:"Kontakt",
+      btn_press:"Schreiben (Presse)",
+      btn_top:"Nach oben",
+
+      write_title:"Eine Zeile schreiben",
+      write_text:"Eine Zeile beschreibt den realen Austausch. Menschlich und einfach.",
+      write_li1:"Keine Mengen/Preise/Zahlen.",
+      write_li2:"Beschreibe die reale Handlung (wer, was, wann).",
       write_li3:"Ungleichgewicht ≠ Schuld: sichtbar und pflegbar.",
       write_note:"Nutze konkrete Verben.",
-      what_title:"Was ist Mango",what_text1:"Kein Geld. Kein Kredit. Kein alternatives System.",
+
+      // REGISTER
+      btn_register:"Zum Register",
+      reg_title:"Öffentliches Mango-Register",
+      reg_intro1:"Hier leben die echten Zeilen. Das Register ist ein Ort schriftlicher Anerkennung: es sagt „das ist passiert, zwischen Menschen, in der realen Welt“.",
+      reg_intro2:"Jede Zeile erkennt einen realen Austausch an. Kein Kredit. Keine Schuld. Kein Konto.",
+      reg_eq:"Eine Zeile = 🥭",
+      reg_no:"Keine Zahlen. Keine Äquivalenzen. Keine Anhäufung.",
+
+      reg_time_h:"Zeitprinzip",
+      reg_time_p1:"Dieses Register ist kein Feed. Es drückt Neues nicht über Altes.",
+      reg_time_p2:"Wenn etwas vergangen ist, bleibt es in der Vergangenheit. Zeilen bleiben in natürlicher Reihenfolge. Mango hat explizite Zeitlichkeit: nicht als Anhäufung gedacht.",
+
+      reg_struct_h:"Strukturprinzip",
+      reg_struct_p1:"Das Register misst nicht. Es summiert nicht. Es rechnet nicht.",
+      reg_struct_p2:"Zeilen werden nicht gezählt. Sie bleiben. Jede Nutzung mit Zahlen/Counting/Äquivalenzen ist nicht Mango.",
+
+      reg_how_h:"Wie man eine Zeile schreibt",
+      reg_how_p:"Schreib einfach. Schreib menschlich. Schreib real. Eine Zeile beschreibt eine Geste oder einen Austausch, der wirklich passiert ist.",
+      reg_how_li1:"Keine Preise, keine Mengen, keine Berechnungen.",
+      reg_how_li2:"Kein gemessener „Wert“: nur was passiert ist.",
+      reg_how_li3:"Wenn du willst, nutze Vornamen oder Initialen: Privatsphäre ist Teil der Fürsorge.",
+      reg_how_li4:"Lieber wenige wahre Details als viele „perfekte“.",
+      reg_balance_note:"Bei Ungleichgewicht gleicht Mango nicht mit Zahlen aus: es macht es sichtbar und pflegbar durch reale Gesten.",
+
+      reg_examples_h:"Beispiele (nur Beispiele, kein Pflichtformat)",
+      reg_examples_p:"— Heute auf dem Markt half A. B., die Kisten nach Hause zu tragen.\n— Gestern begleitete C. D. zu einem Termin und brachte danach die Dokumente zurück.\n— Im Viertel reparierte E. einen Stuhl für F. ohne etwas zu verlangen.\n— Nach einem schweren Tag kochte G. für H. und stellte das Essen vor die Tür.",
+
+      reg_anticapture_h:"Nicht-Aneignung und Anti-Capture",
+      reg_anticapture_p1:"Mango ist so gestaltet, dass Anhäufung, Spekulation und institutionelle Vereinnahmung vermieden werden.",
+      reg_anticapture_p2:"Niemand darf dieses Register in Punkte, Ranking, Reputation oder Social Credit verwandeln. Wenn es Zählung oder Geld wird, ist es nicht Mango.",
+
+      reg_live_h:"Lebende Zeilen",
+      reg_live_p:"Dieser Raum ist bereit für die erste echte Zeile.",
+      reg_live_note:"Hinweis: Zeilen nicht nummerieren und keinen Gesamtzähler anzeigen.",
+
+      btn_back_write:"Zurück zu „Eine Zeile schreiben“",
+      btn_contact2:"Kontakt",
+
+      what_title:"Was ist Mango",
+      what_text1:"Kein Geld. Kein Kredit. Kein alternatives System.",
       what_text2:"Lokales Vertrauen: Anerkennung ohne Zahlenwert.",
-      what_li1:"Nicht akkumulativ.",what_li2:"Nicht quantifizierbar.",what_li3:"Nicht aneignbar.",what_li4:"Explizite Zeitlichkeit.",
-      qr_main:"Zwischen zwei Menschen ist etwas passiert.",qr_sub:"Hier kannst du es verstehen.",
-      contact_title:"Kontakt (Institutionen / Presse)",contact_text:"Für Presse oder Institutionen:",
+      what_li1:"Nicht akkumulativ.",
+      what_li2:"Nicht quantifizierbar.",
+      what_li3:"Nicht aneignbar.",
+      what_li4:"Explizite Zeitlichkeit.",
+
+      qr_main:"Zwischen zwei Menschen ist etwas passiert.",
+      qr_sub:"Hier kannst du es verstehen.",
+
+      contact_title:"Kontakt (Institutionen / Presse)",
+      contact_text:"Für Presse oder Institutionen:",
       contact_note:"Öffentliche E-Mail, damit Journalist:innen sie finden.",
+
       footer1:"Erstellt von Juan de Dios Annaloro Mercedes — 02. Feb 2026 — In Erinnerung an Larimar.",
       footer2:"Praktizierbar und weitergebbar, aber nicht besitzbar oder zentralisierbar."
     },
-    zh:{title:"一种非货币化的本地信任基础设施。",subtitle:"Mango 用“一行记录”承认真实交换，不包含数量与数值。",
-      do_title:"现在就做 Mango",do_text:"如果两个人之间发生了真实的事，Mango 予以承认。它不计量，不累积。",
+
+    zh:{
+      title:"一种非货币化的本地信任基础设施。",
+      subtitle:"Mango 用“一行记录”承认真实交换，不包含数量与数值。",
+
+      do_title:"现在就做 Mango",
+      do_text:"如果两个人之间发生了真实的事，Mango 予以承认。它不计量，不累积。",
       do_note:"规则：一行 = 承认。没有数字，没有等价换算。",
-      btn_first:"写下一行",btn_about:"什么是 Mango",btn_contact:"联系",btn_press:"写信（媒体）",btn_top:"回到顶部",
-      write_title:"写下一行",write_text:"一行描述真实交换。保持人性、简洁。",
-      write_li1:"不要写数量/价格/数字。",write_li2:"描述真实行动（谁、做了什么、何时）。",
+
+      btn_first:"写下一行",
+      btn_about:"什么是 Mango",
+      btn_contact:"联系",
+      btn_press:"写信（媒体）",
+      btn_top:"回到顶部",
+
+      write_title:"写下一行",
+      write_text:"一行描述真实交换。保持人性、简洁。",
+      write_li1:"不要写数量/价格/数字。",
+      write_li2:"描述真实行动（谁、做了什么、何时）。",
       write_li3:"不平衡 ≠ 债：可见、可被照顾。",
       write_note:"使用具体动词。",
-      what_title:"什么是 Mango",what_text1:"不是货币，不是信用，不是替代经济系统。",
+
+      // REGISTER
+      btn_register:"进入登记册",
+      reg_title:"Mango 公开登记册",
+      reg_intro1:"这里存放真实的“行”。登记册是书面承认之地：它说“这件事发生过，在真实世界里，在人和人之间”。",
+      reg_intro2:"每一行承认可验证的真实交换：不是信用、不是债务、不是账户。",
+      reg_eq:"一行 = 🥭",
+      reg_no:"没有数字。没有等价换算。没有累积。",
+
+      reg_time_h:"时间原则",
+      reg_time_p1:"这不是信息流（feed）。不会把新的压在旧的上面。",
+      reg_time_p2:"过去的事留在过去。行按自然顺序保留。Mango 具有明确时间性：不是为“累积”而设计。",
+
+      reg_struct_h:"结构原则",
+      reg_struct_p1:"登记册不计量、不相加、不计算。",
+      reg_struct_p2:"行不被计数，只是保留。任何引入数字、计数或等价换算的用法都不是 Mango。",
+
+      reg_how_h:"如何写一行",
+      reg_how_p:"写得简单、真实、有人味。一行描述确实发生过的动作或交换。",
+      reg_how_li1:"不要写价格、数量、计算。",
+      reg_how_li2:"不要写“衡量出来的价值”：只写发生了什么。",
+      reg_how_li3:"如需隐私，可用名字首字母或昵称：隐私也是照顾的一部分。",
+      reg_how_li4:"少量真实细节胜过大量“完美”细节。",
+      reg_balance_note:"若不平衡，Mango 不用数字“拉平”：它让其可见，并在人的时间里用真实行动去照顾。",
+
+      reg_examples_h:"例子（仅例子，无强制格式）",
+      reg_examples_p:"— 今天在市场，A. 帮 B. 把箱子搬回家。\n— 昨天，C. 陪 D. 去办事，之后把文件送回。\n— 在社区里，E. 给 F. 修了一把椅子，没有索取任何回报。\n— 在艰难的一天后，G. 给 H. 做了饭，把餐放在门口。",
+
+      reg_anticapture_h:"不可占有与反捕获",
+      reg_anticapture_p1:"Mango 的设计目标是避免累积、投机与制度性捕获。",
+      reg_anticapture_p2:"任何人都不能把登记册变成积分、排名、声誉或社会信用。若变成计数或货币，就不是 Mango。",
+
+      reg_live_h:"活的行",
+      reg_live_p:"这个空间已经准备好承载第一行真实记录。",
+      reg_live_note:"注意：不要给行编号，不要显示总数或计数器。",
+
+      btn_back_write:"返回“写下一行”",
+      btn_contact2:"联系",
+
+      what_title:"什么是 Mango",
+      what_text1:"不是货币，不是信用，不是替代经济系统。",
       what_text2:"本地信任：不把交换变成数字价值。",
-      what_li1:"不可累积。",what_li2:"不可量化。",what_li3:"不可占有。",what_li4:"明确时间性。",
-      qr_main:"两个人之间发生了什么。",qr_sub:"你可以在这里理解。",
-      contact_title:"联系（机构 / 媒体）",contact_text:"媒体、学校或机构合作请联系：",
+      what_li1:"不可累积。",
+      what_li2:"不可量化。",
+      what_li3:"不可占有。",
+      what_li4:"明确时间性。",
+
+      qr_main:"两个人之间发生了什么。",
+      qr_sub:"你可以在这里理解。",
+
+      contact_title:"联系（机构 / 媒体）",
+      contact_text:"媒体、学校或机构合作请联系：",
       contact_note:"邮箱公开，方便记者找到。",
+
       footer1:"由 Juan de Dios Annaloro Mercedes 创建 — 2026年2月2日 — 纪念 Larimar。",
       footer2:"可实践与传递，但不可被拥有或中心化。"
     }
@@ -244,20 +672,70 @@
     document.documentElement.lang=l;
     document.querySelectorAll(".chip").forEach(b=>b.setAttribute("aria-current", b.dataset.lang===l ? "true":"false"));
     const d=T[l]||T[DEFAULT_LANG];
+
     const m={
       t_title:d.title,t_subtitle:d.subtitle,
       t_do_title:d.do_title,t_do_text:d.do_text,t_do_note:d.do_note,
       t_btn_first:d.btn_first,t_btn_about:d.btn_about,t_btn_contact:d.btn_contact,t_btn_press:d.btn_press,t_btn_top:d.btn_top,
+
       t_write_title:d.write_title,t_write_text:d.write_text,t_write_li1:d.write_li1,t_write_li2:d.write_li2,t_write_li3:d.write_li3,t_write_note:d.write_note,
+
+      // REGISTRO (mappa completa)
+      t_btn_register:d.btn_register,
+      t_reg_title:d.reg_title,
+      t_reg_intro1:d.reg_intro1,
+      t_reg_intro2:d.reg_intro2,
+      t_reg_eq:d.reg_eq,
+      t_reg_no:d.reg_no,
+      t_reg_time_h:d.reg_time_h,
+      t_reg_time_p1:d.reg_time_p1,
+      t_reg_time_p2:d.reg_time_p2,
+      t_reg_struct_h:d.reg_struct_h,
+      t_reg_struct_p1:d.reg_struct_p1,
+      t_reg_struct_p2:d.reg_struct_p2,
+      t_reg_how_h:d.reg_how_h,
+      t_reg_how_p:d.reg_how_p,
+      t_reg_how_li1:d.reg_how_li1,
+      t_reg_how_li2:d.reg_how_li2,
+      t_reg_how_li3:d.reg_how_li3,
+      t_reg_how_li4:d.reg_how_li4,
+      t_reg_balance_note:d.reg_balance_note,
+      t_reg_examples_h:d.reg_examples_h,
+      t_reg_examples_p:d.reg_examples_p,
+      t_reg_anticapture_h:d.reg_anticapture_h,
+      t_reg_anticapture_p1:d.reg_anticapture_p1,
+      t_reg_anticapture_p2:d.reg_anticapture_p2,
+      t_reg_live_h:d.reg_live_h,
+      t_reg_live_p:d.reg_live_p,
+      t_reg_live_note:d.reg_live_note,
+      t_btn_back_write:d.btn_back_write,
+      t_btn_contact2:d.btn_contact2,
+
       t_what_title:d.what_title,t_what_text1:d.what_text1,t_what_text2:d.what_text2,t_what_li1:d.what_li1,t_what_li2:d.what_li2,t_what_li3:d.what_li3,t_what_li4:d.what_li4,
+
       t_qr_main:d.qr_main,t_qr_sub:d.qr_sub,
       t_contact_title:d.contact_title,t_contact_text:d.contact_text,t_contact_note:d.contact_note,
       t_footer_line1:d.footer1,t_footer_line2:d.footer2
     };
-    Object.keys(m).forEach(id=>{const el=document.getElementById(id); if(el) el.textContent=m[id];});
+
+    Object.keys(m).forEach(id=>{
+      const el=document.getElementById(id);
+      if(!el) return;
+      // Per esempi con \n: rendiamo i ritorni a capo visibili
+      if(id==="t_reg_examples_p"){
+        el.textContent = m[id];
+        el.innerHTML = el.textContent.replace(/\n/g,"<br>");
+        return;
+      }
+      el.textContent=m[id];
+    });
   }
 
-  document.querySelectorAll(".chip").forEach(b=>b.addEventListener("click", ()=>{setLang(b.dataset.lang);apply(b.dataset.lang);} ));
+  document.querySelectorAll(".chip").forEach(b=>b.addEventListener("click", ()=>{
+    setLang(b.dataset.lang);
+    apply(b.dataset.lang);
+  }));
+
   apply(getLang());
 </script>
 

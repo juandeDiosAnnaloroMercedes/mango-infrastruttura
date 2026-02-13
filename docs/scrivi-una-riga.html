@@ -1,189 +1,166 @@
-  <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="it">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
-<meta http-equiv="Pragma" content="no-cache">
-<meta http-equiv="Expires" content="0">
-
-<title>Mango – Scrivi una riga</title>
+<title>Scrivi una riga – Mango</title>
 
 <style>
-  body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;background:#fdfbf7;color:#222;padding:80px 20px 40px;text-align:center;}
-  .langbar{position:fixed;top:12px;left:50%;transform:translateX(-50%);display:flex;gap:10px;background:#fff;border:1px solid #eee;border-radius:14px;padding:10px 12px;box-shadow:0 10px 30px rgba(0,0,0,.06);z-index:999;}
-  .langbar a{text-decoration:none;font-weight:900;font-size:13px;padding:6px 10px;border-radius:10px;color:#111;}
-  .langbar a.active{background:#111;color:#fff;}
-  .container{max-width:760px;margin:0 auto;}
-  h1{font-size:34px;margin:20px 0 12px;}
-  p{font-size:16px;line-height:1.6;margin:0 auto 18px;max-width:680px;}
-  textarea{width:100%;max-width:680px;height:120px;padding:12px;font-size:16px;border-radius:12px;border:1px solid #ddd;background:#fff;resize:vertical;}
-  .row{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:14px;}
-  button,a.btnlink{padding:12px 18px;border:none;border-radius:12px;font-weight:900;cursor:pointer;text-decoration:none;display:inline-block;}
-  .primary{background:#f4a825;color:#fff;}
-  .primary:hover{background:#e69500;}
-  .dark{background:#111;color:#fff;}
-  .dark:hover{background:#000;}
-  .danger{background:#b00020;color:#fff;}
-  .danger:hover{background:#8b0019;}
-  .list{margin:22px auto 0;max-width:680px;text-align:left;background:#fff;border:1px solid #eee;border-radius:16px;padding:14px 16px;}
-  .item{padding:10px 0;border-bottom:1px solid #f0f0f0;word-break:break-word;}
-  .item:last-child{border-bottom:none;}
-  .meta{font-size:12px;opacity:.6;margin-bottom:6px;}
+body{
+  margin:0;
+  font-family:-apple-system,system-ui,Segoe UI,Roboto,Arial,sans-serif;
+  background:#f7f7f7;
+  text-align:center;
+}
+.langbar{
+  margin:20px auto;
+}
+.langbar a{
+  text-decoration:none;
+  font-weight:700;
+  margin:0 8px;
+  color:#111;
+}
+.container{
+  max-width:700px;
+  margin:0 auto;
+  padding:20px;
+}
+h1{font-size:32px;margin-bottom:10px;}
+p{font-size:16px;line-height:1.5;}
+.note{
+  margin-top:10px;
+  font-size:14px;
+  opacity:.7;
+}
+textarea{
+  width:100%;
+  max-width:650px;
+  height:140px;
+  border-radius:14px;
+  border:1px solid #ddd;
+  padding:15px;
+  font-size:16px;
+}
+.row{
+  margin-top:15px;
+}
+button{
+  padding:12px 20px;
+  border:none;
+  border-radius:20px;
+  font-weight:700;
+  margin:6px;
+  cursor:pointer;
+}
+.primary{background:#f4a825;color:white;}
+.dark{background:#111;color:white;}
+.danger{background:#b00020;color:white;}
+.list{
+  margin-top:25px;
+  text-align:left;
+}
+.item{
+  padding:10px 0;
+  border-bottom:1px solid #eee;
+}
+.meta{
+  font-size:12px;
+  opacity:.6;
+}
 </style>
 </head>
 
 <body>
 
-<nav class="langbar" aria-label="Language">
-  <a href="?lang=it" data-lang="it">IT</a>
-  <a href="?lang=en" data-lang="en">EN</a>
-  <a href="?lang=es" data-lang="es">ES</a>
-  <a href="?lang=fr" data-lang="fr">FR</a>
-  <a href="?lang=de" data-lang="de">DE</a>
-  <a href="?lang=zh" data-lang="zh">中文</a>
-</nav>
-
-<div class="container">
-  <h1 id="title"></h1>
-  <p id="desc"></p>
-<p id="note" style="margin-top:10px;font-weight:600;"></p>
-  <textarea id="lineInput"></textarea>
-
-  <div class="row">
-    <button class="primary" id="saveBtn"></button>
-    <button class="dark" id="copyBtn"></button>
-    <button class="danger" id="clearBtn"></button>
-  </div>
-
-  <div class="row" style="margin-top:16px;">
-    <a class="btnlink dark" id="homeBtn"
-       href="https://juandediosannaloromercedes.github.io/mango-infrastruttura/"></a>
-  </div>
-
-  <div class="list" id="listBox" style="display:none;">
-    <div id="savedList"></div>
-  </div>
+<div class="langbar">
+  <a href="?lang=it">IT</a>
+  <a href="?lang=en">EN</a>
+  <a href="?lang=es">ES</a>
+  <a href="?lang=fr">FR</a>
+  <a href="?lang=de">DE</a>
+  <a href="?lang=zh">中文</a>
 </div>
 
-<p id="note" class="small"></p>
+<div class="container">
+
+<h1 id="title">Scrivi una riga</h1>
+<p id="desc">
+Scrivi la riga dello scambio. Nessuna quantità. Nessun valore numerico.
+La riga viene salvata sul tuo dispositivo (non online).
+</p>
+
+<p class="note" id="note">
+Le cose belle qui non si inviano. Si salvano.
+</p>
+
+<textarea id="lineInput" placeholder="Scrivi qui la tua riga..."></textarea>
+
+<div class="row">
+  <button class="primary" onclick="saveLine()">Salva riga</button>
+  <button class="dark" onclick="copyAll()">Copia tutte</button>
+  <button class="danger" onclick="clearAll()">Cancella tutto</button>
+</div>
+
+<div class="row">
+  <button class="dark" onclick="goHome()">Torna alla home</button>
+</div>
+
+<div class="list" id="savedList"></div>
+
+</div>
 
 <script>
-(function(){
+const STORAGE_KEY = "mango_lines_v1";
 
-<script>
-(function(){
-  const VERSION = "MANGO_V1_STABLE";
+function getLines(){
+  return JSON.parse(localStorage.getItem(STORAGE_KEY) || "[]");
+}
 
-  const T = {
-  it:{
-    title:"Scrivi una riga",
-    desc:"Scrivi la riga dello scambio. Nessuna quantità. Nessun valore numerico. La riga viene salvata sul tuo dispositivo (non online).",
-    note:"Qui le cose belle non si inviano. Restano."
-  },
-  en:{
-    title:"Write one line",
-    desc:"Write the line of the exchange. No quantity. No numeric value. The line is saved on your device (not online).",
-    note:"Here, beautiful things are not sent. They remain."
-  },
-  es:{
-    title:"Escribe una línea",
-    desc:"Escribe la línea del intercambio. Sin cantidad. Sin valor numérico. La línea se guarda en tu dispositivo (no en línea).",
-    note:"Aquí las cosas bellas no se envían. Permanecen."
-  },
-  fr:{
-    title:"Écrire une ligne",
-    desc:"Écris la ligne de l’échange. Aucune quantité. Aucune valeur numérique. La ligne est enregistrée sur ton appareil (pas en ligne).",
-    note:"Ici, les belles choses ne s’envoient pas. Elles restent."
-  },
-  de:{
-    title:"Eine Zeile schreiben",
-    desc:"Schreibe die Zeile des Austauschs. Keine Menge. Kein Zahlenwert. Die Zeile wird auf deinem Gerät gespeichert (nicht online).",
-    note:"Hier werden schöne Dinge nicht gesendet. Sie bleiben."
-  },
-  zh:{
-    title:"写一行",
-    desc:"写下交换的一行。不记录数量，不设数字价值。内容保存在你的设备上（不在线）。",
-    note:"在这里，美好的事物不会被发送。它们会留下。"
-  }
-};
-
-  const allowed = new Set(["it","en","es","fr","de","zh"]);
-  const params = new URLSearchParams(location.search);
-  const lang = allowed.has(params.get("lang")) ? params.get("lang") : "it";
-  const t = T[lang] || T.it;
-  document.documentElement.lang = lang;
-
-  document.getElementById("title").textContent = t.title;
-  document.getElementById("desc").textContent = t.desc;
-document.getElementById("note").textContent = t.note;
+function saveLine(){
   const input = document.getElementById("lineInput");
-  input.placeholder = t.placeholder;
-
-  document.getElementById("saveBtn").textContent = t.save;
-  document.getElementById("copyBtn").textContent = t.copy;
-  document.getElementById("clearBtn").textContent = t.clear;
-
-  const homeBtn = document.getElementById("homeBtn");
-  homeBtn.textContent = t.home;
-
-  document.querySelectorAll(".langbar a").forEach(a=>{
-    if(a.dataset.lang === lang) a.classList.add("active");
+  const text = input.value.trim();
+  if(!text) return;
+  const lines = getLines();
+  lines.push({
+    text:text,
+    date:new Date().toLocaleString()
   });
-
-  const hu = new URL(homeBtn.href);
-  hu.searchParams.set("lang", lang);
-  hu.searchParams.set("v", VERSION);
-  homeBtn.href = hu.toString();
-
-  const KEY = "mango_rows_v3";
-  const list = document.getElementById("savedList");
-  const box = document.getElementById("listBox");
-
-  function esc(s){
-    return String(s).replaceAll("&","&amp;").replaceAll("<","&lt;").replaceAll(">","&gt;").replaceAll('"',"&quot;").replaceAll("'","&#039;");
-  }
-  function load(){ try{return JSON.parse(localStorage.getItem(KEY)||"[]");}catch(e){return[];} }
-  function store(rows){ localStorage.setItem(KEY, JSON.stringify(rows)); }
-
-  function render(){
-    const rows = load();
-    if(!rows.length){ box.style.display="none"; list.innerHTML=""; return; }
-    box.style.display="block";
-    list.innerHTML = rows.slice().reverse().map(r=>{
-      const d=new Date(r.ts);
-      return `<div class="item"><div class="meta">${d.toLocaleString()}</div>${esc(r.text)}</div>`;
-    }).join("");
-  }
-
-  document.getElementById("saveBtn").onclick = function(){
-    const text = input.value.trim();
-    if(!text) return;
-    const rows = load();
-    rows.push({ts:Date.now(), text});
-    store(rows);
-    input.value="";
-    render();
-  };
-
-  document.getElementById("copyBtn").onclick = async function(){
-    const rows = load();
-    const txt = rows.map(r=>r.text).join("\n");
-    if(!txt) return alert(t.none);
-    try{ await navigator.clipboard.writeText(txt); }
-    catch(e){ prompt("Copia:", txt); }
-  };
-
-  document.getElementById("clearBtn").onclick = function(){
-    if(confirm(t.clear + "?")){
-      localStorage.removeItem(KEY);
-      render();
-    }
-  };
-
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(lines));
+  input.value="";
   render();
-})();
+}
+
+function render(){
+  const box = document.getElementById("savedList");
+  const lines = getLines();
+  box.innerHTML="";
+  lines.forEach(l=>{
+    box.innerHTML += `
+      <div class="item">
+        <div class="meta">${l.date}</div>
+        <div>${l.text}</div>
+      </div>
+    `;
+  });
+}
+
+function copyAll(){
+  const lines = getLines();
+  const text = lines.map(l => l.date + " — " + l.text).join("\n");
+  navigator.clipboard.writeText(text);
+}
+
+function clearAll(){
+  localStorage.removeItem(STORAGE_KEY);
+  render();
+}
+
+function goHome(){
+  window.location.href="index.html";
+}
+
+render();
 </script>
 
 </body>

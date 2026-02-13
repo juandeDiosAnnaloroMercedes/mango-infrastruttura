@@ -1,46 +1,211 @@
 <!doctype html>
-<html>
+<html lang="it">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Mango — Scrivi una riga</title>
-<link rel="stylesheet" href="style.css">
-<script src="lang.js" defer></script>
-<script src="lang-nav.js" defer></script>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Mango — Scrivi una riga</title>
+  <style>
+    :root{--bg:#fff;--fg:#111;--muted:#6b7280;--card:#f6f7f9;--border:#e5e7eb;--shadow:0 10px 30px rgba(0,0,0,.06);--r:18px;--max:860px;--p:18px;--font:ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial;}
+    body{margin:0;font-family:var(--font);background:var(--bg);color:var(--fg)}
+    header{position:sticky;top:0;background:rgba(255,255,255,.92);backdrop-filter:blur(8px);border-bottom:1px solid var(--border);z-index:10}
+    .hwrap{max-width:var(--max);margin:0 auto;padding:14px var(--p);display:flex;justify-content:space-between;align-items:center;gap:12px}
+    .brand{font-weight:900;font-size:22px;display:flex;gap:10px;align-items:center}
+    .lang{display:flex;gap:10px;flex-wrap:wrap;justify-content:flex-end}
+    .chip{border:1px solid var(--border);background:#fff;border-radius:999px;padding:10px 14px;font-weight:800;font-size:14px;cursor:pointer}
+    .chip[aria-current="true"]{outline:2px solid #111;outline-offset:2px}
+    .wrap{max-width:var(--max);margin:0 auto;padding:22px var(--p) 42px}
+    h1{margin:0;font-size:22px;line-height:1.2}
+    p{color:var(--muted);line-height:1.55}
+    .grid{display:grid;grid-template-columns:1fr;gap:14px;margin-top:18px}
+    .card{background:var(--card);border:1px solid var(--border);border-radius:var(--r);padding:16px;box-shadow:var(--shadow)}
+    .card h2{margin:0 0 10px;font-size:18px;color:#111}
+    .card p,.card li{color:#1f2937;font-size:15px;line-height:1.55}
+    ul{margin:10px 0 0 18px}
+    .btnrow{display:flex;gap:10px;flex-wrap:wrap;margin-top:12px}
+    .btn{border:0;background:#111;color:#fff;padding:12px 14px;border-radius:14px;font-weight:900;cursor:pointer;text-decoration:none;display:inline-flex;align-items:center;gap:8px}
+    .btn.secondary{background:#fff;color:#111;border:1px solid var(--border)}
+    .small{font-size:13px;color:var(--muted)}
+    .eq{font-weight:950;font-size:18px;color:#111;margin:10px 0 0}
+    textarea{
+      width:100%;min-height:132px;resize:vertical;
+      border:1px solid var(--border);border-radius:14px;
+      padding:12px;background:#fff;font-size:16px;line-height:1.35;color:#111;
+    }
+    .badge{display:inline-block;padding:8px 10px;border-radius:999px;background:#fff;border:1px solid var(--border);color:#111;font-weight:800;font-size:13px}
+  </style>
 </head>
 
 <body>
+<header id="top">
+  <div class="hwrap">
+    <div class="brand">Mango 🥭</div>
+    <nav class="lang" aria-label="Lingue">
+      <button class="chip" data-lang="it">IT</button>
+      <button class="chip" data-lang="en">EN</button>
+      <button class="chip" data-lang="es">ES</button>
+      <button class="chip" data-lang="fr">FR</button>
+      <button class="chip" data-lang="de">DE</button>
+      <button class="chip" data-lang="zh">中文</button>
+    </nav>
+  </div>
+</header>
 
-<header id="top"></header>
+<main class="wrap">
+  <section>
+    <h1 id="t_title"></h1>
+    <p id="t_subtitle"></p>
+    <div class="eq" id="t_eq"></div>
+  </section>
 
-<main class="container">
+  <section class="grid">
+    <article class="card">
+      <h2 id="t_how_title"></h2>
+      <p id="t_how_text"></p>
+      <ul>
+        <li id="t_li1"></li>
+        <li id="t_li2"></li>
+        <li id="t_li3"></li>
+      </ul>
+      <p class="small" id="t_note"></p>
+    </article>
 
-<h1 data-i18n="write_title">Scrivi una riga reale</h1>
-<p data-i18n="write_subtitle">
-Una riga riconosce uno scambio reale. Nessun numero. Nessuna equivalenza.
-</p>
+    <article class="card">
+      <h2 id="t_write_title"></h2>
+      <p id="t_write_text"></p>
 
-<p><strong>Una riga = 🥭</strong></p>
+      <textarea id="line"></textarea>
 
-<textarea id="line" placeholder="Scrivi qui la tua riga..." style="width:100%;min-height:120px;"></textarea>
+      <div class="btnrow">
+        <button class="btn" id="btn_copy">📋 <span id="t_btn_copy"></span></button>
+        <a class="btn secondary" id="btn_mail" href="#">✉️ <span id="t_btn_send"></span></a>
+      </div>
 
-<br><br>
+      <div style="margin-top:10px">
+        <span class="badge" id="badge" style="display:none"></span>
+      </div>
 
-<button onclick="copyLine()" class="btn">Copia la riga</button>
+      <div class="btnrow" style="margin-top:14px;">
+        <a class="btn secondary" id="btn_home" href="index.html">🏠 <span id="t_btn_home"></span></a>
+        <a class="btn secondary" id="btn_register" href="index.html#register">📜 <span id="t_btn_register"></span></a>
+      </div>
 
-<p style="margin-top:15px;">
-<a href="index.html#register" class="btn">Vai al Registro</a>
-<a href="index.html" class="btn">Home</a>
-</p>
-
+      <p class="small" id="t_privacy"></p>
+    </article>
+  </section>
 </main>
 
 <script>
-function copyLine(){
-const v=document.getElementById("line").value;
-navigator.clipboard.writeText(v);
-}
-</script>
+const SUPPORTED=["it","en","es","fr","de","zh"];
+const DEFAULT_LANG="it";
 
+const T={
+  it:{title:"Scrivi una riga (reale).",subtitle:"Qui non si registra un valore: si riconosce un gesto accaduto. Una riga, umana e semplice.",eq:"Una riga = 🥭",
+      how_title:"Come deve essere la riga",how_text:"Una riga descrive lo scambio reale. Niente contabilità. Niente punteggi.",
+      li1:"Non inserire quantità, prezzi, numeri o equivalenze.",li2:"Descrivi l’azione reale (chi, cosa, quando) in modo sobrio.",li3:"Se è sbilanciato, non è debito: è visibile e curabile.",
+      note:"Se vuoi, usa solo nomi di battesimo o iniziali. La privacy è parte della cura.",
+      write_title:"Scrivi adesso",write_text:"Scrivi qui sotto. Poi copia e, se vuoi, invia via email per inserirla nel Registro.",
+      placeholder:"Scrivi qui la tua riga…",btn_copy:"Copia la riga",btn_send:"Invia (email)",btn_home:"Torna alla Home",btn_register:"Vai al Registro",
+      privacy:"Mango non chiede dati obbligatori. Scrivi solo ciò che vuoi rendere pubblico.",copied:"Copiato.",empty:"Scrivi prima una riga."},
+  en:{title:"Write one (real) line.",subtitle:"No “value” is recorded here: a real gesture is recognized. One single, human line.",eq:"One line = 🥭",
+      how_title:"How the line must be",how_text:"A line describes a real exchange. No accounting. No scoring.",
+      li1:"No quantities, prices, numbers, or equivalences.",li2:"Describe the real action (who, what, when) soberly.",li3:"If unbalanced, it’s not debt: visible and care-able.",
+      note:"If you want, use first names or initials. Privacy is part of care.",
+      write_title:"Write now",write_text:"Write below. Then copy and, if you want, email it to be added to the Register.",
+      placeholder:"Write your line here…",btn_copy:"Copy the line",btn_send:"Send (email)",btn_home:"Back to Home",btn_register:"Go to Register",
+      privacy:"Mango requires no mandatory personal data. Write only what you want to be public.",copied:"Copied.",empty:"Write a line first."},
+  es:{title:"Escribe una línea (real).",subtitle:"Aquí no se registra “valor”: se reconoce un gesto ocurrido. Una sola línea, humana y simple.",eq:"Una línea = 🥭",
+      how_title:"Cómo debe ser la línea",how_text:"Una línea describe el intercambio real. Sin contabilidad. Sin puntuaciones.",
+      li1:"Sin cantidades, precios, números ni equivalencias.",li2:"Describe la acción real (quién, qué, cuándo) con sobriedad.",li3:"Si es desequilibrado, no es deuda: visible y cuidable.",
+      note:"Si quieres, usa nombres o iniciales. La privacidad es parte del cuidado.",
+      write_title:"Escribe ahora",write_text:"Escribe abajo. Luego copia y, si quieres, envía por email para añadir al Registro.",
+      placeholder:"Escribe tu línea aquí…",btn_copy:"Copiar la línea",btn_send:"Enviar (email)",btn_home:"Inicio",btn_register:"Ir al Registro",
+      privacy:"Mango no pide datos obligatorios. Escribe solo lo que quieras hacer público.",copied:"Copiado.",empty:"Primero escribe una línea."},
+  fr:{title:"Écris une ligne (réelle).",subtitle:"Ici on ne “registre” pas une valeur : on reconnaît un geste arrivé. Une seule ligne, humaine et simple.",eq:"Une ligne = 🥭",
+      how_title:"Comment doit être la ligne",how_text:"Une ligne décrit l’échange réel. Pas de comptabilité. Pas de score.",
+      li1:"Aucune quantité/prix/chiffre/équivalence.",li2:"Décrire l’action réelle (qui, quoi, quand) sobrement.",li3:"Déséquilibre ≠ dette : visible et soignable.",
+      note:"Si tu veux, utilise des prénoms ou des initiales. La confidentialité fait partie du soin.",
+      write_title:"Écris maintenant",write_text:"Écris ci-dessous. Puis copie et, si tu veux, envoie par email pour l’ajouter au Registre.",
+      placeholder:"Écris ta ligne ici…",btn_copy:"Copier la ligne",btn_send:"Envoyer (email)",btn_home:"Accueil",btn_register:"Aller au Registre",
+      privacy:"Mango ne demande aucune donnée obligatoire. Écris seulement ce que tu veux rendre public.",copied:"Copié.",empty:"Écris d’abord une ligne."},
+  de:{title:"Schreib eine (echte) Zeile.",subtitle:"Hier wird kein „Wert“ erfasst: Eine reale Geste wird anerkannt. Eine einzige, menschliche Zeile.",eq:"Eine Zeile = 🥭",
+      how_title:"Wie die Zeile sein soll",how_text:"Eine Zeile beschreibt den realen Austausch. Keine Buchhaltung. Keine Punkte.",
+      li1:"Keine Mengen/Preise/Zahlen/Äquivalenzen.",li2:"Beschreibe die reale Handlung (wer, was, wann) nüchtern.",li3:"Ungleichgewicht ≠ Schuld: sichtbar und pflegbar.",
+      note:"Wenn du willst, nutze Vornamen oder Initialen. Privatsphäre ist Teil der Fürsorge.",
+      write_title:"Jetzt schreiben",write_text:"Schreib unten. Dann kopiere und – wenn du willst – per E-Mail senden, um sie ins Register aufzunehmen.",
+      placeholder:"Schreib deine Zeile hier…",btn_copy:"Zeile kopieren",btn_send:"Senden (E-Mail)",btn_home:"Startseite",btn_register:"Zum Register",
+      privacy:"Mango verlangt keine Pflichtdaten. Schreib nur, was du öffentlich machen willst.",copied:"Kopiert.",empty:"Schreib zuerst eine Zeile."},
+  zh:{title:"写下一行（真实的）。",subtitle:"这里不登记“数值”，而是承认真实发生的动作。一行，保持人性与简洁。",eq:"一行 = 🥭",
+      how_title:"这一行应当怎样写",how_text:"一行描述真实交换：不记账、不打分。",
+      li1:"不要写数量/价格/数字/等价换算。",li2:"用克制方式写清楚（谁、做了什么、何时）。",li3:"不平衡 ≠ 债：可见、可被照顾。",
+      note:"如需隐私，可用昵称或首字母。隐私也是照顾的一部分。",
+      write_title:"现在写",write_text:"在下面写。然后复制；如愿意，可用邮件发送以加入登记册。",
+      placeholder:"在这里写下你的这一行…",btn_copy:"复制这一行",btn_send:"发送（邮件）",btn_home:"回到首页",btn_register:"进入登记册",
+      privacy:"Mango 不要求必须的个人信息。只写你愿意公开的内容。",copied:"已复制。",empty:"请先写一行。"}
+};
+
+function getLang(){
+  const u=new URL(location.href);
+  const l=(u.searchParams.get("lang")||"").toLowerCase();
+  return SUPPORTED.includes(l)?l:DEFAULT_LANG;
+}
+function setLang(l){
+  const u=new URL(location.href);
+  u.searchParams.set("lang",l);
+  history.replaceState({}, "", u.toString());
+}
+function apply(l){
+  document.documentElement.lang=l;
+  document.querySelectorAll(".chip").forEach(b=>b.setAttribute("aria-current", b.dataset.lang===l ? "true":"false"));
+  const d=T[l]||T[DEFAULT_LANG];
+
+  const map={
+    t_title:d.title,t_subtitle:d.subtitle,t_eq:d.eq,
+    t_how_title:d.how_title,t_how_text:d.how_text,
+    t_li1:d.li1,t_li2:d.li2,t_li3:d.li3,t_note:d.note,
+    t_write_title:d.write_title,t_write_text:d.write_text,
+    t_btn_copy:d.btn_copy,t_btn_send:d.btn_send,
+    t_btn_home:d.btn_home,t_btn_register:d.btn_register,
+    t_privacy:d.privacy
+  };
+  Object.keys(map).forEach(id=>{const el=document.getElementById(id); if(el) el.textContent=map[id];});
+
+  const ta=document.getElementById("line");
+  ta.placeholder=d.placeholder;
+
+  document.getElementById("btn_home").href="index.html?lang="+l;
+  document.getElementById("btn_register").href="index.html?lang="+l+"#register";
+
+  updateMailto(l);
+}
+function updateMailto(l){
+  const v=(document.getElementById("line").value||"").trim();
+  const subject=encodeURIComponent("Mango — una riga (reale)");
+  const body=encodeURIComponent(v);
+  document.getElementById("btn_mail").href="mailto:info@mangoinfrastruttura.org?subject="+subject+"&body="+body;
+}
+function badge(msg){
+  const b=document.getElementById("badge");
+  b.textContent=msg;
+  b.style.display="inline-block";
+  clearTimeout(window.__bt);
+  window.__bt=setTimeout(()=>{b.style.display="none";},1500);
+}
+
+document.querySelectorAll(".chip").forEach(b=>b.addEventListener("click", ()=>{
+  setLang(b.dataset.lang);
+  apply(b.dataset.lang);
+}));
+document.getElementById("line").addEventListener("input", ()=>updateMailto(getLang()));
+document.getElementById("btn_copy").addEventListener("click", async ()=>{
+  const l=getLang();
+  const d=T[l]||T[DEFAULT_LANG];
+  const v=(document.getElementById("line").value||"").trim();
+  if(!v){ badge(d.empty); return; }
+  try{ await navigator.clipboard.writeText(v); badge(d.copied); }
+  catch(e){ badge(d.copied); }
+});
+
+apply(getLang());
+</script>
 </body>
 </html>

@@ -67,18 +67,47 @@
   </div>
 </div>
 
+<p id="note" class="small"></p>
+
+<script>
+(function(){
+
 <script>
 (function(){
   const VERSION = "MANGO_V1_STABLE";
 
   const T = {
-    it:{title:"Scrivi una riga",desc:"Scrivi la riga dello scambio. Nessuna quantità. Nessun valore numerico. La riga viene salvata sul tuo dispositivo (non online).",placeholder:"Scrivi qui la tua riga...",save:"Salva riga",copy:"Copia tutte",clear:"Cancella tutto",home:"Torna alla home",none:"Nessuna riga salvata"},
-    en:{title:"Write one line",desc:"Write the line of the exchange. No quantities. No numeric value. The line is saved on your device (not online).",placeholder:"Write your line here...",save:"Save line",copy:"Copy all",clear:"Delete all",home:"Back to home",none:"No saved lines"},
-    es:{title:"Escribe una línea",desc:"Escribe la línea del intercambio. Sin cantidades. Sin valor numérico. La línea se guarda en tu dispositivo (no en línea).",placeholder:"Escribe tu línea aquí...",save:"Guardar línea",copy:"Copiar todas",clear:"Borrar todo",home:"Volver a inicio",none:"No hay líneas guardadas"},
-    fr:{title:"Écrire une ligne",desc:"Écris la ligne de l’échange. Aucune quantité. Aucune valeur numérique. La ligne est enregistrée sur ton appareil (pas en ligne).",placeholder:"Écris ta ligne ici...",save:"Enregistrer",copy:"Tout copier",clear:"Tout supprimer",home:"Retour à l’accueil",none:"Aucune ligne enregistrée"},
-    de:{title:"Eine Zeile schreiben",desc:"Schreibe die Zeile des Austauschs. Keine Mengen. Kein Zahlenwert. Die Zeile wird auf deinem Gerät gespeichert (nicht online).",placeholder:"Schreibe deine Zeile hier...",save:"Zeile speichern",copy:"Alle kopieren",clear:"Alles löschen",home:"Zurück zur Startseite",none:"Keine gespeicherten Zeilen"},
-    zh:{title:"写一行",desc:"写下交换的一行内容。没有数量。没有数值。该内容保存在你的设备上（不在线）。",placeholder:"在这里写下你的内容...",save:"保存",copy:"复制全部",clear:"全部删除",home:"返回首页",none:"暂无已保存内容"}
-  };
+  it:{
+    title:"Scrivi una riga",
+    desc:"Scrivi la riga dello scambio. Nessuna quantità. Nessun valore numerico. La riga viene salvata sul tuo dispositivo (non online).",
+    note:"Qui le cose belle non si inviano. Restano."
+  },
+  en:{
+    title:"Write one line",
+    desc:"Write the line of the exchange. No quantity. No numeric value. The line is saved on your device (not online).",
+    note:"Here, beautiful things are not sent. They remain."
+  },
+  es:{
+    title:"Escribe una línea",
+    desc:"Escribe la línea del intercambio. Sin cantidad. Sin valor numérico. La línea se guarda en tu dispositivo (no en línea).",
+    note:"Aquí las cosas bellas no se envían. Permanecen."
+  },
+  fr:{
+    title:"Écrire une ligne",
+    desc:"Écris la ligne de l’échange. Aucune quantité. Aucune valeur numérique. La ligne est enregistrée sur ton appareil (pas en ligne).",
+    note:"Ici, les belles choses ne s’envoient pas. Elles restent."
+  },
+  de:{
+    title:"Eine Zeile schreiben",
+    desc:"Schreibe die Zeile des Austauschs. Keine Menge. Kein Zahlenwert. Die Zeile wird auf deinem Gerät gespeichert (nicht online).",
+    note:"Hier werden schöne Dinge nicht gesendet. Sie bleiben."
+  },
+  zh:{
+    title:"写一行",
+    desc:"写下交换的一行。不记录数量，不设数字价值。内容保存在你的设备上（不在线）。",
+    note:"在这里，美好的事物不会被发送。它们会留下。"
+  }
+};
 
   const allowed = new Set(["it","en","es","fr","de","zh"]);
   const params = new URLSearchParams(location.search);

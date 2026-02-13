@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="it">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Bianco</title>
+
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      background: #ffffff;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    }
+
+    body {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .container {
+      text-align: center;
+      padding: 20px;
+      width: 100%;
+    }
+
+    h1 {
+      letter-spacing: 0.4em;
+      font-weight: 600;
+      margin: 0 0 60px 0;
+    }
+
+    .home-btn {
+      display: inline-block;
+      padding: 14px 22px;
+      border-radius: 999px;
+      border: 1px solid #000;
+      background: transparent;
+      text-decoration: none;
+      font-weight: 600;
+      cursor: pointer;
+      transition: 0.2s ease;
+    }
+
+    .home-btn:active {
+      transform: scale(0.98);
+    }
+  </style>
+</head>
+
+<body>
+  <main class="container">
+    <h1>BIANCO</h1>
+    <button id="homeBtn" class="home-btn">Torna alla home</button>
+  </main>
+
+  <script>
+    // Lettura lingua da ?lang=xx
+    const params = new URLSearchParams(window.location.search);
+    const lang = (params.get("lang") || "it").toLowerCase();
+
+    // Traduzioni ufficiali Mango
+    const translations = {
+      it: "Torna alla home",
+      en: "Back to home",
+      es: "Volver a inicio",
+      fr: "Retour à l’accueil",
+      de: "Zur Startseite",
+      zh: "返回主页"
+    };
+
+    document.documentElement.lang = lang;
+    document.getElementById("homeBtn").textContent =
+      translations[lang] || translations.it;
+
+    // Ritorno alla home mantenendo la lingua
+    document.getElementById("homeBtn").addEventListener("click", function() {
+      window.location.href = "index.html?lang=" + encodeURIComponent(lang);
+    });
+  </script>
+</body>
+</html>

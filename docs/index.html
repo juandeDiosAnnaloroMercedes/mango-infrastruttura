@@ -64,7 +64,8 @@
       <h2 id="t_do_title"></h2>
       <p id="t_do_text"></p>
       <div class="btnrow">
-        <a class="btn" href="#write">✍️ <span id="t_btn_first"></span></a>
+        <!-- MODIFICA: Scrivi una riga -> apre REGISTRO -->
+        <a class="btn" href="#register">✍️ <span id="t_btn_first"></span></a>
         <a class="btn secondary" href="#what">📘 <span id="t_btn_about"></span></a>
       </div>
       <p class="small" id="t_do_note"></p>
@@ -133,7 +134,9 @@
       <p id="t_reg_live_p"></p>
       <p class="small" id="t_reg_live_note"></p>
 
+      <!-- MODIFICA: aggiunto bottone HOME dal Registro -->
       <div class="btnrow">
+        <a class="btn secondary" href="#top">🏠 <span id="t_btn_home"></span></a>
         <a class="btn secondary" href="#write">⬆️ <span id="t_btn_back_write"></span></a>
         <a class="btn" href="#contact">✉️ <span id="t_btn_contact2"></span></a>
       </div>
@@ -197,6 +200,7 @@
       btn_contact:"Contatti",
       btn_press:"Scrivi (stampa)",
       btn_top:"Torna su",
+      btn_home:"Home",
 
       write_title:"Scrivi una riga",
       write_text:"Una riga descrive lo scambio reale. Deve restare umana, semplice, non contabile.",
@@ -272,6 +276,7 @@
       btn_contact:"Contact",
       btn_press:"Write (press)",
       btn_top:"Back to top",
+      btn_home:"Home",
 
       write_title:"Write a line",
       write_text:"A line describes the real exchange. Keep it human, simple, non-accounting.",
@@ -347,6 +352,7 @@
       btn_contact:"Contacto",
       btn_press:"Escribir (prensa)",
       btn_top:"Volver arriba",
+      btn_home:"Inicio",
 
       write_title:"Escribe una línea",
       write_text:"Una línea describe el intercambio real. Humano y simple.",
@@ -422,6 +428,7 @@
       btn_contact:"Contact",
       btn_press:"Écrire (presse)",
       btn_top:"Haut de page",
+      btn_home:"Accueil",
 
       write_title:"Écrire une ligne",
       write_text:"Une ligne décrit l’échange réel. Humain et simple.",
@@ -497,6 +504,7 @@
       btn_contact:"Kontakt",
       btn_press:"Schreiben (Presse)",
       btn_top:"Nach oben",
+      btn_home:"Startseite",
 
       write_title:"Eine Zeile schreiben",
       write_text:"Eine Zeile beschreibt den realen Austausch. Menschlich und einfach.",
@@ -572,6 +580,7 @@
       btn_contact:"联系",
       btn_press:"写信（媒体）",
       btn_top:"回到顶部",
+      btn_home:"首页",
 
       write_title:"写下一行",
       write_text:"一行描述真实交换。保持人性、简洁。",
@@ -655,7 +664,6 @@
       t_do_title:d.do_title,t_do_text:d.do_text,t_do_note:d.do_note,
       t_btn_first:d.btn_first,t_btn_about:d.btn_about,t_btn_contact:d.btn_contact,t_btn_press:d.btn_press,t_btn_top:d.btn_top,
       t_write_title:d.write_title,t_write_text:d.write_text,t_write_li1:d.write_li1,t_write_li2:d.write_li2,t_write_li3:d.write_li3,t_write_note:d.write_note,
-
       t_btn_register:d.btn_register,
 
       t_reg_title:d.reg_title,
@@ -682,6 +690,8 @@
       t_reg_live_h:d.reg_live_h,
       t_reg_live_p:d.reg_live_p,
       t_reg_live_note:d.reg_live_note,
+
+      t_btn_home:d.btn_home,
       t_btn_back_write:d.btn_back_write,
       t_btn_contact2:d.btn_contact2,
 

@@ -42,3 +42,19 @@ Mango non è possesso.
 È spazio.
 
 Una riga alla volta.
+---
+
+## Snapshot e Stabilità Archivio
+
+In data 13/02/2026 è stata effettuata copia locale completa e coerente del repository pubblico "mango-infrastruttura".
+
+Questa versione rappresenta lo stato stabile e operativo del sistema alla data indicata.
+
+Eventuali evoluzioni successive saranno tracciate mediante versioni incrementali (V2, V3, ecc.) e non alterano il contenuto della versione archiviata V1.
+
+---
+
+Creato da  
+Juan de Dios Annaloro Mercedes  
+
+In memoria di Larimar.

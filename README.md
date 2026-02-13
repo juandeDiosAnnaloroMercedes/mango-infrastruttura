@@ -58,3 +58,21 @@ Creato da
 Juan de Dios Annaloro Mercedes  
 
 In memoria di Larimar.
+---
+
+## Archivio Storico Certificato
+
+In data 13/02/2026 è stata pubblicata la release ufficiale:
+
+**Archivio Storico V1 — Snapshot certificato**
+
+Questa release rappresenta lo stato congelato e verificabile
+dell’infrastruttura digitale Mango alla data indicata.
+
+Include configurazione dominio, HTTPS attivo,
+struttura GitHub Pages stabile e sistema multilingua operativo.
+
+🔒 La versione è pubblicamente tracciabile e non modificabile.
+
+Autore: Juan de Dios Annaloro Mercedes  
+In memoria di Larimar.

@@ -1,30 +1,131 @@
 <!doctype html>
 <html lang="it">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Mango — Bianco</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Mango — Scrivi una riga</title>
+  <meta name="robots" content="noindex,nofollow">
   <style>
     :root{ --b:rgba(0,0,0,.12); --b2:rgba(0,0,0,.16); }
     body{
       margin:0;
       font-family:-apple-system,BlinkMacSystemFont,system-ui,Segoe UI,Roboto,Arial;
-      background:radial-gradient(1200px 700px at 50% 0%, #ffffff 0%, #fbf6ee 55%, #ffffff 100%);
-      color:#111; min-height:100vh;
+      background:#fff;
+      color:#111;
+      min-height:100vh;
     }
-
-    /* Mango top-right = Home */
-    .mango-top{
-      position:fixed; right:16px; top:16px; z-index:30;
+    .top{
+      display:flex; justify-content:space-between; align-items:center;
+      padding:14px 14px;
+      position:sticky; top:0; z-index:20;
+      background:rgba(255,255,255,.92);
+      backdrop-filter: blur(10px);
+      border-bottom:1px solid rgba(0,0,0,.08);
+      gap:10px;
+    }
+    .homeTop{
       text-decoration:none; color:#111; font-weight:950;
       border:1px solid var(--b2); border-radius:16px; padding:10px 12px;
       background:#fff; display:inline-flex; align-items:center; gap:10px;
-      box-shadow:0 10px 26px rgba(0,0,0,.10);
+      box-shadow:0 6px 18px rgba(0,0,0,.06);
       white-space:nowrap;
     }
-    .mango-top:active{ transform: translateY(1px); }
+    .homeTop:active{ transform: translateY(1px); }
 
-    /* Mango bottom-right = Home (comodo thumb) */
+    .langbar{ display:flex; gap:8px; flex-wrap:wrap; justify-content:flex-end; }
+    .langbar a{
+      font-size:.95rem; text-decoration:none; color:#111; opacity:.78; font-weight:900;
+      padding:8px 10px; border-radius:12px;
+      border:1px solid rgba(0,0,0,.10);
+      background:#fff;
+    }
+    .langbar a.active{ opacity:1; border-color:rgba(0,0,0,.25); }
+
+    .wrap{ max-width:860px; margin:0 auto; padding:18px; }
+    h1{ margin:18px 0 8px; font-size:2.25rem; font-weight:950; line-height:1.1; }
+    p.lead{ margin:0 0 16px; opacity:.75; line-height:1.65; font-size:1.05rem; }
+
+    .card{
+      border:1px solid var(--b);
+      border-radius:22px;
+      padding:16px;
+      background:#fff;
+      box-shadow:0 10px 28px rgba(0,0,0,.06);
+    }
+
+    textarea{
+      width:100%;
+      min-height:220px;
+      resize:vertical;
+      border:1px solid rgba(0,0,0,.12);
+      border-radius:18px;
+      padding:16px;
+      font-size:1.05rem;
+      line-height:1.6;
+      outline:none;
+      background:#fff;
+    }
+    textarea:focus{ border-color:rgba(0,0,0,.22); }
+
+    .row{
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
+      margin-top:14px;
+    }
+    .btn{
+      appearance:none;
+      border:1px solid var(--b2);
+      background:#fff;
+      color:#111;
+      padding:12px 14px;
+      border-radius:14px;
+      font-weight:950;
+      cursor:pointer;
+      text-decoration:none;
+      display:inline-flex;
+      align-items:center;
+      gap:10px;
+      box-shadow:0 8px 20px rgba(0,0,0,.05);
+    }
+    .btn:active{ transform: translateY(1px); }
+    .btn.primary{ border-color:rgba(0,0,0,.22); }
+    .btn.danger{ border-color:rgba(180,0,0,.25); }
+
+    .log{
+      margin-top:14px;
+      border:1px solid rgba(0,0,0,.10);
+      border-radius:18px;
+      padding:12px 14px;
+      background:#fff;
+      white-space:pre-wrap;
+      line-height:1.55;
+      font-size:1rem;
+      max-height:220px;
+      overflow:auto;
+    }
+
+    .toast{
+      position:fixed;
+      left:50%;
+      bottom:22px;
+      transform:translateX(-50%);
+      z-index:50;
+      background:rgba(17,17,17,.92);
+      color:#fff;
+      padding:12px 14px;
+      border-radius:16px;
+      font-weight:900;
+      box-shadow:0 10px 24px rgba(0,0,0,.18);
+      opacity:0;
+      pointer-events:none;
+      transition:opacity .18s ease, transform .18s ease;
+    }
+    .toast.show{
+      opacity:1;
+      transform:translateX(-50%) translateY(-4px);
+    }
+
     .mango-fab{
       position:fixed;
       right:16px; bottom:16px;
@@ -36,79 +137,199 @@
       border-radius:18px;
       padding:12px 14px;
       background:#fff;
-      box-shadow: 0 10px 26px rgba(0,0,0,.10);
+      box-shadow: 0 6px 18px rgba(0,0,0,.08);
       display:inline-flex;
       align-items:center;
       gap:10px;
       white-space:nowrap;
     }
     .mango-fab:active{ transform: translateY(1px); }
-
-    .center{
-      min-height:100vh;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      text-align:center;
-      padding:24px;
-    }
-    .panel{
-      max-width:760px;
-      background:rgba(255,255,255,.75);
-      border:1px solid var(--b);
-      border-radius:24px;
-      padding:22px 18px;
-      box-shadow:0 14px 34px rgba(0,0,0,.08);
-    }
-    .title{
-      font-size:1.35rem;
-      font-weight:950;
-      margin:0 0 10px;
-      letter-spacing:.2px;
-    }
-    .hint{
-      margin:0;
-      opacity:.72;
-      line-height:1.7;
-      font-size:1.05rem;
-    }
   </style>
 </head>
-<body>
-  <a class="mango-top" id="homeTop" href="index.html?lang=it">🥭 <span id="homeTxt">Mango</span></a>
-  <a class="mango-fab" id="homeFab" href="index.html?lang=it">🥭 <span id="homeTxt2">Mango</span></a>
 
-  <div class="center">
-    <div class="panel">
-      <p class="title" id="t1">Bianco</p>
-      <p class="hint" id="t2">Spazio neutro. Qui non c’è nulla da dimostrare. Il pulsante 🥭 ti riporta sempre alla Home.</p>
-    </div>
+<body>
+  <div class="top">
+    <a class="homeTop" id="homeTop" href="index.html?lang=it">🥭 <span id="homeTxt">Mango</span></a>
+    <div class="langbar" id="langbar"></div>
   </div>
 
-<script>
-const dict={
-  it:{htmlLang:"it", home:"Mango", t1:"Bianco", t2:"Spazio neutro. Qui non c’è nulla da dimostrare. Il pulsante 🥭 ti riporta sempre alla Home."},
-  en:{htmlLang:"en", home:"Mango", t1:"White", t2:"Neutral space. Nothing to prove here. The 🥭 button always takes you back Home."},
-  es:{htmlLang:"es", home:"Mango", t1:"Blanco", t2:"Espacio neutral. Aquí no hay nada que demostrar. El botón 🥭 siempre te lleva al inicio."},
-  fr:{htmlLang:"fr", home:"Mango", t1:"Blanc", t2:"Espace neutre. Rien à prouver ici. Le bouton 🥭 te ramène toujours à l’accueil."},
-  de:{htmlLang:"de", home:"Mango", t1:"Weiß", t2:"Neutraler Raum. Hier gibt es nichts zu beweisen. Der 🥭-Button bringt dich immer zur Startseite."},
-  zh:{htmlLang:"zh-Hant", home:"Mango", t1:"白頁", t2:"中性空間。這裡不需要證明任何事。點 🥭 可隨時回到首頁。"}
-};
-function getLang(){
-  const q=new URLSearchParams(location.search);
-  const v=(q.get("lang")||"it").toLowerCase();
-  return dict[v]?v:"it";
-}
-const L=getLang();
-document.documentElement.lang = dict[L].htmlLang;
-document.getElementById("homeTxt").textContent = dict[L].home;
-document.getElementById("homeTxt2").textContent = dict[L].home;
-document.getElementById("t1").textContent = dict[L].t1;
-document.getElementById("t2").textContent = dict[L].t2;
+  <main class="wrap">
+    <h1 id="t1">Scrivi una riga</h1>
+    <p class="lead" id="t2">Scrivi la riga dello scambio. Nessuna quantità. Nessun valore numerico. Salvato sul tuo dispositivo (non online).</p>
 
-const home = `index.html?lang=${L}`;
-document.getElementById("homeTop").href = home;
-document.getElementById("homeFab").href = home;
+    <section class="card">
+      <textarea id="lineInput" placeholder="Scrivi qui la tua riga..."></textarea>
+
+      <div class="row">
+        <button class="btn primary" id="btnEnter" type="button">⏎ Invio</button>
+        <button class="btn primary" id="btnSave" type="button">✅ Salva riga</button>
+        <button class="btn" id="btnCopy" type="button">📋 Copia tutte</button>
+        <button class="btn danger" id="btnClear" type="button">🗑️ Cancella tutto</button>
+        <a class="btn" id="btnHome" href="index.html?lang=it">🏠 Torna alla home</a>
+      </div>
+
+      <div class="log" id="logBox"></div>
+    </section>
+  </main>
+
+  <a class="mango-fab" id="homeFab" href="index.html?lang=it">🥭 <span id="homeTxt2">Mango</span></a>
+
+  <div class="toast" id="toast">Riga riconosciuta</div>
+
+<script>
+const dict = {
+  it:{htmlLang:"it", home:"Mango",
+    t1:"Scrivi una riga",
+    t2:"Scrivi la riga dello scambio. Nessuna quantità. Nessun valore numerico. Salvato sul tuo dispositivo (non online).",
+    ph:"Scrivi qui la tua riga...",
+    enter:"⏎ Invio", save:"✅ Salva riga", copy:"📋 Copia tutte", clear:"🗑️ Cancella tutto", back:"🏠 Torna alla home",
+    toast:"Riga riconosciuta", empty:"(Nessuna riga salvata ancora.)"
+  },
+  en:{htmlLang:"en", home:"Mango",
+    t1:"Write a line",
+    t2:"Write the exchange line. No quantity. No numeric value. Saved on your device (offline).",
+    ph:"Write your line here...",
+    enter:"⏎ Enter", save:"✅ Save line", copy:"📋 Copy all", clear:"🗑️ Clear all", back:"🏠 Back to Home",
+    toast:"Line recognized", empty:"(No saved lines yet.)"
+  },
+  es:{htmlLang:"es", home:"Mango",
+    t1:"Escribe una línea",
+    t2:"Escribe la línea del intercambio. Sin cantidad. Sin valor numérico. Guardado en tu dispositivo (sin conexión).",
+    ph:"Escribe tu línea aquí...",
+    enter:"⏎ Enviar", save:"✅ Guardar línea", copy:"📋 Copiar todo", clear:"🗑️ Borrar todo", back:"🏠 Volver al inicio",
+    toast:"Línea reconocida", empty:"(Aún no hay líneas guardadas.)"
+  },
+  fr:{htmlLang:"fr", home:"Mango",
+    t1:"Écrire une ligne",
+    t2:"Écris la ligne de l’échange. Pas de quantité. Pas de valeur numérique. Sauvegardé sur ton appareil (hors ligne).",
+    ph:"Écris ta ligne ici...",
+    enter:"⏎ Entrée", save:"✅ Sauver la ligne", copy:"📋 Tout copier", clear:"🗑️ Tout effacer", back:"🏠 Retour à l’accueil",
+    toast:"Ligne reconnue", empty:"(Aucune ligne enregistrée.)"
+  },
+  de:{htmlLang:"de", home:"Mango",
+    t1:"Eine Zeile schreiben",
+    t2:"Schreibe die Austausch-Zeile. Keine Menge. Kein Zahlenwert. Auf deinem Gerät gespeichert (offline).",
+    ph:"Schreibe deine Zeile hier...",
+    enter:"⏎ Eingabe", save:"✅ Zeile speichern", copy:"📋 Alles kopieren", clear:"🗑️ Alles löschen", back:"🏠 Zur Startseite",
+    toast:"Zeile erkannt", empty:"(Noch keine Zeilen gespeichert.)"
+  },
+  zh:{htmlLang:"zh-Hant", home:"Mango",
+    t1:"寫一行",
+    t2:"寫下交換的一行記錄。不要數量，不要數字價值。儲存在你的裝置上（離線）。",
+    ph:"在這裡寫下你的一行…",
+    enter:"⏎ 送出", save:"✅ 儲存一行", copy:"📋 全部複製", clear:"🗑️ 全部清除", back:"🏠 回到首頁",
+    toast:"已確認這一行", empty:"（目前還沒有已儲存的記錄。）"
+  }
+};
+
+function getLang(){
+  const q = new URLSearchParams(location.search);
+  const v = (q.get("lang") || "it").toLowerCase();
+  return dict[v] ? v : "it";
+}
+const L = getLang();
+
+function buildLangbar(){
+  const bar = document.getElementById("langbar");
+  const langs = [["it","IT"],["en","EN"],["es","ES"],["fr","FR"],["de","DE"],["zh","ZH"]];
+  bar.innerHTML = langs.map(([k,label])=>{
+    const a=document.createElement("a");
+    a.href = `?lang=${k}`;
+    a.textContent = label;
+    if(k===L) a.classList.add("active");
+    return a.outerHTML;
+  }).join("");
+}
+
+function applyI18n(){
+  document.documentElement.lang = dict[L].htmlLang;
+  document.getElementById("homeTxt").textContent = dict[L].home;
+  document.getElementById("homeTxt2").textContent = dict[L].home;
+  document.getElementById("t1").textContent = dict[L].t1;
+  document.getElementById("t2").textContent = dict[L].t2;
+  document.getElementById("lineInput").placeholder = dict[L].ph;
+  document.getElementById("btnEnter").textContent = dict[L].enter;
+  document.getElementById("btnSave").textContent = dict[L].save;
+  document.getElementById("btnCopy").textContent = dict[L].copy;
+  document.getElementById("btnClear").textContent = dict[L].clear;
+  document.getElementById("btnHome").textContent = dict[L].back;
+  document.getElementById("toast").textContent = dict[L].toast;
+
+  const home = `index.html?lang=${L}`;
+  document.getElementById("homeTop").href = home;
+  document.getElementById("homeFab").href = home;
+  document.getElementById("btnHome").href = home;
+}
+
+buildLangbar();
+applyI18n();
+
+const KEY = "MANGO_RIGHE_V1";
+
+function loadLines(){
+  try{ return JSON.parse(localStorage.getItem(KEY) || "[]"); }
+  catch(e){ return []; }
+}
+function saveLines(lines){ localStorage.setItem(KEY, JSON.stringify(lines)); }
+
+function render(){
+  const lines = loadLines();
+  const box = document.getElementById("logBox");
+  box.textContent = lines.length ? lines.join("\n") : dict[L].empty;
+}
+
+function toastShow(){
+  const t = document.getElementById("toast");
+  t.classList.add("show");
+  setTimeout(()=> t.classList.remove("show"), 2500);
+}
+
+function addLine(){
+  const ta = document.getElementById("lineInput");
+  const raw = (ta.value || "").trim();
+  if(!raw) return;
+
+  const now = new Date();
+  const pad = n => String(n).padStart(2,"0");
+  const stamp = `${pad(now.getDate())}/${pad(now.getMonth()+1)}/${now.getFullYear()}, ${pad(now.getHours())}:${pad(now.getMinutes())}:${pad(now.getSeconds())}`;
+
+  const line = `${stamp} — ${raw}`;
+  const lines = loadLines();
+  lines.push(line);
+  saveLines(lines);
+
+  ta.value = "";
+  render();
+  toastShow();
+}
+
+document.getElementById("btnSave").addEventListener("click", addLine);
+document.getElementById("btnEnter").addEventListener("click", addLine);
+
+document.getElementById("lineInput").addEventListener("keydown", (e)=>{
+  if(e.key === "Enter" && !e.shiftKey){
+    e.preventDefault();
+    addLine();
+  }
+});
+
+document.getElementById("btnCopy").addEventListener("click", async ()=>{
+  const text = loadLines().join("\n");
+  try{ await navigator.clipboard.writeText(text); }
+  catch(e){
+    const ta=document.createElement("textarea");
+    ta.value=text; document.body.appendChild(ta);
+    ta.select(); document.execCommand("copy"); ta.remove();
+  }
+  toastShow();
+});
+
+document.getElementById("btnClear").addEventListener("click", ()=>{
+  saveLines([]);
+  render();
+});
+
+render();
 </script>
 </body>
 </html>

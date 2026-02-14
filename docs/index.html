@@ -3,33 +3,62 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="color-scheme" content="light" />
+  <meta name="color-scheme" content="light">
   <title>Mango — Infrastruttura di fiducia locale</title>
 
   <style>
     :root{
-      --bg:#fff;--fg:#111;--muted:#6b7280;--card:#f6f7f9;--border:#e5e7eb;
+      --bg:#ffffff;
+      --fg:#111111;
+      --muted:#6b7280;
+      --card:#f6f7f9;
+      --border:#e5e7eb;
       --shadow:0 10px 30px rgba(0,0,0,.06);
-      --r:18px;--max:860px;--p:18px;
+      --r:18px;
+      --max:860px;
+      --p:18px;
       --font:ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial;
     }
     *{box-sizing:border-box}
     html{scroll-behavior:smooth}
     body{margin:0;font-family:var(--font);background:var(--bg);color:var(--fg)}
-    a,a:visited{text-decoration:none;color:inherit}
-    header{position:sticky;top:0;background:rgba(255,255,255,.92);backdrop-filter:blur(8px);border-bottom:1px solid var(--border);z-index:10}
-    .hwrap{max-width:var(--max);margin:0 auto;padding:14px var(--p);display:flex;justify-content:space-between;align-items:center;gap:12px}
-    .brand{font-weight:900;font-size:22px;display:flex;gap:10px;align-items:center}
-    .brand .mango{display:inline-flex;align-items:center;justify-content:center;line-height:1}
+    a,a:visited{color:inherit;text-decoration:none}
+    header{
+      position:sticky;top:0;z-index:10;
+      background:rgba(255,255,255,.92);
+      backdrop-filter:blur(8px);
+      border-bottom:1px solid var(--border);
+    }
+    .hwrap{
+      max-width:var(--max);margin:0 auto;padding:14px var(--p);
+      display:flex;justify-content:space-between;align-items:center;gap:12px;
+    }
+    .brand{
+      font-weight:900;font-size:22px;display:flex;gap:10px;align-items:center;
+      line-height:1;
+    }
+    .brand .mango{
+      display:inline-flex;align-items:center;justify-content:center;
+      width:34px;height:34px;border-radius:999px;
+      border:1px solid var(--border);background:#fff;
+      cursor:pointer;
+      user-select:none;
+    }
     .lang{display:flex;gap:10px;flex-wrap:wrap;justify-content:flex-end}
-    .chip{border:1px solid var(--border);background:#fff;border-radius:999px;padding:10px 14px;font-weight:800;font-size:14px;cursor:pointer}
+    .chip{
+      border:1px solid var(--border);background:#fff;border-radius:999px;
+      padding:10px 14px;font-weight:900;font-size:14px;cursor:pointer;
+    }
     .chip[aria-current="true"]{outline:2px solid #111;outline-offset:2px}
 
     .wrap{max-width:var(--max);margin:0 auto;padding:22px var(--p) 42px}
     h1{margin:0;font-size:22px;line-height:1.2}
     p{color:var(--muted);line-height:1.55}
     .grid{display:grid;grid-template-columns:1fr;gap:14px;margin-top:18px}
-    .card{background:var(--card);border:1px solid var(--border);border-radius:var(--r);padding:16px;box-shadow:var(--shadow)}
+    .card{
+      background:var(--card);border:1px solid var(--border);border-radius:var(--r);
+      padding:16px;box-shadow:var(--shadow);
+    }
     .card h2{margin:0 0 10px;font-size:18px;color:#111}
     .card h3{margin:14px 0 8px;font-size:16px;color:#111}
     .card p,.card li{color:#1f2937;font-size:15px;line-height:1.55}
@@ -37,21 +66,45 @@
     hr{border:0;border-top:1px solid var(--border);margin:14px 0}
 
     .btnrow{display:flex;gap:10px;flex-wrap:wrap;margin-top:12px}
-    .btn{border:0;background:#111;color:#fff;padding:12px 14px;border-radius:14px;font-weight:900;cursor:pointer;text-decoration:none;display:inline-flex;align-items:center;gap:8px}
+    .btn{
+      border:0;background:#111;color:#fff;padding:12px 14px;border-radius:14px;
+      font-weight:950;cursor:pointer;display:inline-flex;align-items:center;gap:8px;
+    }
     .btn.secondary{background:#fff;color:#111;border:1px solid var(--border)}
-
-    .qrbox{border:2px dashed var(--border);border-radius:22px;padding:18px;background:#fff;display:flex;flex-direction:column;gap:14px;align-items:center;justify-content:center}
-    .qrtext{font-weight:950;font-size:20px;line-height:1.15;text-align:center;color:#111}
-    .qrsub{text-align:center;color:var(--muted);margin-top:6px}
-
-    .footer{margin-top:22px;padding-top:18px;border-top:1px solid var(--border);color:var(--muted);font-size:14px;line-height:1.5}
-    .mono{font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono","Courier New",monospace;font-size:13px}
+    .btn:active{transform:scale(.99)}
     .small{font-size:13px;color:var(--muted)}
+    .mono{font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono","Courier New",monospace;font-size:13px}
     .eq{font-weight:950;font-size:18px;color:#111;margin:10px 0 0}
 
-    /* write box */
-    .field{width:100%;min-height:120px;border:1px solid var(--border);border-radius:14px;padding:12px 12px;font-size:15px;line-height:1.5;resize:vertical;background:#fff;color:#111}
-    .hint{margin-top:10px;color:var(--muted);font-size:13px;line-height:1.45}
+    textarea{
+      width:100%;
+      min-height:92px;
+      resize:vertical;
+      padding:14px;
+      border-radius:16px;
+      border:1px solid var(--border);
+      background:#fff;
+      font-family:var(--font);
+      font-size:16px;
+      outline:none;
+    }
+    textarea:focus{outline:2px solid rgba(17,17,17,.35);outline-offset:2px}
+
+    .notice{
+      display:none;
+      margin-top:10px;
+      padding:12px 14px;
+      border-radius:14px;
+      border:1px solid var(--border);
+      background:#fff;
+      color:#111;
+      box-shadow:var(--shadow);
+    }
+
+    .footer{
+      margin-top:22px;padding-top:18px;border-top:1px solid var(--border);
+      color:var(--muted);font-size:14px;line-height:1.5;
+    }
   </style>
 </head>
 
@@ -59,11 +112,11 @@
 <header id="top">
   <div class="hwrap">
     <div class="brand">
-      <span>Mango</span>
-      <a class="mango" href="bianco.html" aria-label="Spazio di silenzio">🥭</a>
+      <span id="brand_text">Mango</span>
+      <button class="mango" id="brand_mango" type="button" aria-label="Top">🥭</button>
     </div>
 
-    <nav class="lang" aria-label="Lingue">
+    <nav class="lang" aria-label="Languages">
       <button class="chip" data-lang="it">IT</button>
       <button class="chip" data-lang="en">EN</button>
       <button class="chip" data-lang="es">ES</button>
@@ -82,20 +135,20 @@
 
   <section class="grid">
 
-    <!-- FAI MANGO -->
+    <!-- DO -->
     <article class="card" id="do">
       <h2 id="t_do_title"></h2>
       <p id="t_do_text"></p>
 
       <div class="btnrow">
-        <a class="btn" id="btn_first" href="#writebox">✍️ <span id="t_btn_first"></span></a>
-        <a class="btn secondary" href="#register">📜 <span id="t_btn_register"></span></a>
+        <button class="btn" id="btn_first" type="button">✍️ <span id="t_btn_first"></span></button>
+        <button class="btn secondary" id="btn_about" type="button">📘 <span id="t_btn_about"></span></button>
       </div>
 
       <p class="small" id="t_do_note"></p>
     </article>
 
-    <!-- SCRIVI: GUIDA -->
+    <!-- WRITE (instructions) -->
     <article class="card" id="write">
       <h2 id="t_write_title"></h2>
       <p id="t_write_text"></p>
@@ -104,31 +157,34 @@
         <li id="t_write_li2"></li>
         <li id="t_write_li3"></li>
       </ul>
+
+      <div class="btnrow">
+        <button class="btn" id="btn_write_go" type="button">✍️ <span id="t_btn_write_go"></span></button>
+        <button class="btn secondary" id="btn_contact_go" type="button">✉️ <span id="t_btn_contact"></span></button>
+      </div>
+
       <p class="small" id="t_write_note"></p>
-      <div class="btnrow">
-        <a class="btn secondary" href="#writebox">✍️ <span id="t_btn_writebox"></span></a>
-        <a class="btn secondary" href="#contact">✉️ <span id="t_btn_contact"></span></a>
-      </div>
     </article>
 
-    <!-- WRITE BOX (DENTRO HOME) -->
+    <!-- WRITE BOX IN HOME -->
     <article class="card" id="writebox">
-      <h2 id="t_wbox_title"></h2>
-      <p id="t_wbox_text"></p>
+      <h2 id="t_writebox_title"></h2>
+      <p id="t_writebox_text"></p>
 
-      <textarea class="field" id="lineText" placeholder=""></textarea>
+      <textarea id="mango_line" placeholder=""></textarea>
 
       <div class="btnrow">
-        <button class="btn secondary" id="btnCopy">📋 <span id="t_btn_copy"></span></button>
-        <button class="btn" id="btnMail">✉️ <span id="t_btn_send"></span></button>
-        <a class="btn secondary" href="#register">📜 <span id="t_btn_register2"></span></a>
-        <a class="btn secondary" href="#top">⬆️ <span id="t_btn_top"></span></a>
+        <button class="btn secondary" id="btn_copy" type="button">📋 <span id="t_btn_copy"></span></button>
+        <button class="btn" id="btn_send" type="button">✉️ <span id="t_btn_send"></span></button>
+        <button class="btn secondary" id="btn_register_go" type="button">📜 <span id="t_btn_register"></span></button>
+        <button class="btn secondary" id="btn_top" type="button">⬆️ <span id="t_btn_top"></span></button>
       </div>
 
-      <div class="hint" id="t_wbox_note"></div>
+      <div class="notice" id="send_status"></div>
+      <p class="small" id="t_writebox_note"></p>
     </article>
 
-    <!-- REGISTRO -->
+    <!-- REGISTER -->
     <article class="card" id="register">
       <h2 id="t_reg_title"></h2>
 
@@ -176,13 +232,12 @@
       <p class="small" id="t_reg_live_note"></p>
 
       <div class="btnrow">
-        <a class="btn secondary" id="btnTop1" href="#top">⬆️ <span id="t_btn_top2"></span></a>
-        <a class="btn secondary" href="#writebox">✍️ <span id="t_btn_writebox2"></span></a>
-        <a class="btn" href="#contact">✉️ <span id="t_btn_contact2"></span></a>
+        <button class="btn secondary" id="btn_back_write" type="button">⬆️ <span id="t_btn_back_write"></span></button>
+        <button class="btn" id="btn_contact2_go" type="button">✉️ <span id="t_btn_contact2"></span></button>
       </div>
     </article>
 
-    <!-- COS'È -->
+    <!-- WHAT -->
     <article class="card" id="what">
       <h2 id="t_what_title"></h2>
       <p id="t_what_text1"></p>
@@ -195,24 +250,12 @@
       </ul>
     </article>
 
-    <!-- QR BOX -->
-    <article class="card">
-      <div class="qrbox">
-        <div class="qrtext" id="t_qr_main"></div>
-        <div class="qrsub" id="t_qr_sub"></div>
-        <div class="btnrow">
-          <a class="btn" href="#contact">✉️ <span id="t_btn_press"></span></a>
-          <a class="btn secondary" id="btnTop2" href="#top">⬆️ <span id="t_btn_top3"></span></a>
-        </div>
-      </div>
-    </article>
-
-    <!-- CONTATTI -->
+    <!-- CONTACT -->
     <article class="card" id="contact">
       <h2 id="t_contact_title"></h2>
       <p id="t_contact_text"></p>
       <p class="mono" style="margin:10px 0 0;">
-        <a href="mailto:info@mangoinfrastruttura.org">info@mangoinfrastruttura.org</a>
+        info@mangoinfrastruttura.org
       </p>
       <p class="small" id="t_contact_note"></p>
     </article>
@@ -228,6 +271,7 @@
 <script>
   const SUPPORTED = ["it","en","es","fr","de","zh"];
   const DEFAULT_LANG = "it";
+  const DRAFT_KEY = "mango_line_draft_v1";
 
   const T = {
     it:{
@@ -236,12 +280,8 @@
       do_title:"Fai Mango adesso",
       do_text:"Se è successo qualcosa di reale tra due persone (aiuto, tempo, cura, presenza, gesto), Mango lo riconosce. Non valuta. Non misura. Non accumula.",
       do_note:"Principio chiave: una riga = 🥭. Nessun numero. Nessuna equivalenza.",
-
-      btn_first:"Scrivi una riga",
-      btn_register:"Vai al Registro",
-      btn_contact:"Contatti",
-      btn_press:"Scrivi (stampa)",
-      btn_top:"Torna su",
+      btn_first:"Scrivi qui",
+      btn_about:"Cos’è Mango",
 
       write_title:"Scrivi una riga",
       write_text:"Una riga descrive lo scambio reale. Deve restare umana, semplice, non contabile.",
@@ -249,18 +289,18 @@
       write_li2:"Descrivi l’azione reale (chi, cosa, quando) in modo sobrio.",
       write_li3:"Se lo scambio è sbilanciato, Mango non lo trasforma in debito: lo rende visibile e curabile.",
       write_note:"Suggerimento: usa parole concrete (aiutato, accompagnato, ascoltato, riparato, portato, cucinato…).",
+      btn_write_go:"Scrivi qui",
+      btn_contact:"Contatti",
 
-      wbox_title:"Scrivi qui la riga (in home)",
-      wbox_text:"Scrivi una sola riga semplice. Poi copia o invia via email.",
-      wbox_placeholder:"Esempio: Marco ha accompagnato Ana in ospedale. (Roma, 14 feb 2026)",
-      wbox_note:"Mango non salva qui online: questa casella serve solo per scrivere e copiare/inviare. Niente numeri, niente equivalenze.",
-      btn_writebox:"Scrivi qui",
-      btn_writebox2:"Scrivi qui",
+      writebox_title:"Scrivi qui la riga (in home)",
+      writebox_text:"Scrivi una sola riga semplice. Resta sul sito: Mango non apre app esterne.",
+      writebox_placeholder:"Esempio: Marco ha accompagnato Ana in ospedale. (Roma, 14 feb 2026)",
+      writebox_note:"Nota: questa casella salva solo la bozza sul tuo telefono (non salva online). Niente numeri, niente equivalenze.",
       btn_copy:"Copia",
-      btn_send:"Invia email",
-      btn_register2:"Vai al Registro",
-      btn_top2:"Torna su",
-      btn_top3:"Torna su",
+      btn_send:"Invia (resta qui)",
+      btn_register:"Vai al Registro",
+      btn_top:"Torna su",
+      btn_back_write:"Torna a “Scrivi una riga”",
       btn_contact2:"Contatti",
 
       reg_title:"Registro pubblico Mango",
@@ -268,15 +308,12 @@
       reg_intro2:"Ogni riga riconosce uno scambio realmente accaduto. Non è credito. Non è debito. Non è un conto.",
       reg_eq:"Una riga = 🥭",
       reg_no:"Nessun numero. Nessuna equivalenza. Nessuna accumulazione.",
-
       reg_time_h:"Principio del tempo",
       reg_time_p1:"Questo Registro non è un feed. Non spinge il nuovo sopra il vecchio.",
       reg_time_p2:"Se una cosa è passata, rimane nel passato. Le righe restano in ordine naturale. Mango ha una temporalità esplicita: non è progettato per durare come accumulo.",
-
       reg_struct_h:"Principio strutturale",
       reg_struct_p1:"Il Registro non misura. Non somma. Non calcola.",
       reg_struct_p2:"Le righe non si contano. Restano. Qualsiasi uso che introduce numeri, conteggi o equivalenze non è Mango.",
-
       reg_how_h:"Come si scrive una riga",
       reg_how_p:"Scrivi semplice. Scrivi umano. Scrivi reale. Una riga descrive un gesto o uno scambio effettivamente accaduto.",
       reg_how_li1:"Niente prezzi, niente quantità, niente calcoli.",
@@ -284,11 +321,9 @@
       reg_how_li3:"Se vuoi, usa solo nomi di battesimo o iniziali: la privacy è parte della cura.",
       reg_how_li4:"Meglio pochi dettagli veri che tanti dettagli “perfetti”.",
       reg_balance_note:"Se lo scambio è sbilanciato, Mango non lo pareggia con numeri: lo rende visibile e curabile nel tempo umano, con gesti reali.",
-
       reg_anticapture_h:"Non appropriazione e anti-cattura",
       reg_anticapture_p1:"Mango è progettato per evitare accumulo, speculazione e cattura istituzionale.",
       reg_anticapture_p2:"Nessuno può trasformare questo Registro in punti, ranking, reputazione o credito sociale. Se diventa conteggio o moneta, non è Mango.",
-
       reg_live_h:"Righe vive",
       reg_live_p:"Questo spazio è pronto ad accogliere la prima riga reale.",
       reg_live_note:"Nota: le righe non devono essere numerate e non deve comparire alcun totale o contatore.",
@@ -299,10 +334,7 @@
       what_li1:"Non accumulabile.",
       what_li2:"Non quantificabile.",
       what_li3:"Non appropriabile.",
-      what_li4:"Temporalità esplicita.",
-
-      qr_main:"È successo qualcosa tra due persone.",
-      qr_sub:"Qui puoi capirlo.",
+      what_li4:"Temporalità esplicicita.",
 
       contact_title:"Contatto (istituzioni / giornalisti)",
       contact_text:"Per richieste stampa, scuole, associazioni o istituzioni puoi scrivere qui:",
@@ -318,12 +350,8 @@
       do_title:"Do Mango now",
       do_text:"If something real happened between two people (help, time, care, presence, a gesture), Mango recognizes it. It doesn’t price it. It doesn’t measure it. It doesn’t accumulate.",
       do_note:"Core rule: one line = 🥭. No numbers. No equivalences.",
-
-      btn_first:"Write a line",
-      btn_register:"Go to the Register",
-      btn_contact:"Contact",
-      btn_press:"Write (press)",
-      btn_top:"Back to top",
+      btn_first:"Write here",
+      btn_about:"What is Mango",
 
       write_title:"Write a line",
       write_text:"A line describes the real exchange. Keep it human, simple, non-accounting.",
@@ -331,18 +359,18 @@
       write_li2:"Describe the real action (who, what, when) soberly.",
       write_li3:"If unbalanced, Mango doesn’t turn it into debt: it makes it visible and care-able.",
       write_note:"Tip: use concrete verbs (helped, accompanied, listened, repaired, carried, cooked…).",
+      btn_write_go:"Write here",
+      btn_contact:"Contact",
 
-      wbox_title:"Write the line here (in home)",
-      wbox_text:"Write one simple line. Then copy or send by email.",
-      wbox_placeholder:"Example: Marco accompanied Ana to the hospital. (Rome, Feb 14 2026)",
-      wbox_note:"Mango doesn’t save here online: this box is only to write and copy/send. No numbers, no equivalences.",
-      btn_writebox:"Write here",
-      btn_writebox2:"Write here",
+      writebox_title:"Write the line (on home)",
+      writebox_text:"Write one simple line. Stay on the site: Mango won’t open external apps.",
+      writebox_placeholder:"Example: Marco accompanied Ana to the hospital. (Rome, Feb 14 2026)",
+      writebox_note:"Note: this box only saves a draft on your phone (not online). No numbers, no equivalences.",
       btn_copy:"Copy",
-      btn_send:"Send email",
-      btn_register2:"Go to Register",
-      btn_top2:"Back to top",
-      btn_top3:"Back to top",
+      btn_send:"Send (stay here)",
+      btn_register:"Go to the Register",
+      btn_top:"Back to top",
+      btn_back_write:"Back to “Write a line”",
       btn_contact2:"Contact",
 
       reg_title:"Mango public Register",
@@ -350,15 +378,12 @@
       reg_intro2:"Each line recognizes a real exchange. It is not credit. It is not debt. It is not an account.",
       reg_eq:"One line = 🥭",
       reg_no:"No numbers. No equivalences. No accumulation.",
-
       reg_time_h:"Time principle",
       reg_time_p1:"This Register is not a feed. It does not push the new above the old.",
       reg_time_p2:"If something is past, it stays in the past. Lines remain in natural order. Mango has explicit temporality: it is not designed to last as accumulation.",
-
       reg_struct_h:"Structural principle",
       reg_struct_p1:"The Register does not measure. It does not sum. It does not calculate.",
       reg_struct_p2:"Lines are not counted. They remain. Any use that introduces numbers, counting, or equivalences is not Mango.",
-
       reg_how_h:"How to write a line",
       reg_how_p:"Write simple. Write human. Write real. A line describes a gesture or exchange that truly happened.",
       reg_how_li1:"No prices, no quantities, no calculations.",
@@ -366,11 +391,9 @@
       reg_how_li3:"If you want, use first names or initials: privacy is part of care.",
       reg_how_li4:"Better a few true details than many “perfect” details.",
       reg_balance_note:"If unbalanced, Mango does not equalize with numbers: it makes it visible and care-able over human time, with real gestures.",
-
       reg_anticapture_h:"Non-appropriation and anti-capture",
       reg_anticapture_p1:"Mango is designed to prevent accumulation, speculation, and institutional capture.",
       reg_anticapture_p2:"No one can turn this Register into points, ranking, reputation, or social credit. If it becomes counting or money, it is not Mango.",
-
       reg_live_h:"Living lines",
       reg_live_p:"This space is ready to host the first real line.",
       reg_live_note:"Note: lines must not be numbered and no total/counter should appear.",
@@ -382,9 +405,6 @@
       what_li2:"Non-quantifiable.",
       what_li3:"Non-appropriable.",
       what_li4:"Explicit temporality.",
-
-      qr_main:"Something happened between two people.",
-      qr_sub:"Here you can understand it.",
 
       contact_title:"Contact (institutions / press)",
       contact_text:"For press, schools, associations or institutions, write here:",
@@ -400,12 +420,8 @@
       do_title:"Haz Mango ahora",
       do_text:"Si ocurrió algo real entre dos personas, Mango lo reconoce. No lo valora. No lo mide. No lo acumula.",
       do_note:"Regla: una línea = 🥭. Sin números. Sin equivalencias.",
-
-      btn_first:"Escribe una línea",
-      btn_register:"Ir al Registro",
-      btn_contact:"Contacto",
-      btn_press:"Escribir (prensa)",
-      btn_top:"Volver arriba",
+      btn_first:"Escribe aquí",
+      btn_about:"Qué es Mango",
 
       write_title:"Escribe una línea",
       write_text:"Una línea describe el intercambio real. Humano y simple.",
@@ -413,18 +429,18 @@
       write_li2:"Describe la acción real (quién, qué, cuándo).",
       write_li3:"Si es desequilibrado, no es deuda: se vuelve visible y cuidable.",
       write_note:"Usa verbos concretos.",
+      btn_write_go:"Escribe aquí",
+      btn_contact:"Contacto",
 
-      wbox_title:"Escribe la línea aquí (en inicio)",
-      wbox_text:"Escribe una sola línea. Luego copia o envía por email.",
-      wbox_placeholder:"Ejemplo: Marco acompañó a Ana al hospital. (Roma, 14 feb 2026)",
-      wbox_note:"Mango no guarda aquí online: esta caja es solo para escribir y copiar/enviar. Sin números, sin equivalencias.",
-      btn_writebox:"Escribir aquí",
-      btn_writebox2:"Escribir aquí",
+      writebox_title:"Escribe la línea (en la home)",
+      writebox_text:"Escribe una sola línea simple. Quédate en el sitio: Mango no abre apps externas.",
+      writebox_placeholder:"Ejemplo: Marco acompañó a Ana al hospital. (Roma, 14 feb 2026)",
+      writebox_note:"Nota: esta caja guarda solo un borrador en tu teléfono (no online). Sin números, sin equivalencias.",
       btn_copy:"Copiar",
-      btn_send:"Enviar email",
-      btn_register2:"Ir al Registro",
-      btn_top2:"Volver arriba",
-      btn_top3:"Volver arriba",
+      btn_send:"Enviar (quedarse aquí)",
+      btn_register:"Ir al Registro",
+      btn_top:"Volver arriba",
+      btn_back_write:"Volver a “Escribe una línea”",
       btn_contact2:"Contacto",
 
       reg_title:"Registro público Mango",
@@ -432,15 +448,12 @@
       reg_intro2:"Cada línea reconoce un intercambio real. No es crédito. No es deuda. No es una cuenta.",
       reg_eq:"Una línea = 🥭",
       reg_no:"Sin números. Sin equivalencias. Sin acumulación.",
-
       reg_time_h:"Principio del tiempo",
       reg_time_p1:"Este Registro no es un feed. No empuja lo nuevo por encima de lo viejo.",
       reg_time_p2:"Si algo es pasado, queda en el pasado. Las líneas permanecen en orden natural. Mango tiene temporalidad explícita: no está diseñado para durar como acumulación.",
-
       reg_struct_h:"Principio estructural",
       reg_struct_p1:"El Registro no mide. No suma. No calcula.",
       reg_struct_p2:"Las líneas no se cuentan. Permanecen. Cualquier uso que introduzca números, conteos o equivalencias no es Mango.",
-
       reg_how_h:"Cómo escribir una línea",
       reg_how_p:"Escribe simple. Escribe humano. Escribe real. Una línea describe un gesto o intercambio que realmente sucedió.",
       reg_how_li1:"Sin precios, sin cantidades, sin cálculos.",
@@ -448,11 +461,9 @@
       reg_how_li3:"Si quieres, usa nombres o iniciales: la privacidad es parte del cuidado.",
       reg_how_li4:"Mejor pocos detalles verdaderos que muchos “perfectos”.",
       reg_balance_note:"Si es desequilibrado, Mango no lo iguala con números: lo vuelve visible y cuidable con gestos reales, en tiempo humano.",
-
       reg_anticapture_h:"No apropiación y anti-captura",
       reg_anticapture_p1:"Mango está diseñado para evitar acumulación, especulación y captura institucional.",
       reg_anticapture_p2:"Nadie puede convertir este Registro en puntos, ranking, reputación o crédito social. Si se vuelve conteo o dinero, no es Mango.",
-
       reg_live_h:"Líneas vivas",
       reg_live_p:"Este espacio está listo para la primera línea real.",
       reg_live_note:"Nota: no numerar líneas y no mostrar totales/contadores.",
@@ -464,9 +475,6 @@
       what_li2:"No cuantificable.",
       what_li3:"No apropiable.",
       what_li4:"Temporalidad explícita.",
-
-      qr_main:"Pasó algo entre dos personas.",
-      qr_sub:"Aquí puedes entenderlo.",
 
       contact_title:"Contacto (instituciones / prensa)",
       contact_text:"Para prensa o instituciones, escribe aquí:",
@@ -482,12 +490,8 @@
       do_title:"Fais Mango maintenant",
       do_text:"Si quelque chose de réel s’est passé entre deux personnes, Mango le reconnaît. Il ne mesure pas. Il n’accumule pas.",
       do_note:"Règle : une ligne = 🥭. Pas de chiffres. Pas d’équivalences.",
-
-      btn_first:"Écrire une ligne",
-      btn_register:"Aller au Registre",
-      btn_contact:"Contact",
-      btn_press:"Écrire (presse)",
-      btn_top:"Haut de page",
+      btn_first:"Écrire ici",
+      btn_about:"Qu’est-ce que Mango",
 
       write_title:"Écrire une ligne",
       write_text:"Une ligne décrit l’échange réel. Humain et simple.",
@@ -495,18 +499,18 @@
       write_li2:"Décrire l’action réelle (qui, quoi, quand).",
       write_li3:"Déséquilibre ≠ dette : visible et soignable.",
       write_note:"Utilise des verbes concrets.",
+      btn_write_go:"Écrire ici",
+      btn_contact:"Contact",
 
-      wbox_title:"Écrire la ligne ici (accueil)",
-      wbox_text:"Écris une seule ligne. Puis copie ou envoie par email.",
-      wbox_placeholder:"Exemple : Marco a accompagné Ana à l’hôpital. (Rome, 14 fév 2026)",
-      wbox_note:"Mango n’enregistre pas ici : cette zone sert seulement à écrire et copier/envoyer. Pas de chiffres, pas d’équivalences.",
-      btn_writebox:"Écrire ici",
-      btn_writebox2:"Écrire ici",
+      writebox_title:"Écris la ligne (sur l’accueil)",
+      writebox_text:"Écris une seule ligne simple. Reste sur le site : Mango n’ouvre pas d’app externe.",
+      writebox_placeholder:"Exemple : Marco a accompagné Ana à l’hôpital. (Rome, 14 fév 2026)",
+      writebox_note:"Note : cette zone garde seulement un brouillon sur ton téléphone (pas en ligne). Pas de chiffres, pas d’équivalences.",
       btn_copy:"Copier",
-      btn_send:"Envoyer email",
-      btn_register2:"Aller au Registre",
-      btn_top2:"Haut de page",
-      btn_top3:"Haut de page",
+      btn_send:"Envoyer (rester ici)",
+      btn_register:"Aller au Registre",
+      btn_top:"Haut de page",
+      btn_back_write:"Retour à « Écrire une ligne »",
       btn_contact2:"Contact",
 
       reg_title:"Registre public Mango",
@@ -514,27 +518,22 @@
       reg_intro2:"Chaque ligne reconnaît un échange réel. Ce n’est pas un crédit. Ce n’est pas une dette. Ce n’est pas un compte.",
       reg_eq:"Une ligne = 🥭",
       reg_no:"Pas de chiffres. Pas d’équivalences. Pas d’accumulation.",
-
       reg_time_h:"Principe du temps",
       reg_time_p1:"Ce Registre n’est pas un feed. Il ne pousse pas le nouveau au-dessus de l’ancien.",
-      reg_time_p2:"Si c’est passé, ça reste dans le passé. Les lignes restent dans l’ordre naturel. Mango a une temporalité explicite : il n’est pas conçu pour durer comme accumulation.",
-
+      reg_time_p2:"Si c’est passé, ça reste dans le passé. Les lignes restent dans l’ordre naturel. Mango a une temporalité explicite : pas conçu pour durer comme accumulation.",
       reg_struct_h:"Principe structurel",
       reg_struct_p1:"Le Registre ne mesure pas. Il ne somme pas. Il ne calcule pas.",
       reg_struct_p2:"Les lignes ne se comptent pas. Elles restent. Tout usage qui introduit chiffres, comptage ou équivalences n’est pas Mango.",
-
       reg_how_h:"Comment écrire une ligne",
       reg_how_p:"Écris simple. Écris humain. Écris réel. Une ligne décrit un geste ou un échange réellement arrivé.",
       reg_how_li1:"Pas de prix, pas de quantités, pas de calculs.",
       reg_how_li2:"Pas de « valeur » mesurée : seulement ce qui est arrivé.",
       reg_how_li3:"Si tu veux, utilise des prénoms ou des initiales : la confidentialité fait partie du soin.",
       reg_how_li4:"Mieux vaut quelques détails vrais que des détails « parfaits ».",
-      reg_balance_note:"Si c’est déséquilibré, Mango ne l’égalise pas par des chiffres : il le rend visible et soignable avec des gestes réels, dans le temps humain.",
-
+      reg_balance_note:"Si c’est déséquilibré, Mango ne l’égalise pas par des chiffres : visible et soignable avec des gestes réels, dans le temps humain.",
       reg_anticapture_h:"Non-appropriation et anti-capture",
       reg_anticapture_p1:"Mango est conçu pour éviter accumulation, spéculation et capture institutionnelle.",
       reg_anticapture_p2:"Personne ne peut transformer ce Registre en points, classement, réputation ou crédit social. Si cela devient comptage ou monnaie, ce n’est pas Mango.",
-
       reg_live_h:"Lignes vivantes",
       reg_live_p:"Cet espace est prêt à accueillir la première ligne réelle.",
       reg_live_note:"Note : ne pas numéroter les lignes et ne pas afficher de total/compteur.",
@@ -546,9 +545,6 @@
       what_li2:"Non quantifiable.",
       what_li3:"Non appropriable.",
       what_li4:"Temporalité explicite.",
-
-      qr_main:"Quelque chose s’est passé entre deux personnes.",
-      qr_sub:"Ici tu peux comprendre.",
 
       contact_title:"Contact (institutions / presse)",
       contact_text:"Pour la presse ou les institutions :",
@@ -564,12 +560,8 @@
       do_title:"Mach Mango jetzt",
       do_text:"Wenn zwischen zwei Menschen etwas Reales passiert ist, erkennt Mango es an. Es misst nicht. Es häuft nicht an.",
       do_note:"Regel: eine Zeile = 🥭. Keine Zahlen. Keine Äquivalenzen.",
-
-      btn_first:"Eine Zeile schreiben",
-      btn_register:"Zum Register",
-      btn_contact:"Kontakt",
-      btn_press:"Schreiben (Presse)",
-      btn_top:"Nach oben",
+      btn_first:"Hier schreiben",
+      btn_about:"Was ist Mango",
 
       write_title:"Eine Zeile schreiben",
       write_text:"Eine Zeile beschreibt den realen Austausch. Menschlich und einfach.",
@@ -577,46 +569,41 @@
       write_li2:"Beschreibe die reale Handlung (wer, was, wann) nüchtern.",
       write_li3:"Ungleichgewicht ≠ Schuld: sichtbar und pflegbar.",
       write_note:"Nutze konkrete Verben.",
+      btn_write_go:"Hier schreiben",
+      btn_contact:"Kontakt",
 
-      wbox_title:"Zeile hier schreiben (Startseite)",
-      wbox_text:"Schreibe eine Zeile. Dann kopieren oder per E-Mail senden.",
-      wbox_placeholder:"Beispiel: Marco begleitete Ana ins Krankenhaus. (Rom, 14. Feb 2026)",
-      wbox_note:"Mango speichert hier nichts online: nur schreiben und kopieren/senden. Keine Zahlen, keine Äquivalenzen.",
-      btn_writebox:"Hier schreiben",
-      btn_writebox2:"Hier schreiben",
+      writebox_title:"Zeile schreiben (auf der Startseite)",
+      writebox_text:"Schreibe eine einfache Zeile. Bleib auf der Seite: Mango öffnet keine externen Apps.",
+      writebox_placeholder:"Beispiel: Marco begleitete Ana ins Krankenhaus. (Rom, 14. Feb 2026)",
+      writebox_note:"Hinweis: Dieses Feld speichert nur einen Entwurf auf deinem Handy (nicht online). Keine Zahlen, keine Äquivalenzen.",
       btn_copy:"Kopieren",
-      btn_send:"E-Mail senden",
-      btn_register2:"Zum Register",
-      btn_top2:"Nach oben",
-      btn_top3:"Nach oben",
+      btn_send:"Senden (hier bleiben)",
+      btn_register:"Zum Register",
+      btn_top:"Nach oben",
+      btn_back_write:"Zurück zu „Eine Zeile schreiben“",
       btn_contact2:"Kontakt",
 
       reg_title:"Öffentliches Mango-Register",
-      reg_intro1:"Hier leben die echten Zeilen. Das Register ist ein Ort schriftlicher Anerkennung: es sagt „das ist passiert, zwischen Menschen, in der realen Welt“.",
+      reg_intro1:"Hier leben die echten Zeilen. Das Register ist ein Ort schriftlicher Anerkennung: „Das ist passiert – zwischen Menschen – in der realen Welt“.",
       reg_intro2:"Jede Zeile erkennt einen realen Austausch an. Kein Kredit. Keine Schuld. Kein Konto.",
       reg_eq:"Eine Zeile = 🥭",
       reg_no:"Keine Zahlen. Keine Äquivalenzen. Keine Anhäufung.",
-
       reg_time_h:"Zeitprinzip",
       reg_time_p1:"Dieses Register ist kein Feed. Es drückt Neues nicht über Altes.",
-      reg_time_p2:"Wenn etwas vergangen ist, bleibt es in der Vergangenheit. Zeilen bleiben in natürlicher Reihenfolge. Mango hat explizite Zeitlichkeit: nicht als Anhäufung gedacht.",
-
+      reg_time_p2:"Vergangenes bleibt vergangen. Zeilen bleiben in natürlicher Reihenfolge. Mango hat explizite Zeitlichkeit: nicht als Anhäufung gedacht.",
       reg_struct_h:"Strukturprinzip",
       reg_struct_p1:"Das Register misst nicht. Es summiert nicht. Es rechnet nicht.",
       reg_struct_p2:"Zeilen werden nicht gezählt. Sie bleiben. Jede Nutzung mit Zahlen, Zählung oder Äquivalenzen ist nicht Mango.",
-
       reg_how_h:"Wie man eine Zeile schreibt",
       reg_how_p:"Schreib einfach. Schreib menschlich. Schreib real. Eine Zeile beschreibt eine Geste oder einen Austausch, der wirklich passiert ist.",
       reg_how_li1:"Keine Preise, keine Mengen, keine Berechnungen.",
       reg_how_li2:"Kein gemessener „Wert“: nur was passiert ist.",
       reg_how_li3:"Wenn du willst, nutze Vornamen oder Initialen: Privatsphäre ist Teil der Fürsorge.",
       reg_how_li4:"Lieber wenige wahre Details als viele „perfekte“.",
-      reg_balance_note:"Bei Ungleichgewicht gleicht Mango nicht mit Zahlen aus: es macht es sichtbar und pflegbar durch reale Gesten, in menschlicher Zeit.",
-
+      reg_balance_note:"Bei Ungleichgewicht gleicht Mango nicht mit Zahlen aus: sichtbar und pflegbar durch reale Gesten, in menschlicher Zeit.",
       reg_anticapture_h:"Nicht-Aneignung und Anti-Capture",
       reg_anticapture_p1:"Mango ist so gestaltet, dass Anhäufung, Spekulation und institutionelle Vereinnahmung vermieden werden.",
       reg_anticapture_p2:"Niemand darf dieses Register in Punkte, Ranking, Reputation oder Social Credit verwandeln. Wenn es Zählung oder Geld wird, ist es nicht Mango.",
-
       reg_live_h:"Lebende Zeilen",
       reg_live_p:"Dieser Raum ist bereit für die erste echte Zeile.",
       reg_live_note:"Hinweis: Zeilen nicht nummerieren und keinen Gesamtzähler anzeigen.",
@@ -628,9 +615,6 @@
       what_li2:"Nicht quantifizierbar.",
       what_li3:"Nicht aneignbar.",
       what_li4:"Explizite Zeitlichkeit.",
-
-      qr_main:"Zwischen zwei Menschen ist etwas passiert.",
-      qr_sub:"Hier kannst du es verstehen.",
 
       contact_title:"Kontakt (Institutionen / Presse)",
       contact_text:"Für Presse oder Institutionen:",
@@ -646,12 +630,8 @@
       do_title:"现在就做 Mango",
       do_text:"如果两个人之间发生了真实的事，Mango 予以承认。它不计量，不累积。",
       do_note:"规则：一行 = 🥭。没有数字，没有等价换算。",
-
-      btn_first:"写下一行",
-      btn_register:"进入登记册",
-      btn_contact:"联系",
-      btn_press:"写信（媒体）",
-      btn_top:"回到顶部",
+      btn_first:"在此书写",
+      btn_about:"什么是 Mango",
 
       write_title:"写下一行",
       write_text:"一行描述真实交换。保持人性、简洁。",
@@ -659,18 +639,18 @@
       write_li2:"描述真实行动（谁、做了什么、何时）。",
       write_li3:"不平衡 ≠ 债：可见、可被照顾。",
       write_note:"使用具体动词。",
+      btn_write_go:"在此书写",
+      btn_contact:"联系",
 
-      wbox_title:"在首页写这一行",
-      wbox_text:"写一行，然后复制或通过邮件发送。",
-      wbox_placeholder:"例：Marco 陪 Ana 去医院。(罗马，2026年2月14日)",
-      wbox_note:"这里不会在线保存：仅用于写、复制/发送。不要数字，不要等价换算。",
-      btn_writebox:"在这里写",
-      btn_writebox2:"在这里写",
+      writebox_title:"在首页写这一行",
+      writebox_text:"写一行简单的话。留在网站：Mango 不会打开外部应用。",
+      writebox_placeholder:"示例：Marco 陪 Ana 去了医院。（罗马，2026年2月14日）",
+      writebox_note:"注意：这里只在你的手机保存草稿（不在线保存）。不要数字，不要等价换算。",
       btn_copy:"复制",
-      btn_send:"发送邮件",
-      btn_register2:"进入登记册",
-      btn_top2:"回到顶部",
-      btn_top3:"回到顶部",
+      btn_send:"发送（留在此页）",
+      btn_register:"进入登记册",
+      btn_top:"回到顶部",
+      btn_back_write:"返回“写下一行”",
       btn_contact2:"联系",
 
       reg_title:"Mango 公开登记册",
@@ -678,27 +658,22 @@
       reg_intro2:"每一行承认可验证的真实交换：不是信用、不是债务、不是账户。",
       reg_eq:"一行 = 🥭",
       reg_no:"没有数字。没有等价换算。没有累积。",
-
       reg_time_h:"时间原则",
       reg_time_p1:"这不是信息流（feed）。不会把新的压在旧的上面。",
       reg_time_p2:"过去的事留在过去。行按自然顺序保留。Mango 具有明确时间性：不是为“累积”而设计。",
-
       reg_struct_h:"结构原则",
       reg_struct_p1:"登记册不计量、不相加、不计算。",
       reg_struct_p2:"行不被计数，只是保留。任何引入数字、计数或等价换算的用法都不是 Mango。",
-
       reg_how_h:"如何写一行",
       reg_how_p:"写得简单、真实、有人味。一行描述确实发生过的动作或交换。",
       reg_how_li1:"不要写价格、数量、计算。",
       reg_how_li2:"不要写“衡量出来的价值”：只写发生了什么。",
-      reg_how_li3:"如需隐私，可用名字首字母或昵称：隐私也是照顾的一部分。",
+      reg_how_li3:"如需隐私，可用首字母/昵称：隐私也是照顾的一部分。",
       reg_how_li4:"少量真实细节胜过大量“完美”细节。",
       reg_balance_note:"若不平衡，Mango 不用数字“拉平”：它让其可见，并在人的时间里用真实行动去照顾。",
-
       reg_anticapture_h:"不可占有与反捕获",
       reg_anticapture_p1:"Mango 的设计目标是避免累积、投机与制度性捕获。",
       reg_anticapture_p2:"任何人都不能把登记册变成积分、排名、声誉或社会信用。若变成计数或货币，就不是 Mango。",
-
       reg_live_h:"活的行",
       reg_live_p:"这个空间已经准备好承载第一行真实记录。",
       reg_live_note:"注意：不要给行编号，不要显示总数或计数器。",
@@ -711,9 +686,6 @@
       what_li3:"不可占有。",
       what_li4:"明确时间性。",
 
-      qr_main:"两个人之间发生了什么。",
-      qr_sub:"你可以在这里理解。",
-
       contact_title:"联系（机构 / 媒体）",
       contact_text:"媒体、学校或机构合作请联系：",
       contact_note:"邮箱公开，方便记者找到。",
@@ -724,140 +696,215 @@
   };
 
   function getLang(){
-    const u=new URL(location.href);
-    const l=(u.searchParams.get("lang")||"").toLowerCase();
-    return SUPPORTED.includes(l)?l:DEFAULT_LANG;
+    const u = new URL(location.href);
+    const l = (u.searchParams.get("lang")||"").toLowerCase();
+    return SUPPORTED.includes(l) ? l : DEFAULT_LANG;
   }
   function setLang(l){
-    const u=new URL(location.href);
-    u.searchParams.set("lang",l);
+    const u = new URL(location.href);
+    u.searchParams.set("lang", l);
     history.replaceState({}, "", u.toString());
   }
-  function keepLangOnHashLinks(){
-    document.querySelectorAll('a[href^="#"]').forEach(a=>{
-      a.addEventListener("click", ()=>{
-        // keep current ?lang in URL (hash-only navigation)
-        const l=getLang();
-        setLang(l);
-      });
-    });
-  }
-
   function apply(l){
-    document.documentElement.lang=l;
-    document.querySelectorAll(".chip").forEach(b=>b.setAttribute("aria-current", b.dataset.lang===l ? "true":"false"));
-    const d=T[l]||T[DEFAULT_LANG];
+    document.documentElement.lang = l;
+    document.querySelectorAll(".chip").forEach(b=>{
+      b.setAttribute("aria-current", b.dataset.lang === l ? "true":"false");
+    });
 
-    const map={
-      t_title:d.title, t_subtitle:d.subtitle,
+    const d = T[l] || T[DEFAULT_LANG];
 
-      t_do_title:d.do_title, t_do_text:d.do_text, t_do_note:d.do_note,
-      t_btn_first:d.btn_first, t_btn_register:d.btn_register,
-      t_btn_contact:d.btn_contact, t_btn_press:d.btn_press,
-      t_btn_top:d.btn_top, t_btn_top2:d.btn_top2, t_btn_top3:d.btn_top3,
+    const map = {
+      t_title:d.title,
+      t_subtitle:d.subtitle,
+
+      t_do_title:d.do_title,
+      t_do_text:d.do_text,
+      t_do_note:d.do_note,
+      t_btn_first:d.btn_first,
+      t_btn_about:d.btn_about,
+
+      t_write_title:d.write_title,
+      t_write_text:d.write_text,
+      t_write_li1:d.write_li1,
+      t_write_li2:d.write_li2,
+      t_write_li3:d.write_li3,
+      t_write_note:d.write_note,
+      t_btn_write_go:d.btn_write_go,
+      t_btn_contact:d.btn_contact,
+
+      t_writebox_title:d.writebox_title,
+      t_writebox_text:d.writebox_text,
+      t_btn_copy:d.btn_copy,
+      t_btn_send:d.btn_send,
+      t_btn_register:d.btn_register,
+      t_btn_top:d.btn_top,
+      t_writebox_note:d.writebox_note,
+
+      t_reg_title:d.reg_title,
+      t_reg_intro1:d.reg_intro1,
+      t_reg_intro2:d.reg_intro2,
+      t_reg_eq:d.reg_eq,
+      t_reg_no:d.reg_no,
+      t_reg_time_h:d.reg_time_h,
+      t_reg_time_p1:d.reg_time_p1,
+      t_reg_time_p2:d.reg_time_p2,
+      t_reg_struct_h:d.reg_struct_h,
+      t_reg_struct_p1:d.reg_struct_p1,
+      t_reg_struct_p2:d.reg_struct_p2,
+      t_reg_how_h:d.reg_how_h,
+      t_reg_how_p:d.reg_how_p,
+      t_reg_how_li1:d.reg_how_li1,
+      t_reg_how_li2:d.reg_how_li2,
+      t_reg_how_li3:d.reg_how_li3,
+      t_reg_how_li4:d.reg_how_li4,
+      t_reg_balance_note:d.reg_balance_note,
+      t_reg_anticapture_h:d.reg_anticapture_h,
+      t_reg_anticapture_p1:d.reg_anticapture_p1,
+      t_reg_anticapture_p2:d.reg_anticapture_p2,
+      t_reg_live_h:d.reg_live_h,
+      t_reg_live_p:d.reg_live_p,
+      t_reg_live_note:d.reg_live_note,
+      t_btn_back_write:d.btn_back_write,
       t_btn_contact2:d.btn_contact2,
 
-      t_write_title:d.write_title, t_write_text:d.write_text,
-      t_write_li1:d.write_li1, t_write_li2:d.write_li2, t_write_li3:d.write_li3,
-      t_write_note:d.write_note,
-      t_btn_writebox:d.btn_writebox, t_btn_writebox2:d.btn_writebox2,
+      t_what_title:d.what_title,
+      t_what_text1:d.what_text1,
+      t_what_text2:d.what_text2,
+      t_what_li1:d.what_li1,
+      t_what_li2:d.what_li2,
+      t_what_li3:d.what_li3,
+      t_what_li4:d.what_li4,
 
-      t_wbox_title:d.wbox_title, t_wbox_text:d.wbox_text, t_wbox_note:d.wbox_note,
-      t_btn_copy:d.btn_copy, t_btn_send:d.btn_send, t_btn_register2:d.btn_register2,
+      t_contact_title:d.contact_title,
+      t_contact_text:d.contact_text,
+      t_contact_note:d.contact_note,
 
-      t_reg_title:d.reg_title, t_reg_intro1:d.reg_intro1, t_reg_intro2:d.reg_intro2,
-      t_reg_eq:d.reg_eq, t_reg_no:d.reg_no,
-      t_reg_time_h:d.reg_time_h, t_reg_time_p1:d.reg_time_p1, t_reg_time_p2:d.reg_time_p2,
-      t_reg_struct_h:d.reg_struct_h, t_reg_struct_p1:d.reg_struct_p1, t_reg_struct_p2:d.reg_struct_p2,
-      t_reg_how_h:d.reg_how_h, t_reg_how_p:d.reg_how_p,
-      t_reg_how_li1:d.reg_how_li1, t_reg_how_li2:d.reg_how_li2, t_reg_how_li3:d.reg_how_li3, t_reg_how_li4:d.reg_how_li4,
-      t_reg_balance_note:d.reg_balance_note,
-      t_reg_anticapture_h:d.reg_anticapture_h, t_reg_anticapture_p1:d.reg_anticapture_p1, t_reg_anticapture_p2:d.reg_anticapture_p2,
-      t_reg_live_h:d.reg_live_h, t_reg_live_p:d.reg_live_p, t_reg_live_note:d.reg_live_note,
-
-      t_what_title:d.what_title, t_what_text1:d.what_text1, t_what_text2:d.what_text2,
-      t_what_li1:d.what_li1, t_what_li2:d.what_li2, t_what_li3:d.what_li3, t_what_li4:d.what_li4,
-
-      t_qr_main:d.qr_main, t_qr_sub:d.qr_sub,
-      t_contact_title:d.contact_title, t_contact_text:d.contact_text, t_contact_note:d.contact_note,
-      t_footer_line1:d.footer1, t_footer_line2:d.footer2
+      t_footer_line1:d.footer1,
+      t_footer_line2:d.footer2
     };
 
     Object.keys(map).forEach(id=>{
-      const el=document.getElementById(id);
-      if(el) el.textContent=map[id];
+      const el = document.getElementById(id);
+      if(el) el.textContent = map[id];
     });
 
     // placeholder textarea
-    const ta=document.getElementById("lineText");
-    if(ta) ta.placeholder = d.wbox_placeholder || "";
+    const ta = document.getElementById("mango_line");
+    if(ta) ta.placeholder = d.writebox_placeholder || "";
+
+    // aggiorna stato (se visibile) in lingua
+    const status = document.getElementById("send_status");
+    if(status && status.style.display !== "none"){
+      // non sovrascrivo testo (può contenere la riga), solo lascio così
+    }
   }
 
-  // --- Robust “top” behavior (anchor + JS fallback) ---
-  function goTop(e){
-    if(e) e.preventDefault();
+  function goTop(){
     try{ window.scrollTo({top:0,left:0,behavior:"smooth"}); }
     catch(_){ window.scrollTo(0,0); }
-    // ensure URL keeps lang
-    setLang(getLang());
-    // keep hash clean
-    history.replaceState({}, "", new URL(location.href).toString().replace(/#.*$/,""));
+  }
+  function goTo(id){
+    const el = document.getElementById(id);
+    if(el) el.scrollIntoView({behavior:"smooth", block:"start"});
   }
 
-  function bindTop(){
-    ["btnTop1","btnTop2"].forEach(id=>{
-      const el=document.getElementById(id);
-      if(el) el.addEventListener("click", goTop, {passive:false});
+  // bind lingua
+  document.querySelectorAll(".chip").forEach(b=>{
+    b.addEventListener("click", ()=>{
+      setLang(b.dataset.lang);
+      apply(b.dataset.lang);
     });
-  }
+  });
 
-  function bindLang(){
-    document.querySelectorAll(".chip").forEach(b=>{
-      b.addEventListener("click", ()=>{
-        setLang(b.dataset.lang);
-        apply(b.dataset.lang);
-      });
+  // navigazione bottoni
+  document.getElementById("brand_mango")?.addEventListener("click", goTop);
+  document.getElementById("btn_top")?.addEventListener("click", goTop);
+  document.getElementById("btn_about")?.addEventListener("click", ()=>goTo("what"));
+  document.getElementById("btn_contact_go")?.addEventListener("click", ()=>goTo("contact"));
+  document.getElementById("btn_contact2_go")?.addEventListener("click", ()=>goTo("contact"));
+  document.getElementById("btn_back_write")?.addEventListener("click", ()=>goTo("write"));
+  document.getElementById("btn_register_go")?.addEventListener("click", ()=>goTo("register"));
+  document.getElementById("btn_write_go")?.addEventListener("click", ()=>goTo("writebox"));
+
+  // “Scrivi qui” dal primo box porta al textarea e focus
+  document.getElementById("btn_first")?.addEventListener("click", ()=>{
+    goTo("writebox");
+    setTimeout(()=>document.getElementById("mango_line")?.focus(), 250);
+  });
+
+  // bozza + copia + invio che resta sul sito
+  (function(){
+    const ta = document.getElementById("mango_line");
+    const btnCopy = document.getElementById("btn_copy");
+    const btnSend = document.getElementById("btn_send");
+    const status = document.getElementById("send_status");
+    if(!ta || !btnCopy || !btnSend || !status) return;
+
+    const saved = localStorage.getItem(DRAFT_KEY);
+    if(saved && !ta.value) ta.value = saved;
+
+    ta.addEventListener("input", ()=> localStorage.setItem(DRAFT_KEY, ta.value));
+
+    async function copyText(){
+      const text = (ta.value || "").trim();
+      if(!text){
+        status.style.display="block";
+        status.textContent = (getLang()==="it")
+          ? "Scrivi prima una riga (una sola riga semplice)."
+          : (getLang()==="en") ? "Write one simple line first."
+          : (getLang()==="es") ? "Primero escribe una línea simple."
+          : (getLang()==="fr") ? "Écris d’abord une ligne simple."
+          : (getLang()==="de") ? "Schreibe zuerst eine einfache Zeile."
+          : "请先写一行简单内容。";
+        return false;
+      }
+      try{
+        await navigator.clipboard.writeText(text);
+      }catch(e){
+        ta.focus(); ta.select();
+        document.execCommand("copy");
+      }
+      return true;
+    }
+
+    btnCopy.addEventListener("click", async ()=>{
+      const ok = await copyText();
+      if(!ok) return;
+      status.style.display="block";
+      status.textContent = (getLang()==="it")
+        ? "Copiata. La riga resta salvata qui come bozza."
+        : (getLang()==="en") ? "Copied. The line stays saved here as a draft."
+        : (getLang()==="es") ? "Copiada. La línea queda guardada aquí como borrador."
+        : (getLang()==="fr") ? "Copié. La ligne reste enregistrée ici comme brouillon."
+        : (getLang()==="de") ? "Kopiert. Die Zeile bleibt hier als Entwurf gespeichert."
+        : "已复制。此行会在本页作为草稿保存。";
     });
-  }
 
-  function bindWriteBox(){
-    const copyBtn=document.getElementById("btnCopy");
-    const mailBtn=document.getElementById("btnMail");
-    const ta=document.getElementById("lineText");
-    if(copyBtn && ta){
-      copyBtn.addEventListener("click", async ()=>{
-        const text=(ta.value||"").trim();
-        if(!text) return;
-        try{ await navigator.clipboard.writeText(text); }
-        catch(_){
-          ta.focus(); ta.select();
-          try{ document.execCommand("copy"); } catch(__){}
-        }
-      });
-    }
-    if(mailBtn && ta){
-      mailBtn.addEventListener("click", ()=>{
-        const text=(ta.value||"").trim();
-        const l=getLang();
-        const subject = (l==="it") ? "Riga Mango" :
-                        (l==="en") ? "Mango line" :
-                        (l==="es") ? "Línea Mango" :
-                        (l==="fr") ? "Ligne Mango" :
-                        (l==="de") ? "Mango-Zeile" : "Mango 记录";
-        const body = text ? text : "";
-        const url = "mailto:info@mangoinfrastruttura.org"
-          + "?subject=" + encodeURIComponent(subject)
-          + "&body=" + encodeURIComponent(body);
-        window.location.href = url;
-      });
-    }
-  }
+    btnSend.addEventListener("click", async ()=>{
+      const ok = await copyText();
+      if(!ok) return;
+
+      // RESTA SUL SITO: no mailto
+      status.style.display="block";
+      const email = "info@mangoinfrastruttura.org";
+      const msgIt = "✅ Riga pronta e copiata. Ora incollala tu in una email a: <b>"+email+"</b><br><span class='small'>Mango resta qui: niente app esterne. La bozza rimane salvata sul tuo telefono.</span>";
+      const msgEn = "✅ Line ready and copied. Paste it into an email to: <b>"+email+"</b><br><span class='small'>Mango stays here: no external apps. Draft stays saved on your phone.</span>";
+      const msgEs = "✅ Línea lista y copiada. Pégala en un email a: <b>"+email+"</b><br><span class='small'>Mango se queda aquí: sin apps externas. El borrador queda guardado en tu teléfono.</span>";
+      const msgFr = "✅ Ligne prête et copiée. Colle-la dans un email à : <b>"+email+"</b><br><span class='small'>Mango reste ici : aucune app externe. Le brouillon reste sur ton téléphone.</span>";
+      const msgDe = "✅ Zeile bereit und kopiert. Füge sie in eine E-Mail ein an: <b>"+email+"</b><br><span class='small'>Mango bleibt hier: keine externen Apps. Entwurf bleibt auf deinem Handy.</span>";
+      const msgZh = "✅ 已准备并复制。请你粘贴到邮件发送给：<b>"+email+"</b><br><span class='small'>Mango 留在本页：不打开外部应用。草稿会保存在你的手机里。</span>";
+
+      status.innerHTML =
+        (getLang()==="it") ? msgIt :
+        (getLang()==="en") ? msgEn :
+        (getLang()==="es") ? msgEs :
+        (getLang()==="fr") ? msgFr :
+        (getLang()==="de") ? msgDe :
+        msgZh;
+    });
+  })();
 
   // init
-  bindLang();
-  keepLangOnHashLinks();
-  bindTop();
-  bindWriteBox();
   apply(getLang());
 </script>
 </body>

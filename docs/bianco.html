@@ -3,112 +3,37 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Mango — Bianco</title>
+  <title>Mango</title>
   <style>
-    :root{ --b:rgba(0,0,0,.12); --b2:rgba(0,0,0,.16); }
-    body{
-      margin:0;
-      font-family:-apple-system,BlinkMacSystemFont,system-ui,Segoe UI,Roboto,Arial;
-      background:radial-gradient(1200px 700px at 50% 0%, #ffffff 0%, #fbf6ee 55%, #ffffff 100%);
-      color:#111; min-height:100vh;
-    }
-
-    /* Mango top-right = Home */
-    .mango-top{
-      position:fixed; right:16px; top:16px; z-index:30;
+    :root{ --b2:rgba(0,0,0,.16); }
+    body{ margin:0; background:#fff; min-height:100vh; }
+    a{
       text-decoration:none; color:#111; font-weight:950;
-      border:1px solid var(--b2); border-radius:16px; padding:10px 12px;
-      background:#fff; display:inline-flex; align-items:center; gap:10px;
+      border:1px solid var(--b2); border-radius:18px;
+      padding:12px 14px; background:#fff;
       box-shadow:0 10px 26px rgba(0,0,0,.10);
+      display:inline-flex; align-items:center; gap:10px;
       white-space:nowrap;
     }
-    .mango-top:active{ transform: translateY(1px); }
-
-    /* Mango bottom-right = Home (comodo thumb) */
-    .mango-fab{
-      position:fixed;
-      right:16px; bottom:16px;
-      z-index:30;
-      text-decoration:none;
-      color:#111;
-      font-weight:950;
-      border:1px solid var(--b2);
-      border-radius:18px;
-      padding:12px 14px;
-      background:#fff;
-      box-shadow: 0 10px 26px rgba(0,0,0,.10);
-      display:inline-flex;
-      align-items:center;
-      gap:10px;
-      white-space:nowrap;
-    }
-    .mango-fab:active{ transform: translateY(1px); }
-
-    .center{
-      min-height:100vh;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      text-align:center;
-      padding:24px;
-    }
-    .panel{
-      max-width:760px;
-      background:rgba(255,255,255,.75);
-      border:1px solid var(--b);
-      border-radius:24px;
-      padding:22px 18px;
-      box-shadow:0 14px 34px rgba(0,0,0,.08);
-    }
-    .title{
-      font-size:1.35rem;
-      font-weight:950;
-      margin:0 0 10px;
-      letter-spacing:.2px;
-    }
-    .hint{
-      margin:0;
-      opacity:.72;
-      line-height:1.7;
-      font-size:1.05rem;
-    }
+    a:active{ transform: translateY(1px); }
+    .top{ position:fixed; right:16px; top:16px; z-index:30; }
+    .bot{ position:fixed; right:16px; bottom:16px; z-index:30; }
   </style>
 </head>
 <body>
-  <a class="mango-top" id="homeTop" href="index.html?lang=it">🥭 <span id="homeTxt">Mango</span></a>
-  <a class="mango-fab" id="homeFab" href="index.html?lang=it">🥭 <span id="homeTxt2">Mango</span></a>
-
-  <div class="center">
-    <div class="panel">
-      <p class="title" id="t1">Bianco</p>
-      <p class="hint" id="t2">Spazio neutro. Qui non c’è nulla da dimostrare. Il pulsante 🥭 ti riporta sempre alla Home.</p>
-    </div>
-  </div>
+  <div class="top"><a id="homeTop" href="index.html?lang=it">🥭 Mango</a></div>
+  <div class="bot"><a id="homeBot" href="index.html?lang=it">🥭 Mango</a></div>
 
 <script>
-const dict={
-  it:{htmlLang:"it", home:"Mango", t1:"Bianco", t2:"Spazio neutro. Qui non c’è nulla da dimostrare. Il pulsante 🥭 ti riporta sempre alla Home."},
-  en:{htmlLang:"en", home:"Mango", t1:"White", t2:"Neutral space. Nothing to prove here. The 🥭 button always takes you back Home."},
-  es:{htmlLang:"es", home:"Mango", t1:"Blanco", t2:"Espacio neutral. Aquí no hay nada que demostrar. El botón 🥭 siempre te lleva al inicio."},
-  fr:{htmlLang:"fr", home:"Mango", t1:"Blanc", t2:"Espace neutre. Rien à prouver ici. Le bouton 🥭 te ramène toujours à l’accueil."},
-  de:{htmlLang:"de", home:"Mango", t1:"Weiß", t2:"Neutraler Raum. Hier gibt es nichts zu beweisen. Der 🥭-Button bringt dich immer zur Startseite."},
-  zh:{htmlLang:"zh-Hant", home:"Mango", t1:"白頁", t2:"中性空間。這裡不需要證明任何事。點 🥭 可隨時回到首頁。"}
-};
 function getLang(){
   const q=new URLSearchParams(location.search);
   const v=(q.get("lang")||"it").toLowerCase();
-  return dict[v]?v:"it";
+  return ["it","en","es","fr","de","zh"].includes(v) ? v : "it";
 }
 const L=getLang();
-document.documentElement.lang = dict[L].htmlLang;
-document.getElementById("homeTxt").textContent = dict[L].home;
-document.getElementById("homeTxt2").textContent = dict[L].home;
-document.getElementById("t1").textContent = dict[L].t1;
-document.getElementById("t2").textContent = dict[L].t2;
-
 const home = `index.html?lang=${L}`;
 document.getElementById("homeTop").href = home;
-document.getElementById("homeFab").href = home;
+document.getElementById("homeBot").href = home;
 </script>
 </body>
 </html>

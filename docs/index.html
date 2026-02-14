@@ -1,276 +1,179 @@
 <!doctype html>
 <html lang="it">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Mango – Infrastruttura</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Mango</title>
 
   <style>
-    :root { --max: 860px; }
-    body{ margin:0; font-family:-apple-system,BlinkMacSystemFont,system-ui,Segoe UI,Roboto,Arial; background:#fff; color:#111; }
-    .wrap{ max-width:var(--max); margin:0 auto; padding:0 18px; }
-
-    header{ text-align:center; padding:88px 18px 22px; }
-
-    /* Mango sopra = bottone verso pagina bianca */
-    .brand{
-      display:inline-flex; align-items:center; justify-content:center;
-      text-decoration:none; color:#111;
-      font-size:2.45rem; font-weight:750; letter-spacing:.2px;
-      padding:10px 16px;
-      border-radius:18px;
-      border:1px solid rgba(0,0,0,.10);
-      background:#fff;
+    body{
+      margin:0;
+      font-family:-apple-system,BlinkMacSystemFont,system-ui,Segoe UI,Roboto,Arial;
+      background:#fff; color:#111;
+      min-height:100vh;
     }
-    .brand:active{ transform: translateY(1px); }
+    .wrap{ max-width:860px; margin:0 auto; padding:0 18px; }
 
-    .manifesto{ text-align:center; margin:52px auto 30px; }
-    .manifesto h2{ margin:0; font-size:2rem; font-weight:700; line-height:1.35; }
-    .manifesto p{ margin:16px 0 0; opacity:.6; }
-
-    nav{ display:flex; gap:10px; justify-content:center; flex-wrap:wrap; margin:26px 0 8px; }
-    .btn{
-      appearance:none; border:1px solid rgba(0,0,0,.12); background:#fff; color:#111;
-      padding:12px 14px; border-radius:14px; font-weight:700; cursor:pointer; text-decoration:none;
-      display:inline-flex; align-items:center; gap:8px;
-    }
-    .btn:active{ transform: translateY(1px); }
-    .btn.primary{ border-color:rgba(0,0,0,.18); }
-
-    section{ margin:58px 0; }
-    h3{ margin:0 0 14px; font-size:1.45rem; }
-    p{ margin:0; line-height:1.75; font-size:1.05rem; }
-
-    .card{
-      border:1px solid rgba(0,0,0,.12);
-      border-radius:18px; padding:16px; margin-top:14px;
-    }
-
-    .langbar{
-      position:fixed; top:14px; right:14px;
-      display:flex; gap:8px; flex-wrap:wrap;
+    /* Lingue in alto */
+    .top{
+      display:flex; justify-content:flex-end;
+      padding:14px 18px;
+      position:sticky; top:0;
       background:rgba(255,255,255,.92);
-      border:1px solid rgba(0,0,0,.10);
-      border-radius:16px; padding:8px 10px;
       backdrop-filter: blur(10px);
+      border-bottom:1px solid rgba(0,0,0,.08);
       z-index:20;
     }
+    .langbar{ display:flex; gap:8px; flex-wrap:wrap; }
     .langbar a{
-      font-size:.95rem; text-decoration:none; color:#111; opacity:.75; font-weight:750;
-      padding:6px 10px; border-radius:12px; border:1px solid rgba(0,0,0,.10);
+      font-size:.95rem; text-decoration:none; color:#111; opacity:.78; font-weight:900;
+      padding:8px 10px; border-radius:12px; border:1px solid rgba(0,0,0,.10);
       background:#fff;
     }
     .langbar a.active{ opacity:1; border-color:rgba(0,0,0,.25); }
 
-    #registerList{ display:flex; flex-direction:column; gap:10px; }
-    .line{
-      border:1px solid rgba(0,0,0,.10);
-      border-radius:16px; padding:14px 14px;
-      background:#fff;
-      line-height:1.55;
-      word-break: break-word;
-    }
-    .muted{ opacity:.65; font-size:.98rem; }
+    header{ text-align:center; padding:70px 18px 18px; }
+    h1{ margin:0; font-size:2.2rem; font-weight:950; letter-spacing:.2px; line-height:1.15; }
+    p{ margin:16px 0 0; line-height:1.7; font-size:1.05rem; opacity:.7; }
 
-    footer{ text-align:center; padding:68px 18px 46px; opacity:.62; font-size:.95rem; line-height:1.55; }
+    .card{
+      border:1px solid rgba(0,0,0,.12);
+      border-radius:22px;
+      padding:22px;
+      margin:26px auto 0;
+      text-align:center;
+      max-width:640px;
+    }
+    .btn{
+      appearance:none;
+      border:1px solid rgba(0,0,0,.16);
+      background:#fff;
+      color:#111;
+      padding:12px 16px;
+      border-radius:14px;
+      font-weight:950;
+      cursor:pointer;
+      text-decoration:none;
+      display:inline-flex;
+      align-items:center;
+      gap:10px;
+      margin-top:18px;
+    }
+    .btn:active{ transform: translateY(1px); }
+    .muted{ opacity:.55; font-size:.95rem; margin-top:14px; }
+
+    /* 🥭 Mango in basso a destra = bottone Home */
+    .mango-fab{
+      position:fixed;
+      right:16px; bottom:16px;
+      z-index:30;
+      text-decoration:none;
+      color:#111;
+      font-weight:950;
+      border:1px solid rgba(0,0,0,.16);
+      border-radius:18px;
+      padding:12px 14px;
+      background:#fff;
+      box-shadow: 0 6px 18px rgba(0,0,0,.08);
+      display:inline-flex;
+      align-items:center;
+      gap:10px;
+    }
+    .mango-fab:active{ transform: translateY(1px); }
   </style>
 </head>
 
 <body>
-  <div class="langbar" id="langbar"></div>
+  <div class="top">
+    <div class="langbar" id="langbar"></div>
+  </div>
 
   <header class="wrap">
-    <!-- Mango sopra: bottone verso pagina bianca (404 manifesto) -->
-    <a class="brand" id="brandLink" href="404.html">Mango</a>
+    <h1 id="m1">Questo dominio può sparire.<br>Mango no.</h1>
+    <p id="m2">Mango accade tra persone reali.</p>
 
-    <div class="manifesto">
-      <h2 id="m1">Questo dominio può sparire.<br/>Mango no.</h2>
-      <p id="m2">Mango accade tra persone reali.</p>
+    <div class="card">
+      <div id="c1" style="font-weight:900; font-size:1.08rem;">
+        Sei arrivato qui da un vecchio link o un QR.
+      </div>
+
+      <a class="btn" id="homeBtn" href="index.html">
+        🏠 <span id="b1">Torna alla Home</span>
+      </a>
+
+      <div class="muted" id="autoTxt">
+        Reindirizzamento automatico tra pochi secondi…
+      </div>
     </div>
-
-    <nav>
-      <a class="btn primary" id="btnDo" href="#do">⚡ <span id="t_do_now">Fai Mango adesso</span></a>
-      <a class="btn" id="btnWrite" href="primo-scambio.html">✍️ <span id="t_write_line">Scrivi una riga</span></a>
-      <a class="btn" id="btnWhat" href="#what">❓ <span id="t_what_is">Cos’è Mango</span></a>
-      <a class="btn" id="btnReg" href="#register">📓 <span id="t_register">Registro</span></a>
-    </nav>
   </header>
 
-  <main class="wrap">
-    <section id="do">
-      <h3 id="h_do">Fai Mango adesso</h3>
-      <p id="p_do">
-        Se riconosci uno scambio reale tra persone, puoi scrivere una riga.
-        Non servono numeri. Non serve un conto. Non serve accumulare.
-        Una riga è un Mango.
-      </p>
-      <div class="card">
-        <a class="btn primary" id="btnStart" href="primo-scambio.html">✍️ <span id="t_start">Vai a Scrivi una riga</span></a>
-      </div>
-    </section>
-
-    <section id="write">
-      <h3 id="h_write">Scrivi una riga</h3>
-      <p id="p_write">
-        Una riga descrive uno scambio reale. Non misura valore. Non crea credito.
-        Non genera saldo. È riconoscimento.
-      </p>
-    </section>
-
-    <section id="what">
-      <h3 id="h_what">Cos’è Mango</h3>
-      <p id="p_what">
-        Mango è un’infrastruttura di fiducia locale non monetaria, non accumulabile e non appropriabile.
-        Può esistere anche senza questo sito. Vive nelle relazioni.
-      </p>
-    </section>
-
-    <section id="register">
-      <h3 id="h_register">Registro</h3>
-      <p class="muted" id="p_register_note">
-        Qui vedi solo le righe salvate su questo dispositivo. Nessun numero. Nessun saldo. Nessun timestamp.
-      </p>
-
-      <div class="card">
-        <div id="registerList"></div>
-        <div id="emptyRegister" class="muted" style="display:none; padding-top:8px;">
-          <span id="t_empty">Nessuna riga salvata. Scrivi una riga.</span>
-        </div>
-      </div>
-
-      <div class="card" style="display:flex; gap:10px; flex-wrap:wrap;">
-        <a class="btn primary" id="btnAddLine" href="primo-scambio.html">✍️ <span id="t_add_line">Aggiungi una riga</span></a>
-        <button class="btn" id="btnClear">🧼 <span id="t_clear">Svuota registro locale</span></button>
-      </div>
-    </section>
-  </main>
-
-  <footer>
-    Creato da Juan de Dios Annaloro Mercedes<br/>
-    In memoria di Larimar<br/>
-    02 febbraio 2026
-  </footer>
+  <a class="mango-fab" id="mangoFab" href="index.html">🥭 <span id="fabTxt">Mango</span></a>
 
 <script>
-/* =========================
-   LINGUE (6)
-   ========================= */
 const dict = {
-  it: {
-    do_now:"Fai Mango adesso", write_line:"Scrivi una riga", what_is:"Cos’è Mango", register:"Registro",
-    h_do:"Fai Mango adesso",
-    p_do:"Se riconosci uno scambio reale tra persone, puoi scrivere una riga. Non servono numeri. Non serve un conto. Non serve accumulare. Una riga è un Mango.",
-    t_start:"Vai a Scrivi una riga",
-    h_write:"Scrivi una riga",
-    p_write:"Una riga descrive uno scambio reale. Non misura valore. Non crea credito. Non genera saldo. È riconoscimento.",
-    h_what:"Cos’è Mango",
-    p_what:"Mango è un’infrastruttura di fiducia locale non monetaria, non accumulabile e non appropriabile. Può esistere anche senza questo sito. Vive nelle relazioni.",
-    h_register:"Registro",
-    p_register_note:"Qui vedi solo le righe salvate su questo dispositivo. Nessun numero. Nessun saldo. Nessun timestamp.",
-    empty:"Nessuna riga salvata. Scrivi una riga.",
-    add_line:"Aggiungi una riga",
-    clear:"Svuota registro locale",
-    confirm_clear:"Vuoi davvero svuotare il registro locale su questo dispositivo?"
+  it:{ htmlLang:"it",
+    m1:"Questo dominio può sparire.<br>Mango no.",
+    m2:"Mango accade tra persone reali.",
+    c1:"Sei arrivato qui da un vecchio link o un QR.",
+    b1:"Torna alla Home",
+    auto:"Reindirizzamento automatico tra pochi secondi…",
+    mango:"Mango"
   },
-  en: {
-    do_now:"Do Mango now", write_line:"Write a line", what_is:"What is Mango", register:"Register",
-    h_do:"Do Mango now",
-    p_do:"If you recognize a real exchange between people, you can write a line. No numbers. No account. No accumulation. One line is a Mango.",
-    t_start:"Go to Write a line",
-    h_write:"Write a line",
-    p_write:"A line describes a real exchange. It does not measure value. It does not create credit. It does not produce a balance. It is recognition.",
-    h_what:"What is Mango",
-    p_what:"Mango is a local trust infrastructure: non-monetary, non-accumulable, non-appropriable. It can exist without this site. It lives in relationships.",
-    h_register:"Register",
-    p_register_note:"You only see lines saved on this device. No numbers. No balances. No timestamps.",
-    empty:"No saved lines. Write a line.",
-    add_line:"Add a line",
-    clear:"Clear local register",
-    confirm_clear:"Do you really want to clear the local register on this device?"
+  en:{ htmlLang:"en",
+    m1:"This domain can disappear.<br>Mango won’t.",
+    m2:"Mango happens between real people.",
+    c1:"You arrived here from an old link or QR.",
+    b1:"Back to Home",
+    auto:"Auto-redirect in a few seconds…",
+    mango:"Mango"
   },
-  es: {
-    do_now:"Haz Mango ahora", write_line:"Escribe una línea", what_is:"¿Qué es Mango?", register:"Registro",
-    h_do:"Haz Mango ahora",
-    p_do:"Si reconoces un intercambio real entre personas, puedes escribir una línea. Sin números. Sin cuenta. Sin acumulación. Una línea es un Mango.",
-    t_start:"Ir a Escribe una línea",
-    h_write:"Escribe una línea",
-    p_write:"Una línea describe un intercambio real. No mide valor. No crea crédito. No genera saldo. Es reconocimiento.",
-    h_what:"¿Qué es Mango?",
-    p_what:"Mango es una infraestructura local de confianza: no monetaria, no acumulable y no apropiable. Puede existir sin este sitio. Vive en las relaciones.",
-    h_register:"Registro",
-    p_register_note:"Aquí solo ves líneas guardadas en este dispositivo. Sin números. Sin saldos. Sin marcas de tiempo.",
-    empty:"No hay líneas guardadas. Escribe una línea.",
-    add_line:"Añadir una línea",
-    clear:"Vaciar registro local",
-    confirm_clear:"¿Seguro que quieres vaciar el registro local en este dispositivo?"
+  es:{ htmlLang:"es",
+    m1:"Este dominio puede desaparecer.<br>Mango no.",
+    m2:"Mango sucede entre personas reales.",
+    c1:"Llegaste aquí desde un enlace o QR antiguo.",
+    b1:"Volver al inicio",
+    auto:"Redirección automática en unos segundos…",
+    mango:"Mango"
   },
-  fr: {
-    do_now:"Fais Mango maintenant", write_line:"Écris une ligne", what_is:"Qu’est-ce que Mango", register:"Registre",
-    h_do:"Fais Mango maintenant",
-    p_do:"Si tu reconnais un échange réel entre personnes, tu peux écrire une ligne. Pas de nombres. Pas de compte. Pas d’accumulation. Une ligne = un Mango.",
-    t_start:"Aller à Écris une ligne",
-    h_write:"Écris une ligne",
-    p_write:"Une ligne décrit un échange réel. Elle ne mesure pas la valeur. Elle ne crée pas de crédit. Elle ne produit pas de solde. C’est une reconnaissance.",
-    h_what:"Qu’est-ce que Mango",
-    p_what:"Mango est une infrastructure locale de confiance : non monétaire, non accumulable, non appropriable. Elle peut exister sans ce site. Elle vit dans les relations.",
-    h_register:"Registre",
-    p_register_note:"Tu vois uniquement les lignes enregistrées sur cet appareil. Pas de nombres. Pas de soldes. Pas d’horodatage.",
-    empty:"Aucune ligne enregistrée. Écris une ligne.",
-    add_line:"Ajouter une ligne",
-    clear:"Vider le registre local",
-    confirm_clear:"Veux-tu vraiment vider le registre local sur cet appareil ?"
+  fr:{ htmlLang:"fr",
+    m1:"Ce domaine peut disparaître.<br>Mango non.",
+    m2:"Mango se vit entre personnes réelles.",
+    c1:"Tu es arrivé ici depuis un ancien lien ou QR.",
+    b1:"Retour à l’accueil",
+    auto:"Redirection automatique dans quelques secondes…",
+    mango:"Mango"
   },
-  de: {
-    do_now:"Mach Mango jetzt", write_line:"Schreibe eine Zeile", what_is:"Was ist Mango", register:"Register",
-    h_do:"Mach Mango jetzt",
-    p_do:"Wenn du einen realen Austausch zwischen Menschen erkennst, kannst du eine Zeile schreiben. Keine Zahlen. Kein Konto. Keine Ansammlung. Eine Zeile ist ein Mango.",
-    t_start:"Zu Schreibe eine Zeile",
-    h_write:"Schreibe eine Zeile",
-    p_write:"Eine Zeile beschreibt einen realen Austausch. Sie misst keinen Wert. Sie erzeugt keinen Kredit. Sie erzeugt keinen Saldo. Sie ist Anerkennung.",
-    h_what:"Was ist Mango",
-    p_what:"Mango ist eine lokale Vertrauens-Infrastruktur: nicht monetär, nicht ansammelbar, nicht aneignbar. Sie kann ohne diese Seite existieren. Sie lebt in Beziehungen.",
-    h_register:"Register",
-    p_register_note:"Du siehst nur Zeilen, die auf diesem Gerät gespeichert sind. Keine Zahlen. Keine Salden. Keine Zeitstempel.",
-    empty:"Keine gespeicherten Zeilen. Schreibe eine Zeile.",
-    add_line:"Zeile hinzufügen",
-    clear:"Lokales Register leeren",
-    confirm_clear:"Willst du das lokale Register auf diesem Gerät wirklich leeren?"
+  de:{ htmlLang:"de",
+    m1:"Diese Domain kann verschwinden.<br>Mango nicht.",
+    m2:"Mango passiert zwischen echten Menschen.",
+    c1:"Du bist über einen alten Link oder QR hier gelandet.",
+    b1:"Zur Startseite",
+    auto:"Automatische Weiterleitung in wenigen Sekunden…",
+    mango:"Mango"
   },
-  zh: {
-    do_now:"現在就做 Mango", write_line:"寫下一行", what_is:"什麼是 Mango", register:"本機紀錄",
-    h_do:"現在就做 Mango",
-    p_do:"如果你認可人與人之間的一次真實交換，你就可以寫下一行。沒有數字。沒有帳戶。沒有累積。一行就是一個 Mango。",
-    t_start:"前往：寫下一行",
-    h_write:"寫下一行",
-    p_write:"一行描述一次真實交換。不衡量價值。不產生信用。不產生結餘。它是承認。",
-    h_what:"什麼是 Mango",
-    p_what:"Mango 是一種在地信任基礎設施：非貨幣、不可累積、不可占有。即使沒有這個網站也能存在。它活在關係之中。",
-    h_register:"本機紀錄",
-    p_register_note:"此處只顯示儲存在本裝置上的文字行。沒有數字。沒有結餘。沒有時間戳記。",
-    empty:"尚無儲存內容。請寫下一行。",
-    add_line:"新增一行",
-    clear:"清空本機紀錄",
-    confirm_clear:"你確定要清空本裝置上的本機紀錄嗎？"
+  zh:{ htmlLang:"zh-Hant",
+    m1:"這個網域可以消失。<br>Mango 不會。",
+    m2:"Mango 發生在人與人之間的真實關係中。",
+    c1:"你可能是從舊連結或 QR 來到這裡。",
+    b1:"回到首頁",
+    auto:"幾秒後自動跳轉…",
+    mango:"Mango"
   }
 };
 
-function getLang() {
+function getLang(){
   const q = new URLSearchParams(location.search);
   const v = (q.get("lang") || "it").toLowerCase();
   return dict[v] ? v : "it";
 }
 const LANG = getLang();
-function t(key){ return dict[LANG][key] || dict.it[key] || key; }
-function setText(id, txt){ const el=document.getElementById(id); if(el) el.textContent=txt; }
 
 function buildLangbar(){
   const bar = document.getElementById("langbar");
   const langs = [["it","IT"],["en","EN"],["es","ES"],["fr","FR"],["de","DE"],["zh","ZH"]];
-  const base = location.pathname.split("/").pop() || "index.html";
-  const hash = location.hash || "";
   bar.innerHTML = langs.map(([k,label])=>{
-    const a = document.createElement("a");
-    a.href = `${base}?lang=${k}${hash}`;
+    const a=document.createElement("a");
+    a.href = `404.html?lang=${k}`;
     a.textContent = label;
     if(k===LANG) a.classList.add("active");
     return a.outerHTML;
@@ -278,76 +181,49 @@ function buildLangbar(){
 }
 
 function applyI18n(){
-  setText("t_do_now", t("do_now"));
-  setText("t_write_line", t("write_line"));
-  setText("t_what_is", t("what_is"));
-  setText("t_register", t("register"));
-  setText("h_do", t("h_do"));
-  setText("p_do", t("p_do"));
-  setText("t_start", t("t_start"));
-  setText("h_write", t("h_write"));
-  setText("p_write", t("p_write"));
-  setText("h_what", t("h_what"));
-  setText("p_what", t("p_what"));
-  setText("h_register", t("h_register"));
-  setText("p_register_note", t("p_register_note"));
-  setText("t_empty", t("empty"));
-  setText("t_add_line", t("add_line"));
-  setText("t_clear", t("clear"));
+  document.documentElement.lang = dict[LANG].htmlLang;
+  document.getElementById("m1").innerHTML = dict[LANG].m1;
+  document.getElementById("m2").textContent = dict[LANG].m2;
+  document.getElementById("c1").textContent = dict[LANG].c1;
+  document.getElementById("b1").textContent = dict[LANG].b1;
+  document.getElementById("autoTxt").textContent = dict[LANG].auto;
+  document.getElementById("fabTxt").textContent = dict[LANG].mango;
 
-  // link verso primo-scambio con lang
-  const links = document.querySelectorAll('a[href="primo-scambio.html"]');
-  links.forEach(a => a.href = `primo-scambio.html?lang=${LANG}`);
-
-  // Mango sopra (brand) va alla pagina bianca, mantenendo lang
-  document.getElementById("brandLink").href = `404.html?lang=${LANG}`;
+  const homeLocal = `index.html?lang=${LANG}`;
+  document.getElementById("homeBtn").href = homeLocal;
+  document.getElementById("mangoFab").href = homeLocal;
 }
-
-const STORE_KEY = "mango_register_lines";
-
-function loadLines(){
-  try{
-    const raw = localStorage.getItem(STORE_KEY);
-    const arr = raw ? JSON.parse(raw) : [];
-    return Array.isArray(arr) ? arr.filter(x => typeof x === "string" && x.trim() !== "") : [];
-  }catch(_){ return []; }
-}
-function saveLines(arr){ localStorage.setItem(STORE_KEY, JSON.stringify(arr)); }
-
-function renderRegister(){
-  const list = document.getElementById("registerList");
-  const empty = document.getElementById("emptyRegister");
-  const lines = loadLines();
-
-  list.innerHTML = "";
-  if(lines.length === 0){
-    empty.style.display = "block";
-    return;
-  }
-  empty.style.display = "none";
-
-  lines.slice().reverse().forEach(line=>{
-    const d = document.createElement("div");
-    d.className = "line";
-    d.textContent = line;
-    list.appendChild(d);
-  });
-}
-
-document.getElementById("btnClear").addEventListener("click", ()=>{
-  if(confirm(t("confirm_clear"))){
-    saveLines([]);
-    renderRegister();
-  }
-});
 
 buildLangbar();
 applyI18n();
-renderRegister();
 
-if(location.hash === "#register"){
-  setTimeout(()=>document.getElementById("register").scrollIntoView({behavior:"smooth"}), 150);
-}
+/* ===== Redirect vecchi QR → mangoinfrastruttura.org (Home) =====
+   - Se NON sei su mangoinfrastruttura.org, vai lì (Home) mantenendo lang.
+   - Se sei già su mangoinfrastruttura.org, fai redirect alla Home locale (index.html) dopo pochi secondi.
+   - Nessun loop: controllo hostname.
+*/
+let interacted = false;
+["click","touchstart","keydown","scroll"].forEach(ev=>{
+  window.addEventListener(ev, ()=>{ interacted = true; }, {passive:true});
+});
+
+const TARGET_DOMAIN = "mangoinfrastruttura.org";
+const TARGET_BASE = "https://mangoinfrastruttura.org/";
+
+setTimeout(()=>{
+  if(interacted) return;
+
+  const host = (location.hostname || "").toLowerCase();
+
+  if(host && host !== TARGET_DOMAIN){
+    // sei sul vecchio dominio / GitHub Pages → porta sempre alla HOME del dominio nuovo
+    location.replace(`${TARGET_BASE}?lang=${LANG}`);
+    return;
+  }
+
+  // sei già sul dominio ufficiale → vai alla Home locale
+  location.replace(`index.html?lang=${LANG}`);
+}, 4500);
 </script>
 </body>
 </html>

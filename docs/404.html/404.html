@@ -7,20 +7,11 @@
   <meta name="robots" content="noindex,nofollow">
   <script>
     (function() {
-
-      // Lingua dalla query
       var params = new URLSearchParams(window.location.search);
       var lang = (params.get("lang") || "it").toLowerCase();
-
-      // Lingue consentite
       var allowed = ["it","en","es","fr","de","zh"];
-      if (allowed.indexOf(lang) === -1) {
-        lang = "it";
-      }
-
-      // Redirect assoluto e immediato alla Home
+      if (allowed.indexOf(lang) === -1) lang = "it";
       window.location.replace("https://mangoinfrastruttura.org/?lang=" + lang);
-
     })();
   </script>
 </head>

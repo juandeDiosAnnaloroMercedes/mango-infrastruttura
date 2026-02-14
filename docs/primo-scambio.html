@@ -311,10 +311,13 @@
         how_li1:"Fai qualcosa di concreto (aiuto, tempo, cura, presenza).",
         how_li2:"Subito dopo, scrivi una riga semplice su ciò che è successo.",
         how_li3:"Niente numeri, prezzi, quantità, equivalenze.",
-        how_li4:"Se serve: nomi piccoli, iniziali o soprannomi.",
-        how_note:"Mango non trasforma lo scambio in credito o debito. È riconoscimento scritto.",
-        btn_home:"Home",
-        btn_top:"Torna su",
+        badge("✔ RIGA RICONOSCIUTA. Non è un credito. Non è un saldo.");
+
+window.scrollTo({ top: 0, behavior: "smooth" });
+
+setTimeout(()=>{
+  location.href="index.html?lang="+l+"#register";
+}, 2500);
 
         write_title:"Scrivi la riga",
         write_text:"Una riga umana, concreta, reale.",

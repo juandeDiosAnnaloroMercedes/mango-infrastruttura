@@ -3,687 +3,205 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <meta name="color-scheme" content="light" />
-  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
-  <meta http-equiv="Pragma" content="no-cache" />
-  <meta http-equiv="Expires" content="0" />
-  <title>Mango — Primo scambio</title>
+  <title>Mango – Scrivi una riga</title>
 
   <style>
-    :root{
-      --bg:#ffffff;
-      --fg:#111111;
-      --muted:#6b7280;
-      --card:#f7f7f8;
-      --border:#e5e7eb;
-      --radius:18px;
-      --shadow:0 10px 28px rgba(0,0,0,.06);
-      --max:960px;
-      --font:-apple-system, system-ui, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
-    }
-    *{box-sizing:border-box}
-    html{scroll-behavior:smooth}
-    body{
-      margin:0;
-      font-family:var(--font);
-      color:var(--fg);
-      background:var(--bg);
-    }
-    a{color:inherit;text-decoration:none}
-    header{
-      position:sticky; top:0; z-index:10;
-      background:rgba(255,255,255,.9);
-      backdrop-filter:saturate(180%) blur(10px);
-      border-bottom:1px solid var(--border);
-    }
-    .hwrap{
-      max-width:var(--max);
-      margin:0 auto;
-      padding:14px 16px;
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:12px;
-      flex-wrap:wrap;
-    }
-    .brand{
-      display:flex;
-      align-items:center;
-      gap:10px;
-      font-weight:900;
-      font-size:22px;
-      letter-spacing:-0.3px;
-    }
-    .mangoBtn{
-      border:1px solid var(--border);
-      background:#fff;
-      border-radius:999px;
-      padding:6px 10px;
-      display:inline-flex;
-      align-items:center;
-      gap:6px;
-      box-shadow:0 2px 10px rgba(0,0,0,.04);
-      cursor:pointer;
-    }
-    .lang{
-      display:flex;
-      gap:10px;
-      flex-wrap:wrap;
-      align-items:center;
-      justify-content:flex-end;
-    }
-    .chip{
-      border:1px solid var(--border);
-      background:#fff;
-      border-radius:999px;
-      padding:10px 14px;
-      font-weight:800;
-      cursor:pointer;
-      min-width:52px;
-      text-align:center;
-    }
-    .chip[aria-current="true"]{
-      outline:2px solid #111;
-      outline-offset:2px;
-    }
-
-    main{max-width:var(--max); margin:0 auto; padding:18px 16px 40px}
-    .hero{
-      margin-top:10px;
-      color:var(--muted);
-      line-height:1.6;
-      font-size:16px;
-    }
-
-    .grid{
-      display:grid;
-      grid-template-columns:1fr;
-      gap:16px;
-      margin-top:14px;
-    }
-
-    .card{
-      background:var(--card);
-      border:1px solid var(--border);
-      border-radius:var(--radius);
-      padding:18px;
-      box-shadow:var(--shadow);
-    }
-    .card h1{
-      margin:0 0 10px;
-      font-size:28px;
-      line-height:1.15;
-      letter-spacing:-0.6px;
-    }
-    .card h2{
-      margin:0 0 10px;
-      font-size:22px;
-      letter-spacing:-0.3px;
-    }
-    .card p, .card li{
-      margin:0;
-      color:var(--fg);
-      line-height:1.6;
-      font-size:16px;
-    }
-    .muted{color:var(--muted)}
-    ul{margin:10px 0 0 18px}
-    li{margin:7px 0}
-    hr{border:0;border-top:1px solid var(--border); margin:14px 0}
-
+    body{ margin:0; font-family:-apple-system,BlinkMacSystemFont,system-ui,Segoe UI,Roboto,Arial; background:#fff; color:#111; }
+    .wrap{ max-width:860px; margin:0 auto; padding:0 18px; }
+    header{ padding:64px 0 18px; }
+    h1{ margin:0; font-size:1.9rem; font-weight:750; }
+    p{ margin:12px 0 0; line-height:1.7; font-size:1.05rem; opacity:.9; }
+    .card{ border:1px solid rgba(0,0,0,.12); border-radius:18px; padding:16px; margin-top:18px; }
     textarea{
-      width:100%;
-      min-height:130px;
-      resize:vertical;
-      border:1px solid var(--border);
-      border-radius:14px;
-      padding:14px;
-      font-size:16px;
+      width:100%; min-height:130px; resize:vertical;
+      border-radius:16px; border:1px solid rgba(0,0,0,.14);
+      padding:14px; font-size:1.05rem; line-height:1.55;
       outline:none;
-      background:#fff;
     }
-    .btnrow{
-      display:flex;
-      gap:10px;
-      flex-wrap:wrap;
-      margin-top:12px;
-      align-items:center;
-    }
+    .row{ display:flex; gap:10px; flex-wrap:wrap; margin-top:12px; }
     .btn{
-      border:0;
-      background:#111;
-      color:#fff;
-      border-radius:14px;
-      padding:12px 14px;
-      font-weight:900;
-      cursor:pointer;
-      display:inline-flex;
-      align-items:center;
-      gap:8px;
+      appearance:none; border:1px solid rgba(0,0,0,.12); background:#fff; color:#111;
+      padding:12px 14px; border-radius:14px; font-weight:750; cursor:pointer; text-decoration:none;
+      display:inline-flex; align-items:center; gap:8px;
     }
-    .btn.secondary{
-      background:#fff;
-      color:#111;
-      border:1px solid var(--border);
+    .btn.primary{ border-color:rgba(0,0,0,.18); }
+    .btn:active{ transform: translateY(1px); }
+
+    /* ✅ recognition box */
+    .recognition-box{
+      background:#e6f9ec;
+      border:2px solid #22c55e;
+      border-radius:16px;
+      padding:14px;
+      margin-bottom:16px;
+      text-align:center;
+      font-weight:800;
+      animation:fadeIn 0.3s ease;
+      display:none;
     }
-    .btn.small{
-      padding:10px 12px;
-      border-radius:12px;
-      font-weight:900;
+    .rec-sub{
+      font-weight:600;
+      font-size:14px;
+      margin-top:4px;
+      opacity:.85;
+    }
+    @keyframes fadeIn{
+      from{opacity:0; transform:translateY(-6px);}
+      to{opacity:1; transform:translateY(0);}
     }
 
-    .list{
-      display:flex;
-      flex-direction:column;
-      gap:10px;
-      margin-top:12px;
+    .langbar{
+      position:fixed; top:14px; right:14px;
+      display:flex; gap:8px; flex-wrap:wrap;
+      background:rgba(255,255,255,.92);
+      border:1px solid rgba(0,0,0,.10);
+      border-radius:16px; padding:8px 10px;
+      backdrop-filter: blur(10px);
+      z-index:20;
     }
-    .lineItem{
+    .langbar a{
+      font-size:.95rem; text-decoration:none; color:#111; opacity:.75; font-weight:750;
+      padding:6px 10px; border-radius:12px; border:1px solid rgba(0,0,0,.10);
       background:#fff;
-      border:1px solid var(--border);
-      border-radius:14px;
-      padding:12px;
     }
-    .lineMeta{
-      display:flex;
-      justify-content:space-between;
-      gap:10px;
-      flex-wrap:wrap;
-      align-items:center;
-      margin-bottom:8px;
-    }
-    .tag{
-      font-size:12px;
-      color:var(--muted);
-      font-weight:800;
-      letter-spacing:.2px;
-    }
-    .lineText{
-      white-space:pre-wrap;
-      font-size:16px;
-      line-height:1.55;
-    }
-    footer{
-      max-width:var(--max);
-      margin:0 auto;
-      padding:18px 16px 40px;
-      color:var(--muted);
-      text-align:center;
-      font-size:13px;
-      line-height:1.6;
-    }
-    .spacer{height:6px}
+    .langbar a.active{ opacity:1; border-color:rgba(0,0,0,.25); }
+    .hint{ opacity:.65; font-size:.98rem; margin-top:10px; }
   </style>
 </head>
 
 <body>
-  <header id="top">
-    <div class="hwrap">
-      <div class="brand">
-        <span>Mango</span>
-        <button class="mangoBtn" id="mangoTop" title="Top">🥭</button>
+  <div class="langbar" id="langbar"></div>
+
+  <div class="wrap">
+    <header>
+      <h1 id="h_title">Scrivi una riga</h1>
+      <p id="p_intro">Descrivi uno scambio reale. Non usare numeri. Non misurare valore.</p>
+    </header>
+
+    <div class="card">
+      <div id="recognitionBox" class="recognition-box">
+        <strong id="recStrong">✅ RIGA RICONOSCIUTA</strong>
+        <div class="rec-sub" id="recSub">È stata salvata solo su questo dispositivo.</div>
       </div>
 
-      <nav class="lang" aria-label="Lingue">
-        <button class="chip" data-lang="it">IT</button>
-        <button class="chip" data-lang="en">EN</button>
-        <button class="chip" data-lang="es">ES</button>
-        <button class="chip" data-lang="fr">FR</button>
-        <button class="chip" data-lang="de">DE</button>
-        <button class="chip" data-lang="zh">ZH</button>
-      </nav>
+      <textarea id="lineInput" placeholder=""></textarea>
+
+      <div class="row">
+        <button class="btn primary" id="btnSave">✅ <span id="t_save">Salva riga</span></button>
+        <a class="btn" id="btnHome" href="index.html#register">🏠 <span id="t_home">Torna alla Home</span></a>
+      </div>
+
+      <div class="hint" id="t_hint">
+        Dopo il salvataggio verrai portato automaticamente al registro in Home.
+      </div>
     </div>
-  </header>
-
-  <main>
-    <div class="card">
-      <h1 id="t_title"></h1>
-      <p class="hero" id="t_subtitle"></p>
-    </div>
-
-    <section class="grid">
-      <article class="card" id="how">
-        <h2 id="t_how_title"></h2>
-        <p id="t_how_text"></p>
-        <ul>
-          <li id="t_how_li1"></li>
-          <li id="t_how_li2"></li>
-          <li id="t_how_li3"></li>
-          <li id="t_how_li4"></li>
-        </ul>
-        <hr />
-        <p class="muted" id="t_how_note"></p>
-
-        <div class="btnrow">
-          <a class="btn secondary" id="btn_home" href="./index.html">🏠 <span id="t_btn_home"></span></a>
-          <button class="btn secondary" id="btn_top">⬆️ <span id="t_btn_top"></span></button>
-        </div>
-      </article>
-
-      <article class="card" id="write">
-        <h2 id="t_write_title"></h2>
-        <p class="muted" id="t_write_text"></p>
-
-        <div class="spacer"></div>
-        <textarea id="lineInput" placeholder=""></textarea>
-
-        <div class="btnrow">
-          <button class="btn" id="btn_send_keep">✅ <span id="t_btn_send_keep"></span></button>
-          <button class="btn secondary" id="btn_clear_field">🧽 <span id="t_btn_clear_field"></span></button>
-          <button class="btn secondary" id="btn_copy_line">📋 <span id="t_btn_copy"></span></button>
-        </div>
-
-        <p class="muted" style="margin-top:10px" id="t_write_hint"></p>
-      </article>
-
-      <article class="card" id="yourlines">
-        <h2 id="t_yourlines_title"></h2>
-        <p class="muted" id="t_yourlines_text"></p>
-
-        <div class="btnrow">
-          <button class="btn secondary" id="btn_delete_all">🗑️ <span id="t_btn_delete_all"></span></button>
-        </div>
-
-        <div class="list" id="linesList"></div>
-        <p class="muted" id="t_empty" style="display:none;margin-top:10px"></p>
-      </article>
-    </section>
-  </main>
-
-  <footer>
-    <div id="t_footer1"></div>
-    <div id="t_footer2"></div>
-  </footer>
-
-  <script>
-    // CONFIG
-    const SUPPORTED = ["it","en","es","fr","de","zh"];
-    const DEFAULT_LANG = "it";
-    const STORAGE_KEY = "mango_lines_v1"; // stesso concetto di index (solo locale)
-
-    // TRANSLATIONS
-    const T = {
-      it:{
-  subtitle:"Scrivi la tua prima riga reale.",
-  how_title:"Come fare il primo scambio",
-  how_text:"Mango inizia quando due persone...",
-  how_li1:"Fai qualcosa di concreto...",
-  how_li2:"Subito dopo scrivi una riga semplice.",
-  how_li3:"Niente numeri, prezzi, quantità...",
-
-
-        write_title:"Scrivi la riga",
-        write_text:"Una riga umana, concreta, reale.",
-        write_placeholder:"Esempio: Ioana ha ascoltato Marco. (Roma, 14 feb 2026)",
-        write_hint:"Premi “Invia (resta sul sito)” per salvare questa riga SOLO su questo dispositivo. Poi puoi copiarla o cancellarla quando vuoi.",
-
-        btn_send_keep:"Invia (resta sul sito)",
-        btn_clear_field:"Cancella campo",
-        btn_copy:"Copia",
-        btn_delete_all:"Elimina tutte le righe",
-
-        yourlines_title:"Le tue righe (solo su questo dispositivo)",
-        yourlines_text:"Queste righe non sono pubbliche: sono salvate nel tuo browser.",
-        empty:"Nessuna riga salvata ancora.",
-
-        footer1:"Creato da Juan de Dios Annaloro Mercedes — 02 febbraio 2026 — In memoria di Larimar.",
-        footer2:"Mango è praticabile e trasmissibile, ma non possedibile né centralizzabile."
-      },
-
-      en:{
-        title:"How to do the first exchange",
-        subtitle:"Write your first real line. It stays only on this device (not online).",
-        how_title:"How to do the first exchange",
-        how_text:"Mango starts when two people recognize a real gesture.",
-        how_li1:"Do something concrete (help, time, care, presence).",
-        how_li2:"Right after, write one simple line about what happened.",
-        how_li3:"No numbers, prices, quantities, equivalences.",
-        how_li4:"If needed: first names, initials, nicknames.",
-        how_note:"Mango does not turn exchange into credit or debt. It is written recognition.",
-        btn_home:"Home",
-        btn_top:"Back to top",
-
-        write_title:"Write the line",
-        write_text:"One human, concrete, real line.",
-        write_placeholder:"Example: Ioana listened to Marco. (Rome, Feb 14 2026)",
-        write_hint:"Press “Send (stays on site)” to save this line ONLY on this device. Copy or delete whenever you want.",
-
-        btn_send_keep:"Send (stays on site)",
-        btn_clear_field:"Clear field",
-        btn_copy:"Copy",
-        btn_delete_all:"Delete all lines",
-
-        yourlines_title:"Your lines (only on this device)",
-        yourlines_text:"These lines are not public: they are stored in your browser.",
-        empty:"No saved lines yet.",
-
-        footer1:"Created by Juan de Dios Annaloro Mercedes — 02 Feb 2026 — In memory of Larimar.",
-        footer2:"Practicable and transmissible, but not ownable or centralizable."
-      },
-
-      es:{
-        title:"Cómo hacer el primer intercambio",
-        subtitle:"Escribe tu primera línea real. Se queda solo en este dispositivo (no en línea).",
-        how_title:"Cómo hacer el primer intercambio",
-        how_text:"Mango empieza cuando dos personas reconocen un gesto real.",
-        how_li1:"Haz algo concreto (ayuda, tiempo, cuidado, presencia).",
-        how_li2:"Justo después, escribe una línea simple sobre lo que ocurrió.",
-        how_li3:"Sin números, precios, cantidades, equivalencias.",
-        how_li4:"Si hace falta: nombres, iniciales o apodos.",
-        how_note:"Mango no convierte el intercambio en crédito o deuda. Es reconocimiento escrito.",
-        btn_home:"Inicio",
-        btn_top:"Volver arriba",
-
-        write_title:"Escribe la línea",
-        write_text:"Una línea humana, concreta, real.",
-        write_placeholder:"Ejemplo: Ioana escuchó a Marco. (Roma, 14 feb 2026)",
-        write_hint:"Pulsa “Enviar (se queda en el sitio)” para guardar la línea SOLO en este dispositivo. Puedes copiarla o borrarla cuando quieras.",
-
-        btn_send_keep:"Enviar (se queda en el sitio)",
-        btn_clear_field:"Borrar campo",
-        btn_copy:"Copiar",
-        btn_delete_all:"Eliminar todas las líneas",
-
-        yourlines_title:"Tus líneas (solo en este dispositivo)",
-        yourlines_text:"Estas líneas no son públicas: se guardan en tu navegador.",
-        empty:"Aún no hay líneas guardadas.",
-
-        footer1:"Creado por Juan de Dios Annaloro Mercedes — 02 febrero 2026 — En memoria de Larimar.",
-        footer2:"Practicable y transmisible, pero no poseíble ni centralizable."
-      },
-
-      fr:{
-        title:"Comment faire le premier échange",
-        subtitle:"Écris ta première ligne réelle. Elle reste seulement sur cet appareil (pas en ligne).",
-        how_title:"Comment faire le premier échange",
-        how_text:"Mango commence quand deux personnes reconnaissent un geste réel.",
-        how_li1:"Fais quelque chose de concret (aide, temps, soin, présence).",
-        how_li2:"Juste après, écris une ligne simple sur ce qui s’est passé.",
-        how_li3:"Pas de chiffres, prix, quantités, équivalences.",
-        how_li4:"Si besoin : prénoms, initiales, surnoms.",
-        how_note:"Mango ne transforme pas l’échange en crédit ou dette. C’est une reconnaissance écrite.",
-        btn_home:"Accueil",
-        btn_top:"Haut de page",
-
-        write_title:"Écris la ligne",
-        write_text:"Une ligne humaine, concrète, réelle.",
-        write_placeholder:"Exemple : Ioana a écouté Marco. (Rome, 14 fév 2026)",
-        write_hint:"Appuie sur « Envoyer (reste sur le site) » pour enregistrer UNIQUEMENT sur cet appareil. Copier ou supprimer quand tu veux.",
-
-        btn_send_keep:"Envoyer (reste sur le site)",
-        btn_clear_field:"Effacer le champ",
-        btn_copy:"Copier",
-        btn_delete_all:"Supprimer toutes les lignes",
-
-        yourlines_title:"Tes lignes (uniquement sur cet appareil)",
-        yourlines_text:"Ces lignes ne sont pas publiques : elles sont stockées dans ton navigateur.",
-        empty:"Aucune ligne enregistrée pour l’instant.",
-
-        footer1:"Créé par Juan de Dios Annaloro Mercedes — 02 février 2026 — En mémoire de Larimar.",
-        footer2:"Praticable et transmissible, mais non possédable ni centralisable."
-      },
-
-      de:{
-        title:"Wie man den ersten Austausch macht",
-        subtitle:"Schreibe deine erste reale Zeile. Sie bleibt nur auf diesem Gerät (nicht online).",
-        how_title:"Wie man den ersten Austausch macht",
-        how_text:"Mango beginnt, wenn zwei Menschen eine reale Geste anerkennen.",
-        how_li1:"Tu etwas Konkretes (Hilfe, Zeit, Fürsorge, Präsenz).",
-        how_li2:"Direkt danach: schreibe eine einfache Zeile über das, was passiert ist.",
-        how_li3:"Keine Zahlen, Preise, Mengen, Äquivalenzen.",
-        how_li4:"Falls nötig: Vornamen, Initialen, Spitznamen.",
-        how_note:"Mango macht aus Austausch keinen Kredit oder Schuld. Es ist schriftliche Anerkennung.",
-        btn_home:"Start",
-        btn_top:"Nach oben",
-
-        write_title:"Schreibe die Zeile",
-        write_text:"Eine menschliche, konkrete, reale Zeile.",
-        write_placeholder:"Beispiel: Ioana hörte Marco zu. (Rom, 14 Feb 2026)",
-        write_hint:"Klicke „Senden (bleibt auf der Seite)“, um NUR auf diesem Gerät zu speichern. Dann kopieren oder löschen, wann du willst.",
-
-        btn_send_keep:"Senden (bleibt auf der Seite)",
-        btn_clear_field:"Feld löschen",
-        btn_copy:"Kopieren",
-        btn_delete_all:"Alle Zeilen löschen",
-
-        yourlines_title:"Deine Zeilen (nur auf diesem Gerät)",
-        yourlines_text:"Diese Zeilen sind nicht öffentlich: sie werden im Browser gespeichert.",
-        empty:"Noch keine gespeicherten Zeilen.",
-
-        footer1:"Erstellt von Juan de Dios Annaloro Mercedes — 02. Feb 2026 — In Erinnerung an Larimar.",
-        footer2:"Praktizierbar und übertragbar, aber nicht besitzbar oder zentralisierbar."
-      },
-
-      zh:{
-        title:"如何完成第一次交换",
-        subtitle:"写下你的第一条真实记录。它只保存在本设备（不在线）。",
-        how_title:"如何完成第一次交换",
-        how_text:"当两个人承认一个真实的举动时，Mango 就开始了。",
-        how_li1:"做一件具体的事（帮助、时间、照顾、陪伴）。",
-        how_li2:"紧接着，用一行简单文字写下发生了什么。",
-        how_li3:"不要数字、价格、数量、等价换算。",
-        how_li4:"需要时：名字、首字母、昵称。",
-        how_note:"Mango 不把交换变成信用或债务。它是书面承认。",
-        btn_home:"首页",
-        btn_top:"回到顶部",
-
-        write_title:"写下这一行",
-        write_text:"一行人性的、具体的、真实的记录。",
-        write_placeholder:"例：Ioana 听 Marco 说话。（罗马，2026年2月14日）",
-        write_hint:"点击“发送（保留在网站）”即可仅保存在本设备。之后你可以随时复制或删除。",
-
-        btn_send_keep:"发送（保留在网站）",
-        btn_clear_field:"清空输入",
-        btn_copy:"复制",
-        btn_delete_all:"删除所有记录",
-
-        yourlines_title:"你的记录（仅在本设备）",
-        yourlines_text:"这些记录不公开：仅存储在你的浏览器中。",
-        empty:"还没有保存的记录。",
-
-        footer1:"由 Juan de Dios Annaloro Mercedes 创建 — 2026年2月2日 — 纪念 Larimar。",
-        footer2:"可实践与传递，但不可被拥有或中心化。"
-      }
-    };
-
-    // URL lang helpers
-    function getLang(){
-      const u = new URL(location.href);
-      const l = (u.searchParams.get("lang") || "").toLowerCase();
-      return SUPPORTED.includes(l) ? l : DEFAULT_LANG;
-    }
-    function setLang(l){
-      const u = new URL(location.href);
-      u.searchParams.set("lang", l);
-      history.replaceState({}, "", u.toString());
-    }
-    function withLang(path){
-      const l = getLang();
-      const hasQ = path.includes("?");
-      if(path.includes("lang=")) return path;
-      return path + (hasQ ? "&" : "?") + "lang=" + encodeURIComponent(l);
-    }
-
-    // Apply translations
-    function apply(l){
-      document.documentElement.lang = l;
-      document.querySelectorAll(".chip").forEach(b=>{
-        b.setAttribute("aria-current", b.dataset.lang === l ? "true" : "false");
-      });
-      const d = T[l] || T[DEFAULT_LANG];
-
-      const map = [
-        "title","subtitle",
-        "how_title","how_text","how_li1","how_li2","how_li3","how_li4","how_note",
-        "btn_home","btn_top",
-        "write_title","write_text","write_hint",
-        "btn_send_keep","btn_clear_field","btn_copy","btn_delete_all",
-        "yourlines_title","yourlines_text","empty",
-        "footer1","footer2"
-      ];
-      map.forEach(k=>{
-        const el = document.getElementById("t_"+k);
-        if(el) el.textContent = d[k] || "";
-      });
-
-      const ta = document.getElementById("lineInput");
-      if(ta) ta.placeholder = d.write_placeholder || "";
-      const home = document.getElementById("btn_home");
-      if(home) home.href = withLang("./index.html");
-      document.title = "Mango — " + (d.title || "Primo scambio");
-    }
-
-    // Storage
-    function loadLines(){
-      try{
-        const raw = localStorage.getItem(STORAGE_KEY);
-        const arr = raw ? JSON.parse(raw) : [];
-        return Array.isArray(arr) ? arr : [];
-      }catch(_){ return []; }
-    }
-    function saveLines(arr){
-      localStorage.setItem(STORAGE_KEY, JSON.stringify(arr));
-    }
-
-    // Render list
-    function renderLines(){
-      const list = document.getElementById("linesList");
-      const empty = document.getElementById("t_empty");
-      const arr = loadLines();
-
-      list.innerHTML = "";
-      if(!arr.length){
-        empty.style.display = "block";
-        return;
-      }
-      empty.style.display = "none";
-
-      arr.forEach((item, idx)=>{
-        const box = document.createElement("div");
-        box.className = "lineItem";
-
-        const meta = document.createElement("div");
-        meta.className = "lineMeta";
-
-        const tag = document.createElement("div");
-        tag.className = "tag";
-        const dt = item && item.ts ? new Date(item.ts) : new Date();
-        tag.textContent = dt.toLocaleString();
-
-        const actions = document.createElement("div");
-        actions.className = "btnrow";
-        actions.style.margin = "0";
-        actions.style.gap = "8px";
-
-        const bCopy = document.createElement("button");
-        bCopy.className = "btn secondary small";
-        bCopy.type = "button";
-        bCopy.textContent = "📋";
-        bCopy.title = "Copy";
-        bCopy.addEventListener("click", async ()=>{
-          const text = (item && item.text ? item.text : "");
-          if(!text) return;
-          try{ await navigator.clipboard.writeText(text); }
-          catch(_){
-            const ta = document.getElementById("lineInput");
-            if(ta){
-              ta.value = text;
-              ta.focus();
-              ta.select();
-              try{ document.execCommand("copy"); }catch(__){}
-            }
-          }
-        });
-
-        const bDel = document.createElement("button");
-        bDel.className = "btn secondary small";
-        bDel.type = "button";
-        bDel.textContent = "🗑️";
-        bDel.title = "Delete";
-        bDel.addEventListener("click", ()=>{
-          const arr2 = loadLines();
-          arr2.splice(idx, 1);
-          saveLines(arr2);
-          renderLines();
-        });
-
-        actions.appendChild(bCopy);
-        actions.appendChild(bDel);
-
-        meta.appendChild(tag);
-        meta.appendChild(actions);
-
-        const text = document.createElement("div");
-        text.className = "lineText";
-        text.textContent = (item && item.text ? item.text : ""); // ✅ NO [object Object]
-
-        box.appendChild(meta);
-        box.appendChild(text);
-        list.appendChild(box);
-      });
-    }
-
-    // Scroll helpers
-    function goTop(){
-      try{ window.scrollTo({top:0,left:0,behavior:"smooth"}); }
-      catch(_){ window.scrollTo(0,0); }
-    }
-
-    // INIT
-    (function init(){
-      // language buttons
-      document.querySelectorAll(".chip").forEach(b=>{
-        b.addEventListener("click", ()=>{
-          const l = b.dataset.lang;
-          setLang(l);
-          apply(l);
-        });
-      });
-
-      // top buttons
-      document.getElementById("mangoTop")?.addEventListener("click", goTop);
-      document.getElementById("btn_top")?.addEventListener("click", goTop);
-
-      // actions
-      document.getElementById("btn_send_keep")?.addEventListener("click", ()=>{
-        const ta = document.getElementById("lineInput");
-        const text = (ta?.value || "").trim();
-        if(!text) return;
-        const arr = loadLines();
-        arr.unshift({ text, ts: Date.now() });
-        saveLines(arr);
-        renderLines();
-        if(ta) ta.value = "";
-        document.getElementById("yourlines")?.scrollIntoView({behavior:"smooth", block:"start"});
-      });
-
-      document.getElementById("btn_clear_field")?.addEventListener("click", ()=>{
-        const ta = document.getElementById("lineInput");
-        if(ta) ta.value = "";
-      });
-
-      document.getElementById("btn_copy_line")?.addEventListener("click", async ()=>{
-        const ta = document.getElementById("lineInput");
-        const text = (ta?.value || "").trim();
-        if(!text) return;
-        try{ await navigator.clipboard.writeText(text); }
-        catch(_){
-          if(ta){
-            ta.focus(); ta.select();
-            try{ document.execCommand("copy"); }catch(__){}
-          }
-        }
-      });
-
-      document.getElementById("btn_delete_all")?.addEventListener("click", ()=>{
-        saveLines([]);
-        renderLines();
-      });
-
-      const l = getLang();
-      apply(l);
-      renderLines();
-    })();
-  </script>
+  </div>
+
+<script>
+const dict = {
+  it: { title:"Scrivi una riga", intro:"Descrivi uno scambio reale. Non usare numeri. Non misurare valore.",
+        ph:"Scrivi qui la riga…", save:"Salva riga", home:"Torna alla Home",
+        hint:"Dopo il salvataggio verrai portato automaticamente al registro in Home.",
+        recognized:"✅ RIGA RICONOSCIUTA", saved_local:"È stata salvata solo su questo dispositivo.",
+        empty_title:"Scrivi una riga", empty_sub:"Scrivi qualcosa prima di salvare." },
+  en: { title:"Write a line", intro:"Describe a real exchange. No numbers. Do not measure value.",
+        ph:"Write the line here…", save:"Save line", home:"Back to Home",
+        hint:"After saving you will be taken to the register on Home.",
+        recognized:"✅ LINE RECOGNIZED", saved_local:"Saved only on this device.",
+        empty_title:"Write a line", empty_sub:"Write something before saving." },
+  es: { title:"Escribe una línea", intro:"Describe un intercambio real. Sin números. No midas valor.",
+        ph:"Escribe la línea aquí…", save:"Guardar línea", home:"Volver al inicio",
+        hint:"Después de guardar irás automáticamente al registro en Inicio.",
+        recognized:"✅ LÍNEA RECONOCIDA", saved_local:"Guardada solo en este dispositivo.",
+        empty_title:"Escribe una línea", empty_sub:"Escribe algo antes de guardar." },
+  fr: { title:"Écris une ligne", intro:"Décris un échange réel. Pas de nombres. Ne mesure pas la valeur.",
+        ph:"Écris la ligne ici…", save:"Enregistrer la ligne", home:"Retour à l’accueil",
+        hint:"Après l’enregistrement, tu seras envoyé vers le registre sur l’accueil.",
+        recognized:"✅ LIGNE RECONNUE", saved_local:"Enregistrée uniquement sur cet appareil.",
+        empty_title:"Écris une ligne", empty_sub:"Écris quelque chose avant d’enregistrer." },
+  de: { title:"Schreibe eine Zeile", intro:"Beschreibe einen realen Austausch. Keine Zahlen. Keinen Wert messen.",
+        ph:"Schreibe die Zeile hier…", save:"Zeile speichern", home:"Zur Startseite",
+        hint:"Nach dem Speichern wirst du automatisch zum Register auf der Startseite geführt.",
+        recognized:"✅ ZEILE ANERKANNT", saved_local:"Nur auf diesem Gerät gespeichert.",
+        empty_title:"Schreibe eine Zeile", empty_sub:"Schreibe etwas, bevor du speicherst." },
+  zh: { title:"寫下一行", intro:"描述一次真實交換。不要用數字。不要衡量價值。",
+        ph:"在這裡寫下那一行…", save:"儲存", home:"回到首頁",
+        hint:"儲存後會自動帶你回到首頁的本機紀錄。",
+        recognized:"✅ 已承認此行", saved_local:"僅儲存在此裝置上。",
+        empty_title:"寫下一行", empty_sub:"請先寫內容再儲存。" }
+};
+
+function getLang(){
+  const q = new URLSearchParams(location.search);
+  const v = (q.get("lang") || "it").toLowerCase();
+  return dict[v] ? v : "it";
+}
+const LANG = getLang();
+const t = (k)=> (dict[LANG][k] || dict.it[k] || k);
+
+function buildLangbar(){
+  const bar = document.getElementById("langbar");
+  const langs = [["it","IT"],["en","EN"],["es","ES"],["fr","FR"],["de","DE"],["zh","ZH"]];
+  bar.innerHTML = langs.map(([k,label])=>{
+    const a=document.createElement("a");
+    a.href = `primo-scambio.html?lang=${k}`;
+    a.textContent = label;
+    if(k===LANG) a.classList.add("active");
+    return a.outerHTML;
+  }).join("");
+}
+
+function applyI18n(){
+  document.documentElement.lang = (LANG === "zh" ? "zh-Hant" : LANG);
+  document.getElementById("h_title").textContent = t("title");
+  document.getElementById("p_intro").textContent = t("intro");
+  document.getElementById("lineInput").placeholder = t("ph");
+  document.getElementById("t_save").textContent = t("save");
+  document.getElementById("t_home").textContent = t("home");
+  document.getElementById("t_hint").textContent = t("hint");
+  document.getElementById("btnHome").href = `index.html?lang=${LANG}#register`;
+}
+
+const STORE_KEY = "mango_register_lines";
+
+function loadLines(){
+  try{
+    const raw = localStorage.getItem(STORE_KEY);
+    const arr = raw ? JSON.parse(raw) : [];
+    return Array.isArray(arr) ? arr.filter(x => typeof x === "string" && x.trim() !== "") : [];
+  }catch(_){ return []; }
+}
+function saveLines(arr){ localStorage.setItem(STORE_KEY, JSON.stringify(arr)); }
+
+function showRecognition(title, sub){
+  const box = document.getElementById("recognitionBox");
+  document.getElementById("recStrong").textContent = title;
+  document.getElementById("recSub").textContent = sub;
+  box.style.display = "block";
+}
+
+document.getElementById("btnSave").addEventListener("click", ()=>{
+  const v = (document.getElementById("lineInput").value || "").trim();
+
+  if(!v){
+    showRecognition(t("empty_title"), t("empty_sub"));
+    return;
+  }
+
+  const lines = loadLines();
+  lines.push(v);
+  saveLines(lines);
+
+  showRecognition(t("recognized"), t("saved_local"));
+  document.getElementById("lineInput").value = "";
+
+  setTimeout(()=>{
+    window.location.href = `index.html?lang=${LANG}#register`;
+  }, 650);
+});
+
+buildLangbar();
+applyI18n();
+</script>
 </body>
 </html>

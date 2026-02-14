@@ -1,801 +1,127 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="it">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <meta name="color-scheme" content="light" />
-  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
-  <meta http-equiv="Pragma" content="no-cache" />
-  <meta http-equiv="Expires" content="0" />
-  <title>Mango</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mango – Infrastruttura di fiducia</title>
 
-  <style>
-    :root{
-      --bg:#ffffff;
-      --fg:#111111;
-      --muted:#6b7280;
-      --card:#f7f7f8;
-      --border:#e5e7eb;
-      --radius:18px;
-      --shadow:0 10px 28px rgba(0,0,0,.06);
-      --max:960px;
-      --font:-apple-system, system-ui, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
-    }
-    *{box-sizing:border-box}
-    html{scroll-behavior:smooth}
-    body{margin:0;font-family:var(--font);color:var(--fg);background:var(--bg)}
-    a{color:inherit;text-decoration:none}
+<style>
+body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+    background: #ffffff;
+    color: #111;
+}
 
-    header{
-      position:sticky; top:0; z-index:10;
-      background:rgba(255,255,255,.9);
-      backdrop-filter:saturate(180%) blur(10px);
-      border-bottom:1px solid var(--border);
-    }
-    .hwrap{
-      max-width:var(--max);
-      margin:0 auto;
-      padding:14px 16px;
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:12px;
-      flex-wrap:wrap;
-    }
-    .brand{
-      display:flex;
-      align-items:center;
-      gap:10px;
-      font-weight:900;
-      font-size:22px;
-      letter-spacing:-0.3px;
-    }
-    .mangoBtn{
-      border:1px solid var(--border);
-      background:#fff;
-      border-radius:999px;
-      padding:6px 10px;
-      display:inline-flex;
-      align-items:center;
-      gap:6px;
-      box-shadow:0 2px 10px rgba(0,0,0,.04);
-      cursor:pointer;
-      -webkit-tap-highlight-color: transparent;
-    }
+header {
+    text-align: center;
+    padding: 100px 20px 40px 20px;
+}
 
-    .lang{
-      display:flex;
-      gap:10px;
-      flex-wrap:wrap;
-      align-items:center;
-      justify-content:flex-end;
-    }
-    .chip{
-      border:1px solid var(--border);
-      background:#fff;
-      border-radius:999px;
-      padding:10px 14px;
-      font-weight:800;
-      cursor:pointer;
-      min-width:52px;
-      text-align:center;
-    }
-    .chip[aria-current="true"]{
-      outline:2px solid #111;
-      outline-offset:2px;
-    }
+h1 {
+    font-size: 2.4rem;
+    font-weight: 600;
+    margin: 0;
+}
 
-    main{max-width:var(--max); margin:0 auto; padding:18px 16px 40px}
-    .hero{margin-top:10px;color:var(--muted);line-height:1.6;font-size:16px}
-    .grid{display:grid;grid-template-columns:1fr;gap:16px;margin-top:14px}
+.mango-manifesto {
+    text-align: center;
+    margin: 80px 20px;
+}
 
-    .card{
-      background:var(--card);
-      border:1px solid var(--border);
-      border-radius:var(--radius);
-      padding:18px;
-      box-shadow:var(--shadow);
-    }
-    .card h1{margin:0 0 10px;font-size:28px;line-height:1.15;letter-spacing:-0.6px}
-    .card h2{margin:0 0 10px;font-size:22px;letter-spacing:-0.3px}
-    .card p,.card li{margin:0;color:var(--fg);line-height:1.6;font-size:16px}
-    .muted{color:var(--muted)}
-    ul{margin:10px 0 0 18px}
-    li{margin:7px 0}
-    hr{border:0;border-top:1px solid var(--border); margin:14px 0}
+.mango-manifesto h2 {
+    font-size: 2rem;
+    font-weight: 600;
+    line-height: 1.4;
+}
 
-    textarea{
-      width:100%;
-      min-height:130px;
-      resize:vertical;
-      border:1px solid var(--border);
-      border-radius:14px;
-      padding:14px;
-      font-size:16px;
-      outline:none;
-      background:#fff;
-    }
-    .btnrow{
-      display:flex;
-      gap:10px;
-      flex-wrap:wrap;
-      margin-top:12px;
-      align-items:center;
-    }
-    .btn{
-      border:0;
-      background:#111;
-      color:#fff;
-      border-radius:14px;
-      padding:12px 14px;
-      font-weight:900;
-      cursor:pointer;
-      display:inline-flex;
-      align-items:center;
-      gap:8px;
-      -webkit-tap-highlight-color: transparent;
-    }
-    .btn.secondary{
-      background:#fff;
-      color:#111;
-      border:1px solid var(--border);
-    }
-    .btn.small{padding:10px 12px;border-radius:12px;font-weight:900}
+.mango-sub {
+    margin-top: 20px;
+    font-size: 1rem;
+    opacity: 0.6;
+}
 
-    .list{display:flex;flex-direction:column;gap:10px;margin-top:12px}
-    .lineItem{background:#fff;border:1px solid var(--border);border-radius:14px;padding:12px}
-    .lineMeta{
-      display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;align-items:center;margin-bottom:8px
-    }
-    .tag{font-size:12px;color:var(--muted);font-weight:800;letter-spacing:.2px}
-    .lineText{white-space:pre-wrap;font-size:16px;line-height:1.55}
+section {
+    max-width: 800px;
+    margin: 80px auto;
+    padding: 0 20px;
+}
 
-    footer{
-      max-width:var(--max);
-      margin:0 auto;
-      padding:18px 16px 40px;
-      color:var(--muted);
-      text-align:center;
-      font-size:13px;
-      line-height:1.6;
-    }
+section h3 {
+    font-size: 1.5rem;
+    margin-bottom: 20px;
+}
 
-    /* “Pagina vuota” interna (stesso file) */
-    .page{display:none}
-    .page.active{display:block}
+section p {
+    line-height: 1.7;
+    font-size: 1.05rem;
+}
 
-    /* vista blank: schermo bianco pieno */
-    .blankWrap{
-      height: calc(100vh - 58px);
-      min-height: 420px;
-      background:#fff;
-    }
-    .mangoCorner{
-      position:fixed;
-      right:16px;
-      bottom:16px;
-      border:1px solid var(--border);
-      background:#fff;
-      border-radius:999px;
-      padding:12px 14px;
-      font-size:20px;
-      cursor:pointer;
-      box-shadow:0 10px 28px rgba(0,0,0,.10);
-      user-select:none;
-      -webkit-tap-highlight-color: transparent;
-    }
-    .mangoCorner:active{transform:scale(.98)}
-    .blankHint{
-      position:fixed;
-      left:16px;
-      bottom:16px;
-      font-size:12px;
-      color:var(--muted);
-      max-width:70vw;
-    }
-  </style>
+footer {
+    margin-top: 120px;
+    padding: 40px 20px;
+    text-align: center;
+    font-size: 0.9rem;
+    opacity: 0.6;
+}
+</style>
 </head>
 
 <body>
-  <header id="top">
-    <div class="hwrap">
-      <div class="brand">
-        <span>Mango</span>
-        <button class="mangoBtn" id="mangoTop" title="Mango">🥭</button>
-      </div>
 
-      <nav class="lang" aria-label="Lingue">
-        <button class="chip" data-lang="it">IT</button>
-        <button class="chip" data-lang="en">EN</button>
-        <button class="chip" data-lang="es">ES</button>
-        <button class="chip" data-lang="fr">FR</button>
-        <button class="chip" data-lang="de">DE</button>
-        <button class="chip" data-lang="zh">ZH</button>
-      </nav>
-    </div>
-  </header>
+<header>
+    <h1>Mango</h1>
+</header>
+
+<section class="mango-manifesto">
+    <h2>Questo dominio può sparire.<br>Mango no.</h2>
+    <p class="mango-sub">Mango accade tra persone reali.</p>
+</section>
+
+<section id="fai-mango">
+    <h3>Fai Mango adesso</h3>
+    <p>
+    Se riconosci uno scambio reale tra persone, puoi scrivere una riga.
+    Non servono numeri. Non serve un conto. Non serve accumulare.
+    Una riga è un Mango.
+    </p>
+</section>
+
+<section id="scrivi-una-riga">
+    <h3>Scrivi una riga</h3>
+    <p>
+    Una riga descrive uno scambio reale.
+    Non misura valore.
+    Non crea credito.
+    Non genera saldo.
+    È riconoscimento.
+    </p>
+</section>
+
+<section id="cos-e-mango">
+    <h3>Cos’è Mango</h3>
+    <p>
+    Mango è un’infrastruttura di fiducia locale non monetaria,
+    non accumulabile e non appropriabile.
+    Può esistere anche senza questo sito.
+    Vive nelle relazioni.
+    </p>
+</section>
+
+<section>
+    <h3>Natura dell’infrastruttura</h3>
+    <p>
+    Mango non dipende dal dominio.
+    Non può essere posseduto attraverso di esso.
+    Questo spazio è solo una traccia.
+    </p>
+</section>
+
+<footer>
+    Creato da Juan de Dios Annaloro Mercedes<br>
+    In memoria di Larimar<br>
+    02 febbraio 2026
+</footer>
 
-  <!-- HOME PAGE -->
-  <div id="pageHome" class="page">
-    <main>
-      <div class="card">
-        <h1 id="t_title">Mango</h1>
-        <p class="hero" id="t_subtitle"></p>
-
-        <div class="btnrow">
-          <button class="btn secondary" id="btn_go_write">✍️ <span id="t_btn_go_write"></span></button>
-          <button class="btn secondary" id="btn_go_what">❓ <span id="t_btn_go_what"></span></button>
-          <a class="btn secondary" id="btn_primo" href="./primo-scambio.html">➡️ <span id="t_btn_primo"></span></a>
-        </div>
-      </div>
-
-      <section class="grid">
-        <article class="card" id="write">
-          <h2 id="t_write_title"></h2>
-          <p class="muted" id="t_write_text"></p>
-
-          <div style="height:6px"></div>
-          <textarea id="lineInput" placeholder=""></textarea>
-
-          <div class="btnrow">
-            <button class="btn" id="btn_send_keep">✅ <span id="t_btn_send_keep"></span></button>
-            <button class="btn secondary" id="btn_clear_field">🧽 <span id="t_btn_clear_field"></span></button>
-            <button class="btn secondary" id="btn_copy_line">📋 <span id="t_btn_copy"></span></button>
-          </div>
-
-          <p class="muted" style="margin-top:10px" id="t_write_hint"></p>
-        </article>
-
-        <article class="card" id="yourlines">
-          <h2 id="t_yourlines_title"></h2>
-          <p class="muted" id="t_yourlines_text"></p>
-
-          <div class="btnrow">
-            <button class="btn secondary" id="btn_delete_all">🗑️ <span id="t_btn_delete_all"></span></button>
-          </div>
-
-          <div class="list" id="linesList"></div>
-          <p class="muted" id="t_empty" style="display:none;margin-top:10px"></p>
-        </article>
-
-        <article class="card" id="what">
-          <h2 id="t_what_title"></h2>
-          <p id="t_what_text"></p>
-          <ul>
-            <li id="t_what_li1"></li>
-            <li id="t_what_li2"></li>
-            <li id="t_what_li3"></li>
-            <li id="t_what_li4"></li>
-          </ul>
-          <hr />
-          <p class="muted" id="t_what_note"></p>
-
-          <div class="btnrow">
-            <button class="btn secondary" id="btn_top">⬆️ <span id="t_btn_top"></span></button>
-          </div>
-        </article>
-      </section>
-    </main>
-
-    <footer>
-      <div id="t_footer1"></div>
-
-      <!-- EMAIL STAMPA (riga 1) -->
-      <div><a id="pressLink" href=""></a></div>
-      <!-- EMAIL STAMPA (riga 2 sotto) -->
-      <div id="t_press_note"></div>
-
-      <div id="t_footer2"></div>
-    </footer>
-  </div>
-
-  <!-- BLANK PAGE (schermo bianco) -->
-  <div id="pageBlank" class="page">
-    <div class="blankWrap" aria-hidden="true"></div>
-    <button class="mangoCorner" id="mangoCorner" aria-label="Home">🥭</button>
-    <div class="blankHint" id="blankHint"></div>
-  </div>
-
-  <script>
-    // CONFIG
-    const SUPPORTED = ["it","en","es","fr","de","zh"];
-    const DEFAULT_LANG = "it";
-    const STORAGE_KEY = "mango_lines_v1";
-    const PRESS_EMAIL = "press@mangoinfrastruttura.org"; // <-- cambia qui se vuoi
-
-    const T = {
-      it:{
-        title:"Mango",
-        subtitle:"Scrivi una riga reale. Resta solo su questo dispositivo (non online).",
-        btn_go_write:"Scrivi una riga",
-        btn_go_what:"Cos’è Mango",
-        btn_primo:"Primo scambio",
-
-        write_title:"Scrivi la riga",
-        write_text:"Una riga umana, concreta, reale.",
-        write_placeholder:"Esempio: Ioana ha ascoltato Marco. (Roma, 14 feb 2026)",
-        write_hint:"Premi “Invia (resta sul sito)” per salvare questa riga SOLO su questo dispositivo. Poi puoi copiarla o cancellarla quando vuoi.",
-
-        btn_send_keep:"Invia (resta sul sito)",
-        btn_clear_field:"Cancella campo",
-        btn_copy:"Copia",
-        btn_delete_all:"Elimina tutte le righe",
-
-        yourlines_title:"Le tue righe (solo su questo dispositivo)",
-        yourlines_text:"Queste righe non sono pubbliche: sono salvate nel tuo browser.",
-        empty:"Nessuna riga salvata ancora.",
-
-        what_title:"Cos’è Mango",
-        what_text:"Mango è un’infrastruttura di fiducia locale non monetaria: riconosce scambi reali senza trasformarli in valore.",
-        what_li1:"Una riga descrive un gesto reale. Non esiste “saldo”.",
-        what_li2:"Non è accumulabile nel tempo e ha una temporalità esplicita.",
-        what_li3:"Non è appropriabile: non deve essere possedibile o catturabile.",
-        what_li4:"Se qualcuno introduce numeri o equivalenze: non è Mango.",
-        what_note:"Creato da Juan de Dios Annaloro Mercedes in memoria di Larimar. (02 febbraio 2026)",
-        btn_top:"Torna su",
-
-        press:"Giornalisti / media:",
-        press_note:"(Oggetto email: “Mango / stampa” — rispondiamo appena possibile.)",
-        blank_hint:"Pagina vuota. Tocca 🥭 per tornare alla Home.",
-
-        footer1:"Creato da Juan de Dios Annaloro Mercedes — 02 febbraio 2026 — In memoria di Larimar.",
-        footer2:"Mango è praticabile e trasmissibile, ma non possedibile né centralizzabile."
-      },
-      en:{
-        title:"Mango",
-        subtitle:"Write your real line. It stays only on this device (not online).",
-        btn_go_write:"Write a line",
-        btn_go_what:"What is Mango",
-        btn_primo:"First exchange",
-
-        write_title:"Write the line",
-        write_text:"One human, concrete, real line.",
-        write_placeholder:"Example: Ioana listened to Marco. (Rome, Feb 14 2026)",
-        write_hint:"Press “Send (stays on site)” to save ONLY on this device. Copy or delete whenever you want.",
-
-        btn_send_keep:"Send (stays on site)",
-        btn_clear_field:"Clear field",
-        btn_copy:"Copy",
-        btn_delete_all:"Delete all lines",
-
-        yourlines_title:"Your lines (only on this device)",
-        yourlines_text:"These lines are not public: they are stored in your browser.",
-        empty:"No saved lines yet.",
-
-        what_title:"What is Mango",
-        what_text:"Mango is a non-monetary local trust infrastructure: it recognizes real exchanges without turning them into value.",
-        what_li1:"One line describes a real gesture. There is no “balance”.",
-        what_li2:"Not accumulable over time: explicit temporality.",
-        what_li3:"Not ownable: it must not be capturable or centralized.",
-        what_li4:"If someone introduces numbers or equivalences: it’s not Mango.",
-        what_note:"Created by Juan de Dios Annaloro Mercedes in memory of Larimar. (02 Feb 2026)",
-        btn_top:"Back to top",
-
-        press:"Press / media:",
-        press_note:"(Subject: “Mango / press” — we reply as soon as possible.)",
-        blank_hint:"Blank page. Tap 🥭 to go back Home.",
-
-        footer1:"Created by Juan de Dios Annaloro Mercedes — 02 Feb 2026 — In memory of Larimar.",
-        footer2:"Practicable and transmissible, but not ownable or centralizable."
-      },
-      es:{
-        title:"Mango",
-        subtitle:"Escribe tu línea real. Se queda solo en este dispositivo (no en línea).",
-        btn_go_write:"Escribe una línea",
-        btn_go_what:"Qué es Mango",
-        btn_primo:"Primer intercambio",
-
-        write_title:"Escribe la línea",
-        write_text:"Una línea humana, concreta, real.",
-        write_placeholder:"Ejemplo: Ioana escuchó a Marco. (Roma, 14 feb 2026)",
-        write_hint:"Pulsa “Enviar (se queda en el sitio)” para guardar SOLO en este dispositivo. Copia o borra cuando quieras.",
-
-        btn_send_keep:"Enviar (se queda en el sitio)",
-        btn_clear_field:"Borrar campo",
-        btn_copy:"Copiar",
-        btn_delete_all:"Eliminar todas las líneas",
-
-        yourlines_title:"Tus líneas (solo en este dispositivo)",
-        yourlines_text:"Estas líneas no son públicas: se guardan en tu navegador.",
-        empty:"Aún no hay líneas guardadas.",
-
-        what_title:"Qué es Mango",
-        what_text:"Mango es una infraestructura local de confianza no monetaria: reconoce intercambios reales sin convertirlos en valor.",
-        what_li1:"Una línea describe un gesto real. No existe “saldo”.",
-        what_li2:"No acumulable en el tiempo: temporalidad explícita.",
-        what_li3:"No poseíble: no debe ser capturable ni centralizable.",
-        what_li4:"Si alguien introduce números o equivalencias: no es Mango.",
-        what_note:"Creado por Juan de Dios Annaloro Mercedes en memoria de Larimar. (02 febrero 2026)",
-        btn_top:"Volver arriba",
-
-        press:"Prensa / medios:",
-        press_note:"(Asunto: “Mango / prensa” — respondemos lo antes posible.)",
-        blank_hint:"Página en blanco. Toca 🥭 para volver al inicio.",
-
-        footer1:"Creado por Juan de Dios Annaloro Mercedes — 02 febrero 2026 — En memoria de Larimar.",
-        footer2:"Practicable y transmisible, pero no poseíble ni centralizable."
-      },
-      fr:{
-        title:"Mango",
-        subtitle:"Écris ta ligne réelle. Elle reste seulement sur cet appareil (pas en ligne).",
-        btn_go_write:"Écrire une ligne",
-        btn_go_what:"Qu’est-ce que Mango",
-        btn_primo:"Premier échange",
-
-        write_title:"Écris la ligne",
-        write_text:"Une ligne humaine, concrète, réelle.",
-        write_placeholder:"Exemple : Ioana a écouté Marco. (Rome, 14 fév 2026)",
-        write_hint:"Appuie sur « Envoyer (reste sur le site) » pour enregistrer UNIQUEMENT sur cet appareil. Copier ou supprimer quand tu veux.",
-
-        btn_send_keep:"Envoyer (reste sur le site)",
-        btn_clear_field:"Effacer le champ",
-        btn_copy:"Copier",
-        btn_delete_all:"Supprimer toutes les lignes",
-
-        yourlines_title:"Tes lignes (uniquement sur cet appareil)",
-        yourlines_text:"Ces lignes ne sont pas publiques : elles sont stockées dans ton navigateur.",
-        empty:"Aucune ligne enregistrée pour l’instant.",
-
-        what_title:"Qu’est-ce que Mango",
-        what_text:"Mango est une infrastructure locale de confiance non monétaire : elle reconnaît des échanges réels sans les transformer en valeur.",
-        what_li1:"Une ligne décrit un geste réel. Pas de « solde ».",
-        what_li2:"Non accumulable dans le temps : temporalité explicite.",
-        what_li3:"Non possédable : pas de capture ni centralisation.",
-        what_li4:"Si quelqu’un introduit des chiffres ou équivalences : ce n’est pas Mango.",
-        what_note:"Créé par Juan de Dios Annaloro Mercedes — en mémoire de Larimar. (02 février 2026)",
-        btn_top:"Haut de page",
-
-        press:"Presse / médias :",
-        press_note:"(Objet : « Mango / presse » — réponse dès que possible.)",
-        blank_hint:"Page blanche. Appuie sur 🥭 pour revenir à l’accueil.",
-
-        footer1:"Créé par Juan de Dios Annaloro Mercedes — 02 février 2026 — En mémoire de Larimar.",
-        footer2:"Praticable et transmissible, mais non possédable ni centralisable."
-      },
-      de:{
-        title:"Mango",
-        subtitle:"Schreibe deine reale Zeile. Sie bleibt nur auf diesem Gerät (nicht online).",
-        btn_go_write:"Zeile schreiben",
-        btn_go_what:"Was ist Mango",
-        btn_primo:"Erster Austausch",
-
-        write_title:"Schreibe die Zeile",
-        write_text:"Eine menschliche, konkrete, reale Zeile.",
-        write_placeholder:"Beispiel: Ioana hörte Marco zu. (Rom, 14 Feb 2026)",
-        write_hint:"Klicke „Senden (bleibt auf der Seite)“, um NUR auf diesem Gerät zu speichern. Kopieren oder löschen, wann du willst.",
-
-        btn_send_keep:"Senden (bleibt auf der Seite)",
-        btn_clear_field:"Feld löschen",
-        btn_copy:"Kopieren",
-        btn_delete_all:"Alle Zeilen löschen",
-
-        yourlines_title:"Deine Zeilen (nur auf diesem Gerät)",
-        yourlines_text:"Diese Zeilen sind nicht öffentlich: sie werden im Browser gespeichert.",
-        empty:"Noch keine gespeicherten Zeilen.",
-
-        what_title:"Was ist Mango",
-        what_text:"Mango ist eine nicht-monetäre lokale Vertrauens-Infrastruktur: sie erkennt reale Austausche an, ohne sie in Wert zu verwandeln.",
-        what_li1:"Eine Zeile beschreibt eine reale Geste. Kein „Saldo“.",
-        what_li2:"Nicht akkumuliert über Zeit: explizite Temporalität.",
-        what_li3:"Nicht besitzbar: keine Vereinnahmung oder Zentralisierung.",
-        what_li4:"Wenn jemand Zahlen oder Äquivalenzen einführt: nicht Mango.",
-        what_note:"Erstellt von Juan de Dios Annaloro Mercedes — in Erinnerung an Larimar. (02. Feb 2026)",
-        btn_top:"Nach oben",
-
-        press:"Presse / Medien:",
-        press_note:"(Betreff: „Mango / Presse“ — wir antworten so bald wie möglich.)",
-        blank_hint:"Leere Seite. Tippe 🥭, um zur Startseite zurückzukehren.",
-
-        footer1:"Erstellt von Juan de Dios Annaloro Mercedes — 02. Feb 2026 — In Erinnerung an Larimar.",
-        footer2:"Praktizierbar und übertragbar, aber nicht besitzbar oder zentralisierbar."
-      },
-      zh:{
-        title:"Mango",
-        subtitle:"写下你的真实记录。它只保存在本设备（不在线）。",
-        btn_go_write:"写下一行",
-        btn_go_what:"Mango 是什么",
-        btn_primo:"第一次交换",
-
-        write_title:"写下这一行",
-        write_text:"一行人性的、具体的、真实的记录。",
-        write_placeholder:"例：Ioana 听 Marco 说话。（罗马，2026年2月14日）",
-        write_hint:"点击“发送（保留在网站）”即可仅保存在本设备。之后你可以随时复制或删除。",
-
-        btn_send_keep:"发送（保留在网站）",
-        btn_clear_field:"清空输入",
-        btn_copy:"复制",
-        btn_delete_all:"删除所有记录",
-
-        yourlines_title:"你的记录（仅在本设备）",
-        yourlines_text:"这些记录不公开：仅存储在你的浏览器中。",
-        empty:"还没有保存的记录。",
-
-        what_title:"Mango 是什么",
-        what_text:"Mango 是一种非货币化的本地信任基础设施：承认真实交换，但不把它变成价值。",
-        what_li1:"一行描述一个真实举动。没有“余额”。",
-        what_li2:"不可随时间累积：具有明确的时间性。",
-        what_li3:"不可被拥有：不能被捕获或中心化。",
-        what_li4:"如果有人引入数字或等价：那就不是 Mango。",
-        what_note:"由 Juan de Dios Annaloro Mercedes 创建，以纪念 Larimar。（2026年2月2日）",
-        btn_top:"回到顶部",
-
-        press:"媒体 / 记者：",
-        press_note:"（邮件主题：Mango / 媒体——我们会尽快回复。）",
-        blank_hint:"空白页面。点击 🥭 返回首页。",
-
-        footer1:"由 Juan de Dios Annaloro Mercedes 创建 — 2026年2月2日 — 纪念 Larimar。",
-        footer2:"可实践与传递，但不可被拥有或中心化。"
-      }
-    };
-
-    // lang helpers
-    function getLang(){
-      const u = new URL(location.href);
-      const l = (u.searchParams.get("lang") || "").toLowerCase();
-      return SUPPORTED.includes(l) ? l : DEFAULT_LANG;
-    }
-    function setLang(l){
-      const u = new URL(location.href);
-      u.searchParams.set("lang", l);
-      history.replaceState({}, "", u.toString());
-    }
-    function withLang(path){
-      const l = getLang();
-      const base = new URL(path, location.href);
-      base.searchParams.set("lang", l);
-      return base.pathname + "?" + base.searchParams.toString() + (base.hash || "");
-    }
-
-    // routing home/blank in SAME FILE
-    function showPage(which){
-      const home = document.getElementById("pageHome");
-      const blank = document.getElementById("pageBlank");
-      home.classList.remove("active");
-      blank.classList.remove("active");
-      if(which === "blank") blank.classList.add("active");
-      else home.classList.add("active");
-    }
-    function route(){
-      const h = (location.hash || "#home").toLowerCase();
-      if(h === "#blank") showPage("blank");
-      else showPage("home");
-    }
-
-    // storage
-    function loadLines(){
-      try{
-        const raw = localStorage.getItem(STORAGE_KEY);
-        const arr = raw ? JSON.parse(raw) : [];
-        return Array.isArray(arr) ? arr : [];
-      }catch(_){ return []; }
-    }
-    function saveLines(arr){ localStorage.setItem(STORAGE_KEY, JSON.stringify(arr)); }
-
-    // render list
-    function renderLines(){
-      const list = document.getElementById("linesList");
-      const empty = document.getElementById("t_empty");
-      const arr = loadLines();
-
-      list.innerHTML = "";
-      if(!arr.length){
-        empty.style.display = "block";
-        return;
-      }
-      empty.style.display = "none";
-
-      arr.forEach((item, idx)=>{
-        const box = document.createElement("div");
-        box.className = "lineItem";
-
-        const meta = document.createElement("div");
-        meta.className = "lineMeta";
-
-        const tag = document.createElement("div");
-        tag.className = "tag";
-        const dt = item && item.ts ? new Date(item.ts) : new Date();
-        tag.textContent = dt.toLocaleString();
-
-        const actions = document.createElement("div");
-        actions.className = "btnrow";
-        actions.style.margin = "0";
-        actions.style.gap = "8px";
-
-        const bCopy = document.createElement("button");
-        bCopy.className = "btn secondary small";
-        bCopy.type = "button";
-        bCopy.textContent = "📋";
-        bCopy.title = "Copy";
-        bCopy.addEventListener("click", async ()=>{
-          const text = (item && item.text) ? item.text : "";
-          if(!text) return;
-          try{ await navigator.clipboard.writeText(text); }
-          catch(_){
-            const ta = document.getElementById("lineInput");
-            if(ta){
-              ta.value = text;
-              ta.focus();
-              ta.select();
-              try{ document.execCommand("copy"); }catch(__){}
-            }
-          }
-        });
-
-        const bDel = document.createElement("button");
-        bDel.className = "btn secondary small";
-        bDel.type = "button";
-        bDel.textContent = "🗑️";
-        bDel.title = "Delete";
-        bDel.addEventListener("click", ()=>{
-          const arr2 = loadLines();
-          arr2.splice(idx, 1);
-          saveLines(arr2);
-          renderLines();
-        });
-
-        actions.appendChild(bCopy);
-        actions.appendChild(bDel);
-
-        meta.appendChild(tag);
-        meta.appendChild(actions);
-
-        const text = document.createElement("div");
-        text.className = "lineText";
-        text.textContent = (item && item.text) ? item.text : "";
-
-        box.appendChild(meta);
-        box.appendChild(text);
-        list.appendChild(box);
-      });
-    }
-
-    function goTop(){
-      try{ window.scrollTo({top:0,left:0,behavior:"smooth"}); }
-      catch(_){ window.scrollTo(0,0); }
-    }
-
-    // apply translations
-    function apply(l){
-      document.documentElement.lang = l;
-      document.querySelectorAll(".chip").forEach(b=>{
-        b.setAttribute("aria-current", b.dataset.lang === l ? "true" : "false");
-      });
-      const d = T[l] || T[DEFAULT_LANG];
-
-      // home texts
-      document.getElementById("t_title").textContent = d.title;
-      document.getElementById("t_subtitle").textContent = d.subtitle;
-
-      document.getElementById("t_btn_go_write").textContent = d.btn_go_write;
-      document.getElementById("t_btn_go_what").textContent = d.btn_go_what;
-      document.getElementById("t_btn_primo").textContent = d.btn_primo;
-
-      document.getElementById("t_write_title").textContent = d.write_title;
-      document.getElementById("t_write_text").textContent = d.write_text;
-      document.getElementById("lineInput").placeholder = d.write_placeholder;
-      document.getElementById("t_write_hint").textContent = d.write_hint;
-
-      document.getElementById("t_btn_send_keep").textContent = d.btn_send_keep;
-      document.getElementById("t_btn_clear_field").textContent = d.btn_clear_field;
-      document.getElementById("t_btn_copy").textContent = d.btn_copy;
-      document.getElementById("t_btn_delete_all").textContent = d.btn_delete_all;
-
-      document.getElementById("t_yourlines_title").textContent = d.yourlines_title;
-      document.getElementById("t_yourlines_text").textContent = d.yourlines_text;
-      document.getElementById("t_empty").textContent = d.empty;
-
-      document.getElementById("t_what_title").textContent = d.what_title;
-      document.getElementById("t_what_text").textContent = d.what_text;
-      document.getElementById("t_what_li1").textContent = d.what_li1;
-      document.getElementById("t_what_li2").textContent = d.what_li2;
-      document.getElementById("t_what_li3").textContent = d.what_li3;
-      document.getElementById("t_what_li4").textContent = d.what_li4;
-      document.getElementById("t_what_note").textContent = d.what_note;
-      document.getElementById("t_btn_top").textContent = d.btn_top;
-
-      document.getElementById("t_footer1").textContent = d.footer1;
-      document.getElementById("t_footer2").textContent = d.footer2;
-
-      // press email link (riga 1)
-      const a = document.getElementById("pressLink");
-      a.textContent = (d.press || "Press:") + " " + PRESS_EMAIL;
-      a.href = "mailto:" + PRESS_EMAIL;
-
-      // press note (riga sotto)
-      document.getElementById("t_press_note").textContent = d.press_note || "";
-
-      // blank hint
-      document.getElementById("blankHint").textContent = d.blank_hint || "";
-
-      // link primo scambio con lang
-      document.getElementById("btn_primo").href = withLang("./primo-scambio.html");
-
-      document.title = "Mango";
-    }
-
-    // INIT
-    (function init(){
-      // language buttons
-      document.querySelectorAll(".chip").forEach(b=>{
-        b.addEventListener("click", ()=>{
-          const l = b.dataset.lang;
-          setLang(l);
-          apply(l);
-        });
-      });
-
-      // routing
-      window.addEventListener("hashchange", route);
-
-      // 🥭 top: toggle home<->blank
-      document.getElementById("mangoTop").addEventListener("click", ()=>{
-        if((location.hash || "#home").toLowerCase() === "#blank") location.hash = "#home";
-        else location.hash = "#blank";
-        route();
-        goTop();
-      });
-
-      // 🥭 bottom-right in blank: go home
-      document.getElementById("mangoCorner").addEventListener("click", ()=>{
-        location.hash = "#home";
-        route();
-        goTop();
-      });
-
-      // nav buttons
-      document.getElementById("btn_go_write")?.addEventListener("click", ()=>{
-        document.getElementById("write")?.scrollIntoView({behavior:"smooth", block:"start"});
-      });
-      document.getElementById("btn_go_what")?.addEventListener("click", ()=>{
-        document.getElementById("what")?.scrollIntoView({behavior:"smooth", block:"start"});
-      });
-      document.getElementById("btn_top")?.addEventListener("click", goTop);
-
-      // actions
-      document.getElementById("btn_send_keep")?.addEventListener("click", ()=>{
-        const ta = document.getElementById("lineInput");
-        const text = (ta?.value || "").trim();
-        if(!text) return;
-        const arr = loadLines();
-        arr.unshift({ text, ts: Date.now() });
-        saveLines(arr);
-        renderLines();
-        if(ta) ta.value = "";
-        document.getElementById("yourlines")?.scrollIntoView({behavior:"smooth", block:"start"});
-      });
-
-      document.getElementById("btn_clear_field")?.addEventListener("click", ()=>{
-        const ta = document.getElementById("lineInput");
-        if(ta) ta.value = "";
-      });
-
-      document.getElementById("btn_copy_line")?.addEventListener("click", async ()=>{
-        const ta = document.getElementById("lineInput");
-        const text = (ta?.value || "").trim();
-        if(!text) return;
-        try{ await navigator.clipboard.writeText(text); }
-        catch(_){
-          if(ta){
-            ta.focus(); ta.select();
-            try{ document.execCommand("copy"); }catch(__){}
-          }
-        }
-      });
-
-      document.getElementById("btn_delete_all")?.addEventListener("click", ()=>{
-        saveLines([]);
-        renderLines();
-      });
-
-      // boot
-      const l = getLang();
-      apply(l);
-      renderLines();
-
-      // default route
-      if(!location.hash) location.hash = "#home";
-      route();
-    })();
-  </script>
 </body>
 </html>

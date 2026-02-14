@@ -4,236 +4,95 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>Mango</title>
-
+  <link rel="stylesheet" href="style.css">
   <style>
-    body{
-      margin:0;
-      font-family:-apple-system,BlinkMacSystemFont,system-ui,Segoe UI,Roboto,Arial;
-      background:#fff; color:#111;
-      min-height:100vh;
-    }
-    .wrap{ max-width:860px; margin:0 auto; padding:0 18px; }
-
-    .top{
-      display:flex; justify-content:flex-end;
-      padding:14px 18px;
-      position:sticky; top:0;
-      background:rgba(255,255,255,.92);
-      backdrop-filter: blur(10px);
-      border-bottom:1px solid rgba(0,0,0,.08);
-      z-index:20;
-    }
-    .langbar{ display:flex; gap:8px; flex-wrap:wrap; }
-    .langbar a{
-      font-size:.95rem; text-decoration:none; color:#111; opacity:.78; font-weight:900;
-      padding:8px 10px; border-radius:12px; border:1px solid rgba(0,0,0,.10);
-      background:#fff;
-    }
-    .langbar a.active{ opacity:1; border-color:rgba(0,0,0,.25); }
-
-    header{ text-align:center; padding:70px 18px 18px; }
-    h1{ margin:0; font-size:2.2rem; font-weight:950; letter-spacing:.2px; line-height:1.15; }
-    p{ margin:16px 0 0; line-height:1.7; font-size:1.05rem; opacity:.7; }
-
-    .card{
-      border:1px solid rgba(0,0,0,.12);
-      border-radius:22px;
-      padding:22px;
-      margin:26px auto 0;
-      text-align:center;
-      max-width:640px;
-    }
-    .btn{
-      appearance:none;
-      border:1px solid rgba(0,0,0,.16);
-      background:#fff;
-      color:#111;
-      padding:12px 16px;
-      border-radius:14px;
-      font-weight:950;
-      cursor:pointer;
-      text-decoration:none;
-      display:inline-flex;
-      align-items:center;
-      gap:10px;
-      margin-top:18px;
-    }
-    .btn:active{ transform: translateY(1px); }
-    .muted{ opacity:.55; font-size:.95rem; margin-top:14px; }
-
-    .mango-fab{
-      position:fixed;
-      right:16px; bottom:16px;
-      z-index:30;
-      text-decoration:none;
-      color:#111;
-      font-weight:950;
-      border:1px solid rgba(0,0,0,.16);
-      border-radius:18px;
-      padding:12px 14px;
-      background:#fff;
-      box-shadow: 0 6px 18px rgba(0,0,0,.08);
-      display:inline-flex;
-      align-items:center;
-      gap:10px;
-    }
-    .mango-fab:active{ transform: translateY(1px); }
+    body{margin:0;font-family:-apple-system,BlinkMacSystemFont,system-ui,Segoe UI,Roboto,Arial;background:#fff;color:#111}
+    .wrap{max-width:980px;margin:0 auto;padding:18px}
+    .top{display:flex;justify-content:flex-end;position:sticky;top:0;background:rgba(255,255,255,.92);backdrop-filter:blur(10px);border-bottom:1px solid rgba(0,0,0,.08);z-index:10}
+    .langbar{display:flex;gap:8px;flex-wrap:wrap;padding:14px 18px}
+    .langbar a{font-size:.95rem;text-decoration:none;color:#111;opacity:.78;font-weight:900;padding:8px 10px;border-radius:12px;border:1px solid rgba(0,0,0,.10);background:#fff}
+    .langbar a.active{opacity:1;border-color:rgba(0,0,0,.25)}
+    h1{margin:18px 0 6px;font-size:2.1rem;line-height:1.12;font-weight:950}
+    p{margin:0 0 16px;opacity:.75;line-height:1.6}
+    .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px;margin-top:18px}
+    .card{border:1px solid rgba(0,0,0,.12);border-radius:22px;padding:18px}
+    .btn{display:inline-flex;gap:10px;align-items:center;text-decoration:none;border:1px solid rgba(0,0,0,.16);border-radius:14px;padding:12px 14px;font-weight:950;color:#111;background:#fff}
+    .btn:active{transform:translateY(1px)}
+    .small{font-size:.95rem;opacity:.7;margin-top:8px}
   </style>
 </head>
-
 <body>
   <div class="top">
-    <div class="langbar" id="langbar"></div>
+    <div class="langbar">
+      <a class="lang" data-lang="it" href="?lang=it">IT</a>
+      <a class="lang" data-lang="en" href="?lang=en">EN</a>
+      <a class="lang" data-lang="es" href="?lang=es">ES</a>
+      <a class="lang" data-lang="fr" href="?lang=fr">FR</a>
+      <a class="lang" data-lang="de" href="?lang=de">DE</a>
+      <a class="lang" data-lang="zh" href="?lang=zh">ZH</a>
+    </div>
   </div>
 
-  <header class="wrap">
-    <h1 id="m1">Questo dominio può sparire.<br>Mango no.</h1>
-    <p id="m2">Mango accade tra persone reali.</p>
+  <main class="wrap">
+    <h1 id="t1">Mango</h1>
+    <p id="t2">Scegli cosa vuoi fare adesso.</p>
 
-    <div class="card">
-      <div id="c1" style="font-weight:900; font-size:1.08rem;">
-        Sei arrivato qui da un vecchio link o un QR.
+    <div class="grid">
+      <div class="card">
+        <a class="btn" id="a1" href="primo-scambio.html?lang=it">🥭 <span id="b1">Fai Mango adesso</span></a>
+        <div class="small" id="s1">Un primo scambio reale, semplice.</div>
       </div>
 
-      <a class="btn" id="homeBtn" href="index.html">
-        🏠 <span id="b1">Torna alla Home</span>
-      </a>
+      <div class="card">
+        <a class="btn" id="a2" href="scrivi-una-riga.html?lang=it">✍️ <span id="b2">Scrivi una riga</span></a>
+        <div class="small" id="s2">Registra lo scambio (una riga).</div>
+      </div>
 
-      <div class="muted" id="autoTxt">
-        Reindirizzamento automatico tra pochi secondi…
+      <div class="card">
+        <a class="btn" id="a3" href="it.html?lang=it">📘 <span id="b3">Cos’è Mango</span></a>
+        <div class="small" id="s3">Definizione e principi.</div>
       </div>
     </div>
-  </header>
-
-  <a class="mango-fab" id="mangoFab" href="index.html">🥭 <span id="fabTxt">Mango</span></a>
+  </main>
 
 <script>
-/* =========================
-   i18n
-========================= */
 const dict = {
-  it:{ htmlLang:"it",
-    m1:"Questo dominio può sparire.<br>Mango no.",
-    m2:"Mango accade tra persone reali.",
-    c1:"Sei arrivato qui da un vecchio link o un QR.",
-    b1:"Torna alla Home",
-    auto:"Reindirizzamento automatico tra pochi secondi…",
-    mango:"Mango"
-  },
-  en:{ htmlLang:"en",
-    m1:"This domain can disappear.<br>Mango won’t.",
-    m2:"Mango happens between real people.",
-    c1:"You arrived here from an old link or QR.",
-    b1:"Back to Home",
-    auto:"Auto-redirect in a few seconds…",
-    mango:"Mango"
-  },
-  es:{ htmlLang:"es",
-    m1:"Este dominio puede desaparecer.<br>Mango no.",
-    m2:"Mango sucede entre personas reales.",
-    c1:"Llegaste aquí desde un enlace o QR antiguo.",
-    b1:"Volver al inicio",
-    auto:"Redirección automática en unos segundos…",
-    mango:"Mango"
-  },
-  fr:{ htmlLang:"fr",
-    m1:"Ce domaine peut disparaître.<br>Mango non.",
-    m2:"Mango se vit entre personnes réelles.",
-    c1:"Tu es arrivé ici depuis un ancien lien ou QR.",
-    b1:"Retour à l’accueil",
-    auto:"Redirection automatique dans quelques secondes…",
-    mango:"Mango"
-  },
-  de:{ htmlLang:"de",
-    m1:"Diese Domain kann verschwinden.<br>Mango nicht.",
-    m2:"Mango passiert zwischen echten Menschen.",
-    c1:"Du bist über einen alten Link oder QR hier gelandet.",
-    b1:"Zur Startseite",
-    auto:"Automatische Weiterleitung in wenigen Sekunden…",
-    mango:"Mango"
-  },
-  zh:{ htmlLang:"zh-Hant",
-    m1:"這個網域可以消失。<br>Mango 不會。",
-    m2:"Mango 發生在人與人之間的真實關係中。",
-    c1:"你可能是從舊連結或 QR 來到這裡。",
-    b1:"回到首頁",
-    auto:"幾秒後自動跳轉…",
-    mango:"Mango"
-  }
+  it:{t1:"Mango",t2:"Scegli cosa vuoi fare adesso.",b1:"Fai Mango adesso",s1:"Un primo scambio reale, semplice.",
+      b2:"Scrivi una riga",s2:"Registra lo scambio (una riga).",b3:"Cos’è Mango",s3:"Definizione e principi."},
+  en:{t1:"Mango",t2:"Choose what you want to do now.",b1:"Do Mango now",s1:"A simple real first exchange.",
+      b2:"Write a line",s2:"Record the exchange (one line).",b3:"What is Mango",s3:"Definition and principles."},
+  es:{t1:"Mango",t2:"Elige qué quieres hacer ahora.",b1:"Haz Mango ahora",s1:"Un primer intercambio real y simple.",
+      b2:"Escribe una línea",s2:"Registra el intercambio (una línea).",b3:"Qué es Mango",s3:"Definición y principios."},
+  fr:{t1:"Mango",t2:"Choisis ce que tu veux faire maintenant.",b1:"Faire Mango maintenant",s1:"Un premier échange réel et simple.",
+      b2:"Écrire une ligne",s2:"Enregistrer l’échange (une ligne).",b3:"Qu’est-ce que Mango",s3:"Définition et principes."},
+  de:{t1:"Mango",t2:"Wähle, was du jetzt tun willst.",b1:"Jetzt Mango machen",s1:"Ein einfacher, realer erster Austausch.",
+      b2:"Eine Zeile schreiben",s2:"Den Austausch notieren (eine Zeile).",b3:"Was ist Mango",s3:"Definition und Prinzipien."},
+  zh:{t1:"Mango",t2:"請選擇你現在要做的事。",b1:"現在做 Mango",s1:"一個簡單的真實首次交換。",
+      b2:"寫一行",s2:"記錄這次交換（一行）。",b3:"什麼是 Mango",s3:"定義與原則。"}
 };
-
 function getLang(){
-  const q = new URLSearchParams(location.search);
-  const raw = (q.get("lang") || "it").toLowerCase();
-  return dict[raw] ? raw : "it";
+  const q=new URLSearchParams(location.search);
+  const v=(q.get("lang")||"it").toLowerCase();
+  return dict[v]?v:"it";
 }
-const LANG = getLang();
-
-function buildLangbar(){
-  const bar = document.getElementById("langbar");
-  const langs = [["it","IT"],["en","EN"],["es","ES"],["fr","FR"],["de","DE"],["zh","ZH"]];
-  bar.innerHTML = langs.map(([k,label])=>{
-    const a=document.createElement("a");
-    a.href = `404.html?lang=${k}`;
-    a.textContent = label;
-    if(k===LANG) a.classList.add("active");
-    return a.outerHTML;
-  }).join("");
-}
-
-function applyI18n(){
-  document.documentElement.lang = dict[LANG].htmlLang;
-  document.getElementById("m1").innerHTML = dict[LANG].m1;
-  document.getElementById("m2").textContent = dict[LANG].m2;
-  document.getElementById("c1").textContent = dict[LANG].c1;
-  document.getElementById("b1").textContent = dict[LANG].b1;
-  document.getElementById("autoTxt").textContent = dict[LANG].auto;
-  document.getElementById("fabTxt").textContent = dict[LANG].mango;
-
-  const homeLocal = `index.html?lang=${LANG}`;
-  document.getElementById("homeBtn").href = homeLocal;
-  document.getElementById("mangoFab").href = homeLocal;
-}
-
-buildLangbar();
-applyI18n();
-
-/* =========================
-   Redirect permanente anti-404
-   - Se NON sei su mangoinfrastruttura.org (o www) → vai SEMPRE alla HOME ufficiale.
-   - Se sei già sul dominio ufficiale → vai alla HOME locale (index.html).
-   - No loop + rispetta interazione utente.
-========================= */
-let interacted = false;
-["click","touchstart","keydown","scroll"].forEach(ev=>{
-  window.addEventListener(ev, ()=>{ interacted = true; }, {passive:true});
+const L=getLang();
+document.querySelectorAll(".lang").forEach(a=>{
+  if(a.dataset.lang===L) a.classList.add("active");
 });
-
-const CANONICAL = "mangoinfrastruttura.org";
-const CANONICAL_WWW = "www.mangoinfrastruttura.org";
-const CANONICAL_BASE = "https://mangoinfrastruttura.org/";
-
-setTimeout(()=>{
-  if(interacted) return;
-
-  const host = (location.hostname || "").toLowerCase();
-  const path = (location.pathname || "").toLowerCase();
-  const hash = location.hash || "";
-
-  // Se sei su un dominio diverso → porta alla Home del dominio ufficiale (lang + hash)
-  if(host && host !== CANONICAL && host !== CANONICAL_WWW){
-    location.replace(`${CANONICAL_BASE}?lang=${LANG}${hash}`);
-    return;
-  }
-
-  // Se sei già in Home sul dominio ufficiale, non fare nulla
-  if(path === "/" || path.endsWith("/index.html")){
-    return;
-  }
-
-  // Sei sul dominio ufficiale ma su una pagina inesistente → vai alla Home locale
-  location.replace(`index.html?lang=${LANG}${hash}`);
-}, 4500);
+["a1","a2","a3"].forEach((id,i)=>{
+  const el=document.getElementById(id);
+  const url=new URL(el.getAttribute("href"), location.href);
+  url.searchParams.set("lang", L);
+  el.setAttribute("href", url.pathname + "?lang=" + L);
+});
+document.getElementById("t1").textContent=dict[L].t1;
+document.getElementById("t2").textContent=dict[L].t2;
+document.getElementById("b1").textContent=dict[L].b1;
+document.getElementById("s1").textContent=dict[L].s1;
+document.getElementById("b2").textContent=dict[L].b2;
+document.getElementById("s2").textContent=dict[L].s2;
+document.getElementById("b3").textContent=dict[L].b3;
+document.getElementById("s3").textContent=dict[L].s3;
 </script>
 </body>
 </html>

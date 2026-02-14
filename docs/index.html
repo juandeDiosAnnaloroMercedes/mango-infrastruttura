@@ -513,22 +513,23 @@
     document.querySelectorAll(".chip").forEach(b=>b.setAttribute("aria-current", b.dataset.lang===l ? "true":"false"));
     const d = T[l] || T[DEFAULT_LANG] || T.it;
 
-    const keys=[
-      "title","subtitle","do_title","do_text","do_note","do_hint",
-      "btn_first","btn_about","btn_register","btn_contact","btn_contact2","btn_press","btn_top",
-      "btn_write_here","btn_send_keep","btn_copy","btn_clear_field","btn_delete_all","btn_back_write","btn_primo",
-      "write_title","write_text","write_li1","write_li2","write_li3","write_note",
-      "writebox_title","writebox_text","writebox_note",
-      "yourlines_title","yourlines_text","yourlines_note",
-      "reg_title","reg_intro1","reg_intro2","reg_eq","reg_no",
-      "reg_time_h","reg_time_p1","reg_time_p2",
-      "reg_struct_h","reg_struct_p1","reg_struct_p2",
-      "reg_how_h","reg_how_p","reg_how_li1","reg_how_li2","reg_how_li3","reg_how_li4",
-      "reg_balance_note","reg_anticapture_h","reg_anticapture_p1","reg_anticapture_p2",
-      "reg_live_h","reg_live_p","reg_live_note",
-      "what_title","what_text1","what_text2","what_li1","what_li2","what_li3","what_li4","what_note",
-      "qr_main","qr_sub","contact_title","contact_text","contact_note","footer1","footer2"
-    ];
+    const keys = [
+  "title","subtitle",
+  "do_title","do_text","do_note","do_hint",
+  "btn_first","btn_about","btn_register","btn_contact",
+  "btn_contact2","btn_press","btn_top",
+  "btn_write_here","btn_send_keep","btn_copy",
+  "btn_clear_field","btn_delete_all","btn_back_write","btn_primo",
+  "write_title","write_text","write_li1","write_li2","write_li3",
+  "write_note",
+  "what_title","what_text1","what_text2",
+  "what_li1","what_li2","what_li3","what_li4",
+  "what_note",
+  "contact_title","contact_text","contact_note",
+  "footer1","footer2"
+];
+
+
     keys.forEach(k=>{
       const el=document.getElementById("t_"+k);
       if(el) el.textContent=d[k]||"";

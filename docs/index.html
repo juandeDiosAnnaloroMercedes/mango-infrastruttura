@@ -697,7 +697,20 @@
     setLang(b.dataset.lang);
     apply(b.dataset.lang);
   }));
+// --- Mango scroll to top (definitivo, tutte le lingue) ---
+(function () {
+  const btn = document.querySelector(".btn_home");
+  if (!btn) return;
 
+  btn.addEventListener("click", function (e) {
+    e.preventDefault();
+    try {
+      window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
+    } catch (_) {
+      window.scrollTo(0, 0);
+    }
+  }, { passive: false });
+})();
   apply(getLang());
 </script>
 

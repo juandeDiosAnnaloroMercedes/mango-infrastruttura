@@ -1,127 +1,34 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="it">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Mango – Infrastruttura di fiducia</title>
-
-<style>
-body {
-    margin: 0;
-    font-family: -apple-system, BlinkMacSystemFont, sans-serif;
-    background: #ffffff;
-    color: #111;
-}
-
-header {
-    text-align: center;
-    padding: 100px 20px 40px 20px;
-}
-
-h1 {
-    font-size: 2.4rem;
-    font-weight: 600;
-    margin: 0;
-}
-
-.mango-manifesto {
-    text-align: center;
-    margin: 80px 20px;
-}
-
-.mango-manifesto h2 {
-    font-size: 2rem;
-    font-weight: 600;
-    line-height: 1.4;
-}
-
-.mango-sub {
-    margin-top: 20px;
-    font-size: 1rem;
-    opacity: 0.6;
-}
-
-section {
-    max-width: 800px;
-    margin: 80px auto;
-    padding: 0 20px;
-}
-
-section h3 {
-    font-size: 1.5rem;
-    margin-bottom: 20px;
-}
-
-section p {
-    line-height: 1.7;
-    font-size: 1.05rem;
-}
-
-footer {
-    margin-top: 120px;
-    padding: 40px 20px;
-    text-align: center;
-    font-size: 0.9rem;
-    opacity: 0.6;
-}
-</style>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Mango</title>
+  <meta http-equiv="refresh" content="0; url=https://mangoinfrastruttura.org/">
+  <style>
+    body{ font-family:-apple-system,BlinkMacSystemFont,system-ui,Segoe UI,Roboto,Arial; margin:0; padding:40px 18px; }
+    .wrap{ max-width:720px; margin:0 auto; }
+    .muted{ opacity:.7; line-height:1.6; }
+  </style>
 </head>
-
 <body>
-
-<header>
+  <div class="wrap">
     <h1>Mango</h1>
-</header>
-
-<section class="mango-manifesto">
-    <h2>Questo dominio può sparire.<br>Mango no.</h2>
-    <p class="mango-sub">Mango accade tra persone reali.</p>
-</section>
-
-<section id="fai-mango">
-    <h3>Fai Mango adesso</h3>
-    <p>
-    Se riconosci uno scambio reale tra persone, puoi scrivere una riga.
-    Non servono numeri. Non serve un conto. Non serve accumulare.
-    Una riga è un Mango.
+    <p class="muted">
+      Reindirizzamento in corso…
     </p>
-</section>
+  </div>
 
-<section id="scrivi-una-riga">
-    <h3>Scrivi una riga</h3>
-    <p>
-    Una riga descrive uno scambio reale.
-    Non misura valore.
-    Non crea credito.
-    Non genera saldo.
-    È riconoscimento.
-    </p>
-</section>
-
-<section id="cos-e-mango">
-    <h3>Cos’è Mango</h3>
-    <p>
-    Mango è un’infrastruttura di fiducia locale non monetaria,
-    non accumulabile e non appropriabile.
-    Può esistere anche senza questo sito.
-    Vive nelle relazioni.
-    </p>
-</section>
-
-<section>
-    <h3>Natura dell’infrastruttura</h3>
-    <p>
-    Mango non dipende dal dominio.
-    Non può essere posseduto attraverso di esso.
-    Questo spazio è solo una traccia.
-    </p>
-</section>
-
-<footer>
-    Creato da Juan de Dios Annaloro Mercedes<br>
-    In memoria di Larimar<br>
-    02 febbraio 2026
-</footer>
-
+<script>
+(function(){
+  const targetBase = "https://mangoinfrastruttura.org";
+  const path = location.pathname || "/";
+  const search = location.search || "";
+  const hash = location.hash || "";
+  // Mantiene path/query/hash (utile per vecchi QR o link specifici)
+  const target = targetBase + path + search + hash;
+  location.replace(target);
+})();
+</script>
 </body>
 </html>

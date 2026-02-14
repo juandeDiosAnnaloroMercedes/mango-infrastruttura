@@ -6,86 +6,42 @@
   <title>Mango — Infrastruttura di fiducia locale</title>
 
   <style>
-    :root{
-      --bg:#fff; --fg:#111; --muted:#6b7280;
-      --card:#f6f7f9; --border:#e5e7eb;
-      --shadow:0 10px 30px rgba(0,0,0,.06);
-      --r:18px; --max:860px; --p:18px;
-      --font:ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial;
-    }
+    :root{--bg:#fff;--fg:#111;--muted:#6b7280;--card:#f6f7f9;--border:#e5e7eb;--shadow:0 10px 30px rgba(0,0,0,.06);--r:18px;--max:860px;--p:18px;--font:ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial;}
     *{box-sizing:border-box}
     html{scroll-behavior:smooth}
     body{margin:0;font-family:var(--font);background:var(--bg);color:var(--fg)}
     a,a:visited{color:inherit;text-decoration:none}
-
-    header{
-      position:sticky;top:0;background:rgba(255,255,255,.92);
-      backdrop-filter:blur(8px);border-bottom:1px solid var(--border);z-index:10
-    }
-    .hwrap{
-      max-width:var(--max);margin:0 auto;padding:14px var(--p);
-      display:flex;justify-content:space-between;align-items:center;gap:12px
-    }
+    header{position:sticky;top:0;background:rgba(255,255,255,.92);backdrop-filter:blur(8px);border-bottom:1px solid var(--border);z-index:10}
+    .hwrap{max-width:var(--max);margin:0 auto;padding:14px var(--p);display:flex;justify-content:space-between;align-items:center;gap:12px}
     .brand{font-weight:900;font-size:22px;display:flex;gap:10px;align-items:center}
-    .mangoBtn{
-      border:1px solid var(--border); background:#fff;
-      border-radius:999px; padding:6px 10px;
-      cursor:pointer; font-size:18px; line-height:1;
-    }
+    .mangoBtn{border:1px solid var(--border);background:#fff;border-radius:999px;padding:6px 10px;cursor:pointer;font-size:18px;line-height:1}
     .lang{display:flex;gap:10px;flex-wrap:wrap;justify-content:flex-end}
-    .chip{
-      border:1px solid var(--border);background:#fff;border-radius:999px;
-      padding:10px 14px;font-weight:800;font-size:14px;cursor:pointer
-    }
+    .chip{border:1px solid var(--border);background:#fff;border-radius:999px;padding:10px 14px;font-weight:800;font-size:14px;cursor:pointer}
     .chip[aria-current="true"]{outline:2px solid #111;outline-offset:2px}
-
     .wrap{max-width:var(--max);margin:0 auto;padding:22px var(--p) 42px}
     h1{margin:0;font-size:28px;line-height:1.15}
     p{color:var(--muted);line-height:1.6}
-
     .grid{display:grid;grid-template-columns:1fr;gap:14px;margin-top:18px}
-    .card{
-      background:var(--card);border:1px solid var(--border);
-      border-radius:var(--r);padding:16px;box-shadow:var(--shadow)
-    }
+    .card{background:var(--card);border:1px solid var(--border);border-radius:var(--r);padding:16px;box-shadow:var(--shadow)}
     .card h2{margin:0 0 10px;font-size:20px;color:#111}
     .card h3{margin:14px 0 8px;font-size:16px;color:#111}
     .card p,.card li{color:#1f2937;font-size:15px;line-height:1.6}
     ul{margin:10px 0 0 18px}
     hr{border:0;border-top:1px solid var(--border);margin:14px 0}
-
     .btnrow{display:flex;gap:10px;flex-wrap:wrap;margin-top:12px}
-    .btn{
-      border:0;background:#111;color:#fff;padding:12px 14px;border-radius:14px;
-      font-weight:900;cursor:pointer;display:inline-flex;align-items:center;gap:8px
-    }
+    .btn{border:0;background:#111;color:#fff;padding:12px 14px;border-radius:14px;font-weight:900;cursor:pointer;display:inline-flex;align-items:center;gap:8px}
     .btn.secondary{background:#fff;color:#111;border:1px solid var(--border)}
     .btn.small{padding:10px 12px;border-radius:12px;font-weight:850}
-
-    .qrbox{
-      border:2px dashed var(--border);border-radius:22px;padding:18px;background:#fff;
-      display:flex;flex-direction:column;gap:14px;align-items:center;justify-content:center
-    }
+    .qrbox{border:2px dashed var(--border);border-radius:22px;padding:18px;background:#fff;display:flex;flex-direction:column;gap:14px;align-items:center;justify-content:center}
     .qrtext{font-weight:950;font-size:22px;line-height:1.15;text-align:center;color:#111}
     .qrsub{text-align:center;color:var(--muted);margin-top:6px}
-
     .footer{margin-top:22px;padding-top:18px;border-top:1px solid var(--border);color:var(--muted);font-size:14px;line-height:1.5}
     .mono{font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono","Courier New",monospace;font-size:13px}
     .small{font-size:13px;color:var(--muted)}
     .eq{font-weight:950;font-size:18px;color:#111;margin:10px 0 0}
-
-    textarea{
-      width:100%; min-height:110px; resize:vertical;
-      border:1px solid var(--border); border-radius:16px;
-      padding:14px; font-size:16px; line-height:1.5; background:#fff;
-      outline:none;
-    }
-
+    textarea{width:100%;min-height:110px;resize:vertical;border:1px solid var(--border);border-radius:16px;padding:14px;font-size:16px;line-height:1.5;background:#fff;outline:none}
     .list{display:flex;flex-direction:column;gap:10px;margin-top:10px}
-    .lineItem{
-      background:#fff;border:1px solid var(--border);border-radius:16px;
-      padding:12px 12px;
-    }
+    .lineItem{background:#fff;border:1px solid var(--border);border-radius:16px;padding:12px 12px}
     .lineMeta{display:flex;justify-content:space-between;gap:10px;align-items:center;margin-bottom:8px}
     .tag{font-size:12px;color:var(--muted)}
     .lineText{white-space:pre-wrap;color:#111;font-size:15px;line-height:1.55}
@@ -99,7 +55,6 @@
       <span>Mango</span>
       <button class="mangoBtn" id="mangoTop" aria-label="Torna su">🥭</button>
     </div>
-
     <nav class="lang" aria-label="Lingue">
       <button class="chip" data-lang="it">IT</button>
       <button class="chip" data-lang="en">EN</button>
@@ -119,22 +74,18 @@
 
   <section class="grid">
 
-    <!-- 1) FAI MANGO -->
     <article class="card" id="do">
       <h2 id="t_do_title"></h2>
       <p id="t_do_text"></p>
-
       <div class="btnrow">
         <button class="btn" id="btn_go_write">✍️ <span id="t_btn_first"></span></button>
         <button class="btn secondary" id="btn_go_what">📘 <span id="t_btn_about"></span></button>
         <button class="btn secondary" id="btn_go_register">📜 <span id="t_btn_register"></span></button>
       </div>
-
       <p class="small" id="t_do_note"></p>
       <p class="small" id="t_do_hint"></p>
     </article>
 
-    <!-- 2) SCRIVI UNA RIGA (REGOLE) -->
     <article class="card" id="write_rules">
       <h2 id="t_write_title"></h2>
       <p id="t_write_text"></p>
@@ -143,70 +94,52 @@
         <li id="t_write_li2"></li>
         <li id="t_write_li3"></li>
       </ul>
-
       <div class="btnrow">
         <button class="btn" id="btn_go_writebox">📝 <span id="t_btn_write_here"></span></button>
         <button class="btn secondary" id="btn_go_contact">✉️ <span id="t_btn_contact"></span></button>
       </div>
-
       <p class="small" id="t_write_note"></p>
     </article>
 
-    <!-- 3) SCRIVI RIGA IN HOME (RESTa SUL DISPOSITIVO) -->
     <article class="card" id="writebox">
       <h2 id="t_writebox_title"></h2>
       <p id="t_writebox_text"></p>
-
       <textarea id="lineInput" placeholder=""></textarea>
-
       <div class="btnrow">
         <button class="btn small" id="btn_save_line">✅ <span id="t_btn_send_keep"></span></button>
         <button class="btn secondary small" id="btn_copy_line">📋 <span id="t_btn_copy"></span></button>
         <button class="btn secondary small" id="btn_clear_input">🗑️ <span id="t_btn_clear_field"></span></button>
         <button class="btn secondary small" id="btn_top">⬆️ <span id="t_btn_top"></span></button>
       </div>
-
       <p class="small" id="t_writebox_note"></p>
     </article>
 
-    <!-- 4) LE TUE RIGHE (SOLO DISPOSITIVO) -->
     <article class="card" id="yourlines">
       <h2 id="t_yourlines_title"></h2>
       <p id="t_yourlines_text"></p>
-
       <div class="btnrow">
         <button class="btn secondary" id="btn_delete_all">🧹 <span id="t_btn_delete_all"></span></button>
         <button class="btn secondary" id="btn_go_register2">📜 <span id="t_btn_register"></span></button>
       </div>
-
       <div class="list" id="linesList"></div>
       <p class="small" id="t_yourlines_note"></p>
     </article>
 
-    <!-- 5) REGISTRO -->
     <article class="card" id="register">
       <h2 id="t_reg_title"></h2>
-
       <p id="t_reg_intro1"></p>
       <p id="t_reg_intro2"></p>
-
       <div class="eq" id="t_reg_eq"></div>
       <p id="t_reg_no"></p>
-
       <hr>
-
       <h3 id="t_reg_time_h"></h3>
       <p id="t_reg_time_p1"></p>
       <p id="t_reg_time_p2"></p>
-
       <hr>
-
       <h3 id="t_reg_struct_h"></h3>
       <p id="t_reg_struct_p1"></p>
       <p id="t_reg_struct_p2"></p>
-
       <hr>
-
       <h3 id="t_reg_how_h"></h3>
       <p id="t_reg_how_p"></p>
       <ul>
@@ -215,21 +148,15 @@
         <li id="t_reg_how_li3"></li>
         <li id="t_reg_how_li4"></li>
       </ul>
-
       <p class="small" id="t_reg_balance_note"></p>
-
       <hr>
-
       <h3 id="t_reg_anticapture_h"></h3>
       <p id="t_reg_anticapture_p1"></p>
       <p id="t_reg_anticapture_p2"></p>
-
       <hr>
-
       <h3 id="t_reg_live_h"></h3>
       <p id="t_reg_live_p"></p>
       <p class="small" id="t_reg_live_note"></p>
-
       <div class="btnrow">
         <button class="btn secondary" id="btn_back_write_rules">⬆️ <span id="t_btn_back_write"></span></button>
         <button class="btn secondary" id="btn_go_writebox2">📝 <span id="t_btn_write_here"></span></button>
@@ -237,7 +164,6 @@
       </div>
     </article>
 
-    <!-- 6) COS'E MANGO -->
     <article class="card" id="what">
       <h2 id="t_what_title"></h2>
       <p id="t_what_text1"></p>
@@ -248,7 +174,6 @@
         <li id="t_what_li3"></li>
         <li id="t_what_li4"></li>
       </ul>
-
       <div class="btnrow">
         <button class="btn secondary" id="btn_go_primo">🧾 <span id="t_btn_primo"></span></button>
         <button class="btn secondary" id="btn_top2">⬆️ <span id="t_btn_top"></span></button>
@@ -256,7 +181,6 @@
       <p class="small" id="t_what_note"></p>
     </article>
 
-    <!-- 7) BOX QR -->
     <article class="card">
       <div class="qrbox">
         <div class="qrtext" id="t_qr_main"></div>
@@ -268,7 +192,6 @@
       </div>
     </article>
 
-    <!-- 8) CONTATTO -->
     <article class="card" id="contact">
       <h2 id="t_contact_title"></h2>
       <p id="t_contact_text"></p>
@@ -287,12 +210,11 @@
 </main>
 
 <script>
-  const SUPPORTED = ["it","en","es","fr","de","zh"];
-  const DEFAULT_LANG = "it";
+  const SUPPORTED=["it","en","es","fr","de","zh"];
+  const DEFAULT_LANG="it";
+  const STORAGE_KEY="mango_lines_v1";
 
-  // Testi (IT completo + EN breve + altre lingue brevi ma coerenti)
-  // Se vuoi le altre lingue lunghe come l’italiano, te le espando dopo senza cambiare struttura.
-  const T = {
+  const T={
     it:{
       title:"Un’infrastruttura di fiducia locale non monetaria.",
       subtitle:"Mango riconosce scambi reali con una riga, senza quantità né valore numerico.",
@@ -351,7 +273,7 @@
       reg_balance_note:"Se sbilanciato, Mango non pareggia con numeri: rende visibile e curabile nel tempo umano.",
       reg_anticapture_h:"Non appropriazione e anti-cattura",
       reg_anticapture_p1:"Mango evita accumulo, speculazione e cattura istituzionale.",
-      reg_anticapture_p2:"Nessuno può trasformarlo in punti, ranking, reputazione o credito sociale. Se diventa conteggio o moneta, non è Mango.",
+      reg_anticapture_p2:"Se diventa conteggio o moneta, non è Mango.",
       reg_live_h:"Righe vive",
       reg_live_p:"Questo spazio è pronto ad accogliere la prima riga reale.",
       reg_live_note:"Nota: non numerare righe e non mostrare totali o contatori.",
@@ -372,214 +294,196 @@
       footer1:"Creato da Juan de Dios Annaloro Mercedes — 02 febbraio 2026 — In memoria di Larimar.",
       footer2:"Mango è praticabile e trasmissibile, ma non possedibile o centralizzabile."
     },
-
-    en:{
-      title:"A non-monetary local trust infrastructure.",
-      subtitle:"Mango recognizes real exchanges with one line, with no quantities and no numeric value.",
-      do_title:"Do Mango now",
-      do_text:"If something real happened between two people, Mango recognizes it. It doesn’t measure or accumulate.",
-      do_note:"Rule: one line = 🥭. No numbers. No equivalences.",
-      do_hint:"You can write a line and keep it on this device (not online).",
-      btn_first:"Write a line",
-      btn_about:"What is Mango",
-      btn_register:"Go to the Register",
-      btn_contact:"Contact",
-      btn_contact2:"Contact",
-      btn_press:"Write (press)",
-      btn_top:"Back to top",
-      btn_write_here:"Write here",
-      btn_send_keep:"Send (stays on site)",
-      btn_copy:"Copy",
-      btn_clear_field:"Clear field",
-      btn_delete_all:"Delete all lines",
-      btn_back_write:"Back to “Write a line”",
-      btn_primo:"First exchange",
-      write_title:"Write a real line",
-      write_text:"A line describes the real exchange. Keep it human and simple.",
-      write_li1:"No quantities, prices, numbers or equivalences.",
-      write_li2:"Describe who/what/when soberly.",
-      write_li3:"Unbalanced ≠ debt: visible and care-able.",
-      write_note:"Use concrete verbs.",
-      writebox_title:"Write the line here (home)",
-      writebox_text:"Write one simple line. Save it: it stays here on this device.",
-      writebox_placeholder:"Example: Marco accompanied Ana to the hospital. (Rome, Feb 14, 2026)",
-      writebox_note:"Local only (Safari). No external sending. No numbers.",
-      yourlines_title:"Your lines (only on this device)",
-      yourlines_text:"These lines stay here until you delete them.",
-      yourlines_note:"Delete single lines or clear all. No totals.",
-      reg_title:"Mango Register",
-      reg_intro1:"Register principles: written recognition of the real.",
-      reg_intro2:"A line is not credit, not debt, not an account.",
-      reg_eq:"One line = 🥭",
-      reg_no:"No numbers. No equivalences. No accumulation.",
-      reg_time_h:"Time principle",
-      reg_time_p1:"Not a feed. No pushing new above old.",
-      reg_time_p2:"Past stays past. Explicit temporality.",
-      reg_struct_h:"Structural principle",
-      reg_struct_p1:"No measuring, no summing, no calculating.",
-      reg_struct_p2:"Lines are not counted.",
-      reg_how_h:"How to write a line",
-      reg_how_p:"Simple, human, real.",
-      reg_how_li1:"No prices, no quantities, no calculations.",
-      reg_how_li2:"No measured “value”.",
-      reg_how_li3:"Initials are ok: privacy is care.",
-      reg_how_li4:"Few true details > many perfect ones.",
-      reg_balance_note:"No numeric balancing: human time and real gestures.",
-      reg_anticapture_h:"Non-appropriation / anti-capture",
-      reg_anticapture_p1:"Designed to prevent accumulation and capture.",
-      reg_anticapture_p2:"No points, no ranking, no social credit.",
-      reg_live_h:"Living lines",
-      reg_live_p:"Ready for the first real line.",
-      reg_live_note:"No numbering, no totals.",
-      what_title:"What is Mango",
-      what_text1:"Not money. Not credit. Not an alternative economy.",
-      what_text2:"Local trust: recognition without numeric value.",
-      what_li1:"Non-accumulative.",
-      what_li2:"Non-quantifiable.",
-      what_li3:"Non-appropriable.",
-      what_li4:"Explicit temporality.",
-      what_note:"If it becomes counting or money, it’s not Mango.",
-      qr_main:"Something happened between two people.",
-      qr_sub:"Here you can understand it.",
-      contact_title:"Contact (institutions / press)",
-      contact_text:"For press or institutions, write here:",
-      contact_note:"This email is public on the site.",
-      footer1:"Created by Juan de Dios Annaloro Mercedes — 02 Feb 2026 — In memory of Larimar.",
-      footer2:"Practicable and transmissible, but not ownable or centralizable."
-    },
-
-    // Versioni brevi ma coerenti (possiamo espanderle dopo)
-    es:{...null},
-    fr:{...null},
-    de:{...null},
-    zh:{...null}
+    en:{} // placeholder, riempito sotto
   };
 
-  // Riempie ES/FR/DE/ZH usando EN come base (così non si rompe nulla)
-  ["es","fr","de","zh"].forEach(k=>{ if(!T[k]) T[k]=T.en; });
+  // EN base (copre anche ES/FR/DE/ZH se non vuoi testi lunghi adesso)
+  T.en={
+    title:"A non-monetary local trust infrastructure.",
+    subtitle:"Mango recognizes real exchanges with one line, with no quantities and no numeric value.",
+    do_title:"Do Mango now",
+    do_text:"If something real happened between two people, Mango recognizes it. It doesn’t measure or accumulate.",
+    do_note:"Rule: one line = 🥭. No numbers. No equivalences.",
+    do_hint:"Write a line and keep it on this device (not online).",
+    btn_first:"Write a line",
+    btn_about:"What is Mango",
+    btn_register:"Go to the Register",
+    btn_contact:"Contact",
+    btn_contact2:"Contact",
+    btn_press:"Write (press)",
+    btn_top:"Back to top",
+    btn_write_here:"Write here",
+    btn_send_keep:"Send (stays on site)",
+    btn_copy:"Copy",
+    btn_clear_field:"Clear field",
+    btn_delete_all:"Delete all lines",
+    btn_back_write:"Back to “Write a line”",
+    btn_primo:"First exchange",
+    write_title:"Write a real line",
+    write_text:"A line describes the real exchange. Keep it human and simple.",
+    write_li1:"No quantities, prices, numbers or equivalences.",
+    write_li2:"Describe who/what/when soberly.",
+    write_li3:"Unbalanced ≠ debt: visible and care-able.",
+    write_note:"Use concrete verbs.",
+    writebox_title:"Write the line here (home)",
+    writebox_text:"Write one simple line. Save it: it stays here on this device.",
+    writebox_placeholder:"Example: Marco accompanied Ana to the hospital. (Rome, Feb 14, 2026)",
+    writebox_note:"Local only. No external sending. No numbers.",
+    yourlines_title:"Your lines (only on this device)",
+    yourlines_text:"These lines stay here until you delete them.",
+    yourlines_note:"Delete single lines or clear all. No totals.",
+    reg_title:"Mango Register",
+    reg_intro1:"Register principles: written recognition of the real.",
+    reg_intro2:"A line is not credit, not debt, not an account.",
+    reg_eq:"One line = 🥭",
+    reg_no:"No numbers. No equivalences. No accumulation.",
+    reg_time_h:"Time principle",
+    reg_time_p1:"Not a feed. No pushing new above old.",
+    reg_time_p2:"Past stays past. Explicit temporality.",
+    reg_struct_h:"Structural principle",
+    reg_struct_p1:"No measuring, no summing, no calculating.",
+    reg_struct_p2:"Lines are not counted.",
+    reg_how_h:"How to write a line",
+    reg_how_p:"Simple, human, real.",
+    reg_how_li1:"No prices, no quantities, no calculations.",
+    reg_how_li2:"No measured “value”.",
+    reg_how_li3:"Initials are ok: privacy is care.",
+    reg_how_li4:"Few true details > many perfect ones.",
+    reg_balance_note:"No numeric balancing: human time and real gestures.",
+    reg_anticapture_h:"Non-appropriation / anti-capture",
+    reg_anticapture_p1:"Designed to prevent accumulation and capture.",
+    reg_anticapture_p2:"No points, no ranking, no social credit.",
+    reg_live_h:"Living lines",
+    reg_live_p:"Ready for the first real line.",
+    reg_live_note:"No numbering, no totals.",
+    what_title:"What is Mango",
+    what_text1:"Not money. Not credit. Not an alternative economy.",
+    what_text2:"Local trust: recognition without numeric value.",
+    what_li1:"Non-accumulative.",
+    what_li2:"Non-quantifiable.",
+    what_li3:"Non-appropriable.",
+    what_li4:"Explicit temporality.",
+    what_note:"If it becomes counting or money, it’s not Mango.",
+    qr_main:"Something happened between two people.",
+    qr_sub:"Here you can understand it.",
+    contact_title:"Contact (institutions / press)",
+    contact_text:"For press or institutions, write here:",
+    contact_note:"This email is public on the site.",
+    footer1:"Created by Juan de Dios Annaloro Mercedes — 02 Feb 2026 — In memory of Larimar.",
+    footer2:"Practicable and transmissible, but not ownable or centralizable."
+  };
+  ["es","fr","de","zh"].forEach(k=>T[k]=T.en);
 
   function getLang(){
-    const u = new URL(location.href);
-    const l = (u.searchParams.get("lang")||"").toLowerCase();
-    return SUPPORTED.includes(l) ? l : DEFAULT_LANG;
+    const u=new URL(location.href);
+    const l=(u.searchParams.get("lang")||"").toLowerCase();
+    return SUPPORTED.includes(l)?l:DEFAULT_LANG;
   }
   function setLang(l){
-    const u = new URL(location.href);
-    u.searchParams.set("lang", l);
+    const u=new URL(location.href);
+    u.searchParams.set("lang",l);
     history.replaceState({}, "", u.toString());
   }
   function withLang(path){
-    const l = getLang();
-    const hasQ = path.includes("?");
-    if (path.includes("lang=")) return path;
-    return path + (hasQ ? "&" : "?") + "lang=" + encodeURIComponent(l);
+    const l=getLang();
+    const hasQ=path.includes("?");
+    if(path.includes("lang=")) return path;
+    return path + (hasQ?"&":"?") + "lang=" + encodeURIComponent(l);
   }
+
   function apply(l){
-    document.documentElement.lang = l;
-    document.querySelectorAll(".chip").forEach(b=>{
-      b.setAttribute("aria-current", b.dataset.lang===l ? "true" : "false");
-    });
-    const d = T[l] || T[DEFAULT_LANG];
-    const ids = [
-      "t_title","t_subtitle","t_do_title","t_do_text","t_do_note","t_do_hint",
-      "t_btn_first","t_btn_about","t_btn_register","t_btn_contact","t_btn_contact2","t_btn_press","t_btn_top",
-      "t_btn_write_here","t_btn_send_keep","t_btn_copy","t_btn_clear_field","t_btn_delete_all","t_btn_back_write","t_btn_primo",
-      "t_write_title","t_write_text","t_write_li1","t_write_li2","t_write_li3","t_write_note",
-      "t_writebox_title","t_writebox_text","t_writebox_note",
-      "t_yourlines_title","t_yourlines_text","t_yourlines_note",
-      "t_reg_title","t_reg_intro1","t_reg_intro2","t_reg_eq","t_reg_no",
-      "t_reg_time_h","t_reg_time_p1","t_reg_time_p2",
-      "t_reg_struct_h","t_reg_struct_p1","t_reg_struct_p2",
-      "t_reg_how_h","t_reg_how_p","t_reg_how_li1","t_reg_how_li2","t_reg_how_li3","t_reg_how_li4",
-      "t_reg_balance_note","t_reg_anticapture_h","t_reg_anticapture_p1","t_reg_anticapture_p2",
-      "t_reg_live_h","t_reg_live_p","t_reg_live_note",
-      "t_what_title","t_what_text1","t_what_text2","t_what_li1","t_what_li2","t_what_li3","t_what_li4","t_what_note",
-      "t_qr_main","t_qr_sub",
-      "t_contact_title","t_contact_text","t_contact_note",
-      "t_footer_line1","t_footer_line2"
+    document.documentElement.lang=l;
+    document.querySelectorAll(".chip").forEach(b=>b.setAttribute("aria-current", b.dataset.lang===l ? "true":"false"));
+    const d=T[l]||T[DEFAULT_LANG];
+
+    const keys=[
+      "title","subtitle","do_title","do_text","do_note","do_hint",
+      "btn_first","btn_about","btn_register","btn_contact","btn_contact2","btn_press","btn_top",
+      "btn_write_here","btn_send_keep","btn_copy","btn_clear_field","btn_delete_all","btn_back_write","btn_primo",
+      "write_title","write_text","write_li1","write_li2","write_li3","write_note",
+      "writebox_title","writebox_text","writebox_note",
+      "yourlines_title","yourlines_text","yourlines_note",
+      "reg_title","reg_intro1","reg_intro2","reg_eq","reg_no",
+      "reg_time_h","reg_time_p1","reg_time_p2",
+      "reg_struct_h","reg_struct_p1","reg_struct_p2",
+      "reg_how_h","reg_how_p","reg_how_li1","reg_how_li2","reg_how_li3","reg_how_li4",
+      "reg_balance_note","reg_anticapture_h","reg_anticapture_p1","reg_anticapture_p2",
+      "reg_live_h","reg_live_p","reg_live_note",
+      "what_title","what_text1","what_text2","what_li1","what_li2","what_li3","what_li4","what_note",
+      "qr_main","qr_sub","contact_title","contact_text","contact_note","footer1","footer2"
     ];
-    ids.forEach(id=>{
-      const el = document.getElementById(id);
-      if(el && d[id.replace(/^t_/, "")] !== undefined){
-        el.textContent = d[id.replace(/^t_/, "")];
-      }
+    keys.forEach(k=>{
+      const el=document.getElementById("t_"+k);
+      if(el) el.textContent=d[k]||"";
     });
-    const ta = document.getElementById("lineInput");
-    if (ta) ta.placeholder = d.writebox_placeholder || "";
+    const ta=document.getElementById("lineInput");
+    if(ta) ta.placeholder=d.writebox_placeholder||"";
   }
 
   function goTop(){
-    try{ window.scrollTo({top:0,left:0,behavior:"smooth"}); }
-    catch(_){ window.scrollTo(0,0); }
+    try{window.scrollTo({top:0,left:0,behavior:"smooth"});}catch(_){window.scrollTo(0,0);}
   }
   function goToId(id){
-    const el = document.getElementById(id);
-    if(el) el.scrollIntoView({behavior:"smooth", block:"start"});
+    const el=document.getElementById(id);
+    if(el) el.scrollIntoView({behavior:"smooth",block:"start"});
   }
 
-  // Local storage righe
-  const STORAGE_KEY = "mango_lines_v1";
   function loadLines(){
     try{
-      const raw = localStorage.getItem(STORAGE_KEY);
-      const arr = raw ? JSON.parse(raw) : [];
-      return Array.isArray(arr) ? arr : [];
-    }catch(e){ return []; }
+      const raw=localStorage.getItem(STORAGE_KEY);
+      const arr=raw?JSON.parse(raw):[];
+      return Array.isArray(arr)?arr:[];
+    }catch(e){return [];}
   }
-  function saveLines(arr){ localStorage.setItem(STORAGE_KEY, JSON.stringify(arr)); }
+  function saveLines(arr){localStorage.setItem(STORAGE_KEY, JSON.stringify(arr));}
 
   function renderLines(){
-    const list = document.getElementById("linesList");
+    const list=document.getElementById("linesList");
     if(!list) return;
-    const lines = loadLines();
-    list.innerHTML = "";
-
+    const lines=loadLines();
+    list.innerHTML="";
     if(!lines.length){
-      const empty = document.createElement("div");
-      empty.className = "small";
-      empty.textContent = (getLang()==="it")
-        ? "Nessuna riga salvata su questo dispositivo."
-        : "No lines saved on this device.";
+      const empty=document.createElement("div");
+      empty.className="small";
+      empty.textContent=(getLang()==="it")?"Nessuna riga salvata su questo dispositivo.":"No lines saved on this device.";
       list.appendChild(empty);
       return;
     }
-
     lines.forEach((item, idx)=>{
-      const box = document.createElement("div");
-      box.className = "lineItem";
+      const box=document.createElement("div");
+      box.className="lineItem";
 
-      const meta = document.createElement("div");
-      meta.className = "lineMeta";
+      const meta=document.createElement("div");
+      meta.className="lineMeta";
 
-      const tag = document.createElement("div");
-      tag.className = "tag";
-      tag.textContent = new Date(item.ts || Date.now()).toLocaleString();
+      const tag=document.createElement("div");
+      tag.className="tag";
+      tag.textContent=new Date(item.ts||Date.now()).toLocaleString();
 
-      const actions = document.createElement("div");
-      actions.className = "btnrow";
-      actions.style.marginTop = "0";
+      const actions=document.createElement("div");
+      actions.className="btnrow";
+      actions.style.marginTop="0";
 
-      const bCopy = document.createElement("button");
-      bCopy.className = "btn secondary small";
-      bCopy.textContent = "📋";
-      bCopy.onclick = async ()=>{
-        try{ await navigator.clipboard.writeText(item.text || ""); }
+      const bCopy=document.createElement("button");
+      bCopy.className="btn secondary small";
+      bCopy.textContent="📋";
+      bCopy.onclick=async ()=>{
+        try{await navigator.clipboard.writeText(item.text||"");}
         catch(_){
-          const ta = document.createElement("textarea");
-          ta.value = item.text || "";
+          const ta=document.createElement("textarea");
+          ta.value=item.text||"";
           document.body.appendChild(ta);
-          ta.select();
-          document.execCommand("copy");
+          ta.select(); document.execCommand("copy");
           document.body.removeChild(ta);
         }
       };
 
-      const bDel = document.createElement("button");
-      bDel.className = "btn secondary small";
-      bDel.textContent = "🗑️";
-      bDel.onclick = ()=>{
-        const arr = loadLines();
-        arr.splice(idx, 1);
+      const bDel=document.createElement("button");
+      bDel.className="btn secondary small";
+      bDel.textContent="🗑️";
+      bDel.onclick=()=>{
+        const arr=loadLines();
+        arr.splice(idx,1);
         saveLines(arr);
         renderLines();
       };
@@ -590,9 +494,9 @@
       meta.appendChild(tag);
       meta.appendChild(actions);
 
-      const text = document.createElement("div");
-      text.className = "lineText";
-      text.textContent = item.text || "";
+      const text=document.createElement("div");
+      text.className="lineText";
+      text.textContent=item.text||"";
 
       box.appendChild(meta);
       box.appendChild(text);
@@ -600,7 +504,7 @@
     });
   }
 
-  // Eventi
+  // Language buttons
   document.querySelectorAll(".chip").forEach(b=>{
     b.addEventListener("click", ()=>{
       setLang(b.dataset.lang);
@@ -609,12 +513,13 @@
     });
   });
 
-  document.getElementById("mangoTop")?.addEventListener("click", (e)=>{ e.preventDefault(); goTop(); });
+  // Top buttons
+  document.getElementById("mangoTop")?.addEventListener("click",(e)=>{e.preventDefault();goTop();});
+  document.getElementById("btn_top")?.addEventListener("click",(e)=>{e.preventDefault();goTop();});
+  document.getElementById("btn_top2")?.addEventListener("click",(e)=>{e.preventDefault();goTop();});
+  document.getElementById("btn_top3")?.addEventListener("click",(e)=>{e.preventDefault();goTop();});
 
-  document.getElementById("btn_top")?.addEventListener("click", (e)=>{ e.preventDefault(); goTop(); });
-  document.getElementById("btn_top2")?.addEventListener("click", (e)=>{ e.preventDefault(); goTop(); });
-  document.getElementById("btn_top3")?.addEventListener("click", (e)=>{ e.preventDefault(); goTop(); });
-
+  // Navigation
   document.getElementById("btn_go_write")?.addEventListener("click", ()=>goToId("write_rules"));
   document.getElementById("btn_go_what")?.addEventListener("click", ()=>goToId("what"));
   document.getElementById("btn_go_register")?.addEventListener("click", ()=>goToId("register"));
@@ -626,41 +531,33 @@
   document.getElementById("btn_go_writebox")?.addEventListener("click", ()=>goToId("writebox"));
   document.getElementById("btn_go_writebox2")?.addEventListener("click", ()=>goToId("writebox"));
 
-  document.getElementById("btn_go_primo")?.addEventListener("click", ()=>{
-    location.href = withLang("primo-scambio.html");
-  });
+  // Primo scambio
+  document.getElementById("btn_go_primo")?.addEventListener("click", ()=>{ location.href = withLang("primo-scambio.html"); });
 
+  // Line input actions
   document.getElementById("btn_save_line")?.addEventListener("click", ()=>{
-    const ta = document.getElementById("lineInput");
-    if(!ta) return;
-    const text = (ta.value || "").trim();
+    const ta=document.getElementById("lineInput");
+    const text=(ta?.value||"").trim();
     if(!text) return;
-
-    const arr = loadLines();
-    arr.unshift({ text, ts: Date.now() });
+    const arr=loadLines();
+    arr.unshift({text, ts:Date.now()});
     saveLines(arr);
     renderLines();
-
-    ta.value = "";
+    if(ta) ta.value="";
     goToId("yourlines");
   });
 
   document.getElementById("btn_copy_line")?.addEventListener("click", async ()=>{
-    const ta = document.getElementById("lineInput");
-    if(!ta) return;
-    const text = (ta.value || "").trim();
+    const ta=document.getElementById("lineInput");
+    const text=(ta?.value||"").trim();
     if(!text) return;
-    try{ await navigator.clipboard.writeText(text); }
-    catch(_){
-      ta.select();
-      document.execCommand("copy");
-      ta.setSelectionRange(ta.value.length, ta.value.length);
-    }
+    try{await navigator.clipboard.writeText(text);}
+    catch(_){ ta.select(); document.execCommand("copy"); ta.setSelectionRange(ta.value.length, ta.value.length); }
   });
 
   document.getElementById("btn_clear_input")?.addEventListener("click", ()=>{
-    const ta = document.getElementById("lineInput");
-    if(ta) ta.value = "";
+    const ta=document.getElementById("lineInput");
+    if(ta) ta.value="";
   });
 
   document.getElementById("btn_delete_all")?.addEventListener("click", ()=>{
@@ -670,11 +567,10 @@
 
   // INIT
   (function init(){
-    const l = getLang();
+    const l=getLang();
     apply(l);
     renderLines();
   })();
 </script>
-
 </body>
 </html>

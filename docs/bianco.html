@@ -3,64 +3,33 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-
-  <!-- Title neutro (non appare nella pagina) -->
   <title> </title>
-
   <style>
-    html, body {
-      margin: 0;
-      height: 100%;
-      background: #fff;
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-    }
-
-    body {
-      display: grid;
-      place-items: center;
-    }
-
-    /* Silenzio: niente contenitore “visibile”, solo centro */
-    .btn {
-      padding: 10px 16px;
-      border-radius: 999px;
-      border: 0.75px solid rgba(0,0,0,0.35);
-      background: transparent;
-      color: rgba(0,0,0,0.55);
-      font-size: 0.95rem;
-      font-weight: 600;
-      letter-spacing: 0.01em;
-      cursor: pointer;
+    html, body { margin:0; height:100%; background:#fff; }
+    .mango-btn{
+      position: fixed;
+      right: 16px;
+      bottom: 18px;
+      border:0;
+      background:transparent;
+      cursor:pointer;
+      font-size:34px;          /* più discreto */
+      line-height:1;
+      padding:16px;            /* tap target grande */
+      border-radius:999px;
+      opacity:0.75;            /* quasi invisibile */
       -webkit-tap-highlight-color: transparent;
-      transition: transform 0.08s ease;
+      transition: transform .08s ease, opacity .2s ease;
     }
-
-    .btn:active { transform: scale(0.985); }
+    .mango-btn:active{ transform: scale(0.97); opacity:0.95; }
   </style>
 </head>
-
 <body>
-  <button id="homeBtn" class="btn">Torna alla home</button>
+  <button class="mango-btn" aria-label="Home" title="Home" id="mango">🥭</button>
 
   <script>
-    const params = new URLSearchParams(location.search);
-    const lang = (params.get("lang") || "it").toLowerCase();
-
-    const t = {
-      it: "Torna alla home",
-      en: "Back to home",
-      es: "Volver a inicio",
-      fr: "Retour à l’accueil",
-      de: "Zur Startseite",
-      zh: "返回主页"
-    };
-
-    document.documentElement.lang = lang;
-    const btn = document.getElementById("homeBtn");
-    btn.textContent = t[lang] || t.it;
-
-    btn.addEventListener("click", () => {
-      location.href = "index.html?lang=" + encodeURIComponent(lang);
+    document.getElementById("mango").addEventListener("click", () => {
+      window.location.href = "index.html";
     });
   </script>
 </body>

@@ -310,9 +310,14 @@
     const v=(document.getElementById("line").value||"").trim();
     if(!v){ badge(d.empty); return; }
     saveToLocalRegister(v);
-    badge(d.saved);
-    location.href="index.html?lang="+l+"#register";
-  });
+
+badge("✔ Questa riga è stata riconosciuta. Non è un credito. Non è un saldo.");
+
+setTimeout(()=>{
+  location.href="index.html?lang="+l+"#register";
+}, 1200);
+  
+  
 
   apply(getLang());
 </script>

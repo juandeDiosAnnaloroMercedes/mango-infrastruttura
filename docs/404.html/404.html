@@ -1,25 +1,28 @@
 <!doctype html>
-<html lang="it">
+<html>
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Mango</title>
-  <meta name="robots" content="noindex,nofollow" />
+  <meta name="robots" content="noindex,nofollow">
+  <script>
+    (function() {
+
+      // Lingua dalla query
+      var params = new URLSearchParams(window.location.search);
+      var lang = (params.get("lang") || "it").toLowerCase();
+
+      // Lingue consentite
+      var allowed = ["it","en","es","fr","de","zh"];
+      if (allowed.indexOf(lang) === -1) {
+        lang = "it";
+      }
+
+      // Redirect assoluto e immediato alla Home
+      window.location.replace("https://mangoinfrastruttura.org/?lang=" + lang);
+
+    })();
+  </script>
 </head>
-<body>
-<script>
-(function(){
-  // Lingua: se manca, it
-  const q = new URLSearchParams(location.search);
-  const lang = (q.get("lang") || "it").toLowerCase();
-  const safe = ["it","en","es","fr","de","zh"].includes(lang) ? lang : "it";
-
-  // Sempre e solo Home canonica
-  const home = "https://mangoinfrastruttura.org/?lang=" + safe;
-
-  // Redirect immediato (niente loop, niente UI)
-  location.replace(home);
-})();
-</script>
-</body>
+<body></body>
 </html>

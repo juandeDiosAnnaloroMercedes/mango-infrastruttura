@@ -754,6 +754,25 @@
   }));
 
   apply(getLang());
+  // --- Mango: Torna su (iPhone-proof, definitivo) ---
+document.addEventListener("click", function (e) {
+  const a = e.target.closest('a[href="#top"]');
+  if (!a) return;
+
+  e.preventDefault();
+
+  // 3 metodi insieme (Safari/iOS friendly)
+  document.documentElement.scrollTop = 0;
+  document.body.scrollTop = 0;
+  window.scrollTo(0, 0);
+
+  // rinforzo dopo un attimo
+  setTimeout(() => {
+    document.documentElement.scrollTop = 0;
+    document.body.scrollTop = 0;
+    window.scrollTo(0, 0);
+  }, 50);
+}, { passive: false });
 </script>
 
 </body>

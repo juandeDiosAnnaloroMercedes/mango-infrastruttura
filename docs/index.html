@@ -140,7 +140,7 @@
       <p class="small" id="t_reg_live_note"></p>
 
       <div class="btnrow">
-        <a class="btn secondary" href="#top">🏠 <span id="t_btn_home"></span></a>
+        <a class="btn secondary" href="#" onclick="window.scrollTo({top:0,behavior:'smooth'});return false;">
         <a class="btn secondary" href="#write">⬆️ <span id="t_btn_back_write"></span></a>
         <a class="btn" href="#contact">✉️ <span id="t_btn_contact2"></span></a>
       </div>
@@ -712,6 +712,31 @@
   }, { passive: false });
 })();
   apply(getLang());
+  apply(getLang());
+
+// --- Mango: scroll-to-top definitivo ---
+(function () {
+  function goTop(e) {
+    if (e) e.preventDefault();
+    try {
+      window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
+    } catch (_) {
+      window.scrollTo(0, 0);
+    }
+  }
+
+  function bind() {
+    const byId = document.getElementById("t_btn_home");
+    if (byId) byId.addEventListener("click", goTop, { passive: false });
+
+    const byClass = document.querySelector(".btn_home");
+    if (byClass) byClass.addEventListener("click", goTop, { passive: false });
+  }
+
+  bind();
+  setTimeout(bind, 200);
+})();
+</script>
 </script>
 
 </body>

@@ -1,145 +1,497 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="it">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="color-scheme" content="light" />
+  <title>Mango — Primo scambio</title>
 
-<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
-<meta http-equiv="Pragma" content="no-cache">
-<meta http-equiv="Expires" content="0">
+  <!-- anti-cache leggero (GitHub Pages a volte serve) -->
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+  <meta http-equiv="Pragma" content="no-cache" />
+  <meta http-equiv="Expires" content="0" />
 
-<title>Mango – Primo scambio</title>
+  <style>
+    :root{
+      --bg:#ffffff;
+      --fg:#0b0f1a;
+      --muted:#5b6472;
+      --card:#f6f7f9;
+      --border:#e6e8ee;
+      --shadow:0 14px 34px rgba(0,0,0,.07);
+      --r:18px;
+      --max:860px;
+      --p:18px;
+      --font:ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial;
+      --btn:#0b0f1a;
+      --btnfg:#fff;
+      --focus:2px solid #0b0f1a;
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      font-family:var(--font);
+      background:linear-gradient(180deg,#ffffff 0%, #fbfbfd 60%, #ffffff 100%);
+      color:var(--fg);
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+    }
+    header{
+      position:sticky; top:0; z-index:50;
+      background:rgba(255,255,255,.86);
+      backdrop-filter:blur(10px);
+      border-bottom:1px solid var(--border);
+    }
+    .hwrap{
+      max-width:var(--max);
+      margin:0 auto;
+      padding:12px var(--p);
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+    }
+    .brand{
+      display:flex; align-items:center; gap:10px;
+      font-weight:950; letter-spacing:-.02em;
+      font-size:20px;
+    }
+    .mango{
+      display:inline-flex; align-items:center; justify-content:center;
+      width:34px; height:34px;
+      border-radius:999px;
+      background:#fff;
+      border:1px solid var(--border);
+      box-shadow:0 8px 18px rgba(0,0,0,.06);
+      user-select:none;
+      text-decoration:none;
+    }
+    /* evita sottolineature su link */
+    a, a:visited { text-decoration:none; }
 
-<style>
-  body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;background:#fdfbf7;color:#222;padding:80px 20px 40px;text-align:center;}
-  .langbar{position:fixed;top:12px;left:50%;transform:translateX(-50%);display:flex;gap:10px;background:#fff;border:1px solid #eee;border-radius:14px;padding:10px 12px;box-shadow:0 10px 30px rgba(0,0,0,.06);z-index:999;}
-  .langbar a{text-decoration:none;font-weight:900;font-size:13px;padding:6px 10px;border-radius:10px;color:#111;}
-  .langbar a.active{background:#111;color:#fff;}
-  .container{max-width:760px;margin:0 auto;}
-  h1{font-size:34px;margin:20px 0 12px;}
-  p{font-size:16px;line-height:1.6;margin:0 auto 18px;max-width:680px;}
-  .card{max-width:680px;margin:18px auto;background:#fff;border:1px solid #eee;border-radius:16px;padding:16px 18px;text-align:left;}
-  .card ul{margin:10px 0 0 18px;padding:0;}
-  .card li{margin:8px 0;line-height:1.5;}
-  a.btn{display:inline-block;padding:12px 20px;border-radius:12px;font-weight:900;text-decoration:none;background:#111;color:#fff;margin-top:14px;}
-  a.btn:hover{background:#000;}
-</style>
+    .lang{
+      display:flex; flex-wrap:wrap; gap:10px; justify-content:flex-end;
+    }
+    .chip{
+      border:1px solid var(--border);
+      background:#fff;
+      border-radius:999px;
+      padding:10px 14px;
+      font-weight:900;
+      font-size:14px;
+      cursor:pointer;
+      line-height:1;
+    }
+    .chip[aria-current="true"]{ outline:var(--focus); outline-offset:2px; }
+
+    .wrap{
+      max-width:var(--max);
+      margin:0 auto;
+      padding:22px var(--p) 70px;
+    }
+    h1{
+      margin:0;
+      font-size:26px;
+      line-height:1.15;
+      letter-spacing:-.02em;
+    }
+    .sub{
+      margin:10px 0 0;
+      color:var(--muted);
+      line-height:1.6;
+      font-size:16px;
+    }
+    .grid{
+      display:grid;
+      grid-template-columns:1fr;
+      gap:14px;
+      margin-top:18px;
+    }
+    .card{
+      background:var(--card);
+      border:1px solid var(--border);
+      border-radius:var(--r);
+      padding:16px;
+      box-shadow:var(--shadow);
+    }
+    .card h2{ margin:0 0 10px; font-size:18px; letter-spacing:-.01em; }
+    .card p, .card li{
+      margin:0;
+      color:#172033;
+      font-size:15px;
+      line-height:1.62;
+    }
+    .card p + p{ margin-top:10px; }
+    ul{ margin:10px 0 0 18px; padding:0; }
+    li{ margin:8px 0 0; }
+
+    .btnrow{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      margin-top:12px;
+    }
+    .btn{
+      appearance:none;
+      border:0;
+      background:var(--btn);
+      color:var(--btnfg);
+      padding:12px 14px;
+      border-radius:14px;
+      font-weight:950;
+      cursor:pointer;
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      line-height:1;
+    }
+    .btn.secondary{
+      background:#fff;
+      color:var(--btn);
+      border:1px solid var(--border);
+    }
+    .btn:active{ transform:scale(.99) }
+
+    .note{ margin-top:10px; color:var(--muted) !important; font-size:13px !important; }
+    .mono{ font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono","Courier New",monospace; font-size:13px; }
+    .example{
+      background:#fff;
+      border:1px dashed var(--border);
+      border-radius:16px;
+      padding:14px;
+    }
+    .example .mono{ display:block; margin-top:8px; white-space:pre-wrap; }
+
+    /* salvezza fissa in basso a destra */
+    .save{
+      position:fixed;
+      right:14px;
+      bottom:14px;
+      z-index:1000;
+      border-radius:999px;
+      padding:12px 14px;
+      box-shadow:0 14px 34px rgba(0,0,0,.12);
+    }
+
+    @media (max-width:420px){
+      h1{ font-size:23px; }
+      .chip{ padding:10px 12px; }
+      .brand{ font-size:18px; }
+    }
+  </style>
 </head>
 
 <body>
+<header id="top">
+  <div class="hwrap">
+    <div class="brand">
+      <span id="t_brand">Mango</span>
+      <a class="mango" href="#" id="homeMango" aria-label="Home">🥭</a>
+    </div>
 
-<nav class="langbar" aria-label="Language">
-  <a href="?lang=it" data-lang="it">IT</a>
-  <a href="?lang=en" data-lang="en">EN</a>
-  <a href="?lang=es" data-lang="es">ES</a>
-  <a href="?lang=fr" data-lang="fr">FR</a>
-  <a href="?lang=de" data-lang="de">DE</a>
-  <a href="?lang=zh" data-lang="zh">中文</a>
-</nav>
-
-<div class="container">
-  <h1 id="title"></h1>
-  <p id="desc"></p>
-
-  <div class="card">
-    <strong id="howTitle"></strong>
-    <ul>
-      <li id="l1"></li>
-      <li id="l2"></li>
-      <li id="l3"></li>
-    </ul>
+    <nav class="lang" aria-label="Lingue">
+      <button class="chip" data-lang="it">IT</button>
+      <button class="chip" data-lang="en">EN</button>
+      <button class="chip" data-lang="es">ES</button>
+      <button class="chip" data-lang="fr">FR</button>
+      <button class="chip" data-lang="de">DE</button>
+      <button class="chip" data-lang="zh">中文</button>
+    </nav>
   </div>
+</header>
 
-  <a class="btn" id="homeBtn"
-     href="https://juandediosannaloromercedes.github.io/mango-infrastruttura/"></a>
-</div>
+<main class="wrap">
+  <section>
+    <h1 id="t_title"></h1>
+    <p class="sub" id="t_subtitle"></p>
+  </section>
+
+  <section class="grid">
+
+    <article class="card" id="how">
+      <h2 id="t_how_title"></h2>
+      <p id="t_how_text"></p>
+      <ul>
+        <li id="t_rule1"></li>
+        <li id="t_rule2"></li>
+        <li id="t_rule3"></li>
+        <li id="t_rule4"></li>
+      </ul>
+      <p class="note" id="t_rule_note"></p>
+
+      <div class="btnrow">
+        <a class="btn" href="#" id="goRegister">📜 <span id="t_btn_register"></span></a>
+        <a class="btn secondary" href="#" id="goHomeWrite">✍️ <span id="t_btn_home_write"></span></a>
+      </div>
+    </article>
+
+    <article class="card" id="examples">
+      <h2 id="t_ex_title"></h2>
+      <p id="t_ex_text"></p>
+
+      <div class="example" aria-label="Esempi">
+        <strong id="t_ex_label"></strong>
+        <span class="mono" id="t_ex_lines"></span>
+      </div>
+
+      <p class="note" id="t_ex_note"></p>
+    </article>
+
+    <article class="card" id="contact">
+      <h2 id="t_contact_title"></h2>
+      <p id="t_contact_text"></p>
+      <p class="mono" style="margin-top:10px;">
+        <a href="mailto:info@mangoinfrastruttura.org">info@mangoinfrastruttura.org</a>
+      </p>
+      <p class="note" id="t_contact_note"></p>
+
+      <div class="btnrow">
+        <button class="btn secondary" id="btnTop">⬆️ <span id="t_btn_top"></span></button>
+      </div>
+    </article>
+
+  </section>
+</main>
+
+<!-- pulsante salvezza sempre visibile -->
+<button class="btn save" id="saveHome">🏠 <span id="t_btn_home"></span></button>
 
 <script>
-(function(){
-  const VERSION = "MANGO_V1_STABLE";
+  const SUPPORTED = ["it","en","es","fr","de","zh"];
+  const DEFAULT_LANG = "it";
+
   const T = {
     it:{
       title:"Primo scambio",
-      desc:"Stai per iniziare uno scambio reale. Mango non è denaro e non si accumula. Prima fai lo scambio, poi scrivi la riga.",
-      howTitle:"Come fare (semplice):",
-      l1:"Fai lo scambio reale (aiuto, oggetto, tempo, cura, accompagnamento, ecc.).",
-      l2:"Dopo lo scambio, vai su “Scrivi una riga” e descrivilo in una frase.",
-      l3:"Nessuna quantità, nessun valore numerico, nessuna equivalenza.",
-      home:"Torna alla home"
+      subtitle:"Se è successo qualcosa di reale tra due persone, Mango lo riconosce con una riga. Qui trovi il modo giusto per scriverla.",
+      how_title:"Come scrivere una riga Mango",
+      how_text:"Scrivi semplice. Scrivi umano. Scrivi reale. Una riga descrive un gesto o uno scambio effettivamente accaduto.",
+      rule1:"Niente prezzi, niente quantità, niente numeri, niente equivalenze.",
+      rule2:"Descrivi l’azione reale (chi, cosa, quando) in modo sobrio.",
+      rule3:"Se vuoi, usa solo nomi di battesimo o iniziali: la privacy è parte della cura.",
+      rule4:"Se lo scambio è sbilanciato, Mango non lo trasforma in debito: lo rende visibile e curabile con gesti reali.",
+      rule_note:"Mango non è moneta. Qualsiasi uso che introduce conteggi o equivalenze non è Mango.",
+      btn_register:"Vai al Registro (Home)",
+      btn_home_write:"Torna a “Scrivi una riga”",
+      ex_title:"Esempi di righe (solo esempi)",
+      ex_text:"Sono esempi di tono e forma. Non copiare parola per parola: scrivi ciò che è accaduto davvero.",
+      ex_label:"Esempi:",
+      ex_lines:"• Marco ha accompagnato Ana dal medico.\n• Lucia ha ascoltato Davide quando stava male.\n• Sara ha riparato la bici di Paolo.\n• Juan ha cucinato per Chiara dopo una giornata difficile.",
+      ex_note:"Meglio pochi dettagli veri che un testo “perfetto”.",
+      contact_title:"Contatto (istituzioni / giornalisti)",
+      contact_text:"Per richieste stampa, scuole, associazioni o istituzioni puoi scrivere qui:",
+      contact_note:"Questo indirizzo è pubblico sul sito (così i giornalisti lo trovano).",
+      btn_top:"Torna su",
+      btn_home:"Home"
     },
     en:{
       title:"First exchange",
-      desc:"You are about to start a real exchange. Mango is not money and cannot be accumulated. Do the exchange first, then write the line.",
-      howTitle:"How to do it (simple):",
-      l1:"Do the real exchange (help, object, time, care, accompaniment, etc.).",
-      l2:"After the exchange, go to “Write one line” and describe it in one sentence.",
-      l3:"No quantities, no numeric value, no equivalence.",
-      home:"Back to home"
+      subtitle:"If something real happened between two people, Mango recognizes it with one line. Here is the right way to write it.",
+      how_title:"How to write a Mango line",
+      how_text:"Write simple. Write human. Write real. A line describes a gesture or exchange that truly happened.",
+      rule1:"No prices, no quantities, no numbers, no equivalences.",
+      rule2:"Describe the real action (who, what, when) soberly.",
+      rule3:"If you want, use first names or initials: privacy is part of care.",
+      rule4:"If unbalanced, Mango doesn’t turn it into debt: it makes it visible and care-able with real gestures.",
+      rule_note:"Mango is not money. Any use that introduces counting or equivalences is not Mango.",
+      btn_register:"Go to the Register (Home)",
+      btn_home_write:"Back to “Write a line”",
+      ex_title:"Example lines (examples only)",
+      ex_text:"These are examples of tone and form. Don’t copy—write what truly happened.",
+      ex_label:"Examples:",
+      ex_lines:"• Mark accompanied Ana to the doctor.\n• Lucia listened to David when he felt unwell.\n• Sara repaired Paolo’s bike.\n• Juan cooked for Chiara after a hard day.",
+      ex_note:"A few true details beat a “perfect” text.",
+      contact_title:"Contact (institutions / press)",
+      contact_text:"For press, schools, associations or institutions, write here:",
+      contact_note:"This email is public on the site (so journalists can find it).",
+      btn_top:"Back to top",
+      btn_home:"Home"
     },
     es:{
       title:"Primer intercambio",
-      desc:"Estás por iniciar un intercambio real. Mango no es dinero y no se acumula. Haz el intercambio primero, luego escribe la línea.",
-      howTitle:"Cómo hacerlo (simple):",
-      l1:"Haz el intercambio real (ayuda, objeto, tiempo, cuidado, acompañamiento, etc.).",
-      l2:"Después, ve a “Escribe una línea” y descríbelo en una frase.",
-      l3:"Sin cantidades, sin valor numérico, sin equivalencias.",
-      home:"Volver a inicio"
+      subtitle:"Si pasó algo real entre dos personas, Mango lo reconoce con una línea. Aquí está la forma correcta de escribirla.",
+      how_title:"Cómo escribir una línea Mango",
+      how_text:"Escribe simple. Escribe humano. Escribe real. Una línea describe un gesto o intercambio que realmente sucedió.",
+      rule1:"Sin precios, sin cantidades, sin números, sin equivalencias.",
+      rule2:"Describe la acción real (quién, qué, cuándo).",
+      rule3:"Si quieres, usa nombres o iniciales: la privacidad es parte del cuidado.",
+      rule4:"Si es desequilibrado, no es deuda: se vuelve visible y cuidable con gestos reales.",
+      rule_note:"Mango no es dinero. Cualquier uso que introduzca conteos o equivalencias no es Mango.",
+      btn_register:"Ir al Registro (Inicio)",
+      btn_home_write:"Volver a “Escribe una línea”",
+      ex_title:"Ejemplos de líneas (solo ejemplos)",
+      ex_text:"Son ejemplos de tono y forma. No copies: escribe lo que ocurrió de verdad.",
+      ex_label:"Ejemplos:",
+      ex_lines:"• Marco acompañó a Ana al médico.\n• Lucía escuchó a David cuando estaba mal.\n• Sara reparó la bici de Paolo.\n• Juan cocinó para Chiara después de un día difícil.",
+      ex_note:"Pocos detalles verdaderos valen más que un texto “perfecto”.",
+      contact_title:"Contacto (instituciones / prensa)",
+      contact_text:"Para prensa o instituciones, escribe aquí:",
+      contact_note:"Email público para que periodistas lo encuentren.",
+      btn_top:"Volver arriba",
+      btn_home:"Inicio"
     },
     fr:{
       title:"Premier échange",
-      desc:"Tu vas commencer un échange réel. Mango n’est pas de l’argent et ne s’accumule pas. Fais l’échange, puis écris la ligne.",
-      howTitle:"Comment faire (simple) :",
-      l1:"Fais l’échange réel (aide, objet, temps, soin, accompagnement, etc.).",
-      l2:"Ensuite, va sur “Écrire une ligne” et décris-le en une phrase.",
-      l3:"Aucune quantité, aucune valeur numérique, aucune équivalence.",
-      home:"Retour à l’accueil"
+      subtitle:"Si quelque chose de réel s’est passé entre deux personnes, Mango le reconnaît par une ligne. Voici comment l’écrire.",
+      how_title:"Comment écrire une ligne Mango",
+      how_text:"Écris simple. Écris humain. Écris réel. Une ligne décrit un geste ou un échange réellement arrivé.",
+      rule1:"Pas de prix, pas de quantités, pas de chiffres, pas d’équivalences.",
+      rule2:"Décrire l’action réelle (qui, quoi, quand) sobrement.",
+      rule3:"Si tu veux, utilise prénoms ou initiales : la confidentialité fait partie du soin.",
+      rule4:"Si c’est déséquilibré, ce n’est pas une dette : visible et soignable par des gestes réels.",
+      rule_note:"Mango n’est pas une monnaie. Tout usage qui introduit comptage ou équivalences n’est pas Mango.",
+      btn_register:"Aller au Registre (Accueil)",
+      btn_home_write:"Retour à « Écrire une ligne »",
+      ex_title:"Exemples de lignes (exemples)",
+      ex_text:"Ce sont des exemples de ton et de forme. Ne copie pas : écris ce qui est arrivé vraiment.",
+      ex_label:"Exemples :",
+      ex_lines:"• Marco a accompagné Ana chez le médecin.\n• Lucia a écouté David quand il allait mal.\n• Sara a réparé le vélo de Paolo.\n• Juan a cuisiné pour Chiara après une journée difficile.",
+      ex_note:"Quelques détails vrais valent mieux qu’un texte « parfait ».",
+      contact_title:"Contact (institutions / presse)",
+      contact_text:"Pour la presse ou les institutions :",
+      contact_note:"Email public pour que les journalistes le trouvent.",
+      btn_top:"Haut de page",
+      btn_home:"Accueil"
     },
     de:{
       title:"Erster Austausch",
-      desc:"Du beginnst gleich einen echten Austausch. Mango ist kein Geld und nicht akkumulativ. Erst austauschen, dann die Zeile schreiben.",
-      howTitle:"So geht’s (einfach):",
-      l1:"Mache den echten Austausch (Hilfe, Gegenstand, Zeit, Fürsorge, Begleitung usw.).",
-      l2:"Danach gehe zu „Eine Zeile schreiben“ und beschreibe es in einem Satz.",
-      l3:"Keine Mengen, kein Zahlenwert, keine Äquivalenz.",
-      home:"Zurück zur Startseite"
+      subtitle:"Wenn zwischen zwei Menschen etwas Reales passiert ist, erkennt Mango es mit einer Zeile an. Hier steht, wie man sie schreibt.",
+      how_title:"Wie man eine Mango-Zeile schreibt",
+      how_text:"Schreib einfach. Schreib menschlich. Schreib real. Eine Zeile beschreibt eine Geste oder einen Austausch, der wirklich passiert ist.",
+      rule1:"Keine Preise, keine Mengen, keine Zahlen, keine Äquivalenzen.",
+      rule2:"Beschreibe die reale Handlung (wer, was, wann) nüchtern.",
+      rule3:"Wenn du willst, nutze Vornamen oder Initialen: Privatsphäre ist Teil der Fürsorge.",
+      rule4:"Ungleichgewicht ist keine Schuld: sichtbar und pflegbar durch reale Gesten.",
+      rule_note:"Mango ist kein Geld. Jede Nutzung mit Zählung oder Äquivalenzen ist nicht Mango.",
+      btn_register:"Zum Register (Startseite)",
+      btn_home_write:"Zurück zu „Eine Zeile schreiben“",
+      ex_title:"Beispiel-Zeilen (nur Beispiele)",
+      ex_text:"Das sind Beispiele für Ton und Form. Nicht kopieren: Schreib, was wirklich passiert ist.",
+      ex_label:"Beispiele:",
+      ex_lines:"• Marco begleitete Ana zum Arzt.\n• Lucia hörte David zu, als es ihm schlecht ging.\n• Sara reparierte Paolos Fahrrad.\n• Juan kochte für Chiara nach einem schweren Tag.",
+      ex_note:"Wenige wahre Details sind besser als ein „perfekter“ Text.",
+      contact_title:"Kontakt (Institutionen / Presse)",
+      contact_text:"Für Presse oder Institutionen:",
+      contact_note:"Öffentliche E-Mail, damit Journalist:innen sie finden.",
+      btn_top:"Nach oben",
+      btn_home:"Startseite"
     },
     zh:{
       title:"第一次交换",
-      desc:"你将开始一次真实交换。Mango 不是金钱，也不可累积。先完成交换，然后写下一行记录。",
-      howTitle:"怎么做（很简单）：",
-      l1:"完成真实交换（帮助、物品、时间、照料、陪伴等）。",
-      l2:"交换后进入“写一行”，用一句话描述这次交换。",
-      l3:"没有数量、没有数值、没有等价换算。",
-      home:"返回首页"
+      subtitle:"如果两个人之间发生了真实的事，Mango 用“一行记录”予以承认。这里告诉你怎么写。",
+      how_title:"如何写一行 Mango",
+      how_text:"写得简单、真实、有人味。一行描述确实发生过的动作或交换。",
+      rule1:"不要写价格、数量、数字、等价换算。",
+      rule2:"描述真实行动（谁、做了什么、何时）。",
+      rule3:"如需隐私，可用名字首字母或昵称：隐私也是照顾的一部分。",
+      rule4:"不平衡不是债：让它可见，并用真实行动去照顾。",
+      rule_note:"Mango 不是货币。任何引入计数或等价换算的用法都不是 Mango。",
+      btn_register:"进入登记册（首页）",
+      btn_home_write:"返回“写下一行”",
+      ex_title:"示例行（仅示例）",
+      ex_text:"这些只是语气与形式示例。不要照抄：写真实发生的事。",
+      ex_label:"示例：",
+      ex_lines:"• Marco 陪 Ana 去看医生。\n• Lucia 在 David 难受时倾听他。\n• Sara 修好了 Paolo 的自行车。\n• Juan 在 Chiara 很累的一天后为她做饭。",
+      ex_note:"少量真实细节胜过“完美”文本。",
+      contact_title:"联系（机构 / 媒体）",
+      contact_text:"媒体、学校或机构合作请联系：",
+      contact_note:"邮箱公开，方便记者找到。",
+      btn_top:"回到顶部",
+      btn_home:"首页"
     }
   };
 
-  const allowed = new Set(["it","en","es","fr","de","zh"]);
-  const params = new URLSearchParams(location.search);
-  const lang = allowed.has(params.get("lang")) ? params.get("lang") : "it";
-  const t = T[lang] || T.it;
-  document.documentElement.lang = lang;
+  function getLang(){
+    const u = new URL(location.href);
+    const l = (u.searchParams.get("lang") || "").toLowerCase();
+    return SUPPORTED.includes(l) ? l : DEFAULT_LANG;
+  }
+  function setLang(l){
+    const u = new URL(location.href);
+    u.searchParams.set("lang", l);
+    history.replaceState({}, "", u.toString());
+  }
+  function homeUrl(hash){
+    const u = new URL("index.html", location.href);
+    u.searchParams.set("lang", getLang());
+    u.hash = hash || "";
+    return u.toString();
+  }
+  function apply(l){
+    document.documentElement.lang = l;
+    document.querySelectorAll(".chip").forEach(b=>{
+      b.setAttribute("aria-current", b.dataset.lang===l ? "true" : "false");
+    });
+    const d = T[l] || T[DEFAULT_LANG];
 
-  document.getElementById("title").textContent = t.title;
-  document.getElementById("desc").textContent = t.desc;
-  document.getElementById("howTitle").textContent = t.howTitle;
-  document.getElementById("l1").textContent = t.l1;
-  document.getElementById("l2").textContent = t.l2;
-  document.getElementById("l3").textContent = t.l3;
+    const m = {
+      t_title:d.title,
+      t_subtitle:d.subtitle,
+      t_how_title:d.how_title,
+      t_how_text:d.how_text,
+      t_rule1:d.rule1,
+      t_rule2:d.rule2,
+      t_rule3:d.rule3,
+      t_rule4:d.rule4,
+      t_rule_note:d.rule_note,
+      t_btn_register:d.btn_register,
+      t_btn_home_write:d.btn_home_write,
+      t_ex_title:d.ex_title,
+      t_ex_text:d.ex_text,
+      t_ex_label:d.ex_label,
+      t_ex_lines:d.ex_lines,
+      t_ex_note:d.ex_note,
+      t_contact_title:d.contact_title,
+      t_contact_text:d.contact_text,
+      t_contact_note:d.contact_note,
+      t_btn_top:d.btn_top,
+      t_btn_home:d.btn_home
+    };
 
-  const homeBtn = document.getElementById("homeBtn");
-  homeBtn.textContent = t.home;
+    Object.keys(m).forEach(id=>{
+      const el = document.getElementById(id);
+      if(!el) return;
+      if(id==="t_ex_lines"){
+        el.textContent = m[id];
+      }else{
+        el.textContent = m[id];
+      }
+    });
+  }
 
-  document.querySelectorAll(".langbar a").forEach(a=>{
-    if(a.dataset.lang === lang) a.classList.add("active");
+  // lingua
+  document.querySelectorAll(".chip").forEach(b=>{
+    b.addEventListener("click", ()=>{
+      setLang(b.dataset.lang);
+      apply(b.dataset.lang);
+    });
   });
 
-  const u = new URL(homeBtn.href);
-  u.searchParams.set("lang", lang);
-  u.searchParams.set("v", VERSION);
-  homeBtn.href = u.toString();
-})();
-<script src="footer.js" defer></script>
+  // bottoni verso home (lingua mantenuta)
+  const saveHome = document.getElementById("saveHome");
+  const homeMango = document.getElementById("homeMango");
+  const goRegister = document.getElementById("goRegister");
+  const goHomeWrite = document.getElementById("goHomeWrite");
 
+  function go(url){
+    window.location.href = url;
+  }
+
+  saveHome.addEventListener("click", ()=>go(homeUrl("")));
+  homeMango.addEventListener("click", (e)=>{ e.preventDefault(); go(homeUrl("")); });
+  goRegister.addEventListener("click", (e)=>{ e.preventDefault(); go(homeUrl("#register")); });
+  goHomeWrite.addEventListener("click", (e)=>{ e.preventDefault(); go(homeUrl("#write")); });
+
+  // torna su (qui)
+  document.getElementById("btnTop").addEventListener("click", (e)=>{
+    e.preventDefault();
+    try{ window.scrollTo({top:0,left:0,behavior:"smooth"}); }
+    catch(_){ window.scrollTo(0,0); }
+  }, {passive:false});
+
+  // avvio
+  apply(getLang());
+</script>
 </body>
 </html>

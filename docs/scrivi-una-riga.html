@@ -3,417 +3,112 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Scrivi una riga — Mango</title>
-
+  <title>Mango — Bianco</title>
   <style>
-    :root{
-      --bg:#fbfaf7;
-      --text:#111;
-      --muted:#555;
-      --border:#e7e3dd;
-      --card:#fff;
-      --yellow:#f4a62a;
-      --black:#111;
-      --red:#b00020;
-      --shadow: 0 6px 20px rgba(0,0,0,.06);
-    }
-    *{box-sizing:border-box}
+    :root{ --b:rgba(0,0,0,.12); --b2:rgba(0,0,0,.16); }
     body{
       margin:0;
-      font-family:-apple-system,system-ui,Segoe UI,Roboto,Arial,sans-serif;
-      background:var(--bg);
-      color:var(--text);
+      font-family:-apple-system,BlinkMacSystemFont,system-ui,Segoe UI,Roboto,Arial;
+      background:radial-gradient(1200px 700px at 50% 0%, #ffffff 0%, #fbf6ee 55%, #ffffff 100%);
+      color:#111; min-height:100vh;
     }
-    .langbar{
+
+    /* Mango top-right = Home */
+    .mango-top{
+      position:fixed; right:16px; top:16px; z-index:30;
+      text-decoration:none; color:#111; font-weight:950;
+      border:1px solid var(--b2); border-radius:16px; padding:10px 12px;
+      background:#fff; display:inline-flex; align-items:center; gap:10px;
+      box-shadow:0 10px 26px rgba(0,0,0,.10);
+      white-space:nowrap;
+    }
+    .mango-top:active{ transform: translateY(1px); }
+
+    /* Mango bottom-right = Home (comodo thumb) */
+    .mango-fab{
       position:fixed;
-      top:14px;
-      left:50%;
-      transform:translateX(-50%);
-      display:flex;
-      gap:10px;
-      padding:10px 14px;
-      border:1px solid var(--border);
-      background:var(--card);
-      border-radius:14px;
-      box-shadow:var(--shadow);
-      z-index:999;
-    }
-    .langbar a{
+      right:16px; bottom:16px;
+      z-index:30;
       text-decoration:none;
-      font-weight:800;
-      color:var(--text);
-      padding:8px 10px;
-      border-radius:10px;
-      border:1px solid transparent;
-      display:inline-block;
-      min-width:34px;
-      text-align:center;
-    }
-    .langbar a.active{
-      border-color:var(--border);
-      background:#f2efe9;
-    }
-
-    .container{
-      max-width:760px;
-      margin:0 auto;
-      padding:92px 16px 60px;
-    }
-    h1{
-      font-size:44px;
-      margin:0 0 10px;
-      letter-spacing:-.5px;
-      text-align:center;
-    }
-    p#desc{
-      margin:0 auto 18px;
-      max-width:640px;
-      text-align:center;
-      font-size:18px;
-      color:var(--muted);
-      line-height:1.45;
-    }
-
-    textarea{
-      width:100%;
-      max-width:680px;
-      height:220px;
-      padding:14px 14px;
-      margin:0 auto;
-      display:block;
-      font-size:18px;
-      border-radius:14px;
-      border:2px solid var(--border);
-      outline:none;
-      background:var(--card);
-      box-shadow:var(--shadow);
-      resize:vertical;
-    }
-    textarea:focus{
-      border-color:#d8d0c6;
-    }
-
-    .row{
-      display:flex;
-      gap:12px;
-      justify-content:center;
-      flex-wrap:wrap;
-      margin:18px 0 14px;
-    }
-    button, a.btnlink{
-      border:none;
-      cursor:pointer;
-      font-weight:900;
-      font-size:16px;
-      padding:14px 22px;
-      border-radius:999px;
-      box-shadow:var(--shadow);
-      text-decoration:none;
-      display:inline-block;
-      color:#fff;
-    }
-    button.primary{ background:var(--yellow); color:#fff; }
-    button.dark{ background:var(--black); }
-    button.danger{ background:var(--red); }
-
-    .homewrap{
-      display:flex;
-      justify-content:center;
-      margin-top:10px;
-    }
-    a.btnlink.dark{ background:var(--black); }
-
-    .list{
-      margin:22px auto 0;
-      max-width:680px;
-      border:1px solid var(--border);
-      border-radius:14px;
-      background:var(--card);
-      box-shadow:var(--shadow);
-      overflow:hidden;
-    }
-    .item{
+      color:#111;
+      font-weight:950;
+      border:1px solid var(--b2);
+      border-radius:18px;
       padding:12px 14px;
-      border-bottom:1px solid var(--border);
-      font-size:16px;
-      line-height:1.35;
-      white-space:pre-wrap;
+      background:#fff;
+      box-shadow: 0 10px 26px rgba(0,0,0,.10);
+      display:inline-flex;
+      align-items:center;
+      gap:10px;
+      white-space:nowrap;
     }
-    .item:last-child{ border-bottom:none; }
+    .mango-fab:active{ transform: translateY(1px); }
 
-    .meta{
-      font-size:13px;
-      opacity:.75;
-      margin-bottom:6px;
+    .center{
+      min-height:100vh;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      text-align:center;
+      padding:24px;
     }
-
-    .note{
-      margin:18px auto 0;
-      max-width:680px;
-      padding:14px 14px;
-      border:1px solid var(--border);
-      border-radius:14px;
-      background:#f2efe9;
-      color:#222;
-      box-shadow:var(--shadow);
+    .panel{
+      max-width:760px;
+      background:rgba(255,255,255,.75);
+      border:1px solid var(--b);
+      border-radius:24px;
+      padding:22px 18px;
+      box-shadow:0 14px 34px rgba(0,0,0,.08);
+    }
+    .title{
+      font-size:1.35rem;
+      font-weight:950;
+      margin:0 0 10px;
+      letter-spacing:.2px;
+    }
+    .hint{
+      margin:0;
+      opacity:.72;
+      line-height:1.7;
+      font-size:1.05rem;
     }
   </style>
 </head>
-
 <body>
+  <a class="mango-top" id="homeTop" href="index.html?lang=it">🥭 <span id="homeTxt">Mango</span></a>
+  <a class="mango-fab" id="homeFab" href="index.html?lang=it">🥭 <span id="homeTxt2">Mango</span></a>
 
-  <nav class="langbar" aria-label="Language">
-    <a href="?lang=it" data-lang="it">IT</a>
-    <a href="?lang=en" data-lang="en">EN</a>
-    <a href="?lang=es" data-lang="es">ES</a>
-    <a href="?lang=fr" data-lang="fr">FR</a>
-    <a href="?lang=de" data-lang="de">DE</a>
-    <a href="?lang=zh" data-lang="zh">中文</a>
-  </nav>
-
-  <div class="container">
-    <h1 id="title">Scrivi una riga</h1>
-    <p id="desc">Scrivi la riga dello scambio. Nessuna quantità. Nessun valore numerico. La riga viene salvata sul tuo dispositivo (non online).</p>
-
-    <textarea id="lineInput" placeholder="Scrivi qui la tua riga..."></textarea>
-
-    <div class="row">
-      <button class="primary" id="saveBtn" type="button">Salva riga</button>
-      <button class="dark" id="copyBtn" type="button">Copia tutte</button>
-      <button class="danger" id="clearBtn" type="button">Cancella tutto</button>
-    </div>
-
-    <div class="homewrap">
-      <a class="btnlink dark" id="homeBtn" href="index.html">Torna alla home</a>
-    </div>
-
-    <div class="note" id="noteBox" style="display:none"></div>
-
-    <div class="list" id="listBox" style="display:none">
-      <div id="savedList"></div>
+  <div class="center">
+    <div class="panel">
+      <p class="title" id="t1">Bianco</p>
+      <p class="hint" id="t2">Spazio neutro. Qui non c’è nulla da dimostrare. Il pulsante 🥭 ti riporta sempre alla Home.</p>
     </div>
   </div>
 
-  <script>
-  (function(){
-    "use strict";
+<script>
+const dict={
+  it:{htmlLang:"it", home:"Mango", t1:"Bianco", t2:"Spazio neutro. Qui non c’è nulla da dimostrare. Il pulsante 🥭 ti riporta sempre alla Home."},
+  en:{htmlLang:"en", home:"Mango", t1:"White", t2:"Neutral space. Nothing to prove here. The 🥭 button always takes you back Home."},
+  es:{htmlLang:"es", home:"Mango", t1:"Blanco", t2:"Espacio neutral. Aquí no hay nada que demostrar. El botón 🥭 siempre te lleva al inicio."},
+  fr:{htmlLang:"fr", home:"Mango", t1:"Blanc", t2:"Espace neutre. Rien à prouver ici. Le bouton 🥭 te ramène toujours à l’accueil."},
+  de:{htmlLang:"de", home:"Mango", t1:"Weiß", t2:"Neutraler Raum. Hier gibt es nichts zu beweisen. Der 🥭-Button bringt dich immer zur Startseite."},
+  zh:{htmlLang:"zh-Hant", home:"Mango", t1:"白頁", t2:"中性空間。這裡不需要證明任何事。點 🥭 可隨時回到首頁。"}
+};
+function getLang(){
+  const q=new URLSearchParams(location.search);
+  const v=(q.get("lang")||"it").toLowerCase();
+  return dict[v]?v:"it";
+}
+const L=getLang();
+document.documentElement.lang = dict[L].htmlLang;
+document.getElementById("homeTxt").textContent = dict[L].home;
+document.getElementById("homeTxt2").textContent = dict[L].home;
+document.getElementById("t1").textContent = dict[L].t1;
+document.getElementById("t2").textContent = dict[L].t2;
 
-    const VERSION = "MANGO_SCRIVI_RIGA_V1_PERMANENTE";
-
-    const T = {
-      it:{
-        title:"Scrivi una riga",
-        desc:"Scrivi la riga dello scambio. Nessuna quantità. Nessun valore numerico. La riga viene salvata sul tuo dispositivo (non online).",
-        placeholder:"Scrivi qui la tua riga...",
-        save:"Salva riga",
-        copy:"Copia tutte",
-        clear:"Cancella tutto",
-        home:"Torna alla home",
-        note:"Qui le cose belle non si inviano: si salvano sul dispositivo.",
-        copied:"Copiato negli appunti.",
-        empty:"Scrivi qualcosa prima di salvare.",
-        cleared:"Tutto cancellato."
-      },
-      en:{
-        title:"Write one line",
-        desc:"Write the line of the exchange. No quantity. No numeric value. The line is saved on your device (not online).",
-        placeholder:"Write your line here...",
-        save:"Save line",
-        copy:"Copy all",
-        clear:"Clear all",
-        home:"Back to home",
-        note:"Beautiful things are not sent here: they are saved on your device.",
-        copied:"Copied to clipboard.",
-        empty:"Write something before saving.",
-        cleared:"Everything cleared."
-      },
-      es:{
-        title:"Escribe una línea",
-        desc:"Escribe la línea del intercambio. Sin cantidad. Sin valor numérico. La línea se guarda en tu dispositivo (no online).",
-        placeholder:"Escribe tu línea aquí...",
-        save:"Guardar línea",
-        copy:"Copiar todo",
-        clear:"Borrar todo",
-        home:"Volver al inicio",
-        note:"Aquí las cosas bellas no se envían: se guardan en tu dispositivo.",
-        copied:"Copiado al portapapeles.",
-        empty:"Escribe algo antes de guardar.",
-        cleared:"Todo borrado."
-      },
-      fr:{
-        title:"Écrire une ligne",
-        desc:"Écris la ligne de l’échange. Aucune quantité. Aucune valeur numérique. La ligne est enregistrée sur ton appareil (pas en ligne).",
-        placeholder:"Écris ta ligne ici...",
-        save:"Enregistrer",
-        copy:"Tout copier",
-        clear:"Tout effacer",
-        home:"Retour à l’accueil",
-        note:"Ici, les belles choses ne s’envoient pas : elles se sauvegardent sur l’appareil.",
-        copied:"Copié dans le presse-papiers.",
-        empty:"Écris quelque chose avant d’enregistrer.",
-        cleared:"Tout effacé."
-      },
-      de:{
-        title:"Eine Zeile schreiben",
-        desc:"Schreibe die Zeile des Austauschs. Keine Menge. Kein numerischer Wert. Die Zeile wird auf deinem Gerät gespeichert (nicht online).",
-        placeholder:"Schreibe deine Zeile hier...",
-        save:"Zeile speichern",
-        copy:"Alles kopieren",
-        clear:"Alles löschen",
-        home:"Zur Startseite",
-        note:"Schöne Dinge werden hier nicht gesendet: sie werden auf dem Gerät gespeichert.",
-        copied:"In die Zwischenablage kopiert.",
-        empty:"Schreibe etwas, bevor du speicherst.",
-        cleared:"Alles gelöscht."
-      },
-      zh:{
-        title:"寫一行",
-        desc:"寫下交換的一行內容。沒有數量，沒有數值。此行只會儲存在你的裝置上（不在線上）。",
-        placeholder:"在此寫下你的內容...",
-        save:"儲存",
-        copy:"全部複製",
-        clear:"全部刪除",
-        home:"返回首頁",
-        note:"美好的事情不在這裡送出：只保存在你的裝置上。",
-        copied:"已複製到剪貼簿。",
-        empty:"請先寫點內容再儲存。",
-        cleared:"已全部清除。"
-      }
-    };
-
-    const allowed = new Set(["it","en","es","fr","de","zh"]);
-    const params = new URLSearchParams(location.search);
-    let lang = (params.get("lang") || "it").toLowerCase();
-    if(!allowed.has(lang)) lang = "it";
-    const t = T[lang] || T.it;
-
-    document.documentElement.lang = lang;
-
-    // UI elements
-    const titleEl = document.getElementById("title");
-    const descEl  = document.getElementById("desc");
-    const input   = document.getElementById("lineInput");
-    const saveBtn = document.getElementById("saveBtn");
-    const copyBtn = document.getElementById("copyBtn");
-    const clearBtn= document.getElementById("clearBtn");
-    const homeBtn = document.getElementById("homeBtn");
-    const listBox = document.getElementById("listBox");
-    const savedList = document.getElementById("savedList");
-    const noteBox = document.getElementById("noteBox");
-
-    // Set texts
-    titleEl.textContent = t.title;
-    descEl.textContent  = t.desc;
-    input.placeholder   = t.placeholder;
-    saveBtn.textContent = t.save;
-    copyBtn.textContent = t.copy;
-    clearBtn.textContent= t.clear;
-    homeBtn.textContent = t.home;
-
-    // Keep lang in home link
-    try{
-      const hu = new URL(homeBtn.getAttribute("href"), location.href);
-      hu.searchParams.set("lang", lang);
-      hu.searchParams.set("v", VERSION);
-      homeBtn.href = hu.pathname + "?" + hu.searchParams.toString();
-    }catch(e){}
-
-    // Highlight active lang
-    document.querySelectorAll(".langbar a").forEach(a=>{
-      a.classList.toggle("active", a.dataset.lang === lang);
-    });
-
-    const KEY = "MANGO_SCRIVI_RIGA_LINES_V1";
-
-    function nowStamp(){
-      const d = new Date();
-      const pad = n => String(n).padStart(2,"0");
-      return `${pad(d.getDate())}/${pad(d.getMonth()+1)}/${d.getFullYear()}, ${pad(d.getHours())}:${pad(d.getMinutes())}:${pad(d.getSeconds())}`;
-    }
-
-    function load(){
-      try{
-        const raw = localStorage.getItem(KEY);
-        const arr = raw ? JSON.parse(raw) : [];
-        return Array.isArray(arr) ? arr : [];
-      }catch(e){
-        return [];
-      }
-    }
-
-    function save(arr){
-      localStorage.setItem(KEY, JSON.stringify(arr));
-    }
-
-    function render(){
-      const arr = load();
-      if(arr.length === 0){
-        listBox.style.display = "none";
-        savedList.innerHTML = "";
-        return;
-      }
-      listBox.style.display = "block";
-      savedList.innerHTML = "";
-      arr.slice().reverse().forEach(item=>{
-        const wrap = document.createElement("div");
-        wrap.className = "item";
-        const meta = document.createElement("div");
-        meta.className = "meta";
-        meta.textContent = item.ts;
-        const text = document.createElement("div");
-        text.textContent = item.text;
-        wrap.appendChild(meta);
-        wrap.appendChild(text);
-        savedList.appendChild(wrap);
-      });
-    }
-
-    function flashNote(msg){
-      noteBox.style.display = "block";
-      noteBox.textContent = msg;
-      setTimeout(()=>{ noteBox.style.display = "none"; }, 1800);
-    }
-
-    // Buttons
-    saveBtn.addEventListener("click", ()=>{
-      const v = (input.value || "").trim();
-      if(!v){ flashNote(t.empty); return; }
-      const arr = load();
-      arr.push({ ts: nowStamp(), text: v });
-      save(arr);
-      input.value = "";
-      render();
-      flashNote(t.note);
-    });
-
-    copyBtn.addEventListener("click", async ()=>{
-      const arr = load();
-      if(arr.length === 0){ flashNote(t.empty); return; }
-      const out = arr.map(x=>`${x.ts} — ${x.text}`).join("\n");
-      try{
-        await navigator.clipboard.writeText(out);
-        flashNote(t.copied);
-      }catch(e){
-        // fallback
-        const ta = document.createElement("textarea");
-        ta.value = out;
-        document.body.appendChild(ta);
-        ta.select();
-        document.execCommand("copy");
-        document.body.removeChild(ta);
-        flashNote(t.copied);
-      }
-    });
-
-    clearBtn.addEventListener("click", ()=>{
-      localStorage.removeItem(KEY);
-      render();
-      flashNote(t.cleared);
-    });
-
-    render();
-  })();
-  </script>
-
+const home = `index.html?lang=${L}`;
+document.getElementById("homeTop").href = home;
+document.getElementById("homeFab").href = home;
+</script>
 </body>
 </html>

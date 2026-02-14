@@ -3,69 +3,96 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Mango</title>
+  <title>Mango — Bianco</title>
   <style>
     :root{ --b:rgba(0,0,0,.12); --b2:rgba(0,0,0,.16); }
     body{
-      margin:0; font-family:-apple-system,BlinkMacSystemFont,system-ui,Segoe UI,Roboto,Arial;
-      background:#fff; color:#111; min-height:100vh;
+      margin:0;
+      font-family:-apple-system,BlinkMacSystemFont,system-ui,Segoe UI,Roboto,Arial;
+      background:radial-gradient(1200px 700px at 50% 0%, #ffffff 0%, #fbf6ee 55%, #ffffff 100%);
+      color:#111; min-height:100vh;
     }
+
+    /* Mango top-right = Home */
     .mango-top{
       position:fixed; right:16px; top:16px; z-index:30;
       text-decoration:none; color:#111; font-weight:950;
       border:1px solid var(--b2); border-radius:16px; padding:10px 12px;
       background:#fff; display:inline-flex; align-items:center; gap:10px;
-      box-shadow:0 6px 18px rgba(0,0,0,.06);
+      box-shadow:0 10px 26px rgba(0,0,0,.10);
       white-space:nowrap;
     }
     .mango-top:active{ transform: translateY(1px); }
 
-    .corner-note{
-      position:fixed; right:16px; bottom:14px; z-index:30;
-      max-width:min(520px, 84vw);
-      border:1px solid var(--b); border-radius:18px;
-      padding:10px 12px;
-      background:rgba(255,255,255,.92);
-      backdrop-filter: blur(10px);
-      box-shadow:0 6px 18px rgba(0,0,0,.06);
-      font-size:1rem; line-height:1.45;
+    /* Mango bottom-right = Home (comodo thumb) */
+    .mango-fab{
+      position:fixed;
+      right:16px; bottom:16px;
+      z-index:30;
+      text-decoration:none;
+      color:#111;
+      font-weight:950;
+      border:1px solid var(--b2);
+      border-radius:18px;
+      padding:12px 14px;
+      background:#fff;
+      box-shadow: 0 10px 26px rgba(0,0,0,.10);
+      display:inline-flex;
+      align-items:center;
+      gap:10px;
+      white-space:nowrap;
     }
-    .corner-note strong{ font-weight:950; }
+    .mango-fab:active{ transform: translateY(1px); }
 
     .center{
-      min-height:100vh; display:flex; align-items:center; justify-content:center;
-      text-align:center; padding:24px;
+      min-height:100vh;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      text-align:center;
+      padding:24px;
     }
-    .hint{ opacity:.6; max-width:720px; line-height:1.7; }
+    .panel{
+      max-width:760px;
+      background:rgba(255,255,255,.75);
+      border:1px solid var(--b);
+      border-radius:24px;
+      padding:22px 18px;
+      box-shadow:0 14px 34px rgba(0,0,0,.08);
+    }
+    .title{
+      font-size:1.35rem;
+      font-weight:950;
+      margin:0 0 10px;
+      letter-spacing:.2px;
+    }
+    .hint{
+      margin:0;
+      opacity:.72;
+      line-height:1.7;
+      font-size:1.05rem;
+    }
   </style>
 </head>
 <body>
-  <a class="mango-top" id="homeBtn" href="index.html?lang=it">🥭 <span id="homeTxt">Mango</span></a>
+  <a class="mango-top" id="homeTop" href="index.html?lang=it">🥭 <span id="homeTxt">Mango</span></a>
+  <a class="mango-fab" id="homeFab" href="index.html?lang=it">🥭 <span id="homeTxt2">Mango</span></a>
 
   <div class="center">
-    <div class="hint" id="hintTxt">Pagina bianca: spazio neutro. Il pulsante 🥭 ti riporta sempre alla Home.</div>
-  </div>
-
-  <div class="corner-note">
-    <strong id="n1">Questo dominio può sparire.</strong><br>
-    <strong id="n2">Mango no.</strong><br>
-    <span id="n3">Perché Mango non è un sito. È una pratica.</span>
+    <div class="panel">
+      <p class="title" id="t1">Bianco</p>
+      <p class="hint" id="t2">Spazio neutro. Qui non c’è nulla da dimostrare. Il pulsante 🥭 ti riporta sempre alla Home.</p>
+    </div>
   </div>
 
 <script>
 const dict={
-  it:{htmlLang:"it", home:"Mango", hint:"Pagina bianca: spazio neutro. Il pulsante 🥭 ti riporta sempre alla Home.",
-      n1:"Questo dominio può sparire.", n2:"Mango no.", n3:"Perché Mango non è un sito. È una pratica."},
-  en:{htmlLang:"en", home:"Mango", hint:"White page: a neutral space. The 🥭 button always brings you back Home.",
-      n1:"This domain can disappear.", n2:"Mango won’t.", n3:"Because Mango is not a website. It’s a practice."},
-  es:{htmlLang:"es", home:"Mango", hint:"Página blanca: un espacio neutral. El botón 🥭 siempre te lleva al inicio.",
-      n1:"Este dominio puede desaparecer.", n2:"Mango no.", n3:"Porque Mango no es un sitio web. Es una práctica."},
-  fr:{htmlLang:"fr", home:"Mango", hint:"Page blanche : un espace neutre. Le bouton 🥭 te ramène toujours à l’accueil.",
-      n1:"Ce domaine peut disparaître.", n2:"Mango non.", n3:"Parce que Mango n’est pas un site. C’est une pratique."},
-  de:{htmlLang:"de", home:"Mango", hint:"Weiße Seite: neutraler Raum. Der 🥭-Button bringt dich immer zur Startseite.",
-      n1:"Diese Domain kann verschwinden.", n2:"Mango nicht.", n3:"Weil Mango keine Website ist. Es ist eine Praxis."},
-  zh:{htmlLang:"zh-Hant", home:"Mango", hint:"白頁：中性空間。點 🥭 可隨時回到首頁。",
-      n1:"這個網域可以消失。", n2:"Mango 不會。", n3:"因為 Mango 不是網站，而是一種實踐。"}
+  it:{htmlLang:"it", home:"Mango", t1:"Bianco", t2:"Spazio neutro. Qui non c’è nulla da dimostrare. Il pulsante 🥭 ti riporta sempre alla Home."},
+  en:{htmlLang:"en", home:"Mango", t1:"White", t2:"Neutral space. Nothing to prove here. The 🥭 button always takes you back Home."},
+  es:{htmlLang:"es", home:"Mango", t1:"Blanco", t2:"Espacio neutral. Aquí no hay nada que demostrar. El botón 🥭 siempre te lleva al inicio."},
+  fr:{htmlLang:"fr", home:"Mango", t1:"Blanc", t2:"Espace neutre. Rien à prouver ici. Le bouton 🥭 te ramène toujours à l’accueil."},
+  de:{htmlLang:"de", home:"Mango", t1:"Weiß", t2:"Neutraler Raum. Hier gibt es nichts zu beweisen. Der 🥭-Button bringt dich immer zur Startseite."},
+  zh:{htmlLang:"zh-Hant", home:"Mango", t1:"白頁", t2:"中性空間。這裡不需要證明任何事。點 🥭 可隨時回到首頁。"}
 };
 function getLang(){
   const q=new URLSearchParams(location.search);
@@ -75,11 +102,13 @@ function getLang(){
 const L=getLang();
 document.documentElement.lang = dict[L].htmlLang;
 document.getElementById("homeTxt").textContent = dict[L].home;
-document.getElementById("hintTxt").textContent = dict[L].hint;
-document.getElementById("n1").textContent = dict[L].n1;
-document.getElementById("n2").textContent = dict[L].n2;
-document.getElementById("n3").textContent = dict[L].n3;
-document.getElementById("homeBtn").href = `index.html?lang=${L}`;
+document.getElementById("homeTxt2").textContent = dict[L].home;
+document.getElementById("t1").textContent = dict[L].t1;
+document.getElementById("t2").textContent = dict[L].t2;
+
+const home = `index.html?lang=${L}`;
+document.getElementById("homeTop").href = home;
+document.getElementById("homeFab").href = home;
 </script>
 </body>
 </html>

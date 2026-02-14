@@ -1,11 +1,25 @@
 <!doctype html>
 <html lang="it">
 <head>
-<meta charset="utf-8">
-<meta http-equiv="refresh" content="0; url=index.html">
-<title>Mango</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Mango</title>
+  <meta name="robots" content="noindex,nofollow" />
 </head>
 <body>
-Se vedi questa pagina, stai tornando a Mango…
+<script>
+(function(){
+  // Lingua: se manca, it
+  const q = new URLSearchParams(location.search);
+  const lang = (q.get("lang") || "it").toLowerCase();
+  const safe = ["it","en","es","fr","de","zh"].includes(lang) ? lang : "it";
+
+  // Sempre e solo Home canonica
+  const home = "https://mangoinfrastruttura.org/?lang=" + safe;
+
+  // Redirect immediato (niente loop, niente UI)
+  location.replace(home);
+})();
+</script>
 </body>
 </html>

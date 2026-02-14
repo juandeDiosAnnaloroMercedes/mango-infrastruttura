@@ -1,522 +1,239 @@
-uy<!doctype html>
+<!doctype html>
 <html lang="it">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Mango — Infrastruttura di fiducia locale</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Mango</title>
 
   <style>
-    :root{--bg:#fff;--fg:#111;--muted:#6b7280;--card:#f6f7f9;--border:#e5e7eb;--shadow:0 10px 30px rgba(0,0,0,.06);--r:18px;--max:860px;--p:18px;--font:ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial;}
-    body{margin:0;font-family:var(--font);background:var(--bg);color:var(--fg)}
-    header{position:sticky;top:0;background:rgba(255,255,255,.92);backdrop-filter:blur(8px);border-bottom:1px solid var(--border);z-index:10}
-    .hwrap{max-width:var(--max);margin:0 auto;padding:14px var(--p);display:flex;justify-content:space-between;align-items:center;gap:12px}
-    .brand{font-weight:900;font-size:22px;display:flex;gap:10px;align-items:center}
-    .lang{display:flex;gap:10px;flex-wrap:wrap;justify-content:flex-end}
-    .chip{border:1px solid var(--border);background:#fff;border-radius:999px;padding:10px 14px;font-weight:800;font-size:14px;cursor:pointer}
-    .chip[aria-current="true"]{outline:2px solid #111;outline-offset:2px}
-    .wrap{max-width:var(--max);margin:0 auto;padding:22px var(--p) 42px}
-    h1{margin:0;font-size:22px;line-height:1.2}
-    p{color:var(--muted);line-height:1.55}
-    .grid{display:grid;grid-template-columns:1fr;gap:14px;margin-top:18px}
-    .card{background:var(--card);border:1px solid var(--border);border-radius:var(--r);padding:16px;box-shadow:var(--shadow)}
-    .card h2{margin:0 0 10px;font-size:18px;color:#111}
-    .card p,.card li{color:#1f2937;font-size:15px;line-height:1.55}
-    ul{margin:10px 0 0 18px}
-    .btnrow{display:flex;gap:10px;flex-wrap:wrap;margin-top:12px}
-    .btn{border:0;background:#111;color:#fff;padding:12px 14px;border-radius:14px;font-weight:900;cursor:pointer;text-decoration:none;display:inline-flex;align-items:center;gap:8px}
-    .btn.secondary{background:#fff;color:#111;border:1px solid var(--border)}
-    .qrbox{border:2px dashed var(--border);border-radius:22px;padding:18px;background:#fff;display:flex;flex-direction:column;gap:14px;align-items:center;justify-content:center}
-    .qrtext{font-weight:950;font-size:20px;line-height:1.15;text-align:center;color:#111}
-    .qrsub{text-align:center;color:var(--muted);margin-top:6px}
-    .footer{margin-top:22px;padding-top:18px;border-top:1px solid var(--border);color:var(--muted);font-size:14px;line-height:1.5}
-    .mono{font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono","Courier New",monospace;font-size:13px}
-    .small{font-size:13px;color:var(--muted)}
-    .rule{margin-top:10px;font-weight:950;color:#111}
-    .localbox{display:grid;gap:10px;margin-top:10px}
-    .linecard{background:#fff;border:1px solid var(--border);border-radius:14px;padding:12px;color:#111;line-height:1.45}
-    hr{border:0;border-top:1px solid var(--border);margin:14px 0}
+    body{
+      margin:0;
+      font-family:-apple-system,BlinkMacSystemFont,system-ui,Segoe UI,Roboto,Arial;
+      background:#fff; color:#111;
+      min-height:100vh;
+    }
+    .wrap{ max-width:860px; margin:0 auto; padding:0 18px; }
+
+    .top{
+      display:flex; justify-content:flex-end;
+      padding:14px 18px;
+      position:sticky; top:0;
+      background:rgba(255,255,255,.92);
+      backdrop-filter: blur(10px);
+      border-bottom:1px solid rgba(0,0,0,.08);
+      z-index:20;
+    }
+    .langbar{ display:flex; gap:8px; flex-wrap:wrap; }
+    .langbar a{
+      font-size:.95rem; text-decoration:none; color:#111; opacity:.78; font-weight:900;
+      padding:8px 10px; border-radius:12px; border:1px solid rgba(0,0,0,.10);
+      background:#fff;
+    }
+    .langbar a.active{ opacity:1; border-color:rgba(0,0,0,.25); }
+
+    header{ text-align:center; padding:70px 18px 18px; }
+    h1{ margin:0; font-size:2.2rem; font-weight:950; letter-spacing:.2px; line-height:1.15; }
+    p{ margin:16px 0 0; line-height:1.7; font-size:1.05rem; opacity:.7; }
+
+    .card{
+      border:1px solid rgba(0,0,0,.12);
+      border-radius:22px;
+      padding:22px;
+      margin:26px auto 0;
+      text-align:center;
+      max-width:640px;
+    }
+    .btn{
+      appearance:none;
+      border:1px solid rgba(0,0,0,.16);
+      background:#fff;
+      color:#111;
+      padding:12px 16px;
+      border-radius:14px;
+      font-weight:950;
+      cursor:pointer;
+      text-decoration:none;
+      display:inline-flex;
+      align-items:center;
+      gap:10px;
+      margin-top:18px;
+    }
+    .btn:active{ transform: translateY(1px); }
+    .muted{ opacity:.55; font-size:.95rem; margin-top:14px; }
+
+    .mango-fab{
+      position:fixed;
+      right:16px; bottom:16px;
+      z-index:30;
+      text-decoration:none;
+      color:#111;
+      font-weight:950;
+      border:1px solid rgba(0,0,0,.16);
+      border-radius:18px;
+      padding:12px 14px;
+      background:#fff;
+      box-shadow: 0 6px 18px rgba(0,0,0,.08);
+      display:inline-flex;
+      align-items:center;
+      gap:10px;
+    }
+    .mango-fab:active{ transform: translateY(1px); }
   </style>
 </head>
 
 <body>
-<header id="top">
-  <div class="hwrap">
-    <div class="brand">Mango 🥭</div>
-    <nav class="lang" aria-label="Lingue">
-      <button class="chip" data-lang="it">IT</button>
-      <button class="chip" data-lang="en">EN</button>
-      <button class="chip" data-lang="es">ES</button>
-      <button class="chip" data-lang="fr">FR</button>
-      <button class="chip" data-lang="de">DE</button>
-      <button class="chip" data-lang="zh">ZH</button>
-    </nav>
+  <div class="top">
+    <div class="langbar" id="langbar"></div>
   </div>
-</header>
 
-<main class="wrap">
-  <section>
-    <h1 id="t_title"></h1>
-    <p id="t_subtitle"></p>
-  </section>
-  <!-- BLOCCO ISTITUZIONALE -->
-  <section class="card mango-constitution">
-    <h2 id="constitution_title">
-      Mango è un’infrastruttura di fiducia locale non monetaria.
-    </h2>
+  <header class="wrap">
+    <h1 id="m1">Questo dominio può sparire.<br>Mango no.</h1>
+    <p id="m2">Mango accade tra persone reali.</p>
 
-    <p id="constitution_claims">
-      Non è una moneta. Non è accumulabile. Non è numerica. Non è appropriabile.
-    </p>
+    <div class="card">
+      <div id="c1" style="font-weight:900; font-size:1.08rem;">
+        Sei arrivato qui da un vecchio link o un QR.
+      </div>
 
-    <div class="rule" id="constitution_rule">
-      Principio chiave: una riga = 🥭
+      <a class="btn" id="homeBtn" href="index.html">
+        🏠 <span id="b1">Torna alla Home</span>
+      </a>
+
+      <div class="muted" id="autoTxt">
+        Reindirizzamento automatico tra pochi secondi…
+      </div>
     </div>
+  </header>
 
-    <p class="small" id="constitution_meta">
-      Creato da Juan de Dios Annaloro Mercedes — 02 febbraio 2026 — In memoria di Larimar.
-    </p>
-  </section>
-  <section class="grid">
-
-    <article class="card" id="do">
-      <h2 id="t_do_title"></h2>
-      <p id="t_do_text"></p>
-      <div class="btnrow">
-        <a class="btn" id="btn_write" href="primo-scambio.html">✍️ <span id="t_btn_first"></span></a>
-        <a class="btn secondary" href="#what">📘 <span id="t_btn_about"></span></a>
-      </div>
-      <p class="small" id="t_do_note"></p>
-    </article>
-
-    <article class="card" id="register">
-      <h2 id="t_reg_title"></h2>
-      <p id="t_reg_text1"></p>
-      <p id="t_reg_text2"></p>
-
-      <div class="rule" id="t_reg_rule"></div>
-
-      <hr>
-
-      <h3 id="t_reg_local_h" style="margin:0 0 6px;color:#111"></h3>
-      <p class="small" id="t_reg_local_note"></p>
-
-      <div class="localbox" id="local_lines"></div>
-
-      <div class="btnrow" style="margin-top:12px;">
-        <a class="btn secondary" id="btn_add_line" href="primo-scambio.html">✍️ <span id="t_reg_add"></span></a>
-        <button class="btn secondary" id="btn_clear_local">🧹 <span id="t_reg_clear"></span></button>
-      </div>
-
-      <p class="small" id="t_reg_local_note2" style="margin-top:10px;"></p>
-    </article>
-
-    <article class="card" id="what">
-      <h2 id="t_what_title"></h2>
-      <p id="t_what_text1"></p>
-      <p id="t_what_text2"></p>
-      <ul>
-        <li id="t_what_li1"></li>
-        <li id="t_what_li2"></li>
-        <li id="t_what_li3"></li>
-        <li id="t_what_li4"></li>
-      </ul>
-
-<div class="btnrow" style="margin-top:14px;">
-  <a class="btn" href="versione-permanente.pdf">
-    📄 Versione permanente (PDF)
-  </a>
- </div>
-
- </article>
-  
-    <article class="card">
-      <div class="qrbox">
-        <div class="qrtext" id="t_qr_main"></div>
-        <div class="qrsub" id="t_qr_sub"></div>
-        <div class="btnrow">
-          <a class="btn" href="#contact">✉️ <span id="t_btn_press"></span></a>
-          <a class="btn secondary" href="#top">⬆️ <span id="t_btn_top"></span></a>
-        </div>
-      </div>
-    </article>
-
-    <article class="card" id="contact">
-      <h2 id="t_contact_title"></h2>
-      <p id="t_contact_text"></p>
-      <p class="mono" style="margin:10px 0 0;">
-        <a href="mailto:info@mangoinfrastruttura.org">info@mangoinfrastruttura.org</a>
-      </p>
-      <p class="small" id="t_contact_note"></p>
-    </article>
-
-  </section>
-
-  <footer class="footer">
-    <div id="t_footer_line1"></div>
-    <div class="small" id="t_footer_line2" style="margin-top:8px;"></div>
-  </footer>
-</main>
+  <a class="mango-fab" id="mangoFab" href="index.html">🥭 <span id="fabTxt">Mango</span></a>
 
 <script>
-  const SUPPORTED = ["it","en","es","fr","de","zh"];
-  const DEFAULT_LANG = "it";
-  const STORE_KEY = "mango_register_lines_v1";
-
-  const T = {
-    it:{
-      title:"Un’infrastruttura di fiducia locale non monetaria.",
-      subtitle:"Mango riconosce scambi reali tra persone con una riga, senza quantità né valore numerico.",
-
-      do_title:"Fai Mango adesso",
-      do_text:"Se è successo qualcosa di reale tra due persone (aiuto, tempo, cura, presenza, gesto), Mango lo riconosce. Non valuta. Non misura. Non accumula.",
-      do_note:"Principio chiave: una riga = 🥭. Nessun numero. Nessuna equivalenza.",
-
-      btn_first:"Scrivi una riga",
-      btn_about:"Cos’è Mango",
-      btn_press:"Contatti (stampa)",
-      btn_top:"Torna su",
-
-      reg_title:"Registro (qui)",
-      reg_text1:"Qui vivono le righe reali salvate su questo dispositivo. Non è un conto. Non è una classifica.",
-      reg_text2:"Ogni riga riconosce uno scambio realmente accaduto. Nessuna quantità. Nessun totale.",
-      reg_rule:"Una riga = 🥭",
-
-      reg_local_h:"Righe salvate su questo dispositivo",
-      reg_local_note:"Queste righe restano qui (non sono pubblicate).",
-      reg_add:"Aggiungi una riga",
-      reg_clear:"Cancella righe locali",
-      reg_local_note2:"Se cambi telefono o browser, queste righe non si trasferiscono automaticamente.",
-
-      what_title:"Cos’è Mango",
-      what_text1:"Mango non è una moneta. Non è credito. Non è un sistema economico alternativo.",
-      what_text2:"È un’infrastruttura di fiducia locale: riconosce scambi reali senza trasformarli in valore numerico.",
-      what_li1:"Non accumulabile.",
-      what_li2:"Non quantificabile.",
-      what_li3:"Non appropriabile.",
-      what_li4:"Temporalità esplicita.",
-
-      qr_main:"È successo qualcosa tra due persone.",
-      qr_sub:"Qui puoi capirlo.",
-
-      contact_title:"Contatto (istituzioni / giornalisti)",
-      contact_text:"Per richieste stampa, scuole, associazioni o istituzioni puoi scrivere qui:",
-      contact_note:"Questo indirizzo è pubblico sul sito (così i giornalisti lo trovano).",
-
-      footer1:"Creato da Juan de Dios Annaloro Mercedes — 02 febbraio 2026 — In memoria di Larimar.",
-      footer2:"Mango è praticabile e trasmissibile, ma non possedibile o centralizzabile.",
-
-      empty_local:"(vuoto)",
-      confirm_clear:"Cancellare tutte le righe salvate su questo dispositivo?"
-    },
-
-    en:{
-      title:"A non-monetary local trust infrastructure.",
-      subtitle:"Mango recognizes real exchanges with one line, with no quantities and no numeric value.",
-
-      do_title:"Do Mango now",
-      do_text:"If something real happened between two people (help, time, care, presence, a gesture), Mango recognizes it. It doesn’t price it. It doesn’t measure it. It doesn’t accumulate.",
-      do_note:"Core rule: one line = 🥭. No numbers. No equivalences.",
-
-      btn_first:"Write a line",
-      btn_about:"What is Mango",
-      btn_press:"Contact (press)",
-      btn_top:"Back to top",
-
-      reg_title:"Register (here)",
-      reg_text1:"Here live the real lines saved on this device. Not an account. Not a ranking.",
-      reg_text2:"Each line recognizes something that truly happened. No quantities. No totals.",
-      reg_rule:"One line = 🥭",
-
-      reg_local_h:"Lines saved on this device",
-      reg_local_note:"These lines stay here (not published).",
-      reg_add:"Add a line",
-      reg_clear:"Clear local lines",
-      reg_local_note2:"If you change phone or browser, these lines won’t transfer automatically.",
-
-      what_title:"What is Mango",
-      what_text1:"Mango is not money. Not credit. Not an alternative economic system.",
-      what_text2:"It is a local trust infrastructure: recognizing real exchanges without turning them into numeric value.",
-      what_li1:"Non-accumulative.",
-      what_li2:"Non-quantifiable.",
-      what_li3:"Non-appropriable.",
-      what_li4:"Explicit temporality.",
-
-      qr_main:"Something happened between two people.",
-      qr_sub:"Here you can understand it.",
-
-      contact_title:"Contact (institutions / press)",
-      contact_text:"For press, schools, associations or institutions, write here:",
-      contact_note:"This email is public on the site (so journalists can find it).",
-
-      footer1:"Created by Juan de Dios Annaloro Mercedes — 02 Feb 2026 — In memory of Larimar.",
-      footer2:"Mango can be practiced and transmitted, but not owned or centralized.",
-
-      empty_local:"(empty)",
-      confirm_clear:"Delete all lines saved on this device?"
-    },
-
-    es:{
-      title:"Una infraestructura local de confianza no monetaria.",
-      subtitle:"Mango reconoce intercambios reales con una línea, sin cantidades ni valor numérico.",
-
-      do_title:"Haz Mango ahora",
-      do_text:"Si ocurrió algo real entre dos personas, Mango lo reconoce. No lo valora. No lo mide. No lo acumula.",
-      do_note:"Regla: una línea = 🥭. Sin números. Sin equivalencias.",
-
-      btn_first:"Escribe una línea",
-      btn_about:"Qué es Mango",
-      btn_press:"Contacto (prensa)",
-      btn_top:"Volver arriba",
-
-      reg_title:"Registro (aquí)",
-      reg_text1:"Aquí viven las líneas reales guardadas en este dispositivo. No es una cuenta. No es un ranking.",
-      reg_text2:"Cada línea reconoce algo que ocurrió de verdad. Sin cantidades. Sin totales.",
-      reg_rule:"Una línea = 🥭",
-
-      reg_local_h:"Líneas guardadas en este dispositivo",
-      reg_local_note:"Estas líneas se quedan aquí (no se publican).",
-      reg_add:"Añadir una línea",
-      reg_clear:"Borrar líneas locales",
-      reg_local_note2:"Si cambias de teléfono o navegador, no se transfieren automáticamente.",
-
-      what_title:"Qué es Mango",
-      what_text1:"No es dinero. No es crédito. No es un sistema alternativo.",
-      what_text2:"Es confianza local: reconocer sin convertir en valor numérico.",
-      what_li1:"No acumulable.",
-      what_li2:"No cuantificable.",
-      what_li3:"No apropiable.",
-      what_li4:"Temporalidad explícita.",
-
-      qr_main:"Pasó algo entre dos personas.",
-      qr_sub:"Aquí puedes entenderlo.",
-
-      contact_title:"Contacto (instituciones / prensa)",
-      contact_text:"Para prensa o instituciones, escribe aquí:",
-      contact_note:"Email público para que periodistas lo encuentren.",
-
-      footer1:"Creado por Juan de Dios Annaloro Mercedes — 02 feb 2026 — En memoria de Larimar.",
-      footer2:"Se practica y se transmite, pero no se posee ni se centraliza.",
-
-      empty_local:"(vacío)",
-      confirm_clear:"¿Borrar todas las líneas guardadas en este dispositivo?"
-    },
-
-    fr:{
-      title:"Une infrastructure locale de confiance non monétaire.",
-      subtitle:"Mango reconnaît des échanges réels par une ligne, sans quantités ni valeur numérique.",
-
-      do_title:"Fais Mango maintenant",
-      do_text:"Si quelque chose de réel s’est passé entre deux personnes, Mango le reconnaît. Il ne mesure pas. Il n’accumule pas.",
-      do_note:"Règle : une ligne = 🥭. Pas de chiffres. Pas d’équivalences.",
-
-      btn_first:"Écrire une ligne",
-      btn_about:"Qu’est-ce que Mango",
-      btn_press:"Contact (presse)",
-      btn_top:"Haut de page",
-
-      reg_title:"Registre (ici)",
-      reg_text1:"Ici vivent les lignes réelles enregistrées sur cet appareil. Ce n’est pas un compte. Ce n’est pas un classement.",
-      reg_text2:"Chaque ligne reconnaît quelque chose arrivé pour de vrai. Pas de quantités. Pas de total.",
-      reg_rule:"Une ligne = 🥭",
-
-      reg_local_h:"Lignes enregistrées sur cet appareil",
-      reg_local_note:"Ces lignes restent ici (non publiées).",
-      reg_add:"Ajouter une ligne",
-      reg_clear:"Effacer les lignes locales",
-      reg_local_note2:"Si tu changes de téléphone ou de navigateur, elles ne se transfèrent pas automatiquement.",
-
-      what_title:"Qu’est-ce que Mango",
-      what_text1:"Ce n’est pas une monnaie. Ni un crédit. Ni un système alternatif.",
-      what_text2:"C’est la confiance locale : reconnaître sans valeur numérique.",
-      what_li1:"Non accumulable.",
-      what_li2:"Non quantifiable.",
-      what_li3:"Non appropriable.",
-      what_li4:"Temporalité explicite.",
-
-      qr_main:"Quelque chose s’est passé entre deux personnes.",
-      qr_sub:"Ici tu peux comprendre.",
-
-      contact_title:"Contact (institutions / presse)",
-      contact_text:"Pour la presse ou les institutions :",
-      contact_note:"Email public pour que les journalistes le trouvent.",
-
-      footer1:"Créé par Juan de Dios Annaloro Mercedes — 02 fév 2026 — En mémoire de Larimar.",
-      footer2:"Praticable et transmissible, mais non possédable ni centralisable.",
-
-      empty_local:"(vide)",
-      confirm_clear:"Supprimer toutes les lignes enregistrées sur cet appareil ?"
-    },
-
-    de:{
-      title:"Eine nicht-monetäre lokale Vertrauens-Infrastruktur.",
-      subtitle:"Mango erkennt reale Austausche mit einer Zeile an – ohne Mengen und Zahlenwert.",
-
-      do_title:"Mach Mango jetzt",
-      do_text:"Wenn zwischen zwei Menschen etwas Reales passiert ist, erkennt Mango es an. Es misst nicht. Es häuft nicht an.",
-      do_note:"Regel: eine Zeile = 🥭. Keine Zahlen. Keine Äquivalenzen.",
-
-      btn_first:"Eine Zeile schreiben",
-      btn_about:"Was ist Mango",
-      btn_press:"Kontakt (Presse)",
-      btn_top:"Nach oben",
-
-      reg_title:"Register (hier)",
-      reg_text1:"Hier leben die echten Zeilen, die auf diesem Gerät gespeichert sind. Kein Konto. Kein Ranking.",
-      reg_text2:"Jede Zeile erkennt etwas an, das wirklich passiert ist. Keine Mengen. Kein Total.",
-      reg_rule:"Eine Zeile = 🥭",
-
-      reg_local_h:"Auf diesem Gerät gespeicherte Zeilen",
-      reg_local_note:"Diese Zeilen bleiben hier (nicht veröffentlicht).",
-      reg_add:"Zeile hinzufügen",
-      reg_clear:"Lokale Zeilen löschen",
-      reg_local_note2:"Wenn du Gerät oder Browser wechselst, werden sie nicht automatisch übertragen.",
-
-      what_title:"Was ist Mango",
-      what_text1:"Kein Geld. Kein Kredit. Kein alternatives System.",
-      what_text2:"Lokales Vertrauen: Anerkennung ohne Zahlenwert.",
-      what_li1:"Nicht akkumulativ.",
-      what_li2:"Nicht quantifizierbar.",
-      what_li3:"Nicht aneignbar.",
-      what_li4:"Explizite Zeitlichkeit.",
-
-      qr_main:"Zwischen zwei Menschen ist etwas passiert.",
-      qr_sub:"Hier kannst du es verstehen.",
-
-      contact_title:"Kontakt (Institutionen / Presse)",
-      contact_text:"Für Presse oder Institutionen:",
-      contact_note:"Öffentliche E-Mail, damit Journalist:innen sie finden.",
-
-      footer1:"Erstellt von Juan de Dios Annaloro Mercedes — 02. Feb 2026 — In Erinnerung an Larimar.",
-      footer2:"Praktizierbar und weitergebbar, aber nicht besitzbar oder zentralisierbar.",
-
-      empty_local:"(leer)",
-      confirm_clear:"Alle auf diesem Gerät gespeicherten Zeilen löschen?"
-    },
-
-    zh:{
-      title:"一种非货币化的本地信任基础设施。",
-      subtitle:"Mango 用“一行记录”承认真实交换，不包含数量与数值。",
-
-      do_title:"现在就做 Mango",
-      do_text:"如果两个人之间发生了真实的事，Mango 予以承认。它不计量，不累积。",
-      do_note:"规则：一行 = 🥭。没有数字，没有等价换算。",
-
-      btn_first:"写下一行",
-      btn_about:"什么是 Mango",
-      btn_press:"联系（媒体）",
-      btn_top:"回到顶部",
-
-      reg_title:"登记册（这里）",
-      reg_text1:"这里显示保存在此设备上的真实记录。不是账户。不是排名。",
-      reg_text2:"每一行承认真实发生的事。没有数量。没有总计。",
-      reg_rule:"一行 = 🥭",
-
-      reg_local_h:"保存在此设备上的记录",
-      reg_local_note:"这些记录只保存在这里（不公开发布）。",
-      reg_add:"添加一行",
-      reg_clear:"清除本地记录",
-      reg_local_note2:"更换手机或浏览器后不会自动转移。",
-
-      what_title:"什么是 Mango",
-      what_text1:"不是货币，不是信用，不是替代经济系统。",
-      what_text2:"本地信任：不把交换变成数字价值。",
-      what_li1:"不可累积。",
-      what_li2:"不可量化。",
-      what_li3:"不可占有。",
-      what_li4:"明确时间性。",
-
-      qr_main:"两个人之间发生了什么。",
-      qr_sub:"你可以在这里理解。",
-
-      contact_title:"联系（机构 / 媒体）",
-      contact_text:"媒体、学校或机构合作请联系：",
-      contact_note:"邮箱公开，方便记者找到。",
-
-      footer1:"由 Juan de Dios Annaloro Mercedes 创建 — 2026年2月2日 — 纪念 Larimar。",
-      footer2:"可实践与传递，但不可被拥有或中心化。",
-
-      empty_local:"（空）",
-      confirm_clear:"确定清除本设备保存的所有记录？"
-    }
-  };
-
-  function getLang(){
-    const u=new URL(location.href);
-    const l=(u.searchParams.get("lang")||"").toLowerCase();
-    return SUPPORTED.includes(l)?l:DEFAULT_LANG;
+/* =========================
+   i18n
+========================= */
+const dict = {
+  it:{ htmlLang:"it",
+    m1:"Questo dominio può sparire.<br>Mango no.",
+    m2:"Mango accade tra persone reali.",
+    c1:"Sei arrivato qui da un vecchio link o un QR.",
+    b1:"Torna alla Home",
+    auto:"Reindirizzamento automatico tra pochi secondi…",
+    mango:"Mango"
+  },
+  en:{ htmlLang:"en",
+    m1:"This domain can disappear.<br>Mango won’t.",
+    m2:"Mango happens between real people.",
+    c1:"You arrived here from an old link or QR.",
+    b1:"Back to Home",
+    auto:"Auto-redirect in a few seconds…",
+    mango:"Mango"
+  },
+  es:{ htmlLang:"es",
+    m1:"Este dominio puede desaparecer.<br>Mango no.",
+    m2:"Mango sucede entre personas reales.",
+    c1:"Llegaste aquí desde un enlace o QR antiguo.",
+    b1:"Volver al inicio",
+    auto:"Redirección automática en unos segundos…",
+    mango:"Mango"
+  },
+  fr:{ htmlLang:"fr",
+    m1:"Ce domaine peut disparaître.<br>Mango non.",
+    m2:"Mango se vit entre personnes réelles.",
+    c1:"Tu es arrivé ici depuis un ancien lien ou QR.",
+    b1:"Retour à l’accueil",
+    auto:"Redirection automatique dans quelques secondes…",
+    mango:"Mango"
+  },
+  de:{ htmlLang:"de",
+    m1:"Diese Domain kann verschwinden.<br>Mango nicht.",
+    m2:"Mango passiert zwischen echten Menschen.",
+    c1:"Du bist über einen alten Link oder QR hier gelandet.",
+    b1:"Zur Startseite",
+    auto:"Automatische Weiterleitung in wenigen Sekunden…",
+    mango:"Mango"
+  },
+  zh:{ htmlLang:"zh-Hant",
+    m1:"這個網域可以消失。<br>Mango 不會。",
+    m2:"Mango 發生在人與人之間的真實關係中。",
+    c1:"你可能是從舊連結或 QR 來到這裡。",
+    b1:"回到首頁",
+    auto:"幾秒後自動跳轉…",
+    mango:"Mango"
   }
-  function setLang(l){
-    const u=new URL(location.href);
-    u.searchParams.set("lang",l);
-    history.replaceState({}, "", u.toString());
+};
+
+function getLang(){
+  const q = new URLSearchParams(location.search);
+  const raw = (q.get("lang") || "it").toLowerCase();
+  return dict[raw] ? raw : "it";
+}
+const LANG = getLang();
+
+function buildLangbar(){
+  const bar = document.getElementById("langbar");
+  const langs = [["it","IT"],["en","EN"],["es","ES"],["fr","FR"],["de","DE"],["zh","ZH"]];
+  bar.innerHTML = langs.map(([k,label])=>{
+    const a=document.createElement("a");
+    a.href = `404.html?lang=${k}`;
+    a.textContent = label;
+    if(k===LANG) a.classList.add("active");
+    return a.outerHTML;
+  }).join("");
+}
+
+function applyI18n(){
+  document.documentElement.lang = dict[LANG].htmlLang;
+  document.getElementById("m1").innerHTML = dict[LANG].m1;
+  document.getElementById("m2").textContent = dict[LANG].m2;
+  document.getElementById("c1").textContent = dict[LANG].c1;
+  document.getElementById("b1").textContent = dict[LANG].b1;
+  document.getElementById("autoTxt").textContent = dict[LANG].auto;
+  document.getElementById("fabTxt").textContent = dict[LANG].mango;
+
+  const homeLocal = `index.html?lang=${LANG}`;
+  document.getElementById("homeBtn").href = homeLocal;
+  document.getElementById("mangoFab").href = homeLocal;
+}
+
+buildLangbar();
+applyI18n();
+
+/* =========================
+   Redirect permanente anti-404
+   - Se NON sei su mangoinfrastruttura.org (o www) → vai SEMPRE alla HOME ufficiale.
+   - Se sei già sul dominio ufficiale → vai alla HOME locale (index.html).
+   - No loop + rispetta interazione utente.
+========================= */
+let interacted = false;
+["click","touchstart","keydown","scroll"].forEach(ev=>{
+  window.addEventListener(ev, ()=>{ interacted = true; }, {passive:true});
+});
+
+const CANONICAL = "mangoinfrastruttura.org";
+const CANONICAL_WWW = "www.mangoinfrastruttura.org";
+const CANONICAL_BASE = "https://mangoinfrastruttura.org/";
+
+setTimeout(()=>{
+  if(interacted) return;
+
+  const host = (location.hostname || "").toLowerCase();
+  const path = (location.pathname || "").toLowerCase();
+  const hash = location.hash || "";
+
+  // Se sei su un dominio diverso → porta alla Home del dominio ufficiale (lang + hash)
+  if(host && host !== CANONICAL && host !== CANONICAL_WWW){
+    location.replace(`${CANONICAL_BASE}?lang=${LANG}${hash}`);
+    return;
   }
 
-  function renderLocalLines(l){
-    const d=T[l]||T[DEFAULT_LANG];
-    const box=document.getElementById("local_lines");
-    box.innerHTML="";
-
-    let arr=[];
-    try{ arr=JSON.parse(localStorage.getItem(STORE_KEY)||"[]"); }catch(e){ arr=[]; }
-
-    if(!arr.length){
-      const p=document.createElement("p");
-      p.className="small";
-      p.textContent=d.empty_local;
-      box.appendChild(p);
-      return;
-    }
-
-    arr.forEach(item=>{
-      const div=document.createElement("div");
-      div.className="linecard";
-      div.textContent=item.line; // nessun numero, nessun timestamp visibile
-      box.appendChild(div);
-    });
+  // Se sei già in Home sul dominio ufficiale, non fare nulla
+  if(path === "/" || path.endsWith("/index.html")){
+    return;
   }
 
-  function apply(l){
-    document.documentElement.lang=l;
-    document.querySelectorAll(".chip").forEach(b=>b.setAttribute("aria-current", b.dataset.lang===l ? "true":"false"));
-    const d=T[l]||T[DEFAULT_LANG];
-
-    const m={
-      t_title:d.title,t_subtitle:d.subtitle,
-      t_do_title:d.do_title,t_do_text:d.do_text,t_do_note:d.do_note,
-      t_btn_first:d.btn_first,t_btn_about:d.btn_about,t_btn_press:d.btn_press,t_btn_top:d.btn_top,
-      t_reg_title:d.reg_title,t_reg_text1:d.reg_text1,t_reg_text2:d.reg_text2,t_reg_rule:d.reg_rule,
-      t_reg_local_h:d.reg_local_h,t_reg_local_note:d.reg_local_note,
-      t_reg_add:d.reg_add,t_reg_clear:d.reg_clear,t_reg_local_note2:d.reg_local_note2,
-      t_what_title:d.what_title,t_what_text1:d.what_text1,t_what_text2:d.what_text2,
-      t_what_li1:d.what_li1,t_what_li2:d.what_li2,t_what_li3:d.what_li3,t_what_li4:d.what_li4,
-      t_qr_main:d.qr_main,t_qr_sub:d.qr_sub,
-      t_contact_title:d.contact_title,t_contact_text:d.contact_text,t_contact_note:d.contact_note,
-      t_footer_line1:d.footer1,t_footer_line2:d.footer2
-    };
-    Object.keys(m).forEach(id=>{const el=document.getElementById(id); if(el) el.textContent=m[id];});
-
-    // link coerenti lingua
-    document.getElementById("btn_write").href = "primo-scambio.html?lang="+l;
-    document.getElementById("btn_add_line").href = "primo-scambio.html?lang="+l;
-
-    renderLocalLines(l);
-  }
-
-  document.querySelectorAll(".chip").forEach(b=>b.addEventListener("click", ()=>{
-    setLang(b.dataset.lang);
-    apply(b.dataset.lang);
-  }));
-
-  document.getElementById("btn_clear_local").addEventListener("click", ()=>{
-    const l=getLang();
-    const d=T[l]||T[DEFAULT_LANG];
-    if(!confirm(d.confirm_clear)) return;
-    localStorage.removeItem(STORE_KEY);
-    renderLocalLines(l);
-  });
-
-  apply(getLang());
+  // Sei sul dominio ufficiale ma su una pagina inesistente → vai alla Home locale
+  location.replace(`index.html?lang=${LANG}${hash}`);
+}, 4500);
 </script>
-
 </body>
 </html>

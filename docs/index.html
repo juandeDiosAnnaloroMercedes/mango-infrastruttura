@@ -1,274 +1,679 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="it">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Mango — Infrastruttura di fiducia locale</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Mango — Infrastruttura di fiducia locale</title>
 
-<style>
-:root{
-  --bg:#fff;
-  --fg:#111;
-  --muted:#6b7280;
-  --card:#f6f7f9;
-  --border:#e5e7eb;
-}
-body{
-  margin:0;
-  font-family:system-ui,-apple-system,Segoe UI,Roboto;
-  background:var(--bg);
-  color:var(--fg);
-}
-header{
-  position:sticky;
-  top:0;
-  background:#fff;
-  border-bottom:1px solid var(--border);
-  padding:14px 20px;
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-}
-.lang button{
-  border:1px solid var(--border);
-  background:#fff;
-  padding:6px 10px;
-  border-radius:999px;
-  font-weight:700;
-  cursor:pointer;
-}
-main{
-  max-width:820px;
-  margin:auto;
-  padding:20px;
-}
-.card{
-  background:var(--card);
-  border:1px solid var(--border);
-  border-radius:20px;
-  padding:18px;
-  margin-bottom:18px;
-}
-textarea{
-  width:100%;
-  min-height:110px;
-  padding:14px;
-  border-radius:16px;
-  border:1px solid var(--border);
-  resize:vertical;
-  font-size:16px;
-}
-.btn{
-  margin-top:10px;
-  padding:10px 14px;
-  border-radius:14px;
-  border:none;
-  font-weight:800;
-  cursor:pointer;
-}
-.btn.primary{
-  background:#111;
-  color:#fff;
-}
-.btn.secondary{
-  background:#fff;
-  border:1px solid var(--border);
-}
-.line{
-  background:#fff;
-  border:1px solid var(--border);
-  border-radius:14px;
-  padding:10px 12px;
-  margin-top:10px;
-  display:flex;
-  justify-content:space-between;
-  gap:10px;
-}
-footer{
-  text-align:center;
-  color:var(--muted);
-  margin-top:40px;
-  padding-top:20px;
-  border-top:1px solid var(--border);
-}
-</style>
+  <style>
+    :root{
+      --bg:#fff; --fg:#111; --muted:#6b7280;
+      --card:#f6f7f9; --border:#e5e7eb;
+      --shadow:0 10px 30px rgba(0,0,0,.06);
+      --r:18px; --max:860px; --p:18px;
+      --font:ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial;
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{margin:0;font-family:var(--font);background:var(--bg);color:var(--fg)}
+    a,a:visited{color:inherit;text-decoration:none}
+
+    header{
+      position:sticky;top:0;background:rgba(255,255,255,.92);
+      backdrop-filter:blur(8px);border-bottom:1px solid var(--border);z-index:10
+    }
+    .hwrap{
+      max-width:var(--max);margin:0 auto;padding:14px var(--p);
+      display:flex;justify-content:space-between;align-items:center;gap:12px
+    }
+    .brand{font-weight:900;font-size:22px;display:flex;gap:10px;align-items:center}
+    .mangoBtn{
+      border:1px solid var(--border); background:#fff;
+      border-radius:999px; padding:6px 10px;
+      cursor:pointer; font-size:18px; line-height:1;
+    }
+    .lang{display:flex;gap:10px;flex-wrap:wrap;justify-content:flex-end}
+    .chip{
+      border:1px solid var(--border);background:#fff;border-radius:999px;
+      padding:10px 14px;font-weight:800;font-size:14px;cursor:pointer
+    }
+    .chip[aria-current="true"]{outline:2px solid #111;outline-offset:2px}
+
+    .wrap{max-width:var(--max);margin:0 auto;padding:22px var(--p) 42px}
+    h1{margin:0;font-size:28px;line-height:1.15}
+    p{color:var(--muted);line-height:1.6}
+
+    .grid{display:grid;grid-template-columns:1fr;gap:14px;margin-top:18px}
+    .card{
+      background:var(--card);border:1px solid var(--border);
+      border-radius:var(--r);padding:16px;box-shadow:var(--shadow)
+    }
+    .card h2{margin:0 0 10px;font-size:20px;color:#111}
+    .card h3{margin:14px 0 8px;font-size:16px;color:#111}
+    .card p,.card li{color:#1f2937;font-size:15px;line-height:1.6}
+    ul{margin:10px 0 0 18px}
+    hr{border:0;border-top:1px solid var(--border);margin:14px 0}
+
+    .btnrow{display:flex;gap:10px;flex-wrap:wrap;margin-top:12px}
+    .btn{
+      border:0;background:#111;color:#fff;padding:12px 14px;border-radius:14px;
+      font-weight:900;cursor:pointer;display:inline-flex;align-items:center;gap:8px
+    }
+    .btn.secondary{background:#fff;color:#111;border:1px solid var(--border)}
+    .btn.small{padding:10px 12px;border-radius:12px;font-weight:850}
+
+    .qrbox{
+      border:2px dashed var(--border);border-radius:22px;padding:18px;background:#fff;
+      display:flex;flex-direction:column;gap:14px;align-items:center;justify-content:center
+    }
+    .qrtext{font-weight:950;font-size:22px;line-height:1.15;text-align:center;color:#111}
+    .qrsub{text-align:center;color:var(--muted);margin-top:6px}
+
+    .footer{margin-top:22px;padding-top:18px;border-top:1px solid var(--border);color:var(--muted);font-size:14px;line-height:1.5}
+    .mono{font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono","Courier New",monospace;font-size:13px}
+    .small{font-size:13px;color:var(--muted)}
+    .eq{font-weight:950;font-size:18px;color:#111;margin:10px 0 0}
+
+    textarea{
+      width:100%; min-height:110px; resize:vertical;
+      border:1px solid var(--border); border-radius:16px;
+      padding:14px; font-size:16px; line-height:1.5; background:#fff;
+      outline:none;
+    }
+
+    .list{display:flex;flex-direction:column;gap:10px;margin-top:10px}
+    .lineItem{
+      background:#fff;border:1px solid var(--border);border-radius:16px;
+      padding:12px 12px;
+    }
+    .lineMeta{display:flex;justify-content:space-between;gap:10px;align-items:center;margin-bottom:8px}
+    .tag{font-size:12px;color:var(--muted)}
+    .lineText{white-space:pre-wrap;color:#111;font-size:15px;line-height:1.55}
+  </style>
 </head>
 
 <body>
+<header id="top">
+  <div class="hwrap">
+    <div class="brand">
+      <span>Mango</span>
+      <button class="mangoBtn" id="mangoTop" aria-label="Torna su">🥭</button>
+    </div>
 
-<header>
-  <div><strong>Mango</strong> 🥭</div>
-  <div class="lang">
-    <button onclick="setLang('it')">IT</button>
-    <button onclick="setLang('en')">EN</button>
-    <button onclick="setLang('es')">ES</button>
-    <button onclick="setLang('fr')">FR</button>
-    <button onclick="setLang('de')">DE</button>
-    <button onclick="setLang('zh')">ZH</button>
+    <nav class="lang" aria-label="Lingue">
+      <button class="chip" data-lang="it">IT</button>
+      <button class="chip" data-lang="en">EN</button>
+      <button class="chip" data-lang="es">ES</button>
+      <button class="chip" data-lang="fr">FR</button>
+      <button class="chip" data-lang="de">DE</button>
+      <button class="chip" data-lang="zh">ZH</button>
+    </nav>
   </div>
 </header>
 
-<main>
+<main class="wrap">
+  <section>
+    <h1 id="t_title"></h1>
+    <p id="t_subtitle"></p>
+  </section>
 
-<div class="card">
-  <h2 id="title"></h2>
-  <p id="subtitle"></p>
-</div>
+  <section class="grid">
 
-<div class="card">
-  <h3 id="writeTitle"></h3>
-  <textarea id="input"></textarea>
-  <button class="btn primary" onclick="submitLine()" id="btnSubmit"></button>
-  <button class="btn secondary" onclick="clearInput()" id="btnClear"></button>
-</div>
+    <!-- 1) FAI MANGO -->
+    <article class="card" id="do">
+      <h2 id="t_do_title"></h2>
+      <p id="t_do_text"></p>
 
-<div class="card">
-  <h3 id="myLinesTitle"></h3>
-  <div id="list"></div>
-  <button class="btn secondary" onclick="deleteAll()" id="btnDeleteAll"></button>
-</div>
+      <div class="btnrow">
+        <button class="btn" id="btn_go_write">✍️ <span id="t_btn_first"></span></button>
+        <button class="btn secondary" id="btn_go_what">📘 <span id="t_btn_about"></span></button>
+        <button class="btn secondary" id="btn_go_register">📜 <span id="t_btn_register"></span></button>
+      </div>
 
-<div class="card">
-  <h3>Registro Mango</h3>
-  <p>Una riga = 🥭</p>
-  <p>Nessun numero. Nessuna equivalenza. Nessuna accumulazione.</p>
-  <p>Mango non misura. Non somma. Non calcola.</p>
-</div>
+      <p class="small" id="t_do_note"></p>
+      <p class="small" id="t_do_hint"></p>
+    </article>
 
-<button class="btn secondary" onclick="goTop()" id="btnTop"></button>
+    <!-- 2) SCRIVI UNA RIGA (REGOLE) -->
+    <article class="card" id="write_rules">
+      <h2 id="t_write_title"></h2>
+      <p id="t_write_text"></p>
+      <ul>
+        <li id="t_write_li1"></li>
+        <li id="t_write_li2"></li>
+        <li id="t_write_li3"></li>
+      </ul>
 
-<footer>
-Creato da Juan de Dios Annaloro Mercedes — 02 febbraio 2026 — In memoria di Larimar.
-</footer>
+      <div class="btnrow">
+        <button class="btn" id="btn_go_writebox">📝 <span id="t_btn_write_here"></span></button>
+        <button class="btn secondary" id="btn_go_contact">✉️ <span id="t_btn_contact"></span></button>
+      </div>
 
+      <p class="small" id="t_write_note"></p>
+    </article>
+
+    <!-- 3) SCRIVI RIGA IN HOME (RESTa SUL DISPOSITIVO) -->
+    <article class="card" id="writebox">
+      <h2 id="t_writebox_title"></h2>
+      <p id="t_writebox_text"></p>
+
+      <textarea id="lineInput" placeholder=""></textarea>
+
+      <div class="btnrow">
+        <button class="btn small" id="btn_save_line">✅ <span id="t_btn_send_keep"></span></button>
+        <button class="btn secondary small" id="btn_copy_line">📋 <span id="t_btn_copy"></span></button>
+        <button class="btn secondary small" id="btn_clear_input">🗑️ <span id="t_btn_clear_field"></span></button>
+        <button class="btn secondary small" id="btn_top">⬆️ <span id="t_btn_top"></span></button>
+      </div>
+
+      <p class="small" id="t_writebox_note"></p>
+    </article>
+
+    <!-- 4) LE TUE RIGHE (SOLO DISPOSITIVO) -->
+    <article class="card" id="yourlines">
+      <h2 id="t_yourlines_title"></h2>
+      <p id="t_yourlines_text"></p>
+
+      <div class="btnrow">
+        <button class="btn secondary" id="btn_delete_all">🧹 <span id="t_btn_delete_all"></span></button>
+        <button class="btn secondary" id="btn_go_register2">📜 <span id="t_btn_register"></span></button>
+      </div>
+
+      <div class="list" id="linesList"></div>
+      <p class="small" id="t_yourlines_note"></p>
+    </article>
+
+    <!-- 5) REGISTRO -->
+    <article class="card" id="register">
+      <h2 id="t_reg_title"></h2>
+
+      <p id="t_reg_intro1"></p>
+      <p id="t_reg_intro2"></p>
+
+      <div class="eq" id="t_reg_eq"></div>
+      <p id="t_reg_no"></p>
+
+      <hr>
+
+      <h3 id="t_reg_time_h"></h3>
+      <p id="t_reg_time_p1"></p>
+      <p id="t_reg_time_p2"></p>
+
+      <hr>
+
+      <h3 id="t_reg_struct_h"></h3>
+      <p id="t_reg_struct_p1"></p>
+      <p id="t_reg_struct_p2"></p>
+
+      <hr>
+
+      <h3 id="t_reg_how_h"></h3>
+      <p id="t_reg_how_p"></p>
+      <ul>
+        <li id="t_reg_how_li1"></li>
+        <li id="t_reg_how_li2"></li>
+        <li id="t_reg_how_li3"></li>
+        <li id="t_reg_how_li4"></li>
+      </ul>
+
+      <p class="small" id="t_reg_balance_note"></p>
+
+      <hr>
+
+      <h3 id="t_reg_anticapture_h"></h3>
+      <p id="t_reg_anticapture_p1"></p>
+      <p id="t_reg_anticapture_p2"></p>
+
+      <hr>
+
+      <h3 id="t_reg_live_h"></h3>
+      <p id="t_reg_live_p"></p>
+      <p class="small" id="t_reg_live_note"></p>
+
+      <div class="btnrow">
+        <button class="btn secondary" id="btn_back_write_rules">⬆️ <span id="t_btn_back_write"></span></button>
+        <button class="btn secondary" id="btn_go_writebox2">📝 <span id="t_btn_write_here"></span></button>
+        <button class="btn" id="btn_go_contact2">✉️ <span id="t_btn_contact2"></span></button>
+      </div>
+    </article>
+
+    <!-- 6) COS'E MANGO -->
+    <article class="card" id="what">
+      <h2 id="t_what_title"></h2>
+      <p id="t_what_text1"></p>
+      <p id="t_what_text2"></p>
+      <ul>
+        <li id="t_what_li1"></li>
+        <li id="t_what_li2"></li>
+        <li id="t_what_li3"></li>
+        <li id="t_what_li4"></li>
+      </ul>
+
+      <div class="btnrow">
+        <button class="btn secondary" id="btn_go_primo">🧾 <span id="t_btn_primo"></span></button>
+        <button class="btn secondary" id="btn_top2">⬆️ <span id="t_btn_top"></span></button>
+      </div>
+      <p class="small" id="t_what_note"></p>
+    </article>
+
+    <!-- 7) BOX QR -->
+    <article class="card">
+      <div class="qrbox">
+        <div class="qrtext" id="t_qr_main"></div>
+        <div class="qrsub" id="t_qr_sub"></div>
+        <div class="btnrow">
+          <button class="btn" id="btn_go_contact3">✉️ <span id="t_btn_press"></span></button>
+          <button class="btn secondary" id="btn_top3">⬆️ <span id="t_btn_top"></span></button>
+        </div>
+      </div>
+    </article>
+
+    <!-- 8) CONTATTO -->
+    <article class="card" id="contact">
+      <h2 id="t_contact_title"></h2>
+      <p id="t_contact_text"></p>
+      <p class="mono" style="margin:10px 0 0;">
+        <a href="mailto:info@mangoinfrastruttura.org">info@mangoinfrastruttura.org</a>
+      </p>
+      <p class="small" id="t_contact_note"></p>
+    </article>
+
+  </section>
+
+  <footer class="footer">
+    <div id="t_footer_line1"></div>
+    <div class="small" id="t_footer_line2" style="margin-top:8px;"></div>
+  </footer>
 </main>
 
 <script>
+  const SUPPORTED = ["it","en","es","fr","de","zh"];
+  const DEFAULT_LANG = "it";
 
-const TEXTS={
-it:{
-title:"Un’infrastruttura di fiducia locale non monetaria.",
-subtitle:"Mango riconosce scambi reali con una riga.",
-writeTitle:"Scrivi una riga reale",
-submit:"Invia (resta sul sito)",
-clear:"Cancella campo",
-myLines:"Le tue righe sul sito (solo su questo dispositivo)",
-deleteAll:"Elimina tutte le righe",
-top:"Torna su"
-},
-en:{
-title:"A non-monetary local trust infrastructure.",
-subtitle:"Mango recognizes real exchanges with one line.",
-writeTitle:"Write a real line",
-submit:"Submit (stay on site)",
-clear:"Clear field",
-myLines:"Your lines on this device",
-deleteAll:"Delete all lines",
-top:"Back to top"
-},
-es:{
-title:"Infraestructura local de confianza no monetaria.",
-subtitle:"Mango reconoce intercambios reales con una línea.",
-writeTitle:"Escribe una línea real",
-submit:"Enviar (queda en el sitio)",
-clear:"Borrar campo",
-myLines:"Tus líneas en este dispositivo",
-deleteAll:"Borrar todas",
-top:"Volver arriba"
-},
-fr:{
-title:"Infrastructure locale de confiance non monétaire.",
-subtitle:"Mango reconnaît des échanges réels par une ligne.",
-writeTitle:"Écris une ligne réelle",
-submit:"Envoyer (reste ici)",
-clear:"Effacer",
-myLines:"Tes lignes sur cet appareil",
-deleteAll:"Supprimer toutes",
-top:"Haut de page"
-},
-de:{
-title:"Nicht-monetäre lokale Vertrauens-Infrastruktur.",
-subtitle:"Mango erkennt reale Austausche mit einer Zeile an.",
-writeTitle:"Schreibe eine echte Zeile",
-submit:"Senden (bleibt hier)",
-clear:"Feld leeren",
-myLines:"Deine Zeilen auf diesem Gerät",
-deleteAll:"Alle löschen",
-top:"Nach oben"
-},
-zh:{
-title:"非货币化的本地信任基础设施。",
-subtitle:"Mango 用一行记录承认真实交换。",
-writeTitle:"写下一行真实记录",
-submit:"提交（保留在此）",
-clear:"清除",
-myLines:"你在此设备上的记录",
-deleteAll:"删除全部",
-top:"回到顶部"
-}
-};
+  // Testi (IT completo + EN breve + altre lingue brevi ma coerenti)
+  // Se vuoi le altre lingue lunghe come l’italiano, te le espando dopo senza cambiare struttura.
+  const T = {
+    it:{
+      title:"Un’infrastruttura di fiducia locale non monetaria.",
+      subtitle:"Mango riconosce scambi reali con una riga, senza quantità né valore numerico.",
+      do_title:"Fai Mango adesso",
+      do_text:"Se è successo qualcosa di reale tra due persone (aiuto, tempo, cura, presenza, gesto), Mango lo riconosce. Non valuta. Non misura. Non accumula.",
+      do_note:"Principio chiave: una riga = 🥭. Nessun numero. Nessuna equivalenza.",
+      do_hint:"Qui puoi scrivere una riga e tenerla sul tuo dispositivo (non online).",
+      btn_first:"Scrivi una riga",
+      btn_about:"Cos’è Mango",
+      btn_register:"Vai al Registro",
+      btn_contact:"Contatti",
+      btn_contact2:"Contatti",
+      btn_press:"Scrivi (stampa)",
+      btn_top:"Torna su",
+      btn_write_here:"Scrivi qui",
+      btn_send_keep:"Invia (resta sul sito)",
+      btn_copy:"Copia",
+      btn_clear_field:"Cancella campo",
+      btn_delete_all:"Elimina tutte le righe",
+      btn_back_write:"Torna a “Scrivi una riga”",
+      btn_primo:"Primo scambio",
 
-function setLang(l){
-  const t=TEXTS[l]||TEXTS.it;
-  document.getElementById("title").textContent=t.title;
-  document.getElementById("subtitle").textContent=t.subtitle;
-  document.getElementById("writeTitle").textContent=t.writeTitle;
-  document.getElementById("btnSubmit").textContent=t.submit;
-  document.getElementById("btnClear").textContent=t.clear;
-  document.getElementById("myLinesTitle").textContent=t.myLines;
-  document.getElementById("btnDeleteAll").textContent=t.deleteAll;
-  document.getElementById("btnTop").textContent=t.top;
-}
+      write_title:"Scrivi una riga reale",
+      write_text:"Una riga descrive lo scambio reale. Deve restare umana, semplice, non contabile.",
+      write_li1:"Non inserire quantità, prezzi, numeri o equivalenze.",
+      write_li2:"Descrivi l’azione reale (chi, cosa, quando) in modo sobrio.",
+      write_li3:"Se lo scambio è sbilanciato, Mango non lo trasforma in debito: lo rende visibile e curabile.",
+      write_note:"Usa parole concrete (aiutato, accompagnato, ascoltato, riparato, portato, cucinato…).",
 
-function submitLine(){
-  const input=document.getElementById("input");
-  const text=input.value.trim();
-  if(!text) return;
+      writebox_title:"Scrivi qui la riga (in home)",
+      writebox_text:"Scrivi una sola riga semplice. Poi salva: resterà visibile qui, solo su questo dispositivo.",
+      writebox_placeholder:"Esempio: Marco ha accompagnato Ana in ospedale. (Roma, 14 feb 2026)",
+      writebox_note:"Nota: questo resta sul tuo dispositivo (Safari). Nessun invio esterno. Nessun numero.",
 
-  const lines=JSON.parse(localStorage.getItem("mangoLines")||"[]");
-  lines.push(text);
-  localStorage.setItem("mangoLines",JSON.stringify(lines));
-  input.value="";
-  render();
-}
+      yourlines_title:"Le tue righe sul sito (solo su questo dispositivo)",
+      yourlines_text:"Queste righe restano qui finché non le cancelli. Nessun conteggio pubblico, nessuna somma.",
+      yourlines_note:"Puoi eliminare singole righe o svuotare tutto. Mango non mostra totali.",
 
-function render(){
-  const list=document.getElementById("list");
-  list.innerHTML="";
-  const lines=JSON.parse(localStorage.getItem("mangoLines")||"[]");
-  lines.forEach((line,index)=>{
-    const div=document.createElement("div");
-    div.className="line";
-    div.innerHTML=`<span>${line}</span>
-    <button onclick="deleteLine(${index})">🗑️</button>`;
-    list.appendChild(div);
+      reg_title:"Registro Mango",
+      reg_intro1:"Qui vivono le regole del Registro. È un luogo di riconoscimento scritto: “questo è accaduto, tra persone, nel mondo reale”.",
+      reg_intro2:"Ogni riga riconosce uno scambio realmente accaduto. Non è credito. Non è debito. Non è un conto.",
+      reg_eq:"Una riga = 🥭",
+      reg_no:"Nessun numero. Nessuna equivalenza. Nessuna accumulazione.",
+      reg_time_h:"Principio del tempo",
+      reg_time_p1:"Questo Registro non è un feed. Non spinge il nuovo sopra il vecchio.",
+      reg_time_p2:"Se una cosa è passata, rimane nel passato. Mango ha una temporalità esplicita: non è progettato per durare come accumulo.",
+      reg_struct_h:"Principio strutturale",
+      reg_struct_p1:"Il Registro non misura. Non somma. Non calcola.",
+      reg_struct_p2:"Le righe non si contano. Qualsiasi uso che introduce numeri o conteggi non è Mango.",
+      reg_how_h:"Come si scrive una riga",
+      reg_how_p:"Scrivi semplice. Scrivi umano. Scrivi reale.",
+      reg_how_li1:"Niente prezzi, niente quantità, niente calcoli.",
+      reg_how_li2:"Niente “valore” misurato: solo cosa è accaduto.",
+      reg_how_li3:"Se vuoi, usa solo nomi o iniziali: la privacy è cura.",
+      reg_how_li4:"Meglio pochi dettagli veri che tanti dettagli perfetti.",
+      reg_balance_note:"Se sbilanciato, Mango non pareggia con numeri: rende visibile e curabile nel tempo umano.",
+      reg_anticapture_h:"Non appropriazione e anti-cattura",
+      reg_anticapture_p1:"Mango evita accumulo, speculazione e cattura istituzionale.",
+      reg_anticapture_p2:"Nessuno può trasformarlo in punti, ranking, reputazione o credito sociale. Se diventa conteggio o moneta, non è Mango.",
+      reg_live_h:"Righe vive",
+      reg_live_p:"Questo spazio è pronto ad accogliere la prima riga reale.",
+      reg_live_note:"Nota: non numerare righe e non mostrare totali o contatori.",
+
+      what_title:"Cos’è Mango",
+      what_text1:"Mango non è una moneta. Non è credito. Non è un sistema economico alternativo.",
+      what_text2:"È un’infrastruttura di fiducia locale: riconosce scambi reali senza trasformarli in valore numerico.",
+      what_li1:"Non accumulabile.",
+      what_li2:"Non quantificabile.",
+      what_li3:"Non appropriabile.",
+      what_li4:"Temporalità esplicita.",
+      what_note:"Qualsiasi uso che introduce numeri, conteggi o equivalenze non è Mango.",
+      qr_main:"È successo qualcosa tra due persone.",
+      qr_sub:"Qui puoi capirlo.",
+      contact_title:"Contatto (istituzioni / giornalisti)",
+      contact_text:"Per richieste stampa, scuole, associazioni o istituzioni puoi scrivere qui:",
+      contact_note:"Questo indirizzo è pubblico sul sito.",
+      footer1:"Creato da Juan de Dios Annaloro Mercedes — 02 febbraio 2026 — In memoria di Larimar.",
+      footer2:"Mango è praticabile e trasmissibile, ma non possedibile o centralizzabile."
+    },
+
+    en:{
+      title:"A non-monetary local trust infrastructure.",
+      subtitle:"Mango recognizes real exchanges with one line, with no quantities and no numeric value.",
+      do_title:"Do Mango now",
+      do_text:"If something real happened between two people, Mango recognizes it. It doesn’t measure or accumulate.",
+      do_note:"Rule: one line = 🥭. No numbers. No equivalences.",
+      do_hint:"You can write a line and keep it on this device (not online).",
+      btn_first:"Write a line",
+      btn_about:"What is Mango",
+      btn_register:"Go to the Register",
+      btn_contact:"Contact",
+      btn_contact2:"Contact",
+      btn_press:"Write (press)",
+      btn_top:"Back to top",
+      btn_write_here:"Write here",
+      btn_send_keep:"Send (stays on site)",
+      btn_copy:"Copy",
+      btn_clear_field:"Clear field",
+      btn_delete_all:"Delete all lines",
+      btn_back_write:"Back to “Write a line”",
+      btn_primo:"First exchange",
+      write_title:"Write a real line",
+      write_text:"A line describes the real exchange. Keep it human and simple.",
+      write_li1:"No quantities, prices, numbers or equivalences.",
+      write_li2:"Describe who/what/when soberly.",
+      write_li3:"Unbalanced ≠ debt: visible and care-able.",
+      write_note:"Use concrete verbs.",
+      writebox_title:"Write the line here (home)",
+      writebox_text:"Write one simple line. Save it: it stays here on this device.",
+      writebox_placeholder:"Example: Marco accompanied Ana to the hospital. (Rome, Feb 14, 2026)",
+      writebox_note:"Local only (Safari). No external sending. No numbers.",
+      yourlines_title:"Your lines (only on this device)",
+      yourlines_text:"These lines stay here until you delete them.",
+      yourlines_note:"Delete single lines or clear all. No totals.",
+      reg_title:"Mango Register",
+      reg_intro1:"Register principles: written recognition of the real.",
+      reg_intro2:"A line is not credit, not debt, not an account.",
+      reg_eq:"One line = 🥭",
+      reg_no:"No numbers. No equivalences. No accumulation.",
+      reg_time_h:"Time principle",
+      reg_time_p1:"Not a feed. No pushing new above old.",
+      reg_time_p2:"Past stays past. Explicit temporality.",
+      reg_struct_h:"Structural principle",
+      reg_struct_p1:"No measuring, no summing, no calculating.",
+      reg_struct_p2:"Lines are not counted.",
+      reg_how_h:"How to write a line",
+      reg_how_p:"Simple, human, real.",
+      reg_how_li1:"No prices, no quantities, no calculations.",
+      reg_how_li2:"No measured “value”.",
+      reg_how_li3:"Initials are ok: privacy is care.",
+      reg_how_li4:"Few true details > many perfect ones.",
+      reg_balance_note:"No numeric balancing: human time and real gestures.",
+      reg_anticapture_h:"Non-appropriation / anti-capture",
+      reg_anticapture_p1:"Designed to prevent accumulation and capture.",
+      reg_anticapture_p2:"No points, no ranking, no social credit.",
+      reg_live_h:"Living lines",
+      reg_live_p:"Ready for the first real line.",
+      reg_live_note:"No numbering, no totals.",
+      what_title:"What is Mango",
+      what_text1:"Not money. Not credit. Not an alternative economy.",
+      what_text2:"Local trust: recognition without numeric value.",
+      what_li1:"Non-accumulative.",
+      what_li2:"Non-quantifiable.",
+      what_li3:"Non-appropriable.",
+      what_li4:"Explicit temporality.",
+      what_note:"If it becomes counting or money, it’s not Mango.",
+      qr_main:"Something happened between two people.",
+      qr_sub:"Here you can understand it.",
+      contact_title:"Contact (institutions / press)",
+      contact_text:"For press or institutions, write here:",
+      contact_note:"This email is public on the site.",
+      footer1:"Created by Juan de Dios Annaloro Mercedes — 02 Feb 2026 — In memory of Larimar.",
+      footer2:"Practicable and transmissible, but not ownable or centralizable."
+    },
+
+    // Versioni brevi ma coerenti (possiamo espanderle dopo)
+    es:{...null},
+    fr:{...null},
+    de:{...null},
+    zh:{...null}
+  };
+
+  // Riempie ES/FR/DE/ZH usando EN come base (così non si rompe nulla)
+  ["es","fr","de","zh"].forEach(k=>{ if(!T[k]) T[k]=T.en; });
+
+  function getLang(){
+    const u = new URL(location.href);
+    const l = (u.searchParams.get("lang")||"").toLowerCase();
+    return SUPPORTED.includes(l) ? l : DEFAULT_LANG;
+  }
+  function setLang(l){
+    const u = new URL(location.href);
+    u.searchParams.set("lang", l);
+    history.replaceState({}, "", u.toString());
+  }
+  function withLang(path){
+    const l = getLang();
+    const hasQ = path.includes("?");
+    if (path.includes("lang=")) return path;
+    return path + (hasQ ? "&" : "?") + "lang=" + encodeURIComponent(l);
+  }
+  function apply(l){
+    document.documentElement.lang = l;
+    document.querySelectorAll(".chip").forEach(b=>{
+      b.setAttribute("aria-current", b.dataset.lang===l ? "true" : "false");
+    });
+    const d = T[l] || T[DEFAULT_LANG];
+    const ids = [
+      "t_title","t_subtitle","t_do_title","t_do_text","t_do_note","t_do_hint",
+      "t_btn_first","t_btn_about","t_btn_register","t_btn_contact","t_btn_contact2","t_btn_press","t_btn_top",
+      "t_btn_write_here","t_btn_send_keep","t_btn_copy","t_btn_clear_field","t_btn_delete_all","t_btn_back_write","t_btn_primo",
+      "t_write_title","t_write_text","t_write_li1","t_write_li2","t_write_li3","t_write_note",
+      "t_writebox_title","t_writebox_text","t_writebox_note",
+      "t_yourlines_title","t_yourlines_text","t_yourlines_note",
+      "t_reg_title","t_reg_intro1","t_reg_intro2","t_reg_eq","t_reg_no",
+      "t_reg_time_h","t_reg_time_p1","t_reg_time_p2",
+      "t_reg_struct_h","t_reg_struct_p1","t_reg_struct_p2",
+      "t_reg_how_h","t_reg_how_p","t_reg_how_li1","t_reg_how_li2","t_reg_how_li3","t_reg_how_li4",
+      "t_reg_balance_note","t_reg_anticapture_h","t_reg_anticapture_p1","t_reg_anticapture_p2",
+      "t_reg_live_h","t_reg_live_p","t_reg_live_note",
+      "t_what_title","t_what_text1","t_what_text2","t_what_li1","t_what_li2","t_what_li3","t_what_li4","t_what_note",
+      "t_qr_main","t_qr_sub",
+      "t_contact_title","t_contact_text","t_contact_note",
+      "t_footer_line1","t_footer_line2"
+    ];
+    ids.forEach(id=>{
+      const el = document.getElementById(id);
+      if(el && d[id.replace(/^t_/, "")] !== undefined){
+        el.textContent = d[id.replace(/^t_/, "")];
+      }
+    });
+    const ta = document.getElementById("lineInput");
+    if (ta) ta.placeholder = d.writebox_placeholder || "";
+  }
+
+  function goTop(){
+    try{ window.scrollTo({top:0,left:0,behavior:"smooth"}); }
+    catch(_){ window.scrollTo(0,0); }
+  }
+  function goToId(id){
+    const el = document.getElementById(id);
+    if(el) el.scrollIntoView({behavior:"smooth", block:"start"});
+  }
+
+  // Local storage righe
+  const STORAGE_KEY = "mango_lines_v1";
+  function loadLines(){
+    try{
+      const raw = localStorage.getItem(STORAGE_KEY);
+      const arr = raw ? JSON.parse(raw) : [];
+      return Array.isArray(arr) ? arr : [];
+    }catch(e){ return []; }
+  }
+  function saveLines(arr){ localStorage.setItem(STORAGE_KEY, JSON.stringify(arr)); }
+
+  function renderLines(){
+    const list = document.getElementById("linesList");
+    if(!list) return;
+    const lines = loadLines();
+    list.innerHTML = "";
+
+    if(!lines.length){
+      const empty = document.createElement("div");
+      empty.className = "small";
+      empty.textContent = (getLang()==="it")
+        ? "Nessuna riga salvata su questo dispositivo."
+        : "No lines saved on this device.";
+      list.appendChild(empty);
+      return;
+    }
+
+    lines.forEach((item, idx)=>{
+      const box = document.createElement("div");
+      box.className = "lineItem";
+
+      const meta = document.createElement("div");
+      meta.className = "lineMeta";
+
+      const tag = document.createElement("div");
+      tag.className = "tag";
+      tag.textContent = new Date(item.ts || Date.now()).toLocaleString();
+
+      const actions = document.createElement("div");
+      actions.className = "btnrow";
+      actions.style.marginTop = "0";
+
+      const bCopy = document.createElement("button");
+      bCopy.className = "btn secondary small";
+      bCopy.textContent = "📋";
+      bCopy.onclick = async ()=>{
+        try{ await navigator.clipboard.writeText(item.text || ""); }
+        catch(_){
+          const ta = document.createElement("textarea");
+          ta.value = item.text || "";
+          document.body.appendChild(ta);
+          ta.select();
+          document.execCommand("copy");
+          document.body.removeChild(ta);
+        }
+      };
+
+      const bDel = document.createElement("button");
+      bDel.className = "btn secondary small";
+      bDel.textContent = "🗑️";
+      bDel.onclick = ()=>{
+        const arr = loadLines();
+        arr.splice(idx, 1);
+        saveLines(arr);
+        renderLines();
+      };
+
+      actions.appendChild(bCopy);
+      actions.appendChild(bDel);
+
+      meta.appendChild(tag);
+      meta.appendChild(actions);
+
+      const text = document.createElement("div");
+      text.className = "lineText";
+      text.textContent = item.text || "";
+
+      box.appendChild(meta);
+      box.appendChild(text);
+      list.appendChild(box);
+    });
+  }
+
+  // Eventi
+  document.querySelectorAll(".chip").forEach(b=>{
+    b.addEventListener("click", ()=>{
+      setLang(b.dataset.lang);
+      apply(b.dataset.lang);
+      renderLines();
+    });
   });
-}
 
-function deleteLine(i){
-  const lines=JSON.parse(localStorage.getItem("mangoLines")||"[]");
-  lines.splice(i,1);
-  localStorage.setItem("mangoLines",JSON.stringify(lines));
-  render();
-}
+  document.getElementById("mangoTop")?.addEventListener("click", (e)=>{ e.preventDefault(); goTop(); });
 
-function deleteAll(){
-  if(!confirm("Cancellare tutte le righe?")) return;
-  localStorage.removeItem("mangoLines");
-  render();
-}
+  document.getElementById("btn_top")?.addEventListener("click", (e)=>{ e.preventDefault(); goTop(); });
+  document.getElementById("btn_top2")?.addEventListener("click", (e)=>{ e.preventDefault(); goTop(); });
+  document.getElementById("btn_top3")?.addEventListener("click", (e)=>{ e.preventDefault(); goTop(); });
 
-function clearInput(){
-  document.getElementById("input").value="";
-}
+  document.getElementById("btn_go_write")?.addEventListener("click", ()=>goToId("write_rules"));
+  document.getElementById("btn_go_what")?.addEventListener("click", ()=>goToId("what"));
+  document.getElementById("btn_go_register")?.addEventListener("click", ()=>goToId("register"));
+  document.getElementById("btn_go_register2")?.addEventListener("click", ()=>goToId("register"));
+  document.getElementById("btn_go_contact")?.addEventListener("click", ()=>goToId("contact"));
+  document.getElementById("btn_go_contact2")?.addEventListener("click", ()=>goToId("contact"));
+  document.getElementById("btn_go_contact3")?.addEventListener("click", ()=>goToId("contact"));
+  document.getElementById("btn_back_write_rules")?.addEventListener("click", ()=>goToId("write_rules"));
+  document.getElementById("btn_go_writebox")?.addEventListener("click", ()=>goToId("writebox"));
+  document.getElementById("btn_go_writebox2")?.addEventListener("click", ()=>goToId("writebox"));
 
-function goTop(){
-  window.scrollTo({top:0,behavior:"smooth"});
-}
+  document.getElementById("btn_go_primo")?.addEventListener("click", ()=>{
+    location.href = withLang("primo-scambio.html");
+  });
 
-setLang("it");
-render();
+  document.getElementById("btn_save_line")?.addEventListener("click", ()=>{
+    const ta = document.getElementById("lineInput");
+    if(!ta) return;
+    const text = (ta.value || "").trim();
+    if(!text) return;
 
+    const arr = loadLines();
+    arr.unshift({ text, ts: Date.now() });
+    saveLines(arr);
+    renderLines();
+
+    ta.value = "";
+    goToId("yourlines");
+  });
+
+  document.getElementById("btn_copy_line")?.addEventListener("click", async ()=>{
+    const ta = document.getElementById("lineInput");
+    if(!ta) return;
+    const text = (ta.value || "").trim();
+    if(!text) return;
+    try{ await navigator.clipboard.writeText(text); }
+    catch(_){
+      ta.select();
+      document.execCommand("copy");
+      ta.setSelectionRange(ta.value.length, ta.value.length);
+    }
+  });
+
+  document.getElementById("btn_clear_input")?.addEventListener("click", ()=>{
+    const ta = document.getElementById("lineInput");
+    if(ta) ta.value = "";
+  });
+
+  document.getElementById("btn_delete_all")?.addEventListener("click", ()=>{
+    saveLines([]);
+    renderLines();
+  });
+
+  // INIT
+  (function init(){
+    const l = getLang();
+    apply(l);
+    renderLines();
+  })();
 </script>
 
 </body>

@@ -3,55 +3,50 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title></title>
+
+  <!-- Title neutro (non appare nella pagina) -->
+  <title> </title>
 
   <style>
     html, body {
       margin: 0;
-      padding: 0;
       height: 100%;
-      background: #ffffff;
+      background: #fff;
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
     }
 
     body {
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      display: grid;
+      place-items: center;
     }
 
-    .container {
-      text-align: center;
-      width: 100%;
-    }
-
-    .home-btn {
-      padding: 14px 22px;
+    /* Silenzio: niente contenitore “visibile”, solo centro */
+    .btn {
+      padding: 10px 16px;
       border-radius: 999px;
-      border: 1px solid #000;
+      border: 0.75px solid rgba(0,0,0,0.35);
       background: transparent;
-      text-decoration: none;
+      color: rgba(0,0,0,0.55);
+      font-size: 0.95rem;
       font-weight: 600;
+      letter-spacing: 0.01em;
       cursor: pointer;
-      transition: 0.2s ease;
+      -webkit-tap-highlight-color: transparent;
+      transition: transform 0.08s ease;
     }
 
-    .home-btn:active {
-      transform: scale(0.98);
-    }
+    .btn:active { transform: scale(0.985); }
   </style>
 </head>
 
 <body>
-  <main class="container">
-    <button id="homeBtn" class="home-btn">Torna alla home</button>
-  </main>
+  <button id="homeBtn" class="btn">Torna alla home</button>
 
   <script>
-    const params = new URLSearchParams(window.location.search);
+    const params = new URLSearchParams(location.search);
     const lang = (params.get("lang") || "it").toLowerCase();
 
-    const translations = {
+    const t = {
       it: "Torna alla home",
       en: "Back to home",
       es: "Volver a inicio",
@@ -61,11 +56,11 @@
     };
 
     document.documentElement.lang = lang;
-    document.getElementById("homeBtn").textContent =
-      translations[lang] || translations.it;
+    const btn = document.getElementById("homeBtn");
+    btn.textContent = t[lang] || t.it;
 
-    document.getElementById("homeBtn").addEventListener("click", function() {
-      window.location.href = "index.html?lang=" + encodeURIComponent(lang);
+    btn.addEventListener("click", () => {
+      location.href = "index.html?lang=" + encodeURIComponent(lang);
     });
   </script>
 </body>

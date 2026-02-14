@@ -44,7 +44,7 @@
 <body>
 <header id="top">
   <div class="hwrap">
-    <div class="brand">Mango <a href="bianco.html">🥭</a></div>
+    <div class="brand">Mango <a href="bianco.html" aria-label="Spazio bianco">🥭</a></div>
     <nav class="lang" aria-label="Lingue">
       <button class="chip" data-lang="it">IT</button>
       <button class="chip" data-lang="en">EN</button>
@@ -69,9 +69,7 @@
       <p id="t_do_text"></p>
 
       <div class="btnrow">
-        <!-- apre primo-scambio con lingua attiva -->
-        <a class="btn" href="primo-scambio.html"
-           onclick="location.href='primo-scambio.html?lang='+(new URL(location.href).searchParams.get('lang')||'it'); return false;">
+        <a class="btn" href="primo-scambio.html" id="btnFirst">
           ✍️ <span id="t_btn_first"></span>
         </a>
         <a class="btn secondary" href="#what">📘 <span id="t_btn_about"></span></a>
@@ -95,7 +93,6 @@
       <p class="small" id="t_write_note"></p>
     </article>
 
-    <!-- REGISTRO PUBBLICO -->
     <article class="card" id="register">
       <h2 id="t_reg_title"></h2>
 
@@ -103,7 +100,6 @@
       <p id="t_reg_intro2"></p>
 
       <div class="eq" id="t_reg_eq"></div>
-
       <p id="t_reg_no"></p>
 
       <hr>
@@ -144,8 +140,7 @@
       <p class="small" id="t_reg_live_note"></p>
 
       <div class="btnrow">
-        <!-- Torna su: link standard, reso iPhone-safe via JS -->
-        <a class="btn secondary" href="#top">⬆️ <span id="t_btn_home"></span></a>
+        <a class="btn secondary" href="#top">⬆️ <span id="t_btn_top2"></span></a>
         <a class="btn secondary" href="#write">⬆️ <span id="t_btn_back_write"></span></a>
         <a class="btn" href="#contact">✉️ <span id="t_btn_contact2"></span></a>
       </div>
@@ -192,9 +187,12 @@
 </main>
 
 <script>
+document.addEventListener("DOMContentLoaded", () => {
+
   const SUPPORTED = ["it","en","es","fr","de","zh"];
   const DEFAULT_LANG = "it";
 
+  // ==== TESTI (6 lingue) ====
   const T = {
     it:{
       title:"Un’infrastruttura di fiducia locale non monetaria.",
@@ -207,7 +205,6 @@
       btn_contact:"Contatti",
       btn_press:"Scrivi (stampa)",
       btn_top:"Torna su",
-      btn_home:"Home",
       btn_register:"Vai al Registro",
 
       write_title:"Scrivi una riga",
@@ -280,7 +277,6 @@
       btn_contact:"Contact",
       btn_press:"Write (press)",
       btn_top:"Back to top",
-      btn_home:"Home",
       btn_register:"Go to the Register",
 
       write_title:"Write a line",
@@ -353,7 +349,6 @@
       btn_contact:"Contacto",
       btn_press:"Escribir (prensa)",
       btn_top:"Volver arriba",
-      btn_home:"Inicio",
       btn_register:"Ir al Registro",
 
       write_title:"Escribe una línea",
@@ -426,7 +421,6 @@
       btn_contact:"Contact",
       btn_press:"Écrire (presse)",
       btn_top:"Haut de page",
-      btn_home:"Accueil",
       btn_register:"Aller au Registre",
 
       write_title:"Écrire une ligne",
@@ -499,7 +493,6 @@
       btn_contact:"Kontakt",
       btn_press:"Schreiben (Presse)",
       btn_top:"Nach oben",
-      btn_home:"Startseite",
       btn_register:"Zum Register",
 
       write_title:"Eine Zeile schreiben",
@@ -572,7 +565,6 @@
       btn_contact:"联系",
       btn_press:"写信（媒体）",
       btn_top:"回到顶部",
-      btn_home:"首页",
       btn_register:"进入登记册",
 
       write_title:"写下一行",
@@ -640,140 +632,137 @@
     const l=(u.searchParams.get("lang")||"").toLowerCase();
     return SUPPORTED.includes(l)?l:DEFAULT_LANG;
   }
+
   function setLang(l){
     const u=new URL(location.href);
     u.searchParams.set("lang",l);
     history.replaceState({}, "", u.toString());
   }
 
-  // iPhone-safe: tutti i link a #top scrollano sempre in cima
-  function bindTopLinks(){
-    document.querySelectorAll('a[href="#top"]').forEach(a=>{
-      if(a.dataset.mangoTop==="1") return;
-      a.dataset.mangoTop="1";
-      a.addEventListener("click",(e)=>{
-        e.preventDefault();
-        window.scrollTo(0,0);
-      },{passive:false});
-    });
+  // iPhone-proof: qualsiasi click su #top -> scroll assoluto
+  document.addEventListener("click", (e) => {
+    const a = e.target.closest('a[href="#top"]');
+    if(!a) return;
+    e.preventDefault();
+    document.documentElement.scrollTop = 0;
+    document.body.scrollTop = 0;
+    window.scrollTo(0,0);
+    setTimeout(()=>window.scrollTo(0,0), 30);
+  }, {passive:false});
+
+  function setText(id, value){
+    const el = document.getElementById(id);
+    if(!el) return;
+    el.textContent = value || "";
   }
 
   function apply(l){
     document.documentElement.lang=l;
-    document.querySelectorAll(".chip").forEach(b=>b.setAttribute("aria-current", b.dataset.lang===l ? "true":"false"));
-    const d=T[l]||T[DEFAULT_LANG];
-
-    const m={
-      t_title:d.title,
-      t_subtitle:d.subtitle,
-
-      t_do_title:d.do_title,
-      t_do_text:d.do_text,
-      t_do_note:d.do_note,
-
-      t_btn_first:d.btn_first,
-      t_btn_about:d.btn_about,
-      t_btn_contact:d.btn_contact,
-      t_btn_press:d.btn_press,
-      t_btn_top:d.btn_top,
-
-      t_write_title:d.write_title,
-      t_write_text:d.write_text,
-      t_write_li1:d.write_li1,
-      t_write_li2:d.write_li2,
-      t_write_li3:d.write_li3,
-      t_write_note:d.write_note,
-      t_btn_register:d.btn_register,
-
-      t_reg_title:d.reg_title,
-      t_reg_intro1:d.reg_intro1,
-      t_reg_intro2:d.reg_intro2,
-      t_reg_eq:d.reg_eq,
-      t_reg_no:d.reg_no,
-
-      t_reg_time_h:d.reg_time_h,
-      t_reg_time_p1:d.reg_time_p1,
-      t_reg_time_p2:d.reg_time_p2,
-
-      t_reg_struct_h:d.reg_struct_h,
-      t_reg_struct_p1:d.reg_struct_p1,
-      t_reg_struct_p2:d.reg_struct_p2,
-
-      t_reg_how_h:d.reg_how_h,
-      t_reg_how_p:d.reg_how_p,
-      t_reg_how_li1:d.reg_how_li1,
-      t_reg_how_li2:d.reg_how_li2,
-      t_reg_how_li3:d.reg_how_li3,
-      t_reg_how_li4:d.reg_how_li4,
-      t_reg_balance_note:d.reg_balance_note,
-
-      t_reg_anticapture_h:d.reg_anticapture_h,
-      t_reg_anticapture_p1:d.reg_anticapture_p1,
-      t_reg_anticapture_p2:d.reg_anticapture_p2,
-
-      t_reg_live_h:d.reg_live_h,
-      t_reg_live_p:d.reg_live_p,
-      t_reg_live_note:d.reg_live_note,
-
-      // QUI: il bottone in Registro deve dire "Torna su" in ogni lingua
-      t_btn_home:d.btn_top,
-
-      t_btn_back_write:d.btn_back_write,
-      t_btn_contact2:d.btn_contact2,
-
-      t_what_title:d.what_title,
-      t_what_text1:d.what_text1,
-      t_what_text2:d.what_text2,
-      t_what_li1:d.what_li1,
-      t_what_li2:d.what_li2,
-      t_what_li3:d.what_li3,
-      t_what_li4:d.what_li4,
-
-      t_qr_main:d.qr_main,
-      t_qr_sub:d.qr_sub,
-
-      t_contact_title:d.contact_title,
-      t_contact_text:d.contact_text,
-      t_contact_note:d.contact_note,
-
-      t_footer_line1:d.footer1,
-      t_footer_line2:d.footer2
-    };
-
-    Object.keys(m).forEach(id=>{
-      const el=document.getElementById(id);
-      if(el) el.textContent=m[id];
+    document.querySelectorAll(".chip").forEach(b=>{
+      b.setAttribute("aria-current", b.dataset.lang===l ? "true":"false");
     });
+    const d = T[l] || T[DEFAULT_LANG];
 
-    bindTopLinks();
+    // testi base
+    setText("t_title", d.title);
+    setText("t_subtitle", d.subtitle);
+
+    setText("t_do_title", d.do_title);
+    setText("t_do_text", d.do_text);
+    setText("t_do_note", d.do_note);
+
+    setText("t_btn_first", d.btn_first);
+    setText("t_btn_about", d.btn_about);
+    setText("t_btn_contact", d.btn_contact);
+    setText("t_btn_press", d.btn_press);
+    setText("t_btn_top", d.btn_top);
+    setText("t_btn_top2", d.btn_top);
+
+    setText("t_btn_register", d.btn_register);
+
+    setText("t_write_title", d.write_title);
+    setText("t_write_text", d.write_text);
+    setText("t_write_li1", d.write_li1);
+    setText("t_write_li2", d.write_li2);
+    setText("t_write_li3", d.write_li3);
+    setText("t_write_note", d.write_note);
+
+    // registro
+    setText("t_reg_title", d.reg_title);
+    setText("t_reg_intro1", d.reg_intro1);
+    setText("t_reg_intro2", d.reg_intro2);
+    setText("t_reg_eq", d.reg_eq);
+    setText("t_reg_no", d.reg_no);
+
+    setText("t_reg_time_h", d.reg_time_h);
+    setText("t_reg_time_p1", d.reg_time_p1);
+    setText("t_reg_time_p2", d.reg_time_p2);
+
+    setText("t_reg_struct_h", d.reg_struct_h);
+    setText("t_reg_struct_p1", d.reg_struct_p1);
+    setText("t_reg_struct_p2", d.reg_struct_p2);
+
+    setText("t_reg_how_h", d.reg_how_h);
+    setText("t_reg_how_p", d.reg_how_p);
+    setText("t_reg_how_li1", d.reg_how_li1);
+    setText("t_reg_how_li2", d.reg_how_li2);
+    setText("t_reg_how_li3", d.reg_how_li3);
+    setText("t_reg_how_li4", d.reg_how_li4);
+
+    setText("t_reg_balance_note", d.reg_balance_note);
+
+    setText("t_reg_anticapture_h", d.reg_anticapture_h);
+    setText("t_reg_anticapture_p1", d.reg_anticapture_p1);
+    setText("t_reg_anticapture_p2", d.reg_anticapture_p2);
+
+    setText("t_reg_live_h", d.reg_live_h);
+    setText("t_reg_live_p", d.reg_live_p);
+    setText("t_reg_live_note", d.reg_live_note);
+
+    setText("t_btn_back_write", d.btn_back_write);
+    setText("t_btn_contact2", d.btn_contact2);
+
+    // what
+    setText("t_what_title", d.what_title);
+    setText("t_what_text1", d.what_text1);
+    setText("t_what_text2", d.what_text2);
+    setText("t_what_li1", d.what_li1);
+    setText("t_what_li2", d.what_li2);
+    setText("t_what_li3", d.what_li3);
+    setText("t_what_li4", d.what_li4);
+
+    // qr
+    setText("t_qr_main", d.qr_main);
+    setText("t_qr_sub", d.qr_sub);
+
+    // contatti + footer
+    setText("t_contact_title", d.contact_title);
+    setText("t_contact_text", d.contact_text);
+    setText("t_contact_note", d.contact_note);
+
+    setText("t_footer_line1", d.footer1);
+    setText("t_footer_line2", d.footer2);
   }
 
-  document.querySelectorAll(".chip").forEach(b=>b.addEventListener("click", ()=>{
-    setLang(b.dataset.lang);
-    apply(b.dataset.lang);
-  }));
+  // bottone primo-scambio sempre con lingua attiva
+  const btnFirst = document.getElementById("btnFirst");
+  if(btnFirst){
+    btnFirst.addEventListener("click", (e)=>{
+      e.preventDefault();
+      const lang = (new URL(location.href).searchParams.get("lang")||DEFAULT_LANG);
+      location.href = "primo-scambio.html?lang=" + encodeURIComponent(lang);
+    }, {passive:false});
+  }
+
+  document.querySelectorAll(".chip").forEach(b=>{
+    b.addEventListener("click", ()=>{
+      setLang(b.dataset.lang);
+      apply(b.dataset.lang);
+    });
+  });
 
   apply(getLang());
-  // --- Mango: Torna su (iPhone-proof, definitivo) ---
-document.addEventListener("click", function (e) {
-  const a = e.target.closest('a[href="#top"]');
-  if (!a) return;
-
-  e.preventDefault();
-
-  // 3 metodi insieme (Safari/iOS friendly)
-  document.documentElement.scrollTop = 0;
-  document.body.scrollTop = 0;
-  window.scrollTo(0, 0);
-
-  // rinforzo dopo un attimo
-  setTimeout(() => {
-    document.documentElement.scrollTop = 0;
-    document.body.scrollTop = 0;
-    window.scrollTo(0, 0);
-  }, 50);
-}, { passive: false });
+});
 </script>
-
 </body>
 </html>

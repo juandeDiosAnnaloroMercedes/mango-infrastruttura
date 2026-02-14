@@ -1,36 +1,48 @@
 <!doctype html>
-<html lang="it">
+<html>
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title> </title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title></title>
+
   <style>
-    html, body { margin:0; height:100%; background:#fff; }
-    .mango-btn{
-      position: fixed;
-      right: 16px;
-      bottom: 18px;
-      border:0;
-      background:transparent;
-      cursor:pointer;
-      font-size:34px;          /* più discreto */
-      line-height:1;
-      padding:16px;            /* tap target grande */
-      border-radius:999px;
-      opacity:0.75;            /* quasi invisibile */
-      -webkit-tap-highlight-color: transparent;
-      transition: transform .08s ease, opacity .2s ease;
+    html, body {
+      margin: 0;
+      height: 100%;
+      background: #ffffff;
     }
-    .mango-btn:active{ transform: scale(0.97); opacity:0.95; }
+
+    .mango {
+      position: fixed;
+      right: 18px;
+      bottom: 22px;
+      font-size: 34px;
+      background: transparent;
+      border: none;
+      padding: 18px;              /* grande area di tap */
+      cursor: pointer;
+      border-radius: 999px;
+      opacity: 0.75;
+      -webkit-tap-highlight-color: transparent;
+      transition: transform 0.08s ease, opacity 0.2s ease;
+    }
+
+    .mango:active {
+      transform: scale(0.96);
+      opacity: 1;
+    }
   </style>
 </head>
+
 <body>
-  <button class="mango-btn" aria-label="Home" title="Home" id="mango">🥭</button>
+
+  <button class="mango" onclick="goHome()">🥭</button>
 
   <script>
-    document.getElementById("mango").addEventListener("click", () => {
+    function goHome() {
       window.location.href = "index.html";
-    });
+    }
   </script>
+
 </body>
 </html>

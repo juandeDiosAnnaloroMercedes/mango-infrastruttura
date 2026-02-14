@@ -34,6 +34,10 @@
     .mono{font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono","Courier New",monospace;font-size:13px}
     .small{font-size:13px;color:var(--muted)}
     .eq{font-weight:950;font-size:18px;color:#111;margin:10px 0 0}
+
+    /* 🥭 pulito: niente sottolineatura */
+    .brand a{ text-decoration:none; color:inherit; }
+    .brand a:visited{ color:inherit; }
   </style>
 </head>
 
@@ -65,7 +69,7 @@
       <p id="t_do_text"></p>
 
       <div class="btnrow">
-        <!-- FIX DEFINITIVO: forza apertura primo-scambio.html con lingua attiva -->
+        <!-- apre primo-scambio con lingua attiva -->
         <a class="btn" href="primo-scambio.html"
            onclick="location.href='primo-scambio.html?lang='+(new URL(location.href).searchParams.get('lang')||'it'); return false;">
           ✍️ <span id="t_btn_first"></span>
@@ -91,7 +95,7 @@
       <p class="small" id="t_write_note"></p>
     </article>
 
-    <!-- REGISTRO PUBBLICO INTEGRATO NELLA HOME UNICA -->
+    <!-- REGISTRO PUBBLICO -->
     <article class="card" id="register">
       <h2 id="t_reg_title"></h2>
 
@@ -140,7 +144,8 @@
       <p class="small" id="t_reg_live_note"></p>
 
       <div class="btnrow">
-        <a class="btn secondary" href="#" onclick="window.scrollTo({top:0,behavior:'smooth'});return false;">
+        <!-- Torna su: link standard, reso iPhone-safe via JS -->
+        <a class="btn secondary" href="#top">⬆️ <span id="t_btn_home"></span></a>
         <a class="btn secondary" href="#write">⬆️ <span id="t_btn_back_write"></span></a>
         <a class="btn" href="#contact">✉️ <span id="t_btn_contact2"></span></a>
       </div>
@@ -640,16 +645,44 @@
     u.searchParams.set("lang",l);
     history.replaceState({}, "", u.toString());
   }
+
+  // iPhone-safe: tutti i link a #top scrollano sempre in cima
+  function bindTopLinks(){
+    document.querySelectorAll('a[href="#top"]').forEach(a=>{
+      if(a.dataset.mangoTop==="1") return;
+      a.dataset.mangoTop="1";
+      a.addEventListener("click",(e)=>{
+        e.preventDefault();
+        window.scrollTo(0,0);
+      },{passive:false});
+    });
+  }
+
   function apply(l){
     document.documentElement.lang=l;
     document.querySelectorAll(".chip").forEach(b=>b.setAttribute("aria-current", b.dataset.lang===l ? "true":"false"));
     const d=T[l]||T[DEFAULT_LANG];
 
     const m={
-      t_title:d.title,t_subtitle:d.subtitle,
-      t_do_title:d.do_title,t_do_text:d.do_text,t_do_note:d.do_note,
-      t_btn_first:d.btn_first,t_btn_about:d.btn_about,t_btn_contact:d.btn_contact,t_btn_press:d.btn_press,t_btn_top:d.btn_top,
-      t_write_title:d.write_title,t_write_text:d.write_text,t_write_li1:d.write_li1,t_write_li2:d.write_li2,t_write_li3:d.write_li3,t_write_note:d.write_note,
+      t_title:d.title,
+      t_subtitle:d.subtitle,
+
+      t_do_title:d.do_title,
+      t_do_text:d.do_text,
+      t_do_note:d.do_note,
+
+      t_btn_first:d.btn_first,
+      t_btn_about:d.btn_about,
+      t_btn_contact:d.btn_contact,
+      t_btn_press:d.btn_press,
+      t_btn_top:d.btn_top,
+
+      t_write_title:d.write_title,
+      t_write_text:d.write_text,
+      t_write_li1:d.write_li1,
+      t_write_li2:d.write_li2,
+      t_write_li3:d.write_li3,
+      t_write_note:d.write_note,
       t_btn_register:d.btn_register,
 
       t_reg_title:d.reg_title,
@@ -657,12 +690,15 @@
       t_reg_intro2:d.reg_intro2,
       t_reg_eq:d.reg_eq,
       t_reg_no:d.reg_no,
+
       t_reg_time_h:d.reg_time_h,
       t_reg_time_p1:d.reg_time_p1,
       t_reg_time_p2:d.reg_time_p2,
+
       t_reg_struct_h:d.reg_struct_h,
       t_reg_struct_p1:d.reg_struct_p1,
       t_reg_struct_p2:d.reg_struct_p2,
+
       t_reg_how_h:d.reg_how_h,
       t_reg_how_p:d.reg_how_p,
       t_reg_how_li1:d.reg_how_li1,
@@ -670,73 +706,54 @@
       t_reg_how_li3:d.reg_how_li3,
       t_reg_how_li4:d.reg_how_li4,
       t_reg_balance_note:d.reg_balance_note,
+
       t_reg_anticapture_h:d.reg_anticapture_h,
       t_reg_anticapture_p1:d.reg_anticapture_p1,
       t_reg_anticapture_p2:d.reg_anticapture_p2,
+
       t_reg_live_h:d.reg_live_h,
       t_reg_live_p:d.reg_live_p,
       t_reg_live_note:d.reg_live_note,
 
-      t_btn_home:d.btn_home,
+      // QUI: il bottone in Registro deve dire "Torna su" in ogni lingua
+      t_btn_home:d.btn_top,
+
       t_btn_back_write:d.btn_back_write,
       t_btn_contact2:d.btn_contact2,
 
-      t_what_title:d.what_title,t_what_text1:d.what_text1,t_what_text2:d.what_text2,t_what_li1:d.what_li1,t_what_li2:d.what_li2,t_what_li3:d.what_li3,t_what_li4:d.what_li4,
-      t_qr_main:d.qr_main,t_qr_sub:d.qr_sub,
-      t_contact_title:d.contact_title,t_contact_text:d.contact_text,t_contact_note:d.contact_note,
-      t_footer_line1:d.footer1,t_footer_line2:d.footer2
+      t_what_title:d.what_title,
+      t_what_text1:d.what_text1,
+      t_what_text2:d.what_text2,
+      t_what_li1:d.what_li1,
+      t_what_li2:d.what_li2,
+      t_what_li3:d.what_li3,
+      t_what_li4:d.what_li4,
+
+      t_qr_main:d.qr_main,
+      t_qr_sub:d.qr_sub,
+
+      t_contact_title:d.contact_title,
+      t_contact_text:d.contact_text,
+      t_contact_note:d.contact_note,
+
+      t_footer_line1:d.footer1,
+      t_footer_line2:d.footer2
     };
 
     Object.keys(m).forEach(id=>{
       const el=document.getElementById(id);
       if(el) el.textContent=m[id];
     });
+
+    bindTopLinks();
   }
 
   document.querySelectorAll(".chip").forEach(b=>b.addEventListener("click", ()=>{
     setLang(b.dataset.lang);
     apply(b.dataset.lang);
   }));
-// --- Mango scroll to top (definitivo, tutte le lingue) ---
-(function () {
-  const btn = document.querySelector(".btn_home");
-  if (!btn) return;
 
-  btn.addEventListener("click", function (e) {
-    e.preventDefault();
-    try {
-      window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
-    } catch (_) {
-      window.scrollTo(0, 0);
-    }
-  }, { passive: false });
-})();
   apply(getLang());
-  apply(getLang());
-
-// --- Mango: scroll-to-top definitivo ---
-(function () {
-  function goTop(e) {
-    if (e) e.preventDefault();
-    try {
-      window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
-    } catch (_) {
-      window.scrollTo(0, 0);
-    }
-  }
-
-  function bind() {
-    const byId = document.getElementById("t_btn_home");
-    if (byId) byId.addEventListener("click", goTop, { passive: false });
-
-    const byClass = document.querySelector(".btn_home");
-    if (byClass) byClass.addEventListener("click", goTop, { passive: false });
-  }
-
-  bind();
-  setTimeout(bind, 200);
-})();
-</script>
 </script>
 
 </body>

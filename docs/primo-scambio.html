@@ -1,416 +1,195 @@
 <!doctype html>
 <html lang="it">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Mango — Primo scambio</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Mango – Primo scambio</title>
 
-  <style>
-    :root{
-      --bg:#fff; --fg:#111; --muted:#6b7280;
-      --card:#f6f7f9; --border:#e5e7eb;
-      --shadow:0 10px 30px rgba(0,0,0,.06);
-      --r:18px; --max:860px; --p:18px;
-      --font:ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial;
-    }
-    *{box-sizing:border-box}
-    html{scroll-behavior:smooth}
-    body{margin:0;font-family:var(--font);background:var(--bg);color:var(--fg)}
-    a,a:visited{color:inherit;text-decoration:none}
-
-    header{
-      position:sticky;top:0;background:rgba(255,255,255,.92);
-      backdrop-filter:blur(8px);border-bottom:1px solid var(--border);z-index:10
-    }
-    .hwrap{
-      max-width:var(--max);margin:0 auto;padding:14px var(--p);
-      display:flex;justify-content:space-between;align-items:center;gap:12px
-    }
-    .brand{font-weight:900;font-size:22px;display:flex;gap:10px;align-items:center}
-    .mangoBtn{
-      border:1px solid var(--border); background:#fff;
-      border-radius:999px; padding:6px 10px;
-      cursor:pointer; font-size:18px; line-height:1;
-    }
-    .lang{display:flex;gap:10px;flex-wrap:wrap;justify-content:flex-end}
-    .chip{
-      border:1px solid var(--border);background:#fff;border-radius:999px;
-      padding:10px 14px;font-weight:800;font-size:14px;cursor:pointer
-    }
-    .chip[aria-current="true"]{outline:2px solid #111;outline-offset:2px}
-
-    .wrap{max-width:var(--max);margin:0 auto;padding:22px var(--p) 42px}
-    h1{margin:0;font-size:28px;line-height:1.15}
-    p{color:var(--muted);line-height:1.6}
-    .grid{display:grid;grid-template-columns:1fr;gap:14px;margin-top:18px}
-    .card{
-      background:var(--card);border:1px solid var(--border);
-      border-radius:var(--r);padding:16px;box-shadow:var(--shadow)
-    }
-    .card h2{margin:0 0 10px;font-size:20px;color:#111}
-    .card p,.card li{color:#1f2937;font-size:15px;line-height:1.6}
-    ul{margin:10px 0 0 18px}
-    .btnrow{display:flex;gap:10px;flex-wrap:wrap;margin-top:12px}
-    .btn{
-      border:0;background:#111;color:#fff;padding:12px 14px;border-radius:14px;
-      font-weight:900;cursor:pointer;display:inline-flex;align-items:center;gap:8px
-    }
-    .btn.secondary{background:#fff;color:#111;border:1px solid var(--border)}
-    .btn.small{padding:10px 12px;border-radius:12px;font-weight:850}
-    textarea{
-      width:100%; min-height:120px; resize:vertical;
-      border:1px solid var(--border); border-radius:16px;
-      padding:14px; font-size:16px; line-height:1.5; background:#fff;
-      outline:none;
-    }
-    .small{font-size:13px;color:var(--muted)}
-    .list{display:flex;flex-direction:column;gap:10px;margin-top:10px}
-    .lineItem{
-      background:#fff;border:1px solid var(--border);border-radius:16px;
-      padding:12px 12px;
-    }
-    .lineMeta{display:flex;justify-content:space-between;gap:10px;align-items:center;margin-bottom:8px}
-    .tag{font-size:12px;color:var(--muted)}
-    .lineText{white-space:pre-wrap;color:#111;font-size:15px;line-height:1.55}
-    .footer{margin-top:22px;padding-top:18px;border-top:1px solid var(--border);color:var(--muted);font-size:14px;line-height:1.5}
-  </style>
+<style>
+body{margin:0;font-family:system-ui;background:#f5f5f5;color:#111}
+header{position:sticky;top:0;background:#fff;padding:16px;border-bottom:1px solid #ddd}
+.brand{font-weight:900;font-size:22px}
+.lang{display:flex;gap:8px;margin-top:10px;flex-wrap:wrap}
+.lang button{padding:6px 12px;border-radius:20px;border:1px solid #ccc;background:#fff}
+.wrap{max-width:720px;margin:0 auto;padding:20px}
+.card{background:#fff;border-radius:14px;padding:20px;margin-bottom:20px;border:1px solid #ddd}
+h2{margin-top:0}
+textarea{width:100%;min-height:120px;padding:12px;border-radius:12px;border:1px solid #ccc;font-size:16px}
+.btnrow{display:flex;gap:10px;flex-wrap:wrap;margin-top:10px}
+button.main{background:#111;color:#fff;border:none;padding:12px 16px;border-radius:10px}
+button.sec{background:#fff;border:1px solid #ccc;padding:12px 16px;border-radius:10px}
+.list{display:flex;flex-direction:column;gap:10px;margin-top:10px}
+.line{background:#fafafa;border:1px solid #ddd;border-radius:10px;padding:10px}
+footer{padding:30px;text-align:center;color:#777;font-size:14px}
+</style>
 </head>
 
 <body>
-<header id="top">
-  <div class="hwrap">
-    <div class="brand">
-      <span>Mango</span>
-      <button class="mangoBtn" id="mangoTop" aria-label="Torna su">🥭</button>
-    </div>
 
-    <nav class="lang" aria-label="Lingue">
-      <button class="chip" data-lang="it">IT</button>
-      <button class="chip" data-lang="en">EN</button>
-      <button class="chip" data-lang="es">ES</button>
-      <button class="chip" data-lang="fr">FR</button>
-      <button class="chip" data-lang="de">DE</button>
-      <button class="chip" data-lang="zh">ZH</button>
-    </nav>
-  </div>
+<header>
+<div class="brand">Mango 🥭</div>
+<div class="lang">
+<button onclick="setLang('it')">IT</button>
+<button onclick="setLang('en')">EN</button>
+<button onclick="setLang('es')">ES</button>
+<button onclick="setLang('fr')">FR</button>
+<button onclick="setLang('de')">DE</button>
+<button onclick="setLang('zh')">ZH</button>
+</div>
 </header>
 
-<main class="wrap">
-  <section>
-    <h1 id="t_title"></h1>
-    <p id="t_subtitle"></p>
-  </section>
+<div class="wrap">
 
-  <section class="grid">
+<div class="card">
+<h2 id="t_title"></h2>
+<p id="t_text"></p>
+</div>
 
-    <article class="card" id="how">
-      <h2 id="t_how_title"></h2>
-      <p id="t_how_p1"></p>
-      <ul>
-        <li id="t_how_li1"></li>
-        <li id="t_how_li2"></li>
-        <li id="t_how_li3"></li>
-        <li id="t_how_li4"></li>
-      </ul>
-      <p class="small" id="t_how_note"></p>
+<div class="card">
+<h2 id="t_write"></h2>
+<textarea id="lineInput"></textarea>
+<div class="btnrow">
+<button class="main" onclick="addLine()" id="t_send"></button>
+<button class="sec" onclick="clearInput()" id="t_clear"></button>
+<button class="sec" onclick="deleteAll()" id="t_delete"></button>
+<button class="sec" onclick="goHome()">Home</button>
+</div>
+</div>
 
-      <div class="btnrow">
-        <button class="btn secondary" id="btn_home">🏠 <span id="t_btn_home"></span></button>
-        <button class="btn secondary" id="btn_top">⬆️ <span id="t_btn_top"></span></button>
-      </div>
-    </article>
+<div class="card">
+<h2 id="t_your"></h2>
+<div class="list" id="list"></div>
+</div>
 
-    <article class="card" id="write">
-      <h2 id="t_write_title"></h2>
-      <p id="t_write_text"></p>
+</div>
 
-      <textarea id="lineInput" placeholder=""></textarea>
-
-      <div class="btnrow">
-        <button class="btn small" id="btn_save_line">✅ <span id="t_btn_send_keep"></span></button>
-        <button class="btn secondary small" id="btn_copy_line">📋 <span id="t_btn_copy"></span></button>
-        <button class="btn secondary small" id="btn_clear_input">🗑️ <span id="t_btn_clear_field"></span></button>
-      </div>
-
-      <p class="small" id="t_write_note"></p>
-    </article>
-
-    <article class="card" id="saved">
-      <h2 id="t_saved_title"></h2>
-      <p id="t_saved_text"></p>
-
-      <div class="btnrow">
-        <button class="btn secondary" id="btn_delete_all">🧹 <span id="t_btn_delete_all"></span></button>
-        <button class="btn secondary" id="btn_home2">🏠 <span id="t_btn_home"></span></button>
-        <button class="btn secondary" id="btn_top2">⬆️ <span id="t_btn_top"></span></button>
-      </div>
-
-      <div class="list" id="linesList"></div>
-      <p class="small" id="t_saved_note"></p>
-    </article>
-
-  </section>
-
-  <footer class="footer">
-    <div id="t_footer_line1"></div>
-    <div class="small" id="t_footer_line2" style="margin-top:8px;"></div>
-  </footer>
-</main>
+<footer>
+Juan de Dios Annaloro Mercedes — 02 febbraio 2026 — In memoria di Larimar
+</footer>
 
 <script>
-  const SUPPORTED=["it","en","es","fr","de","zh"];
-  const DEFAULT_LANG="it";
-  const STORAGE_KEY="mango_lines_v1";
+const STORAGE_KEY="mango_lines_v1";
+const DEFAULT_LANG="it";
 
-  const T={
-    it:{
-      title:"Primo scambio",
-      subtitle:"Qui scrivi la prima riga reale. Rimane sul sito solo nel tuo dispositivo (non online).",
-      how_title:"Come fare il primo scambio",
-      how_p1:"Mango inizia quando due persone riconoscono un gesto reale.",
-      how_li1:"Fate un gesto concreto (aiuto, tempo, cura, presenza).",
-      how_li2:"Subito dopo, scrivete una riga semplice su ciò che è accaduto.",
-      how_li3:"Niente numeri, prezzi, quantità, equivalenze.",
-      how_li4:"Se serve privacy: nomi, iniziali o soprannomi.",
-      how_note:"Mango non trasforma lo scambio in credito o debito. È solo riconoscimento scritto.",
-      write_title:"Scrivi la riga",
-      write_text:"Una riga umana, concreta, reale.",
-      write_placeholder:"Esempio: Ioana ha ascoltato Marco. (Roma, 14 feb 2026)",
-      write_note:"Premi “Invia” per salvarla sul sito (solo su questo dispositivo).",
-      saved_title:"Righe salvate (solo su questo dispositivo)",
-      saved_text:"Puoi lasciarle qui o cancellarle quando vuoi.",
-      saved_note:"Non esistono totali o contatori. Mango non conta.",
-      btn_send_keep:"Invia (resta sul sito)",
-      btn_copy:"Copia",
-      btn_clear_field:"Cancella campo",
-      btn_delete_all:"Elimina tutte le righe",
-      btn_home:"Home",
-      btn_top:"Torna su",
-      footer1:"Creato da Juan de Dios Annaloro Mercedes — 02 febbraio 2026 — In memoria di Larimar.",
-      footer2:"Mango è praticabile e trasmissibile, ma non possedibile o centralizzabile."
-    },
-    en:{
-      title:"First exchange",
-      subtitle:"Write your first real line. It stays only on this device (not online).",
-      how_title:"How to do the first exchange",
-      how_p1:"Mango starts when two people recognize a real gesture.",
-      how_li1:"Do something concrete (help, time, care, presence).",
-      how_li2:"Right after, write one simple line about what happened.",
-      how_li3:"No numbers, prices, quantities, equivalences.",
-      how_li4:"If needed: first names, initials, nicknames.",
-      how_note:"Mango does not turn exchange into credit or debt. It is written recognition.",
-      write_title:"Write the line",
-      write_text:"One human, concrete, real line.",
-      write_placeholder:"Example: Ioana listened to Marco. (Rome, Feb 14, 2026)",
-      write_note:"Press “Send” to save it on the site (only on this device).",
-      saved_title:"Saved lines (only on this device)",
-      saved_text:"Keep them here or delete them anytime.",
-      saved_note:"No totals, no counters. Mango does not count.",
-      btn_send_keep:"Send (stays on site)",
-      btn_copy:"Copy",
-      btn_clear_field:"Clear field",
-      btn_delete_all:"Delete all lines",
-      btn_home:"Home",
-      btn_top:"Back to top",
-      footer1:"Created by Juan de Dios Annaloro Mercedes — 02 Feb 2026 — In memory of Larimar.",
-      footer2:"Practicable and transmissible, but not ownable or centralizable."
-    }
-  };
-  ["es","fr","de","zh"].forEach(k=>{ if(!T[k]) T[k]=T.en; });
+const T={
+it:{
+title:"Come fare il primo scambio",
+text:"Mango inizia quando due persone riconoscono un gesto reale.",
+write:"Scrivi la riga",
+send:"Invia (resta sul sito)",
+clear:"Cancella campo",
+delete:"Elimina tutte le righe",
+your:"Le tue righe (solo su questo dispositivo)"
+},
+en:{
+title:"How to do the first exchange",
+text:"Mango starts when two people recognize a real gesture.",
+write:"Write the line",
+send:"Send (stays on site)",
+clear:"Clear field",
+delete:"Delete all lines",
+your:"Your lines (only on this device)"
+},
+es:{
+title:"Cómo hacer el primer intercambio",
+text:"Mango empieza cuando dos personas reconocen un gesto real.",
+write:"Escribe la línea",
+send:"Enviar (permanece en el sitio)",
+clear:"Borrar campo",
+delete:"Eliminar todas las líneas",
+your:"Tus líneas (solo en este dispositivo)"
+},
+fr:{
+title:"Comment faire le premier échange",
+text:"Mango commence lorsque deux personnes reconnaissent un geste réel.",
+write:"Écrire la ligne",
+send:"Envoyer (reste sur le site)",
+clear:"Effacer le champ",
+delete:"Supprimer toutes les lignes",
+your:"Vos lignes (sur cet appareil)"
+},
+de:{
+title:"Wie man den ersten Austausch macht",
+text:"Mango beginnt, wenn zwei Personen eine reale Handlung anerkennen.",
+write:"Zeile schreiben",
+send:"Senden (bleibt auf Gerät)",
+clear:"Feld löschen",
+delete:"Alle Zeilen löschen",
+your:"Deine Zeilen (nur auf diesem Gerät)"
+},
+zh:{
+title:"如何进行第一次交换",
+text:"当两个人承认一个真实的行为时，Mango 就开始了。",
+write:"写下这一行",
+send:"发送（保存在本设备）",
+clear:"清空",
+delete:"删除所有记录",
+your:"你的记录（仅在本设备）"
+}
+};
 
-  function getLang(){
-    const u=new URL(location.href);
-    const l=(u.searchParams.get("lang")||"").toLowerCase();
-    return SUPPORTED.includes(l)?l:DEFAULT_LANG;
-  }
-  function setLang(l){
-    const u=new URL(location.href);
-    u.searchParams.set("lang",l);
-    history.replaceState({}, "", u.toString());
-  }
-  function homeUrl(){
-    return "index.html?lang=" + encodeURIComponent(getLang());
-  }
-  function apply(l){
-    document.documentElement.lang=l;
-    document.querySelectorAll(".chip").forEach(b=>b.setAttribute("aria-current", b.dataset.lang===l ? "true":"false"));
-    const d=T[l]||T[DEFAULT_LANG];
+function setLang(l){
+localStorage.setItem("mango_lang",l);
+applyLang();
+}
 
-    const set=(id,val)=>{const el=document.getElementById(id); if(el) el.textContent=val;};
+function applyLang(){
+const l=localStorage.getItem("mango_lang")||DEFAULT_LANG;
+const d=T[l]||T.it;
+document.getElementById("t_title").textContent=d.title;
+document.getElementById("t_text").textContent=d.text;
+document.getElementById("t_write").textContent=d.write;
+document.getElementById("t_send").textContent=d.send;
+document.getElementById("t_clear").textContent=d.clear;
+document.getElementById("t_delete").textContent=d.delete;
+document.getElementById("t_your").textContent=d.your;
+}
 
-    set("t_title",d.title);
-    set("t_subtitle",d.subtitle);
-    set("t_how_title",d.how_title);
-    set("t_how_p1",d.how_p1);
-    set("t_how_li1",d.how_li1);
-    set("t_how_li2",d.how_li2);
-    set("t_how_li3",d.how_li3);
-    set("t_how_li4",d.how_li4);
-    set("t_how_note",d.how_note);
+function load(){
+return JSON.parse(localStorage.getItem(STORAGE_KEY)||"[]");
+}
 
-    set("t_write_title",d.write_title);
-    set("t_write_text",d.write_text);
-    set("t_write_note",d.write_note);
+function save(arr){
+localStorage.setItem(STORAGE_KEY,JSON.stringify(arr));
+}
 
-    set("t_saved_title",d.saved_title);
-    set("t_saved_text",d.saved_text);
-    set("t_saved_note",d.saved_note);
+function render(){
+const list=document.getElementById("list");
+list.innerHTML="";
+load().forEach((t,i)=>{
+const div=document.createElement("div");
+div.className="line";
+div.textContent=t;
+list.appendChild(div);
+});
+}
 
-    set("t_btn_send_keep",d.btn_send_keep);
-    set("t_btn_copy",d.btn_copy);
-    set("t_btn_clear_field",d.btn_clear_field);
-    set("t_btn_delete_all",d.btn_delete_all);
-    set("t_btn_home",d.btn_home);
-    set("t_btn_top",d.btn_top);
+function addLine(){
+const ta=document.getElementById("lineInput");
+const text=ta.value.trim();
+if(!text)return;
+const arr=load();
+arr.unshift(text);
+save(arr);
+ta.value="";
+render();
+}
 
-    set("t_footer_line1",d.footer1);
-    set("t_footer_line2",d.footer2);
+function clearInput(){
+document.getElementById("lineInput").value="";
+}
 
-    const ta=document.getElementById("lineInput");
-    if(ta) ta.placeholder=d.write_placeholder||"";
-  }
+function deleteAll(){
+save([]);
+render();
+}
 
-  function goTop(){
-    try{window.scrollTo({top:0,left:0,behavior:"smooth"});}catch(_){window.scrollTo(0,0);}
-  }
+function goHome(){
+window.location.href="index.html";
+}
 
-  function loadLines(){
-    try{
-      const raw=localStorage.getItem(STORAGE_KEY);
-      const arr=raw?JSON.parse(raw):[];
-      return Array.isArray(arr)?arr:[];
-    }catch(e){return [];}
-  }
-  function saveLines(arr){localStorage.setItem(STORAGE_KEY, JSON.stringify(arr));}
-
-  function renderLines(){
-    const list=document.getElementById("linesList");
-    if(!list) return;
-    const lines=loadLines();
-    list.innerHTML="";
-
-    if(!lines.length){
-      const empty=document.createElement("div");
-      empty.className="small";
-      empty.textContent=(getLang()==="it")?"Nessuna riga salvata su questo dispositivo.":"No lines saved on this device.";
-      list.appendChild(empty);
-      return;
-    }
-
-    lines.forEach((item, idx)=>{
-      const box=document.createElement("div");
-      box.className="lineItem";
-
-      const meta=document.createElement("div");
-      meta.className="lineMeta";
-
-      const tag=document.createElement("div");
-      tag.className="tag";
-      tag.textContent=new Date(item.ts||Date.now()).toLocaleString();
-
-      const actions=document.createElement("div");
-      actions.className="btnrow";
-      actions.style.marginTop="0";
-
-      const bCopy=document.createElement("button");
-      bCopy.className="btn secondary small";
-      bCopy.textContent="📋";
-      bCopy.onclick=async ()=>{
-        try{await navigator.clipboard.writeText(item.text||"");}
-        catch(_){
-          const ta=document.createElement("textarea");
-          ta.value=item.text||"";
-          document.body.appendChild(ta);
-          ta.select(); document.execCommand("copy");
-          document.body.removeChild(ta);
-        }
-      };
-
-      const bDel=document.createElement("button");
-      bDel.className="btn secondary small";
-      bDel.textContent="🗑️";
-      bDel.onclick=()=>{
-        const arr=loadLines();
-        arr.splice(idx,1);
-        saveLines(arr);
-        renderLines();
-      };
-
-      actions.appendChild(bCopy);
-      actions.appendChild(bDel);
-
-      meta.appendChild(tag);
-      meta.appendChild(actions);
-
-      const text=document.createElement("div");
-      text.className="lineText";
-      text.textContent=item.text||"";
-
-      box.appendChild(meta);
-      box.appendChild(text);
-      list.appendChild(box);
-    });
-  }
-
-  // Language
-  document.querySelectorAll(".chip").forEach(b=>{
-    b.addEventListener("click", ()=>{
-      setLang(b.dataset.lang);
-      apply(b.dataset.lang);
-      renderLines();
-    });
-  });
-
-  // Top
-  document.getElementById("mangoTop")?.addEventListener("click",(e)=>{e.preventDefault();goTop();});
-  document.getElementById("btn_top")?.addEventListener("click",(e)=>{e.preventDefault();goTop();});
-  document.getElementById("btn_top2")?.addEventListener("click",(e)=>{e.preventDefault();goTop();});
-
-  // Home
-  document.getElementById("btn_home")?.addEventListener("click", ()=>{ location.href=homeUrl(); });
-  document.getElementById("btn_home2")?.addEventListener("click", ()=>{ location.href=homeUrl(); });
-
-  // Save
-  document.getElementById("btn_save_line")?.addEventListener("click", ()=>{
-    const ta=document.getElementById("lineInput");
-    const text=(ta?.value||"").trim();
-    if(!text) return;
-
-    const arr=loadLines();
-    arr.unshift({text, ts:Date.now()});
-    saveLines(arr);
-    renderLines();
-    if(ta) ta.value="";
-    document.getElementById("saved")?.scrollIntoView({behavior:"smooth",block:"start"});
-  });
-
-  // Copy
-  document.getElementById("btn_copy_line")?.addEventListener("click", async ()=>{
-    const ta=document.getElementById("lineInput");
-    const text=(ta?.value||"").trim();
-    if(!text) return;
-    try{await navigator.clipboard.writeText(text);}
-    catch(_){ ta.select(); document.execCommand("copy"); ta.setSelectionRange(ta.value.length, ta.value.length); }
-  });
-
-  // Clear
-  document.getElementById("btn_clear_input")?.addEventListener("click", ()=>{
-    const ta=document.getElementById("lineInput");
-    if(ta) ta.value="";
-  });
-
-  // Delete all
-  document.getElementById("btn_delete_all")?.addEventListener("click", ()=>{
-    saveLines([]);
-    renderLines();
-  });
-
-  // INIT
-  (function init(){
-    const l=getLang();
-    apply(l);
-    renderLines();
-  })();
+applyLang();
+render();
 </script>
 
 </body>

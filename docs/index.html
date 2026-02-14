@@ -166,7 +166,7 @@
 
     /* vista blank: schermo bianco pieno */
     .blankWrap{
-      height: calc(100vh - 58px); /* header approx */
+      height: calc(100vh - 58px);
       min-height: 420px;
       background:#fff;
     }
@@ -201,7 +201,6 @@
     <div class="hwrap">
       <div class="brand">
         <span>Mango</span>
-        <!-- 🥭 in alto: dalla HOME vai al vuoto (#blank). Dal vuoto torna alla HOME (#home). -->
         <button class="mangoBtn" id="mangoTop" title="Mango">🥭</button>
       </div>
 
@@ -280,7 +279,12 @@
 
     <footer>
       <div id="t_footer1"></div>
+
+      <!-- EMAIL STAMPA (riga 1) -->
       <div><a id="pressLink" href=""></a></div>
+      <!-- EMAIL STAMPA (riga 2 sotto) -->
+      <div id="t_press_note"></div>
+
       <div id="t_footer2"></div>
     </footer>
   </div>
@@ -331,6 +335,7 @@
         btn_top:"Torna su",
 
         press:"Giornalisti / media:",
+        press_note:"(Oggetto email: “Mango / stampa” — rispondiamo appena possibile.)",
         blank_hint:"Pagina vuota. Tocca 🥭 per tornare alla Home.",
 
         footer1:"Creato da Juan de Dios Annaloro Mercedes — 02 febbraio 2026 — In memoria di Larimar.",
@@ -367,6 +372,7 @@
         btn_top:"Back to top",
 
         press:"Press / media:",
+        press_note:"(Subject: “Mango / press” — we reply as soon as possible.)",
         blank_hint:"Blank page. Tap 🥭 to go back Home.",
 
         footer1:"Created by Juan de Dios Annaloro Mercedes — 02 Feb 2026 — In memory of Larimar.",
@@ -403,6 +409,7 @@
         btn_top:"Volver arriba",
 
         press:"Prensa / medios:",
+        press_note:"(Asunto: “Mango / prensa” — respondemos lo antes posible.)",
         blank_hint:"Página en blanco. Toca 🥭 para volver al inicio.",
 
         footer1:"Creado por Juan de Dios Annaloro Mercedes — 02 febrero 2026 — En memoria de Larimar.",
@@ -439,6 +446,7 @@
         btn_top:"Haut de page",
 
         press:"Presse / médias :",
+        press_note:"(Objet : « Mango / presse » — réponse dès que possible.)",
         blank_hint:"Page blanche. Appuie sur 🥭 pour revenir à l’accueil.",
 
         footer1:"Créé par Juan de Dios Annaloro Mercedes — 02 février 2026 — En mémoire de Larimar.",
@@ -475,6 +483,7 @@
         btn_top:"Nach oben",
 
         press:"Presse / Medien:",
+        press_note:"(Betreff: „Mango / Presse“ — wir antworten so bald wie möglich.)",
         blank_hint:"Leere Seite. Tippe 🥭, um zur Startseite zurückzukehren.",
 
         footer1:"Erstellt von Juan de Dios Annaloro Mercedes — 02. Feb 2026 — In Erinnerung an Larimar.",
@@ -511,6 +520,7 @@
         btn_top:"回到顶部",
 
         press:"媒体 / 记者：",
+        press_note:"（邮件主题：Mango / 媒体——我们会尽快回复。）",
         blank_hint:"空白页面。点击 🥭 返回首页。",
 
         footer1:"由 Juan de Dios Annaloro Mercedes 创建 — 2026年2月2日 — 纪念 Larimar。",
@@ -686,10 +696,13 @@
       document.getElementById("t_footer1").textContent = d.footer1;
       document.getElementById("t_footer2").textContent = d.footer2;
 
-      // press email link
+      // press email link (riga 1)
       const a = document.getElementById("pressLink");
       a.textContent = (d.press || "Press:") + " " + PRESS_EMAIL;
       a.href = "mailto:" + PRESS_EMAIL;
+
+      // press note (riga sotto)
+      document.getElementById("t_press_note").textContent = d.press_note || "";
 
       // blank hint
       document.getElementById("blankHint").textContent = d.blank_hint || "";

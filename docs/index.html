@@ -139,6 +139,17 @@
         <a class="btn" id="pdf1" href="kit-mango.pdf">📄 <span id="pdf1t">Apri PDF</span></a>
       </section>
     </div>
+
+    <!-- ✅ SOLO AGGIUNTA: EMAIL GIORNALISTI / INFO (in fondo, discreta) -->
+    <div id="contactBox" style="margin:40px auto 10px; text-align:center; font-size:.95rem; opacity:.78;">
+      <span id="contactLabel">Contatti stampa:</span>
+      <a id="contactMail"
+         href="mailto:info@mangoinfrastruttura.org"
+         style="color:#111; text-decoration:none; font-weight:800;">
+        info@mangoinfrastruttura.org
+      </a>
+    </div>
+
   </header>
 
   <a class="mango-fab" id="homeFab" href="index.html?lang=it">🥭 <span id="fabTxt">Mango</span></a>
@@ -162,7 +173,8 @@ const dict = {
     c4t:"PDF",
     c4p:"Apri i PDF nella lingua selezionata.",
     pdf1t:"Apri PDF",
-    fab:"Mango"
+    fab:"Mango",
+    contact:"Contatti stampa:"
   },
 
   en:{ htmlLang:"en",
@@ -182,7 +194,8 @@ const dict = {
     c4t:"PDF",
     c4p:"Open the PDFs in the selected language.",
     pdf1t:"Open PDF",
-    fab:"Mango"
+    fab:"Mango",
+    contact:"Press / Contact:"
   },
 
   es:{ htmlLang:"es",
@@ -202,7 +215,8 @@ const dict = {
     c4t:"PDF",
     c4p:"Abre los PDF en el idioma seleccionado.",
     pdf1t:"Abrir PDF",
-    fab:"Mango"
+    fab:"Mango",
+    contact:"Contacto de prensa:"
   },
 
   fr:{ htmlLang:"fr",
@@ -222,7 +236,8 @@ const dict = {
     c4t:"PDF",
     c4p:"Ouvre les PDF dans la langue choisie.",
     pdf1t:"Ouvrir PDF",
-    fab:"Mango"
+    fab:"Mango",
+    contact:"Contact presse :"
   },
 
   de:{ htmlLang:"de",
@@ -242,7 +257,8 @@ const dict = {
     c4t:"PDF",
     c4p:"Öffne die PDFs in der gewählten Sprache.",
     pdf1t:"PDF öffnen",
-    fab:"Mango"
+    fab:"Mango",
+    contact:"Pressekontakt:"
   },
 
   zh:{ htmlLang:"zh-Hant",
@@ -262,7 +278,8 @@ const dict = {
     c4t:"PDF",
     c4p:"以所選語言開啟 PDF。",
     pdf1t:"打開 PDF",
-    fab:"Mango"
+    fab:"Mango",
+    contact:"媒體聯絡："
   }
 };
 
@@ -304,6 +321,9 @@ function applyI18n(){
   setText("c4t", dict[L].c4t); setText("c4p", dict[L].c4p); setText("pdf1t", dict[L].pdf1t);
 
   document.getElementById("fabTxt").textContent = dict[L].fab;
+
+  // ✅ label email multilingua
+  setText("contactLabel", dict[L].contact);
 
   // Link sempre con lingua
   const home = `index.html?lang=${L}`;

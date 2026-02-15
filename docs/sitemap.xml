@@ -55,10 +55,4 @@
     <priority>0.6</priority>
   </url>
 
-  <url>
-    <loc>https://mangoinfrastruttura.org/docs/docs/pdf/Mango_Documento_Fondativo_Multilingua_v1.pdf</loc>
-    <changefreq>yearly</changefreq>
-    <priority>0.7</priority>
-  </url>
-
 </urlset>

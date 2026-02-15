@@ -1,19 +1,33 @@
-<!doctype html>
-<html>
+<!DOCTYPE html>
+<html lang="it">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Mango</title>
-  <meta name="robots" content="noindex,nofollow">
-  <script>
-    (function() {
-      var params = new URLSearchParams(window.location.search);
-      var lang = (params.get("lang") || "it").toLowerCase();
-      var allowed = ["it","en","es","fr","de","zh"];
-      if (allowed.indexOf(lang) === -1) lang = "it";
-      window.location.replace("https://mangoinfrastruttura.org/?lang=" + lang);
-    })();
-  </script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Mango</title>
+
+<!-- NO INDEX -->
+<meta name="robots" content="noindex, nofollow">
+
+<!-- REDIRECT IMMEDIATO -->
+<script>
+  (function() {
+    var home = "https://mangoinfrastruttura.org";
+    if (window.location.href !== home) {
+      window.location.replace(home);
+    }
+  })();
+</script>
+
+<style>
+  html, body {
+    margin: 0;
+    padding: 0;
+    background: #ffffff;
+  }
+</style>
 </head>
-<body></body>
+
+<body>
+</body>
 </html>

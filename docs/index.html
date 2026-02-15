@@ -105,6 +105,7 @@
       line-height: 1.35;
       text-align:center;
     }
+
     .btnRow{
       display:flex;
       justify-content:center;
@@ -129,7 +130,21 @@
       min-width: 170px;
     }
 
-    /* Origine vissuta block (testo in card) */
+    /* Statement line (domain can disappear...) */
+    .statement{
+      margin-top: 8px;
+      padding: 14px 14px;
+      border:1px solid var(--stroke);
+      border-radius: 16px;
+      background:#fff;
+      text-align:center;
+      color: var(--muted);
+      font-size: 18px;
+      line-height: 1.35;
+      box-shadow: 0 6px 14px rgba(0,0,0,.04);
+    }
+
+    /* Origine vissuta block */
     .story{
       text-align:left;
       color: var(--text);
@@ -140,7 +155,7 @@
     }
     .story .muted{ color: var(--muted); }
     .story .quote{
-      font-style: italic;
+      font-style:italic;
       margin: 12px 0;
       padding: 12px 14px;
       border:1px solid var(--stroke);
@@ -198,13 +213,12 @@
       pointer-events: auto;
     }
 
-    /* Secret view (bianco su bianco) */
+    /* Secret view (bianco assoluto, assenza) */
     .secret{
       display:none;
       min-height: 100vh;
       background: #ffffff;
-      color: #ffffff; /* bianco su bianco */
-      padding: 18px 16px 90px;
+      padding: 0;
     }
     .secret.show{ display:block; }
     .main.hide{ display:none; }
@@ -228,18 +242,6 @@
       z-index: 60;
     }
     .homeMango.show{ display:flex; }
-
-    /* un mango “invisibile” (bianco su bianco) al centro della pagina segreta */
-    .secretMango{
-      width: 100%;
-      height: calc(100vh - 120px);
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      user-select:none;
-      font-size: 28px;
-      color:#ffffff; /* invisibile */
-    }
   </style>
 </head>
 
@@ -265,9 +267,12 @@
       </div>
     </div>
 
+    <!-- statement -->
+    <div class="statement" id="t_statement"></div>
+
     <!-- Fai Mango adesso -->
     <div class="card">
-      <p id="t_fast">Riconosci uno scambio reale tra persone. Scrivi una riga. Non servono numeri.</p>
+      <p id="t_fast"></p>
       <div class="btnRow">
         <a class="btn" id="btn_go" href="primo-scambio.html">🥭 Vai</a>
       </div>
@@ -275,8 +280,8 @@
 
     <!-- Scrivi una riga -->
     <div class="card">
-      <h2 id="t_row_title">Scrivi una riga</h2>
-      <p id="t_row_desc">Registra lo scambio: una riga. Nessun numero, nessun conto.</p>
+      <h2 id="t_row_title"></h2>
+      <p id="t_row_desc"></p>
       <div class="btnRow">
         <a class="btn" id="btn_open" href="scrivi-una-riga.html">✍️ Apri</a>
       </div>
@@ -284,8 +289,8 @@
 
     <!-- Cos'è Mango -->
     <div class="card">
-      <h2 id="t_what_title">Cos’è Mango</h2>
-      <p id="t_what_desc">Mango è un’infrastruttura di fiducia locale non monetaria.</p>
+      <h2 id="t_what_title"></h2>
+      <p id="t_what_desc"></p>
       <div class="btnRow">
         <a class="btn" id="btn_read" href="cos-e-mango.html">📘 Leggi</a>
       </div>
@@ -293,52 +298,37 @@
 
     <!-- Origine vissuta IN HOME -->
     <div class="card">
-      <h2 id="t_origin_title">Origine vissuta</h2>
-      <p id="t_origin_desc">La storia reale: prima della teoria. L’origine vissuta di Mango.</p>
+      <h2 id="t_origin_title"></h2>
+      <p id="t_origin_desc"></p>
 
       <div class="btnRow">
-        <button class="btn" id="btn_origin_toggle" type="button">📜 Leggi</button>
+        <button class="btn" id="btn_origin_toggle" type="button"></button>
       </div>
 
       <div class="storyWrap" id="storyWrap">
         <div class="story">
-          <div id="story_p1">Prima della teoria, Mango era un gesto.</div>
-          <div class="muted" style="margin-top:10px" id="story_p2">
-            Durante l'attività musicale dell'autore, Juan regalava mango e magliette.
-          </div>
+          <div id="story_p1"></div>
+          <div class="muted" style="margin-top:10px" id="story_p2"></div>
 
-          <div class="quote" id="story_q1">“T’Amo Mango, Pantera dete Lao te lo dise.”</div>
-          <div class="quote" id="story_q2">“Il mango è buono, succoso, dolce, non fa male a nessuno.”</div>
+          <div class="quote" id="story_q1"></div>
+          <div class="quote" id="story_q2"></div>
 
-          <div class="muted" id="story_p3">
-            Questa esperienza concreta precede la formalizzazione teorica del progetto.
-          </div>
+          <div class="muted" id="story_p3"></div>
 
-          <div style="margin-top:10px" id="story_p4">
-            Mango nasce quindi da una pratica reale di dono e scambio, successivamente strutturata come infrastruttura di fiducia locale non monetaria.
-          </div>
+          <div style="margin-top:10px" id="story_p4"></div>
 
-          <div class="meta" id="story_meta">
-            Creato da Juan de Dios Annaloro Mercedes.<br>
-            Data di nascita formale del progetto: 02 Febbraio 2026.<br>
-            In memoria di Larimar.
-          </div>
+          <div class="meta" id="story_meta"></div>
         </div>
       </div>
     </div>
 
     <!-- PDF -->
     <div class="card">
-      <h2 id="t_pdf_title">PDF</h2>
-      <p id="t_pdf_desc">Apri i PDF nella lingua selezionata.</p>
+      <h2 id="t_pdf_title"></h2>
+      <p id="t_pdf_desc"></p>
       <div class="btnRow">
-        <!-- Compatibile con la tua struttura precedente -->
-        <a class="btn" id="btn_pdf" href="pdf.html">📄 Apri PDF</a>
-
-        <!-- Se un giorno vuoi aprire direttamente file PDF lingua-per-lingua,
-             puoi usare questi (rinomina i file reali dentro /docs):
-             <a class="btn" id="btn_pdf_direct" href="mango-it.pdf">📄 PDF</a>
-        -->
+        <!-- PDF unico multilingua (vale per tutte le lingue) -->
+        <a class="btn" id="btn_pdf" href="MANGO_INFRASTRUTTURA_UFFICIALE.pdf">📄 Apri PDF</a>
       </div>
     </div>
 
@@ -347,10 +337,8 @@
     </div>
   </div>
 
-  <!-- SECRET PAGE (bianco su bianco) dentro lo stesso index -->
-  <div class="secret" id="secret">
-    <div class="secretMango">🥭</div>
-  </div>
+  <!-- SECRET PAGE (assenza totale) dentro lo stesso index -->
+  <div class="secret" id="secret"></div>
 
   <!-- Arrow up (Home) -->
   <button class="toTop" id="toTop" aria-label="Torna su">↑</button>
@@ -405,7 +393,7 @@
         main.classList.remove("hide");
         secret.classList.remove("show");
         homeMango.classList.remove("show");
-        // la freccia su la gestiamo con scroll sotto
+        // freccia gestita con scroll sotto
       }
     }
 
@@ -433,20 +421,30 @@
       return u.pathname + "?" + u.searchParams.toString();
     }
 
-    const links = [
+    // link pages (non tocchiamo altro)
+    const pageLinks = [
       ["btn_go", "primo-scambio.html"],
       ["btn_open", "scrivi-una-riga.html"],
       ["btn_read", "cos-e-mango.html"],
-      ["btn_pdf", "pdf.html"],
     ];
-    links.forEach(([id, path]) => {
+    pageLinks.forEach(([id, path]) => {
       const el = document.getElementById(id);
       if (el) el.setAttribute("href", withLang(path));
     });
 
+    // PDF unico multilingua: manteniamo comunque ?lang per coerenza URL (anche se il file è lo stesso)
+    const pdfBtn = document.getElementById("btn_pdf");
+    if (pdfBtn){
+      const base = location.origin + location.pathname.replace(/[^\/]*$/, "");
+      const u = new URL("MANGO_INFRASTRUTTURA_UFFICIALE.pdf", base);
+      u.searchParams.set("lang", lang);
+      pdfBtn.setAttribute("href", u.pathname + "?" + u.searchParams.toString());
+    }
+
     // ---- Texts (Home + Origine vissuta) ----
     const T = {
       it: {
+        statement: "Questo dominio può sparire, Mango no, perché non è un dominio.",
         fast: "Riconosci uno scambio reale tra persone. Scrivi una riga. Non servono numeri.",
         rowTitle: "Scrivi una riga",
         rowDesc: "Registra lo scambio: una riga. Nessun numero, nessun conto.",
@@ -455,7 +453,7 @@
         originTitle: "Origine vissuta",
         originDesc: "La storia reale: prima della teoria. L’origine vissuta di Mango.",
         pdfTitle: "PDF",
-        pdfDesc: "Apri i PDF nella lingua selezionata.",
+        pdfDesc: "Apri il documento ufficiale multilingua.",
         originBtn: "📜 Leggi",
         story: {
           p1:"Prima della teoria, Mango era un gesto.",
@@ -469,28 +467,30 @@
       },
 
       en: {
+        statement: "This domain can disappear. Mango can’t—because it isn’t a domain.",
         fast: "Recognize a real exchange between people. Write a line. No numbers needed.",
         rowTitle: "Write a line",
         rowDesc: "Record the exchange: one line. No numbers, no counting.",
         whatTitle: "What is Mango",
-        whatDesc: "Mango is a local trust infrastructure, non-monetary.",
+        whatDesc: "Mango is a local, non-monetary trust infrastructure.",
         originTitle: "Lived origin",
         originDesc: "The real story: before the theory. Mango’s lived origin.",
         pdfTitle: "PDF",
-        pdfDesc: "Open the PDFs in the selected language.",
+        pdfDesc: "Open the official multilingual document.",
         originBtn: "📜 Read",
         story: {
           p1:"Before the theory, Mango was a gesture.",
           p2:"During the author’s music activity, Juan used to give away mangoes and T-shirts.",
           q1:"“T’Amo Mango, Pantera dete Lao te lo dise.”",
           q2:"“Mango is good, juicy, sweet, it hurts nobody.”",
-          p3:"This concrete experience comes before the project’s theoretical formalization.",
-          p4:"Mango therefore emerges from a real practice of giving and exchange, later structured as a local non-monetary trust infrastructure.",
+          p3:"This concrete experience precedes the project’s theoretical formalization.",
+          p4:"Mango thus emerges from a real practice of giving and exchange, later structured as a local non-monetary trust infrastructure.",
           meta:"Created by Juan de Dios Annaloro Mercedes.<br>Formal birth date of the project: 02 February 2026.<br>In memory of Larimar."
         }
       },
 
       es: {
+        statement: "Este dominio puede desaparecer. Mango no, porque no es un dominio.",
         fast: "Reconoce un intercambio real entre personas. Escribe una línea. No hacen falta números.",
         rowTitle: "Escribe una línea",
         rowDesc: "Registra el intercambio: una línea. Sin números, sin conteo.",
@@ -499,7 +499,7 @@
         originTitle: "Origen vivido",
         originDesc: "La historia real: antes de la teoría. El origen vivido de Mango.",
         pdfTitle: "PDF",
-        pdfDesc: "Abre los PDF en el idioma seleccionado.",
+        pdfDesc: "Abre el documento oficial multilingüe.",
         originBtn: "📜 Leer",
         story: {
           p1:"Antes de la teoría, Mango era un gesto.",
@@ -513,6 +513,7 @@
       },
 
       fr: {
+        statement: "Ce domaine peut disparaître. Mango non, car Mango n’est pas un domaine.",
         fast: "Reconnais un échange réel entre personnes. Écris une ligne. Pas besoin de chiffres.",
         rowTitle: "Écris une ligne",
         rowDesc: "Enregistre l’échange : une ligne. Aucun chiffre, aucun comptage.",
@@ -521,7 +522,7 @@
         originTitle: "Origine vécue",
         originDesc: "L’histoire réelle : avant la théorie. L’origine vécue de Mango.",
         pdfTitle: "PDF",
-        pdfDesc: "Ouvre les PDF dans la langue sélectionnée.",
+        pdfDesc: "Ouvre le document officiel multilingue.",
         originBtn: "📜 Lire",
         story: {
           p1:"Avant la théorie, Mango était un geste.",
@@ -535,15 +536,16 @@
       },
 
       de: {
+        statement: "Diese Domain kann verschwinden. Mango nicht – denn Mango ist keine Domain.",
         fast: "Erkenne einen echten Austausch zwischen Menschen. Schreibe eine Zeile. Keine Zahlen nötig.",
         rowTitle: "Schreibe eine Zeile",
         rowDesc: "Protokolliere den Austausch: eine Zeile. Keine Zahlen, kein Zählen.",
         whatTitle: "Was ist Mango",
-        whatDesc: "Mango ist eine lokale Vertrauens-Infrastruktur, nicht monetär.",
+        whatDesc: "Mango ist eine lokale, nicht-monetäre Vertrauens-Infrastruktur.",
         originTitle: "Gelebter Ursprung",
         originDesc: "Die echte Geschichte: vor der Theorie. Mangos gelebter Ursprung.",
         pdfTitle: "PDF",
-        pdfDesc: "Öffne die PDFs in der ausgewählten Sprache.",
+        pdfDesc: "Öffne das offizielle mehrsprachige Dokument.",
         originBtn: "📜 Lesen",
         story: {
           p1:"Vor der Theorie war Mango eine Geste.",
@@ -557,6 +559,7 @@
       },
 
       zh: {
+        statement: "这个域名可以消失，但 Mango 不会——因为 Mango 不是域名。",
         fast: "认可人与人之间真实的交换。写一行。不需要数字。",
         rowTitle: "写一行",
         rowDesc: "记录交换：一行。不用数字，不用计数。",
@@ -565,7 +568,7 @@
         originTitle: "亲历起源",
         originDesc: "真实故事：在理论之前。Mango 的亲历起源。",
         pdfTitle: "PDF",
-        pdfDesc: "用所选语言打开 PDF。",
+        pdfDesc: "打开官方多语言文件。",
         originBtn: "📜 阅读",
         story: {
           p1:"在理论之前，Mango 是一种行动与姿态。",
@@ -581,23 +584,25 @@
 
     function applyTexts(){
       const t = T[lang] || T.it;
-
       document.documentElement.lang = lang;
+
+      document.getElementById("t_statement").textContent = t.statement;
 
       document.getElementById("t_fast").textContent = t.fast;
       document.getElementById("t_row_title").textContent = t.rowTitle;
       document.getElementById("t_row_desc").textContent = t.rowDesc;
       document.getElementById("t_what_title").textContent = t.whatTitle;
       document.getElementById("t_what_desc").textContent = t.whatDesc;
+
       document.getElementById("t_origin_title").textContent = t.originTitle;
       document.getElementById("t_origin_desc").textContent = t.originDesc;
+
       document.getElementById("t_pdf_title").textContent = t.pdfTitle;
       document.getElementById("t_pdf_desc").textContent = t.pdfDesc;
 
       const btnOrigin = document.getElementById("btn_origin_toggle");
       btnOrigin.textContent = t.originBtn;
 
-      // story in home
       document.getElementById("story_p1").textContent = t.story.p1;
       document.getElementById("story_p2").textContent = t.story.p2;
       document.getElementById("story_q1").textContent = t.story.q1;

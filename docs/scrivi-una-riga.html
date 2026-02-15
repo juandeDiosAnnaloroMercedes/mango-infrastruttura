@@ -1,51 +1,15 @@
 <!doctype html>
 <html lang="it">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Mango — Scrivi una riga</title>
-<meta name="robots" content="noindex,nofollow">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Mango</title>
+  <meta name="robots" content="noindex,nofollow">
+  <meta http-equiv="refresh" content="0; url=./index.html">
+  <script>
+    window.location.replace("./index.html");
+  </script>
 </head>
 <body>
-<script>
-
-/* =========================================
-   MANGO REGISTRO UNICO DEFINITIVO
-   Condivide lo stesso archivio della home
-========================================= */
-
-const KEY = "mango_righe_v1"; 
-// ⚠️ questa è la stessa chiave usata in index.html
-
-/* ===== MIGRAZIONE AUTOMATICA (se esiste vecchio registro) ===== */
-
-(function migrateOldKey(){
-  const OLD = "MANGO_RIGHE_V1";
-  try{
-    const oldRaw = localStorage.getItem(OLD);
-    if(!oldRaw) return;
-
-    const oldArr = JSON.parse(oldRaw || "[]");
-    if(!Array.isArray(oldArr) || !oldArr.length) return;
-
-    const curArr = JSON.parse(localStorage.getItem(KEY) || "[]");
-    const cur = Array.isArray(curArr) ? curArr : [];
-
-    const set = new Set(cur);
-    oldArr.forEach(x => {
-      if(typeof x === "string") set.add(x);
-      if(typeof x === "object" && x.text) set.add(x.text);
-    });
-
-    localStorage.setItem(KEY, JSON.stringify(Array.from(set)));
-    localStorage.removeItem(OLD);
-  }catch(e){}
-})();
-
-/* ===== REDIRECT ALLA HOME UNICA ===== */
-
-window.location.replace("./index.html");
-
-</script>
 </body>
 </html>

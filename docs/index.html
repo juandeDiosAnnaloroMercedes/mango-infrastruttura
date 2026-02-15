@@ -2,340 +2,377 @@
 <html lang="it">
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Mango</title>
-  <meta name="description" content="Mango accade tra persone reali. Mango non è un sito: è una pratica." />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Mango — Infrastruttura</title>
+
   <style>
-    :root{ --b:rgba(0,0,0,.12); --b2:rgba(0,0,0,.16); }
+    :root{
+      --bg:#ffffff;
+      --card:#f7f7f8;
+      --text:#111111;
+      --muted:#5b5b5b;
+      --stroke:#e6e6e9;
+      --shadow: 0 8px 20px rgba(0,0,0,.06);
+      --radius: 20px;
+      --btn:#ffffff;
+    }
+
+    *{box-sizing:border-box}
     body{
-      margin:0; font-family:-apple-system,BlinkMacSystemFont,system-ui,Segoe UI,Roboto,Arial;
-      background:#fff; color:#111; min-height:100vh;
+      margin:0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
+      background:var(--bg);
+      color:var(--text);
     }
+
+    .wrap{
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 18px 16px 90px;
+    }
+
+    /* Header */
     .top{
-      display:flex; justify-content:space-between; align-items:center;
-      padding:14px 18px;
-      position:sticky; top:0; z-index:20;
-      background:rgba(255,255,255,.92);
-      backdrop-filter: blur(10px);
-      border-bottom:1px solid rgba(0,0,0,.08);
+      display:flex;
+      align-items:center;
+      gap:14px;
+      margin-bottom: 12px;
+    }
+    .brand{
+      display:flex;
+      align-items:center;
       gap:10px;
+      font-weight:800;
+      font-size: 32px;
+      letter-spacing: -0.5px;
     }
-    .brand{ font-weight:950; letter-spacing:.2px; }
-
-    .langbar{ display:flex; gap:8px; flex-wrap:wrap; justify-content:flex-end; }
-    .langbar a{
-      font-size:.95rem; text-decoration:none; color:#111; opacity:.78; font-weight:900;
-      padding:8px 10px; border-radius:12px;
-      border:1px solid rgba(0,0,0,.10);
+    .logo{
+      width:70px;
+      height:48px;
+      border-radius: 18px;
+      border:1px solid var(--stroke);
+      display:flex;
+      align-items:center;
+      justify-content:center;
       background:#fff;
+      box-shadow: var(--shadow);
+      font-size: 22px;
     }
-    .langbar a.active{ opacity:1; border-color:rgba(0,0,0,.25); }
 
-    /* bottone “segreto”: SOLO 🥭, nessuna parola */
-    .secret-mango{
-      text-decoration:none; color:#111; font-weight:950;
-      border:1px solid var(--b2); border-radius:16px; padding:10px 12px;
-      background:#fff; display:inline-flex; align-items:center;
-      box-shadow:0 6px 18px rgba(0,0,0,.06);
-      white-space:nowrap;
+    /* Language pills */
+    .langs{
+      margin-left:auto;
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      justify-content:flex-end;
     }
-    .secret-mango:active{ transform: translateY(1px); }
-
-    .wrap{ max-width:980px; margin:0 auto; padding:18px; }
-    header{ text-align:center; padding:44px 18px 10px; }
-    h1{ margin:0; font-size:2.45rem; font-weight:950; line-height:1.12; letter-spacing:.2px; }
-    p.lead{ margin:14px auto 0; max-width:820px; line-height:1.65; font-size:1.08rem; opacity:.78; }
-
-    /* frase SOLO HOME: non flottante, non in basso */
-    .motto{
-      margin:18px auto 0;
-      max-width:820px;
-      border:1px solid rgba(0,0,0,.10);
-      border-radius:18px;
-      padding:14px 14px;
+    .pill{
+      border:1px solid var(--stroke);
       background:#fff;
-      box-shadow:0 10px 26px rgba(0,0,0,.06);
+      border-radius: 16px;
+      padding: 10px 14px;
+      font-weight:700;
+      min-width: 46px;
+      text-align:center;
+      cursor:pointer;
+      user-select:none;
+    }
+    .pill.active{
+      outline: none;
+      border-color:#cfcfd6;
+      box-shadow: 0 0 0 3px rgba(0,0,0,.04);
+    }
+
+    /* Cards */
+    .card{
+      background:var(--card);
+      border:1px solid var(--stroke);
+      border-radius: var(--radius);
+      padding: 22px 18px;
+      margin: 14px 0;
+      box-shadow: 0 6px 14px rgba(0,0,0,.04);
+    }
+    .card h2{
+      margin: 0 0 10px;
+      font-size: 30px;
+      letter-spacing:-.2px;
       text-align:center;
     }
-    .motto strong{ font-weight:950; }
-    .motto .small{ opacity:.78; line-height:1.55; }
-
-    .grid{ display:grid; grid-template-columns:repeat(auto-fit,minmax(250px,1fr)); gap:14px; margin-top:22px; }
-    .card{
-      border:1px solid rgba(0,0,0,.12);
-      border-radius:22px;
-      padding:18px;
-      background:#fff;
-      box-shadow:0 10px 28px rgba(0,0,0,.05);
+    .card p{
+      margin: 0 0 16px;
+      color:var(--muted);
+      font-size: 20px;
+      line-height: 1.35;
+      text-align:center;
     }
-    .card h2{ margin:0 0 8px; font-size:1.12rem; font-weight:950; }
-    .card p{ margin:0 0 12px; opacity:.72; line-height:1.55; }
 
+    .btnRow{
+      display:flex;
+      justify-content:center;
+    }
     .btn{
-      appearance:none; border:1px solid var(--b2); background:#fff; color:#111;
-      padding:12px 14px; border-radius:14px; font-weight:950;
-      cursor:pointer; text-decoration:none;
-      display:inline-flex; align-items:center; gap:10px;
-      box-shadow:0 8px 20px rgba(0,0,0,.05);
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap:10px;
+      padding: 14px 18px;
+      border-radius: 16px;
+      border:1px solid var(--stroke);
+      background:var(--btn);
+      font-size: 22px;
+      font-weight:800;
+      cursor:pointer;
+      box-shadow: 0 10px 18px rgba(0,0,0,.06);
+      text-decoration:none;
+      color:inherit;
+      min-width: 170px;
     }
-    .btn:active{ transform: translateY(1px); }
 
-    /* 🥭 bottom-right = Home sempre */
-    .mango-fab{
-      position:fixed; right:16px; bottom:16px; z-index:30;
-      text-decoration:none; color:#111; font-weight:950;
-      border:1px solid var(--b2); border-radius:18px; padding:12px 14px;
-      background:#fff; box-shadow:0 6px 18px rgba(0,0,0,.08);
-      display:inline-flex; align-items:center; gap:10px;
-      white-space:nowrap;
+    /* Footer contact */
+    .footer{
+      margin-top: 16px;
+      padding: 10px 6px;
+      color: var(--muted);
+      font-size: 18px;
     }
-    .mango-fab:active{ transform: translateY(1px); }
+    .footer a{color:inherit}
+
+    /* Scroll to top button (freccia su) */
+    .toTop{
+      position: fixed;
+      right: 16px;
+      bottom: 16px;
+      width: 54px;
+      height: 54px;
+      border-radius: 18px;
+      border: 1px solid var(--stroke);
+      background: #fff;
+      box-shadow: var(--shadow);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      font-size: 22px;
+      font-weight:900;
+      cursor:pointer;
+      opacity: 0;
+      transform: translateY(10px);
+      pointer-events: none;
+      transition: .18s ease;
+    }
+    .toTop.show{
+      opacity: 1;
+      transform: translateY(0);
+      pointer-events: auto;
+    }
   </style>
 </head>
 
 <body>
-  <div class="top">
-    <div class="brand" id="brandTxt">Mango</div>
+  <div class="wrap">
+    <div class="top">
+      <div class="brand">
+        Mango
+        <div class="logo">🥭</div>
+      </div>
 
-    <!-- SOLO 🥭 (segreto) -->
-    <a class="secret-mango" id="biancoBtn" href="bianco.html?lang=it" aria-label="Bianco">🥭</a>
+      <div class="langs" id="langs">
+        <div class="pill" data-lang="it">IT</div>
+        <div class="pill" data-lang="en">EN</div>
+        <div class="pill" data-lang="es">ES</div>
+        <div class="pill" data-lang="fr">FR</div>
+        <div class="pill" data-lang="de">DE</div>
+        <div class="pill" data-lang="zh">ZH</div>
+      </div>
+    </div>
 
-    <div class="langbar" id="langbar"></div>
+    <!-- Fai Mango adesso -->
+    <div class="card">
+      <p id="t_fast">
+        Riconosci uno scambio reale tra persone. Scrivi una riga. Non servono numeri.
+      </p>
+      <div class="btnRow">
+        <a class="btn" id="btn_go" href="primo-scambio.html">🥭 Vai</a>
+      </div>
+    </div>
+
+    <!-- Scrivi una riga -->
+    <div class="card">
+      <h2 id="t_row_title">Scrivi una riga</h2>
+      <p id="t_row_desc">Registra lo scambio: una riga. Nessun numero, nessun conto.</p>
+      <div class="btnRow">
+        <a class="btn" id="btn_open" href="scrivi-una-riga.html">✍️ Apri</a>
+      </div>
+    </div>
+
+    <!-- Cos'è Mango -->
+    <div class="card">
+      <h2 id="t_what_title">Cos’è Mango</h2>
+      <p id="t_what_desc">Mango è un’infrastruttura di fiducia locale non monetaria.</p>
+      <div class="btnRow">
+        <a class="btn" id="btn_read" href="cos-e-mango.html">📘 Leggi</a>
+      </div>
+    </div>
+
+    <!-- Origine vissuta -->
+    <div class="card">
+      <h2 id="t_origin_title">Origine vissuta</h2>
+      <p id="t_origin_desc">La storia reale: prima della teoria. L’origine vissuta di Mango.</p>
+      <div class="btnRow">
+        <a class="btn" id="btn_origin" href="origine-vissuta.html">📜 Leggi</a>
+      </div>
+    </div>
+
+    <!-- PDF -->
+    <div class="card">
+      <h2 id="t_pdf_title">PDF</h2>
+      <p id="t_pdf_desc">Apri i PDF nella lingua selezionata.</p>
+      <div class="btnRow">
+        <a class="btn" id="btn_pdf" href="pdf.html">📄 Apri PDF</a>
+      </div>
+    </div>
+
+    <div class="footer">
+      Contatti stampa: <a href="mailto:info@mangoinfrastruttura.org"><b>info@mangoinfrastruttura.org</b></a>
+    </div>
   </div>
 
-  <header class="wrap">
-    <h1 id="h1">Mango accade tra persone reali.</h1>
-    <p class="lead" id="lead">Mango non è un sito. È una pratica. Qui trovi solo strumenti minimi per farlo adesso.</p>
+  <!-- Freccia su -->
+  <button class="toTop" id="toTop" aria-label="Torna su">↑</button>
 
-    <!-- SOLO HOME -->
-    <div class="motto" id="mottoBox">
-      <div><strong id="m1">Questo dominio può sparire.</strong></div>
-      <div><strong id="m2">Mango no.</strong></div>
-      <div class="small" id="m3">Perché Mango non è un sito. È una pratica.</div>
-    </div>
+  <script>
+    // --- Lingua (unificata con ?lang=xx) ---
+    const supported = ["it","en","es","fr","de","zh"];
+    const qs = new URLSearchParams(location.search);
+    let lang = (qs.get("lang") || "it").toLowerCase();
+    if (!supported.includes(lang)) lang = "it";
 
-    <div class="grid">
-      <section class="card">
-        <h2 id="c1t">Fai Mango adesso</h2>
-        <p id="c1p">Riconosci uno scambio reale tra persone. Scrivi una riga. Non servono numeri.</p>
-        <a class="btn" id="btn1" href="primo-scambio.html?lang=it">🥭 <span id="btn1t">Vai</span></a>
-      </section>
+    // evidenzia pill
+    document.querySelectorAll(".pill").forEach(p => {
+      if (p.dataset.lang === lang) p.classList.add("active");
+      p.addEventListener("click", () => {
+        const next = p.dataset.lang;
+        const url = new URL(location.href);
+        url.searchParams.set("lang", next);
+        location.href = url.toString();
+      });
+    });
 
-      <section class="card">
-        <h2 id="c2t">Scrivi una riga</h2>
-        <p id="c2p">Registra lo scambio: una riga. Nessun numero, nessun conto.</p>
-        <a class="btn" id="btn2" href="scrivi-una-riga.html?lang=it">✍️ <span id="btn2t">Apri</span></a>
-      </section>
+    // preserva lang nei link principali
+    function withLang(path){
+      const u = new URL(path, location.origin + location.pathname.replace(/[^\/]*$/, ""));
+      u.searchParams.set("lang", lang);
+      return u.pathname + "?" + u.searchParams.toString();
+    }
 
-      <section class="card">
-        <h2 id="c3t">Cos’è Mango</h2>
-        <p id="c3p">Mango è un’infrastruttura di fiducia locale non monetaria.</p>
-        <a class="btn" id="btn3" href="it.html?lang=it">📘 <span id="btn3t">Leggi</span></a>
-      </section>
+    // aggiorna href dei bottoni
+    const links = [
+      ["btn_go", "primo-scambio.html"],
+      ["btn_open", "scrivi-una-riga.html"],
+      ["btn_read", "cos-e-mango.html"],
+      ["btn_origin", "origine-vissuta.html"],
+      ["btn_pdf", "pdf.html"],
+    ];
+    links.forEach(([id, path]) => {
+      const el = document.getElementById(id);
+      if (el) el.setAttribute("href", withLang(path));
+    });
 
-      <section class="card">
-        <h2 id="c4t">PDF</h2>
-        <p id="c4p">Apri i PDF nella lingua selezionata.</p>
-        <a class="btn" id="pdf1" href="kit-mango.pdf">📄 <span id="pdf1t">Apri PDF</span></a>
-      </section>
-    </div>
+    // Testi base IT + (placeholder minimi EN/ES/FR/DE/ZH se vuoi poi li allineiamo come nel tuo file attuale)
+    const T = {
+      it: {
+        fast: "Riconosci uno scambio reale tra persone. Scrivi una riga. Non servono numeri.",
+        rowTitle: "Scrivi una riga",
+        rowDesc: "Registra lo scambio: una riga. Nessun numero, nessun conto.",
+        whatTitle: "Cos’è Mango",
+        whatDesc: "Mango è un’infrastruttura di fiducia locale non monetaria.",
+        originTitle: "Origine vissuta",
+        originDesc: "La storia reale: prima della teoria. L’origine vissuta di Mango.",
+        pdfTitle: "PDF",
+        pdfDesc: "Apri i PDF nella lingua selezionata."
+      },
+      en: {
+        fast: "Recognize a real exchange between people. Write a line. No numbers needed.",
+        rowTitle: "Write a line",
+        rowDesc: "Record the exchange: one line. No numbers, no counting.",
+        whatTitle: "What is Mango",
+        whatDesc: "Mango is a local trust infrastructure, non-monetary.",
+        originTitle: "Lived origin",
+        originDesc: "The real story: before the theory. Mango’s lived origin.",
+        pdfTitle: "PDF",
+        pdfDesc: "Open the PDFs in the selected language."
+      },
+      es: {
+        fast: "Reconoce un intercambio real entre personas. Escribe una línea. No hacen falta números.",
+        rowTitle: "Escribe una línea",
+        rowDesc: "Registra el intercambio: una línea. Sin números, sin conteo.",
+        whatTitle: "Qué es Mango",
+        whatDesc: "Mango es una infraestructura local de confianza, no monetaria.",
+        originTitle: "Origen vivido",
+        originDesc: "La historia real: antes de la teoría. El origen vivido de Mango.",
+        pdfTitle: "PDF",
+        pdfDesc: "Abre los PDF en el idioma seleccionado."
+      },
+      fr: {
+        fast: "Reconnais un échange réel entre personnes. Écris une ligne. Pas besoin de chiffres.",
+        rowTitle: "Écris une ligne",
+        rowDesc: "Enregistre l’échange : une ligne. Aucun chiffre, aucun comptage.",
+        whatTitle: "Qu’est-ce que Mango",
+        whatDesc: "Mango est une infrastructure locale de confiance, non monétaire.",
+        originTitle: "Origine vécue",
+        originDesc: "L’histoire réelle : avant la théorie. L’origine vécue de Mango.",
+        pdfTitle: "PDF",
+        pdfDesc: "Ouvre les PDF dans la langue sélectionnée."
+      },
+      de: {
+        fast: "Erkenne einen echten Austausch zwischen Menschen. Schreibe eine Zeile. Keine Zahlen nötig.",
+        rowTitle: "Schreibe eine Zeile",
+        rowDesc: "Protokolliere den Austausch: eine Zeile. Keine Zahlen, kein Zählen.",
+        whatTitle: "Was ist Mango",
+        whatDesc: "Mango ist eine lokale Vertrauens-Infrastruktur, nicht monetär.",
+        originTitle: "Gelebter Ursprung",
+        originDesc: "Die echte Geschichte: vor der Theorie. Mangos gelebter Ursprung.",
+        pdfTitle: "PDF",
+        pdfDesc: "Öffne die PDFs in der ausgewählten Sprache."
+      },
+      zh: {
+        fast: "认可人与人之间真实的交换。写一行。不需要数字。",
+        rowTitle: "写一行",
+        rowDesc: "记录交换：一行。不用数字，不用计数。",
+        whatTitle: "什么是 Mango",
+        whatDesc: "Mango 是一种本地信任基础设施，非货币化。",
+        originTitle: "亲历起源",
+        originDesc: "真实故事：在理论之前。Mango 的亲历起源。",
+        pdfTitle: "PDF",
+        pdfDesc: "用所选语言打开 PDF。"
+      }
+    };
 
-    <!-- ✅ SOLO AGGIUNTA: EMAIL GIORNALISTI / INFO (in fondo, discreta) -->
-    <div id="contactBox" style="margin:40px auto 10px; text-align:center; font-size:.95rem; opacity:.78;">
-      <span id="contactLabel">Contatti stampa:</span>
-      <a id="contactMail"
-         href="mailto:info@mangoinfrastruttura.org"
-         style="color:#111; text-decoration:none; font-weight:800;">
-        info@mangoinfrastruttura.org
-      </a>
-    </div>
+    const t = T[lang] || T.it;
+    document.getElementById("t_fast").textContent = t.fast;
+    document.getElementById("t_row_title").textContent = t.rowTitle;
+    document.getElementById("t_row_desc").textContent = t.rowDesc;
+    document.getElementById("t_what_title").textContent = t.whatTitle;
+    document.getElementById("t_what_desc").textContent = t.whatDesc;
+    document.getElementById("t_origin_title").textContent = t.originTitle;
+    document.getElementById("t_origin_desc").textContent = t.originDesc;
+    document.getElementById("t_pdf_title").textContent = t.pdfTitle;
+    document.getElementById("t_pdf_desc").textContent = t.pdfDesc;
 
-  </header>
+    // --- Freccia su ---
+    const toTop = document.getElementById("toTop");
+    function toggleToTop(){
+      if (window.scrollY > 220) toTop.classList.add("show");
+      else toTop.classList.remove("show");
+    }
+    window.addEventListener("scroll", toggleToTop, {passive:true});
+    toggleToTop();
 
-  <a class="mango-fab" id="homeFab" href="index.html?lang=it">🥭 <span id="fabTxt">Mango</span></a>
+    toTop.addEventListener("click", () => {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    });
 
-<script>
-const dict = {
-  it:{ htmlLang:"it",
-    brand:"Mango",
-    h1:"Mango accade tra persone reali.",
-    lead:"Mango non è un sito. È una pratica. Qui trovi solo strumenti minimi per farlo adesso.",
-    m1:"Questo dominio può sparire.", m2:"Mango no.", m3:"Perché Mango non è un sito. È una pratica.",
-    c1t:"Fai Mango adesso",
-    c1p:"Riconosci uno scambio reale tra persone. Scrivi una riga. Non servono numeri.",
-    btn1t:"Vai",
-    c2t:"Scrivi una riga",
-    c2p:"Registra lo scambio: una riga. Nessun numero, nessun conto.",
-    btn2t:"Apri",
-    c3t:"Cos’è Mango",
-    c3p:"Mango è un’infrastruttura di fiducia locale non monetaria.",
-    btn3t:"Leggi",
-    c4t:"PDF",
-    c4p:"Apri i PDF nella lingua selezionata.",
-    pdf1t:"Apri PDF",
-    fab:"Mango",
-    contact:"Contatti stampa:"
-  },
-
-  en:{ htmlLang:"en",
-    brand:"Mango",
-    h1:"Mango happens between real people.",
-    lead:"Mango is not a website. It’s a practice. Here you only find minimal tools to do it now.",
-    m1:"This domain can disappear.", m2:"Mango won’t.", m3:"Because Mango is not a website. It’s a practice.",
-    c1t:"Do Mango now",
-    c1p:"Recognize a real exchange between people. Write a line. No numbers needed.",
-    btn1t:"Go",
-    c2t:"Write a line",
-    c2p:"Record the exchange: one line. No numbers, no counting.",
-    btn2t:"Open",
-    c3t:"What is Mango",
-    c3p:"Mango is a local trust infrastructure (non-monetary).",
-    btn3t:"Read",
-    c4t:"PDF",
-    c4p:"Open the PDFs in the selected language.",
-    pdf1t:"Open PDF",
-    fab:"Mango",
-    contact:"Press / Contact:"
-  },
-
-  es:{ htmlLang:"es",
-    brand:"Mango",
-    h1:"Mango sucede entre personas reales.",
-    lead:"Mango no es un sitio web. Es una práctica. Aquí solo hay herramientas mínimas para hacerlo ahora.",
-    m1:"Este dominio puede desaparecer.", m2:"Mango no.", m3:"Porque Mango no es un sitio web. Es una práctica.",
-    c1t:"Haz Mango ahora",
-    c1p:"Reconoce un intercambio real entre personas. Escribe una línea. No hacen falta números.",
-    btn1t:"Ir",
-    c2t:"Escribe una línea",
-    c2p:"Registra el intercambio: una línea. Sin números, sin conteos.",
-    btn2t:"Abrir",
-    c3t:"Qué es Mango",
-    c3p:"Mango es una infraestructura local de confianza (no monetaria).",
-    btn3t:"Leer",
-    c4t:"PDF",
-    c4p:"Abre los PDF en el idioma seleccionado.",
-    pdf1t:"Abrir PDF",
-    fab:"Mango",
-    contact:"Contacto de prensa:"
-  },
-
-  fr:{ htmlLang:"fr",
-    brand:"Mango",
-    h1:"Mango se vit entre personnes réelles.",
-    lead:"Mango n’est pas un site. C’est une pratique. Ici, seulement des outils minimaux pour le faire maintenant.",
-    m1:"Ce domaine peut disparaître.", m2:"Mango non.", m3:"Parce que Mango n’est pas un site. C’est une pratique.",
-    c1t:"Faire Mango maintenant",
-    c1p:"Reconnais un échange réel entre personnes. Écris une ligne. Pas besoin de chiffres.",
-    btn1t:"Aller",
-    c2t:"Écrire une ligne",
-    c2p:"Enregistre l’échange : une ligne. Pas de chiffres, pas de comptes.",
-    btn2t:"Ouvrir",
-    c3t:"Qu’est-ce que Mango",
-    c3p:"Mango est une infrastructure locale de confiance (non monétaire).",
-    btn3t:"Lire",
-    c4t:"PDF",
-    c4p:"Ouvre les PDF dans la langue choisie.",
-    pdf1t:"Ouvrir PDF",
-    fab:"Mango",
-    contact:"Contact presse :"
-  },
-
-  de:{ htmlLang:"de",
-    brand:"Mango",
-    h1:"Mango passiert zwischen echten Menschen.",
-    lead:"Mango ist keine Website. Es ist eine Praxis. Hier findest du nur minimale Werkzeuge, um es jetzt zu tun.",
-    m1:"Diese Domain kann verschwinden.", m2:"Mango nicht.", m3:"Weil Mango keine Website ist. Es ist eine Praxis.",
-    c1t:"Jetzt Mango machen",
-    c1p:"Erkenne einen echten Austausch zwischen Menschen. Schreib eine Zeile. Keine Zahlen nötig.",
-    btn1t:"Start",
-    c2t:"Eine Zeile schreiben",
-    c2p:"Den Austausch notieren: eine Zeile. Keine Zahlen, kein Zählen.",
-    btn2t:"Öffnen",
-    c3t:"Was ist Mango",
-    c3p:"Mango ist eine lokale Vertrauens-Infrastruktur (nicht-monetär).",
-    btn3t:"Lesen",
-    c4t:"PDF",
-    c4p:"Öffne die PDFs in der gewählten Sprache.",
-    pdf1t:"PDF öffnen",
-    fab:"Mango",
-    contact:"Pressekontakt:"
-  },
-
-  zh:{ htmlLang:"zh-Hant",
-    brand:"Mango",
-    h1:"Mango 發生在人與人之間的真實關係中。",
-    lead:"Mango 不是網站，而是一種實踐。這裡只提供最少工具，讓你現在就能開始。",
-    m1:"這個網域可以消失。", m2:"Mango 不會。", m3:"因為 Mango 不是網站，而是一種實踐。",
-    c1t:"現在做 Mango",
-    c1p:"辨認人與人之間的真實交換。寫一行。不需要數字。",
-    btn1t:"開始",
-    c2t:"寫一行",
-    c2p:"記錄交換：一行。不要數字，不要計算。",
-    btn2t:"打開",
-    c3t:"什麼是 Mango",
-    c3p:"Mango 是一種在地信任基礎設施（非貨幣）。",
-    btn3t:"閱讀",
-    c4t:"PDF",
-    c4p:"以所選語言開啟 PDF。",
-    pdf1t:"打開 PDF",
-    fab:"Mango",
-    contact:"媒體聯絡："
-  }
-};
-
-function getLang(){
-  const q = new URLSearchParams(location.search);
-  const v = (q.get("lang") || "it").toLowerCase();
-  return dict[v] ? v : "it";
-}
-const L = getLang();
-
-function setText(id, val){ const el=document.getElementById(id); if(el) el.textContent = val; }
-
-function buildLangbar(){
-  const bar=document.getElementById("langbar");
-  const langs=[["it","IT"],["en","EN"],["es","ES"],["fr","FR"],["de","DE"],["zh","ZH"]];
-  bar.innerHTML = langs.map(([k,label])=>{
-    const a=document.createElement("a");
-    a.href = `?lang=${k}`;
-    a.textContent = label;
-    if(k===L) a.classList.add("active");
-    return a.outerHTML;
-  }).join("");
-}
-
-function applyI18n(){
-  document.documentElement.lang = dict[L].htmlLang;
-
-  setText("brandTxt", dict[L].brand);
-  setText("h1", dict[L].h1);
-  setText("lead", dict[L].lead);
-
-  setText("m1", dict[L].m1);
-  setText("m2", dict[L].m2);
-  setText("m3", dict[L].m3);
-
-  setText("c1t", dict[L].c1t); setText("c1p", dict[L].c1p); setText("btn1t", dict[L].btn1t);
-  setText("c2t", dict[L].c2t); setText("c2p", dict[L].c2p); setText("btn2t", dict[L].btn2t);
-  setText("c3t", dict[L].c3t); setText("c3p", dict[L].c3p); setText("btn3t", dict[L].btn3t);
-  setText("c4t", dict[L].c4t); setText("c4p", dict[L].c4p); setText("pdf1t", dict[L].pdf1t);
-
-  document.getElementById("fabTxt").textContent = dict[L].fab;
-
-  // ✅ label email multilingua
-  setText("contactLabel", dict[L].contact);
-
-  // Link sempre con lingua
-  const home = `index.html?lang=${L}`;
-  document.getElementById("homeFab").href = home;
-  document.getElementById("biancoBtn").href = `bianco.html?lang=${L}`;
-  document.getElementById("btn1").href = `primo-scambio.html?lang=${L}`;
-  document.getElementById("btn2").href = `scrivi-una-riga.html?lang=${L}`;
-  document.getElementById("btn3").href = `${L}.html?lang=${L}`;
-}
-
-buildLangbar();
-applyI18n();
-</script>
+    // --- IMPORTANTE: qui NON c'è nessun bottone flottante "🥭 Mango" ---
+  </script>
 </body>
 </html>

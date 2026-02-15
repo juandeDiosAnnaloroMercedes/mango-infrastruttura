@@ -2,658 +2,654 @@
 <html lang="it">
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Mango – Infrastruttura di fiducia locale non monetaria | Scambio senza numeri</title>
-<meta name="description" content="Mango è un’infrastruttura di fiducia locale non monetaria. Riconosce scambi reali tra persone senza numeri, conti o accumulo. Una riga per ogni scambio. Creato da Juan de Dios Annaloro Mercedes.">
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Mango — Infrastruttura di fiducia locale</title>
 
   <style>
     :root{
-      --bg:#ffffff;
-      --card:#f7f7f8;
-      --text:#111111;
-      --muted:#5b5b5b;
-      --stroke:#e6e6e9;
-      --shadow: 0 8px 20px rgba(0,0,0,.06);
-      --radius: 20px;
-      --btn:#ffffff;
+      --bg:#0b0b0c;
+      --card:#121214;
+      --text:#ffffff;
+      --muted:#b8b8b8;
+      --line:#2a2a2f;
+      --accent:#2d6cdf;
+      --accent2:#22c55e;
+      --danger:#ef4444;
+      --radius:16px;
     }
     *{box-sizing:border-box}
     body{
       margin:0;
-      font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,"Apple Color Emoji","Segoe UI Emoji";
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
       background:var(--bg);
       color:var(--text);
+      line-height:1.35;
     }
+    a{color:inherit}
     .wrap{
-      max-width: 720px;
-      margin: 0 auto;
-      padding: 18px 16px 90px;
+      max-width:980px;
+      margin:0 auto;
+      padding:20px 16px 40px;
     }
-
-    /* Header */
-    .top{
+    header{
       display:flex;
       align-items:center;
-      gap:14px;
-      margin-bottom: 12px;
+      justify-content:space-between;
+      gap:12px;
+      padding:10px 0 18px;
     }
     .brand{
-      display:flex;
-      align-items:center;
-      gap:10px;
+      display:flex; align-items:center; gap:10px;
       font-weight:800;
-      font-size: 32px;
-      letter-spacing: -0.5px;
+      letter-spacing:0.2px;
+      font-size:18px;
     }
-    .logoBtn{
-      width:70px;
-      height:48px;
-      border-radius: 18px;
-      border:1px solid var(--stroke);
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      background:#fff;
-      box-shadow: var(--shadow);
-      font-size: 22px;
+    .brand .emoji{font-size:22px}
+    .langbar{
+      display:flex; gap:8px; flex-wrap:wrap; justify-content:flex-end;
+    }
+    .chip{
+      border:1px solid var(--line);
+      background:transparent;
+      color:var(--text);
+      padding:8px 10px;
+      border-radius:999px;
+      font-size:13px;
       cursor:pointer;
-      user-select:none;
+    }
+    .chip.active{
+      border-color:var(--accent);
+      box-shadow:0 0 0 2px rgba(45,108,223,.18) inset;
     }
 
-    /* Language pills */
-    .langs{
-      margin-left:auto;
-      display:flex;
-      gap:10px;
-      flex-wrap:wrap;
-      justify-content:flex-end;
+    .hero{
+      background:linear-gradient(180deg, rgba(45,108,223,.18), rgba(45,108,223,.05));
+      border:1px solid var(--line);
+      border-radius:var(--radius);
+      padding:18px 16px;
+      margin-bottom:14px;
     }
-    .pill{
-      border:1px solid var(--stroke);
-      background:#fff;
-      border-radius: 16px;
-      padding: 10px 14px;
-      font-weight:700;
-      min-width: 46px;
-      text-align:center;
-      cursor:pointer;
-      user-select:none;
+    .hero h1{
+      margin:0 0 8px;
+      font-size:28px;
+      line-height:1.15;
     }
-    .pill.active{
-      border-color:#cfcfd6;
-      box-shadow: 0 0 0 3px rgba(0,0,0,.04);
+    .hero p{
+      margin:0;
+      color:var(--muted);
+      font-size:15px;
     }
 
-    /* Cards */
+    .grid{
+      display:grid;
+      grid-template-columns: 1fr;
+      gap:12px;
+    }
+    @media (min-width: 860px){
+      .grid{ grid-template-columns: 1fr 1fr; }
+      .full{ grid-column: 1 / -1; }
+    }
     .card{
       background:var(--card);
-      border:1px solid var(--stroke);
-      border-radius: var(--radius);
-      padding: 22px 18px;
-      margin: 14px 0;
-      box-shadow: 0 6px 14px rgba(0,0,0,.04);
+      border:1px solid var(--line);
+      border-radius:var(--radius);
+      padding:16px;
     }
     .card h2{
-      margin: 0 0 10px;
-      font-size: 30px;
-      letter-spacing:-.2px;
-      text-align:center;
+      margin:0 0 10px;
+      font-size:18px;
     }
-    .card p{
-      margin: 0 0 16px;
+    .card p, .card li{
       color:var(--muted);
-      font-size: 20px;
-      line-height: 1.35;
-      text-align:center;
+      font-size:14px;
     }
+    .card ul{margin:10px 0 0; padding-left:18px}
 
-    .btnRow{
-      display:flex;
-      justify-content:center;
-      gap:12px;
-      flex-wrap:wrap;
-    }
+    .btnrow{display:flex; flex-wrap:wrap; gap:10px; margin-top:12px}
     .btn{
       display:inline-flex;
       align-items:center;
       justify-content:center;
-      gap:10px;
-      padding: 14px 18px;
-      border-radius: 16px;
-      border:1px solid var(--stroke);
-      background:var(--btn);
-      font-size: 22px;
-      font-weight:800;
-      cursor:pointer;
-      box-shadow: 0 10px 18px rgba(0,0,0,.06);
+      gap:8px;
+      padding:12px 14px;
+      border-radius:12px;
+      border:1px solid var(--line);
+      background:transparent;
+      color:var(--text);
+      font-weight:700;
+      font-size:14px;
       text-decoration:none;
-      color:inherit;
-      min-width: 170px;
+      cursor:pointer;
+    }
+    .btn.primary{
+      background:var(--accent);
+      border-color:transparent;
+    }
+    .btn.good{
+      background:rgba(34,197,94,.16);
+      border-color:rgba(34,197,94,.35);
+    }
+    .btn.danger{
+      background:rgba(239,68,68,.12);
+      border-color:rgba(239,68,68,.35);
     }
 
-    /* Statement line (domain can disappear...) */
-    .statement{
-      margin-top: 8px;
-      padding: 14px 14px;
-      border:1px solid var(--stroke);
-      border-radius: 16px;
-      background:#fff;
-      text-align:center;
-      color: var(--muted);
-      font-size: 18px;
-      line-height: 1.35;
-      box-shadow: 0 6px 14px rgba(0,0,0,.04);
+    .field{
+      display:flex;
+      flex-direction:column;
+      gap:8px;
+      margin-top:10px;
     }
-
-    /* Origine vissuta block */
-    .story{
-      text-align:left;
-      color: var(--text);
-      font-size: 18px;
-      line-height: 1.55;
-      max-width: 640px;
-      margin: 0 auto;
+    textarea{
+      width:100%;
+      min-height:110px;
+      resize:vertical;
+      border-radius:14px;
+      border:1px solid var(--line);
+      background:#0e0e10;
+      color:var(--text);
+      padding:12px;
+      font-size:14px;
+      outline:none;
     }
-    .story .muted{ color: var(--muted); }
-    .story .quote{
-      font-style:italic;
-      margin: 12px 0;
-      padding: 12px 14px;
-      border:1px solid var(--stroke);
-      border-radius: 16px;
-      background: #fff;
-    }
-    .story .meta{
-      margin-top: 16px;
-      padding-top: 14px;
-      border-top:1px solid var(--stroke);
-      color: var(--muted);
-      font-size: 16px;
-    }
-    .storyWrap{
-      display:none;
-      margin-top: 10px;
-    }
-    .storyWrap.open{ display:block; }
-
-    /* Footer contact */
-    .footer{
-      margin-top: 16px;
-      padding: 10px 6px;
-      color: var(--muted);
-      font-size: 18px;
-    }
-    .footer a{color:inherit}
-
-    /* Scroll to top arrow */
-    .toTop{
-      position: fixed;
-      right: 16px;
-      bottom: 16px;
-      width: 54px;
-      height: 54px;
-      border-radius: 18px;
-      border: 1px solid var(--stroke);
-      background: #fff;
-      box-shadow: var(--shadow);
+    textarea:focus{border-color:rgba(45,108,223,.65)}
+    .meta{
       display:flex;
       align-items:center;
-      justify-content:center;
-      font-size: 22px;
-      font-weight:900;
-      cursor:pointer;
-      opacity: 0;
-      transform: translateY(10px);
-      pointer-events: none;
-      transition: .18s ease;
-      z-index: 50;
+      justify-content:space-between;
+      gap:10px;
+      flex-wrap:wrap;
+      margin-top:8px;
+      color:var(--muted);
+      font-size:13px;
     }
-    .toTop.show{
-      opacity: 1;
-      transform: translateY(0);
-      pointer-events: auto;
-    }
-
-    /* Secret view (bianco assoluto, assenza) */
-    .secret{
+    .status{
+      margin-top:10px;
+      padding:10px 12px;
+      border-radius:12px;
+      border:1px solid var(--line);
+      background:#0e0e10;
+      color:var(--muted);
+      font-size:13px;
       display:none;
-      min-height: 100vh;
-      background: #ffffff;
-      padding: 0;
     }
-    .secret.show{ display:block; }
-    .main.hide{ display:none; }
-
-    /* Mango bottom-right: torna Home (solo in segreto) */
-    .homeMango{
-      position: fixed;
-      right: 16px;
-      bottom: 16px;
-      width: 74px;
-      height: 54px;
-      border-radius: 18px;
-      border: 1px solid var(--stroke);
-      background: #fff;
-      box-shadow: var(--shadow);
-      display:none;
-      align-items:center;
-      justify-content:center;
-      font-size: 24px;
-      cursor:pointer;
-      z-index: 60;
+    .status.show{display:block}
+    footer{
+      margin-top:18px;
+      color:var(--muted);
+      font-size:12px;
+      text-align:center;
     }
-    .homeMango.show{ display:flex; }
+    .smallnote{font-size:12px; color:var(--muted); margin-top:8px}
+    .divider{height:1px;background:var(--line);margin:12px 0}
   </style>
 </head>
 
 <body>
+  <div class="wrap">
 
-  <!-- MAIN HOME -->
-  <div class="wrap main" id="main">
-
-    <div class="top">
+    <header>
       <div class="brand">
-        Mango
-        <!-- Mango in alto = bottone segreto -->
-        <div class="logoBtn" id="secretBtn" aria-label="Apri pagina segreta">🥭</div>
+        <span class="emoji">🥭</span>
+        <span id="brandTitle">Mango</span>
       </div>
 
-      <div class="langs" id="langs">
-        <div class="pill" data-lang="it">IT</div>
-        <div class="pill" data-lang="en">EN</div>
-        <div class="pill" data-lang="es">ES</div>
-        <div class="pill" data-lang="fr">FR</div>
-        <div class="pill" data-lang="de">DE</div>
-        <div class="pill" data-lang="zh">ZH</div>
+      <div class="langbar" aria-label="Language selector">
+        <button class="chip" data-lang="it">IT</button>
+        <button class="chip" data-lang="en">EN</button>
+        <button class="chip" data-lang="es">ES</button>
+        <button class="chip" data-lang="fr">FR</button>
+        <button class="chip" data-lang="de">DE</button>
+        <button class="chip" data-lang="zh">中文</button>
       </div>
-    </div>
+    </header>
 
-    <!-- statement -->
-    <div class="statement" id="t_statement"></div>
+    <section class="hero">
+      <h1 id="heroTitle">Mango — infrastruttura di fiducia locale</h1>
+      <p id="heroSub">
+        Non monetaria, non appropriabile, anti-accumulo, anti-cattura. Nata il 02 febbraio 2026.
+      </p>
+    </section>
 
-    <!-- Fai Mango adesso -->
-    <div class="card">
-      <p id="t_fast"></p>
-      <div class="btnRow">
-        <a class="btn" id="btn_go" href="primo-scambio.html">🥭 Vai</a>
-      </div>
-    </div>
-
-    <!-- Scrivi una riga -->
-    <div class="card">
-      <h2 id="t_row_title"></h2>
-      <p id="t_row_desc"></p>
-      <div class="btnRow">
-        <a class="btn" id="btn_open" href="scrivi-una-riga.html">✍️ Apri</a>
-      </div>
-    </div>
-
-    <!-- Cos'è Mango -->
-    <div class="card">
-      <h2 id="t_what_title"></h2>
-      <p id="t_what_desc"></p>
-      <div class="btnRow">
-        <a class="btn" id="btn_read" href="cos-e-mango.html">📘 Leggi</a>
-      </div>
-    </div>
-
-    <!-- Origine vissuta IN HOME -->
-    <div class="card">
-      <h2 id="t_origin_title"></h2>
-      <p id="t_origin_desc"></p>
-
-      <div class="btnRow">
-        <button class="btn" id="btn_origin_toggle" type="button"></button>
-      </div>
-
-      <div class="storyWrap" id="storyWrap">
-        <div class="story">
-          <div id="story_p1"></div>
-          <div class="muted" style="margin-top:10px" id="story_p2"></div>
-
-          <div class="quote" id="story_q1"></div>
-          <div class="quote" id="story_q2"></div>
-
-          <div class="muted" id="story_p3"></div>
-
-          <div style="margin-top:10px" id="story_p4"></div>
-
-          <div class="meta" id="story_meta"></div>
+    <section class="grid">
+      <!-- 1) FAI MANGO ADESSO -->
+      <div class="card">
+        <h2 id="sec1Title">Fai Mango adesso</h2>
+        <p id="sec1Text">
+          Mango nasce da scambi reali tra persone. Non è denaro. Non si conta. Non si accumula.
+        </p>
+        <div class="btnrow">
+          <a class="btn primary" id="btnPrimoScambio" href="primo-scambio.html">🥭 <span id="btnPrimoScambioTxt">Fai il primo scambio</span></a>
+          <a class="btn" id="btnFAQ" href="faq.html">❓ <span id="btnFAQTxt">FAQ</span></a>
+        </div>
+        <div class="smallnote" id="sec1Note">
+          Se non hai ancora le pagine, puoi aggiungerle dopo: qui intanto lasciamo i bottoni pronti.
         </div>
       </div>
-    </div>
 
-    <!-- PDF -->
-    <div class="card">
-      <h2 id="t_pdf_title"></h2>
-      <p id="t_pdf_desc"></p>
-      <div class="btnRow">
-        <!-- PDF unico multilingua (vale per tutte le lingue) -->
-        <a class="btn" id="btn_pdf" href="MANGO_INFRASTRUTTURA_UFFICIALE.pdf">📄 Apri PDF</a>
+      <!-- 2) SCRIVI UNA RIGA -->
+      <div class="card">
+        <h2 id="sec2Title">Scrivi una riga</h2>
+        <p id="sec2Text">
+          Una riga = riconoscimento di uno scambio reale. Nessun numero, nessun valore.
+        </p>
+
+        <div class="field">
+          <label for="riga" id="rigaLabel" style="color:var(--muted); font-size:13px;">
+            Descrivi lo scambio (breve, umano, chiaro):
+          </label>
+          <textarea id="riga" placeholder="Es: Ho aiutato a portare la spesa; in cambio ho ricevuto un passaggio."></textarea>
+
+          <div class="btnrow">
+            <button class="btn good" id="btnInvia" type="button">📩 <span id="btnInviaTxt">Invia / Salva</span></button>
+            <button class="btn danger" id="btnPulisci" type="button">🧹 <span id="btnPulisciTxt">Pulisci</span></button>
+          </div>
+
+          <div class="meta">
+            <div id="metaCount">0 righe salvate su questo dispositivo</div>
+            <div id="metaHint">Suggerimento: premi anche Invio (⌅) per salvare.</div>
+          </div>
+
+          <div class="status" id="statusBox"></div>
+        </div>
+
+        <div class="divider"></div>
+        <div class="btnrow">
+          <button class="btn" id="btnApriArchivio" type="button">📚 <span id="btnApriArchivioTxt">Vedi righe salvate</span></button>
+          <button class="btn danger" id="btnSvuotaArchivio" type="button">🗑️ <span id="btnSvuotaArchivioTxt">Svuota archivio</span></button>
+        </div>
+        <div class="smallnote" id="sec2Note">
+          Salvataggio locale (telefono/PC). Se vuoi anche invio online, serve un backend o un form esterno.
+        </div>
       </div>
-    </div>
 
-    <div class="footer">
-      Contatti stampa: <a href="mailto:info@mangoinfrastruttura.org"><b>info@mangoinfrastruttura.org</b></a>
-    </div>
+      <!-- 3) COS'È MANGO -->
+      <div class="card full">
+        <h2 id="sec3Title">Cos’è Mango</h2>
+        <p id="sec3Text">
+          Mango è un’infrastruttura di fiducia locale non monetaria: riconosce scambi reali senza trasformarli in quantità, valore o accumulo.
+          Creato da Juan de Dios Annaloro Mercedes in memoria di sua sorella Larimar.
+        </p>
+
+        <!-- ✅ BOTTONE PDF DEFINITIVO (multilingua) -->
+        <div class="btnrow">
+          <a class="btn primary" id="btnPDF" href="pdf/Mango_Documento_Fondativo_Multilingua_v1.pdf" target="_blank" rel="noopener">
+            📄 <span id="btnPDFTxt">Documento Fondativo Ufficiale (Multilingua)</span>
+          </a>
+        </div>
+
+        <div class="smallnote" id="pdfNote">
+          Il PDF deve stare in: <b>docs/pdf/</b> con questo nome: <b>Mango_Documento_Fondativo_Multilingua_v1.pdf</b>
+        </div>
+      </div>
+    </section>
+
+    <footer id="footerTxt">
+      Mango — nato il 02 febbraio 2026. Infrastruttura non monetaria, non appropriabile, anti-accumulo, anti-cattura.
+    </footer>
+
   </div>
 
-  <!-- SECRET PAGE (assenza totale) dentro lo stesso index -->
-  <div class="secret" id="secret"></div>
-
-  <!-- Arrow up (Home) -->
-  <button class="toTop" id="toTop" aria-label="Torna su">↑</button>
-
-  <!-- Mango bottom-right: torna Home (solo in segreto) -->
-  <button class="homeMango" id="homeMango" aria-label="Torna alla Home">🥭</button>
-
   <script>
-    // ---- Lang support ----
-    const supported = ["it","en","es","fr","de","zh"];
-    const qs = new URLSearchParams(location.search);
-    let lang = (qs.get("lang") || "it").toLowerCase();
-    if (!supported.includes(lang)) lang = "it";
-
-    // ---- Views: home vs secret (senza creare altri file) ----
-    const main = document.getElementById("main");
-    const secret = document.getElementById("secret");
-    const secretBtn = document.getElementById("secretBtn");
-    const homeMango = document.getElementById("homeMango");
-    const toTop = document.getElementById("toTop");
-
-    function isSecretView() {
-      const q = new URLSearchParams(location.search);
-      return q.get("view") === "secret";
-    }
-
-    function goSecret(){
-      const url = new URL(location.href);
-      url.searchParams.set("view","secret");
-      url.searchParams.set("lang", lang);
-      history.pushState({}, "", url.toString());
-      renderView();
-    }
-
-    function goHome(){
-      const url = new URL(location.href);
-      url.searchParams.delete("view");
-      url.searchParams.set("lang", lang);
-      history.pushState({}, "", url.toString());
-      renderView();
-      window.scrollTo({top:0,behavior:"smooth"});
-    }
-
-    function renderView(){
-      const secretOn = isSecretView();
-      if (secretOn){
-        main.classList.add("hide");
-        secret.classList.add("show");
-        homeMango.classList.add("show");  // mango bottom-right torna home
-        toTop.classList.remove("show");   // in segreto non serve freccia
-      } else {
-        main.classList.remove("hide");
-        secret.classList.remove("show");
-        homeMango.classList.remove("show");
-        // freccia gestita con scroll sotto
-      }
-    }
-
-    secretBtn.addEventListener("click", goSecret);
-    homeMango.addEventListener("click", goHome);
-    window.addEventListener("popstate", renderView);
-
-    // ---- Language pills ----
-    document.querySelectorAll(".pill").forEach(p => {
-      if (p.dataset.lang === lang) p.classList.add("active");
-      p.addEventListener("click", () => {
-        const next = p.dataset.lang;
-        const url = new URL(location.href);
-        url.searchParams.set("lang", next);
-        // mantiene view=secret se c'è
-        location.href = url.toString();
-      });
-    });
-
-    // ---- Preserve lang on internal links ----
-    function withLang(path){
-      const base = location.origin + location.pathname.replace(/[^\/]*$/, "");
-      const u = new URL(path, base);
-      u.searchParams.set("lang", lang);
-      return u.pathname + "?" + u.searchParams.toString();
-    }
-
-    // link pages (non tocchiamo altro)
-    const pageLinks = [
-      ["btn_go", "primo-scambio.html"],
-      ["btn_open", "scrivi-una-riga.html"],
-      ["btn_read", "cos-e-mango.html"],
-    ];
-    pageLinks.forEach(([id, path]) => {
-      const el = document.getElementById(id);
-      if (el) el.setAttribute("href", withLang(path));
-    });
-
-    // PDF unico multilingua: manteniamo comunque ?lang per coerenza URL (anche se il file è lo stesso)
-    const pdfBtn = document.getElementById("btn_pdf");
-    if (pdfBtn){
-      const base = location.origin + location.pathname.replace(/[^\/]*$/, "");
-      const u = new URL("MANGO_INFRASTRUTTURA_UFFICIALE.pdf", base);
-      u.searchParams.set("lang", lang);
-      pdfBtn.setAttribute("href", u.pathname + "?" + u.searchParams.toString());
-    }
-
-    // ---- Texts (Home + Origine vissuta) ----
-    const T = {
+    // -----------------------------
+    // Language system (?lang=it/en/es/fr/de/zh)
+    // -----------------------------
+    const STR = {
       it: {
-        statement: "Questo dominio può sparire, Mango no, perché non è un dominio.",
-        fast: "Riconosci uno scambio reale tra persone. Scrivi una riga. Non servono numeri.",
-        rowTitle: "Scrivi una riga",
-        rowDesc: "Registra lo scambio: una riga. Nessun numero, nessun conto.",
-        whatTitle: "Cos’è Mango",
-        whatDesc: "Mango è un’infrastruttura di fiducia locale non monetaria.",
-        originTitle: "Origine vissuta",
-        originDesc: "La storia reale: prima della teoria. L’origine vissuta di Mango.",
-        pdfTitle: "PDF",
-        pdfDesc: "Apri il documento ufficiale multilingua.",
-        originBtn: "📜 Leggi",
-        story: {
-          p1:"Prima della teoria, Mango era un gesto.",
-          p2:"Durante l'attività musicale dell'autore, Juan regalava mango e magliette.",
-          q1:"“T’Amo Mango, Pantera dete Lao te lo dise.”",
-          q2:"“Il mango è buono, succoso, dolce, non fa male a nessuno.”",
-          p3:"Questa esperienza concreta precede la formalizzazione teorica del progetto.",
-          p4:"Mango nasce quindi da una pratica reale di dono e scambio, successivamente strutturata come infrastruttura di fiducia locale non monetaria.",
-          meta:"Creato da Juan de Dios Annaloro Mercedes.<br>Data di nascita formale del progetto: 02 Febbraio 2026.<br>In memoria di Larimar."
-        }
+        brandTitle: "Mango",
+        heroTitle: "Mango — infrastruttura di fiducia locale",
+        heroSub: "Non monetaria, non appropriabile, anti-accumulo, anti-cattura. Nata il 02 febbraio 2026.",
+        sec1Title: "Fai Mango adesso",
+        sec1Text: "Mango nasce da scambi reali tra persone. Non è denaro. Non si conta. Non si accumula.",
+        btnPrimoScambioTxt: "Fai il primo scambio",
+        btnFAQTxt: "FAQ",
+        sec1Note: "Se non hai ancora le pagine, puoi aggiungerle dopo: qui intanto lasciamo i bottoni pronti.",
+        sec2Title: "Scrivi una riga",
+        sec2Text: "Una riga = riconoscimento di uno scambio reale. Nessun numero, nessun valore.",
+        rigaLabel: "Descrivi lo scambio (breve, umano, chiaro):",
+        rigaPh: "Es: Ho aiutato a portare la spesa; in cambio ho ricevuto un passaggio.",
+        btnInviaTxt: "Invia / Salva",
+        btnPulisciTxt: "Pulisci",
+        metaHint: "Suggerimento: premi anche Invio (⌅) per salvare.",
+        btnApriArchivioTxt: "Vedi righe salvate",
+        btnSvuotaArchivioTxt: "Svuota archivio",
+        sec2Note: "Salvataggio locale (telefono/PC). Se vuoi anche invio online, serve un backend o un form esterno.",
+        sec3Title: "Cos’è Mango",
+        sec3Text: "Mango è un’infrastruttura di fiducia locale non monetaria: riconosce scambi reali senza trasformarli in quantità, valore o accumulo. Creato da Juan de Dios Annaloro Mercedes in memoria di sua sorella Larimar.",
+        btnPDFTxt: "Documento Fondativo Ufficiale (Multilingua)",
+        pdfNote: "Il PDF deve stare in: docs/pdf/ con questo nome: Mango_Documento_Fondativo_Multilingua_v1.pdf",
+        footerTxt: "Mango — nato il 02 febbraio 2026. Infrastruttura non monetaria, non appropriabile, anti-accumulo, anti-cattura.",
+        savedOk: "Salvato ✅",
+        savedEmpty: "Scrivi qualcosa prima di salvare.",
+        cleared: "Campo pulito.",
+        archiveEmpty: "Archivio vuoto (nessuna riga salvata su questo dispositivo).",
+        confirmWipe: "Sicuro di voler cancellare TUTTE le righe salvate su questo dispositivo?",
+        wiped: "Archivio cancellato."
       },
-
       en: {
-        statement: "This domain can disappear. Mango can’t—because it isn’t a domain.",
-        fast: "Recognize a real exchange between people. Write a line. No numbers needed.",
-        rowTitle: "Write a line",
-        rowDesc: "Record the exchange: one line. No numbers, no counting.",
-        whatTitle: "What is Mango",
-        whatDesc: "Mango is a local, non-monetary trust infrastructure.",
-        originTitle: "Lived origin",
-        originDesc: "The real story: before the theory. Mango’s lived origin.",
-        pdfTitle: "PDF",
-        pdfDesc: "Open the official multilingual document.",
-        originBtn: "📜 Read",
-        story: {
-          p1:"Before the theory, Mango was a gesture.",
-          p2:"During the author’s music activity, Juan used to give away mangoes and T-shirts.",
-          q1:"“T’Amo Mango, Pantera dete Lao te lo dise.”",
-          q2:"“Mango is good, juicy, sweet, it hurts nobody.”",
-          p3:"This concrete experience precedes the project’s theoretical formalization.",
-          p4:"Mango thus emerges from a real practice of giving and exchange, later structured as a local non-monetary trust infrastructure.",
-          meta:"Created by Juan de Dios Annaloro Mercedes.<br>Formal birth date of the project: 02 February 2026.<br>In memory of Larimar."
-        }
+        brandTitle: "Mango",
+        heroTitle: "Mango — local trust infrastructure",
+        heroSub: "Non-monetary, non-appropriable, anti-accumulation, anti-capture. Born on 02 Feb 2026.",
+        sec1Title: "Do Mango now",
+        sec1Text: "Mango comes from real exchanges between people. It is not money. It is not counted. It is not accumulated.",
+        btnPrimoScambioTxt: "Make the first exchange",
+        btnFAQTxt: "FAQ",
+        sec1Note: "If pages are not ready yet, you can add them later: buttons stay here.",
+        sec2Title: "Write one line",
+        sec2Text: "One line = recognition of a real exchange. No numbers, no value.",
+        rigaLabel: "Describe the exchange (short, human, clear):",
+        rigaPh: "Example: I helped carry groceries; in return I got a ride.",
+        btnInviaTxt: "Send / Save",
+        btnPulisciTxt: "Clear",
+        metaHint: "Tip: press Enter to save.",
+        btnApriArchivioTxt: "View saved lines",
+        btnSvuotaArchivioTxt: "Clear archive",
+        sec2Note: "Local save (phone/PC). For online submission, you need a backend or an external form.",
+        sec3Title: "What is Mango",
+        sec3Text: "Mango is a non-monetary local trust infrastructure: it recognizes real exchanges without turning them into quantity, value, or accumulation. Created by Juan de Dios Annaloro Mercedes in memory of his sister Larimar.",
+        btnPDFTxt: "Official Foundational Document (Multilingual)",
+        pdfNote: "The PDF must be in: docs/pdf/ with this name: Mango_Documento_Fondativo_Multilingua_v1.pdf",
+        footerTxt: "Mango — born on 02 Feb 2026. Non-monetary, non-appropriable, anti-accumulation, anti-capture.",
+        savedOk: "Saved ✅",
+        savedEmpty: "Write something before saving.",
+        cleared: "Cleared.",
+        archiveEmpty: "Archive is empty (no lines saved on this device).",
+        confirmWipe: "Are you sure you want to delete ALL saved lines on this device?",
+        wiped: "Archive deleted."
       },
-
       es: {
-        statement: "Este dominio puede desaparecer. Mango no, porque no es un dominio.",
-        fast: "Reconoce un intercambio real entre personas. Escribe una línea. No hacen falta números.",
-        rowTitle: "Escribe una línea",
-        rowDesc: "Registra el intercambio: una línea. Sin números, sin conteo.",
-        whatTitle: "Qué es Mango",
-        whatDesc: "Mango es una infraestructura local de confianza, no monetaria.",
-        originTitle: "Origen vivido",
-        originDesc: "La historia real: antes de la teoría. El origen vivido de Mango.",
-        pdfTitle: "PDF",
-        pdfDesc: "Abre el documento oficial multilingüe.",
-        originBtn: "📜 Leer",
-        story: {
-          p1:"Antes de la teoría, Mango era un gesto.",
-          p2:"Durante la actividad musical del autor, Juan regalaba mangos y camisetas.",
-          q1:"“T’Amo Mango, Pantera dete Lao te lo dise.”",
-          q2:"“El mango es bueno, jugoso, dulce, no hace daño a nadie.”",
-          p3:"Esta experiencia concreta precede a la formalización teórica del proyecto.",
-          p4:"Mango nace de una práctica real de regalo e intercambio, y luego se estructura como una infraestructura local de confianza no monetaria.",
-          meta:"Creado por Juan de Dios Annaloro Mercedes.<br>Fecha de nacimiento formal del proyecto: 02 de febrero de 2026.<br>En memoria de Larimar."
-        }
+        brandTitle: "Mango",
+        heroTitle: "Mango — infraestructura local de confianza",
+        heroSub: "No monetaria, no apropiable, anti-acumulación, anti-captura. Nacida el 02 feb 2026.",
+        sec1Title: "Haz Mango ahora",
+        sec1Text: "Mango nace de intercambios reales entre personas. No es dinero. No se cuenta. No se acumula.",
+        btnPrimoScambioTxt: "Hacer el primer intercambio",
+        btnFAQTxt: "FAQ",
+        sec1Note: "Si aún no tienes las páginas, puedes añadirlas después: los botones quedan listos.",
+        sec2Title: "Escribe una línea",
+        sec2Text: "Una línea = reconocimiento de un intercambio real. Sin números, sin valor.",
+        rigaLabel: "Describe el intercambio (breve, humano, claro):",
+        rigaPh: "Ej: Ayudé con la compra; a cambio recibí un paseo.",
+        btnInviaTxt: "Enviar / Guardar",
+        btnPulisciTxt: "Limpiar",
+        metaHint: "Consejo: pulsa Enter para guardar.",
+        btnApriArchivioTxt: "Ver líneas guardadas",
+        btnSvuotaArchivioTxt: "Vaciar archivo",
+        sec2Note: "Guardado local (teléfono/PC). Para enviar online necesitas backend o formulario externo.",
+        sec3Title: "Qué es Mango",
+        sec3Text: "Mango es una infraestructura local de confianza no monetaria: reconoce intercambios reales sin convertirlos en cantidad, valor o acumulación. Creado por Juan de Dios Annaloro Mercedes en memoria de su hermana Larimar.",
+        btnPDFTxt: "Documento Fundacional Oficial (Multilingüe)",
+        pdfNote: "El PDF debe estar en: docs/pdf/ con este nombre: Mango_Documento_Fondativo_Multilingua_v1.pdf",
+        footerTxt: "Mango — nacido el 02 feb 2026. No monetario, no apropiable, anti-acumulación, anti-captura.",
+        savedOk: "Guardado ✅",
+        savedEmpty: "Escribe algo antes de guardar.",
+        cleared: "Limpio.",
+        archiveEmpty: "Archivo vacío (no hay líneas guardadas en este dispositivo).",
+        confirmWipe: "¿Seguro que quieres borrar TODAS las líneas guardadas en este dispositivo?",
+        wiped: "Archivo borrado."
       },
-
       fr: {
-        statement: "Ce domaine peut disparaître. Mango non, car Mango n’est pas un domaine.",
-        fast: "Reconnais un échange réel entre personnes. Écris une ligne. Pas besoin de chiffres.",
-        rowTitle: "Écris une ligne",
-        rowDesc: "Enregistre l’échange : une ligne. Aucun chiffre, aucun comptage.",
-        whatTitle: "Qu’est-ce que Mango",
-        whatDesc: "Mango est une infrastructure locale de confiance, non monétaire.",
-        originTitle: "Origine vécue",
-        originDesc: "L’histoire réelle : avant la théorie. L’origine vécue de Mango.",
-        pdfTitle: "PDF",
-        pdfDesc: "Ouvre le document officiel multilingue.",
-        originBtn: "📜 Lire",
-        story: {
-          p1:"Avant la théorie, Mango était un geste.",
-          p2:"Pendant l’activité musicale de l’auteur, Juan offrait des mangues et des t-shirts.",
-          q1:"“T’Amo Mango, Pantera dete Lao te lo dise.”",
-          q2:"“La mangue est bonne, juteuse, douce, elle ne fait de mal à personne.”",
-          p3:"Cette expérience concrète précède la formalisation théorique du projet.",
-          p4:"Mango naît d’une pratique réelle de don et d’échange, ensuite structurée comme une infrastructure locale de confiance non monétaire.",
-          meta:"Créé par Juan de Dios Annaloro Mercedes.<br>Date de naissance formelle du projet : 02 février 2026.<br>En mémoire de Larimar."
-        }
+        brandTitle: "Mango",
+        heroTitle: "Mango — infrastructure locale de confiance",
+        heroSub: "Non monétaire, non appropriable, anti-accumulation, anti-capture. Née le 02 fév 2026.",
+        sec1Title: "Fais Mango maintenant",
+        sec1Text: "Mango naît d’échanges réels entre personnes. Ce n’est pas de l’argent. Ça ne se compte pas. Ça ne s’accumule pas.",
+        btnPrimoScambioTxt: "Faire le premier échange",
+        btnFAQTxt: "FAQ",
+        sec1Note: "Si les pages ne sont pas prêtes, tu peux les ajouter après : les boutons restent ici.",
+        sec2Title: "Écris une ligne",
+        sec2Text: "Une ligne = reconnaissance d’un échange réel. Aucun chiffre, aucune valeur.",
+        rigaLabel: "Décris l’échange (court, humain, clair) :",
+        rigaPh: "Ex : J’ai aidé à porter les courses; en échange j’ai reçu un trajet.",
+        btnInviaTxt: "Envoyer / Enregistrer",
+        btnPulisciTxt: "Effacer",
+        metaHint: "Astuce : appuie sur Entrée pour enregistrer.",
+        btnApriArchivioTxt: "Voir les lignes enregistrées",
+        btnSvuotaArchivioTxt: "Vider l’archive",
+        sec2Note: "Enregistrement local (téléphone/PC). Pour l’envoi en ligne, il faut un backend ou un formulaire externe.",
+        sec3Title: "Qu’est-ce que Mango",
+        sec3Text: "Mango est une infrastructure locale de confiance non monétaire : elle reconnaît des échanges réels sans les transformer en quantité, valeur ou accumulation. Créée par Juan de Dios Annaloro Mercedes en mémoire de sa sœur Larimar.",
+        btnPDFTxt: "Document Fondateur Officiel (Multilingue)",
+        pdfNote: "Le PDF doit être dans : docs/pdf/ avec ce nom : Mango_Documento_Fondativo_Multilingua_v1.pdf",
+        footerTxt: "Mango — né le 02 fév 2026. Non monétaire, non appropriable, anti-accumulation, anti-capture.",
+        savedOk: "Enregistré ✅",
+        savedEmpty: "Écris quelque chose avant d’enregistrer.",
+        cleared: "Effacé.",
+        archiveEmpty: "Archive vide (aucune ligne enregistrée sur cet appareil).",
+        confirmWipe: "Es-tu sûr de vouloir supprimer TOUTES les lignes enregistrées sur cet appareil ?",
+        wiped: "Archive supprimée."
       },
-
       de: {
-        statement: "Diese Domain kann verschwinden. Mango nicht – denn Mango ist keine Domain.",
-        fast: "Erkenne einen echten Austausch zwischen Menschen. Schreibe eine Zeile. Keine Zahlen nötig.",
-        rowTitle: "Schreibe eine Zeile",
-        rowDesc: "Protokolliere den Austausch: eine Zeile. Keine Zahlen, kein Zählen.",
-        whatTitle: "Was ist Mango",
-        whatDesc: "Mango ist eine lokale, nicht-monetäre Vertrauens-Infrastruktur.",
-        originTitle: "Gelebter Ursprung",
-        originDesc: "Die echte Geschichte: vor der Theorie. Mangos gelebter Ursprung.",
-        pdfTitle: "PDF",
-        pdfDesc: "Öffne das offizielle mehrsprachige Dokument.",
-        originBtn: "📜 Lesen",
-        story: {
-          p1:"Vor der Theorie war Mango eine Geste.",
-          p2:"Während der musikalischen Tätigkeit des Autors verschenkte Juan Mangos und T-Shirts.",
-          q1:"“T’Amo Mango, Pantera dete Lao te lo dise.”",
-          q2:"“Mango ist gut, saftig, süß, es tut niemandem weh.”",
-          p3:"Diese konkrete Erfahrung geht der theoretischen Formalisierung des Projekts voraus.",
-          p4:"Mango entsteht aus einer realen Praxis des Schenkens und Austauschens und wurde später als lokale nicht-monetäre Vertrauens-Infrastruktur strukturiert.",
-          meta:"Erstellt von Juan de Dios Annaloro Mercedes.<br>Formales Geburtsdatum des Projekts: 02. Februar 2026.<br>In Erinnerung an Larimar."
-        }
+        brandTitle: "Mango",
+        heroTitle: "Mango — lokale Vertrauens-Infrastruktur",
+        heroSub: "Nicht monetär, nicht aneignbar, anti-Akkumulation, anti-Capture. Geboren am 02. Feb 2026.",
+        sec1Title: "Mach Mango jetzt",
+        sec1Text: "Mango entsteht aus realen Austauschen zwischen Menschen. Es ist kein Geld. Es wird nicht gezählt. Es wird nicht angesammelt.",
+        btnPrimoScambioTxt: "Ersten Austausch machen",
+        btnFAQTxt: "FAQ",
+        sec1Note: "Wenn die Seiten noch nicht bereit sind, kannst du sie später hinzufügen: die Buttons bleiben hier.",
+        sec2Title: "Schreibe eine Zeile",
+        sec2Text: "Eine Zeile = Anerkennung eines realen Austauschs. Keine Zahlen, kein Wert.",
+        rigaLabel: "Beschreibe den Austausch (kurz, menschlich, klar):",
+        rigaPh: "Bsp: Ich half beim Tragen; im Gegenzug bekam ich eine Mitfahrt.",
+        btnInviaTxt: "Senden / Speichern",
+        btnPulisciTxt: "Leeren",
+        metaHint: "Tipp: Drücke Enter zum Speichern.",
+        btnApriArchivioTxt: "Gespeicherte Zeilen ansehen",
+        btnSvuotaArchivioTxt: "Archiv leeren",
+        sec2Note: "Lokales Speichern (Handy/PC). Für Online-Senden brauchst du Backend oder externes Formular.",
+        sec3Title: "Was ist Mango",
+        sec3Text: "Mango ist eine nicht-monetäre lokale Vertrauens-Infrastruktur: Sie erkennt reale Austausche an, ohne sie in Menge, Wert oder Akkumulation zu verwandeln. Erschaffen von Juan de Dios Annaloro Mercedes im Gedenken an seine Schwester Larimar.",
+        btnPDFTxt: "Offizielles Gründungsdokument (Mehrsprachig)",
+        pdfNote: "Das PDF muss in: docs/pdf/ liegen mit diesem Namen: Mango_Documento_Fondativo_Multilingua_v1.pdf",
+        footerTxt: "Mango — geboren am 02. Feb 2026. Nicht monetär, nicht aneignbar, anti-Akkumulation, anti-Capture.",
+        savedOk: "Gespeichert ✅",
+        savedEmpty: "Schreibe etwas, bevor du speicherst.",
+        cleared: "Geleert.",
+        archiveEmpty: "Archiv ist leer (keine Zeilen auf diesem Gerät gespeichert).",
+        confirmWipe: "Bist du sicher, dass du ALLE gespeicherten Zeilen auf diesem Gerät löschen willst?",
+        wiped: "Archiv gelöscht."
       },
-
       zh: {
-        statement: "这个域名可以消失，但 Mango 不会——因为 Mango 不是域名。",
-        fast: "认可人与人之间真实的交换。写一行。不需要数字。",
-        rowTitle: "写一行",
-        rowDesc: "记录交换：一行。不用数字，不用计数。",
-        whatTitle: "什么是 Mango",
-        whatDesc: "Mango 是一种本地信任基础设施，非货币化。",
-        originTitle: "亲历起源",
-        originDesc: "真实故事：在理论之前。Mango 的亲历起源。",
-        pdfTitle: "PDF",
-        pdfDesc: "打开官方多语言文件。",
-        originBtn: "📜 阅读",
-        story: {
-          p1:"在理论之前，Mango 是一种行动与姿态。",
-          p2:"在作者从事音乐活动期间，Juan 会赠送芒果和 T 恤。",
-          q1:"“T’Amo Mango, Pantera dete Lao te lo dise.”",
-          q2:"“芒果很好，汁多香甜，不会伤害任何人。”",
-          p3:"这段具体经历早于项目的理论化与正式化。",
-          p4:"因此，Mango 源于真实的赠与与交换实践，随后被结构化为一种本地、非货币化的信任基础设施。",
-          meta:"创建者：Juan de Dios Annaloro Mercedes。<br>项目正式诞生日期：2026 年 2 月 2 日。<br>纪念 Larimar。"
-        }
+        brandTitle: "Mango",
+        heroTitle: "Mango — 本地信任基础设施",
+        heroSub: "非货币、不可占有、反积累、反机构俘获。诞生于 2026 年 2 月 2 日。",
+        sec1Title: "现在就做 Mango",
+        sec1Text: "Mango 来自人与人之间真实交换。不是钱。不计数。不积累。",
+        btnPrimoScambioTxt: "进行第一次交换",
+        btnFAQTxt: "常见问题",
+        sec1Note: "如果页面还没准备好，之后可以再加：按钮先放在这里。",
+        sec2Title: "写一行",
+        sec2Text: "一行 = 对一次真实交换的认可。没有数字，没有价值。",
+        rigaLabel: "描述这次交换（简短、人性、清楚）：",
+        rigaPh: "例：我帮忙提菜；作为交换我得到一次顺风车。",
+        btnInviaTxt: "提交 / 保存",
+        btnPulisciTxt: "清空",
+        metaHint: "提示：按回车也可以保存。",
+        btnApriArchivioTxt: "查看已保存的行",
+        btnSvuotaArchivioTxt: "清空存档",
+        sec2Note: "本地保存（手机/电脑）。若要在线提交，需要后台或外部表单。",
+        sec3Title: "什么是 Mango",
+        sec3Text: "Mango 是一种非货币的本地信任基础设施：它认可真实交换，但不把它们变成数量、价值或积累。由 Juan de Dios Annaloro Mercedes 创建，以纪念其妹妹 Larimar。",
+        btnPDFTxt: "官方奠基文件（多语言）",
+        pdfNote: "PDF 必须放在：docs/pdf/ 文件名：Mango_Documento_Fondativo_Multilingua_v1.pdf",
+        footerTxt: "Mango — 诞生于 2026 年 2 月 2 日。非货币、不可占有、反积累、反机构俘获。",
+        savedOk: "已保存 ✅",
+        savedEmpty: "请先写点内容再保存。",
+        cleared: "已清空。",
+        archiveEmpty: "存档为空（本设备未保存任何记录）。",
+        confirmWipe: "确定要删除本设备上已保存的所有记录吗？",
+        wiped: "已删除存档。"
       }
     };
 
-    function applyTexts(){
-      const t = T[lang] || T.it;
-      document.documentElement.lang = lang;
-
-      document.getElementById("t_statement").textContent = t.statement;
-
-      document.getElementById("t_fast").textContent = t.fast;
-      document.getElementById("t_row_title").textContent = t.rowTitle;
-      document.getElementById("t_row_desc").textContent = t.rowDesc;
-      document.getElementById("t_what_title").textContent = t.whatTitle;
-      document.getElementById("t_what_desc").textContent = t.whatDesc;
-
-      document.getElementById("t_origin_title").textContent = t.originTitle;
-      document.getElementById("t_origin_desc").textContent = t.originDesc;
-
-      document.getElementById("t_pdf_title").textContent = t.pdfTitle;
-      document.getElementById("t_pdf_desc").textContent = t.pdfDesc;
-
-      const btnOrigin = document.getElementById("btn_origin_toggle");
-      btnOrigin.textContent = t.originBtn;
-
-      document.getElementById("story_p1").textContent = t.story.p1;
-      document.getElementById("story_p2").textContent = t.story.p2;
-      document.getElementById("story_q1").textContent = t.story.q1;
-      document.getElementById("story_q2").textContent = t.story.q2;
-      document.getElementById("story_p3").textContent = t.story.p3;
-      document.getElementById("story_p4").textContent = t.story.p4;
-      document.getElementById("story_meta").innerHTML = t.story.meta;
+    function getLang() {
+      const url = new URL(window.location.href);
+      const q = (url.searchParams.get("lang") || "").toLowerCase().trim();
+      if (STR[q]) return q;
+      return "it";
     }
 
-    applyTexts();
+    function setLang(lang) {
+      const url = new URL(window.location.href);
+      url.searchParams.set("lang", lang);
+      window.location.href = url.toString();
+    }
 
-    // ---- Origine vissuta toggle ----
-    const storyWrap = document.getElementById("storyWrap");
-    document.getElementById("btn_origin_toggle").addEventListener("click", () => {
-      storyWrap.classList.toggle("open");
-      if (storyWrap.classList.contains("open")){
-        storyWrap.scrollIntoView({behavior:"smooth", block:"start"});
+    function applyLang(lang) {
+      document.documentElement.lang = lang === "zh" ? "zh" : lang;
+
+      const s = STR[lang];
+
+      // Text nodes
+      const map = {
+        brandTitle: "brandTitle",
+        heroTitle: "heroTitle",
+        heroSub: "heroSub",
+        sec1Title: "sec1Title",
+        sec1Text: "sec1Text",
+        btnPrimoScambioTxt: "btnPrimoScambioTxt",
+        btnFAQTxt: "btnFAQTxt",
+        sec1Note: "sec1Note",
+        sec2Title: "sec2Title",
+        sec2Text: "sec2Text",
+        rigaLabel: "rigaLabel",
+        btnInviaTxt: "btnInviaTxt",
+        btnPulisciTxt: "btnPulisciTxt",
+        metaHint: "metaHint",
+        btnApriArchivioTxt: "btnApriArchivioTxt",
+        btnSvuotaArchivioTxt: "btnSvuotaArchivioTxt",
+        sec2Note: "sec2Note",
+        sec3Title: "sec3Title",
+        sec3Text: "sec3Text",
+        btnPDFTxt: "btnPDFTxt",
+        pdfNote: "pdfNote",
+        footerTxt: "footerTxt",
+      };
+
+      Object.entries(map).forEach(([k, id]) => {
+        const el = document.getElementById(id);
+        if (el) el.textContent = s[k];
+      });
+
+      const ta = document.getElementById("riga");
+      if (ta) ta.placeholder = s.rigaPh;
+
+      // Chips active
+      document.querySelectorAll(".chip").forEach(ch => {
+        ch.classList.toggle("active", ch.dataset.lang === lang);
+      });
+    }
+
+    // -----------------------------
+    // Local archive for "righe"
+    // -----------------------------
+    const STORAGE_KEY = "mango_righe_v1";
+
+    function readArchive(){
+      try {
+        return JSON.parse(localStorage.getItem(STORAGE_KEY) || "[]");
+      } catch(e){
+        return [];
       }
+    }
+    function writeArchive(arr){
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(arr));
+    }
+    function updateCount(lang){
+      const n = readArchive().length;
+      const el = document.getElementById("metaCount");
+      if (!el) return;
+      // quick multilingual count line
+      const t = {
+        it: `${n} righe salvate su questo dispositivo`,
+        en: `${n} lines saved on this device`,
+        es: `${n} líneas guardadas en este dispositivo`,
+        fr: `${n} lignes enregistrées sur cet appareil`,
+        de: `${n} Zeilen auf diesem Gerät gespeichert`,
+        zh: `本设备已保存 ${n} 条记录`
+      };
+      el.textContent = (t[lang] || t.it);
+    }
+    function showStatus(msg){
+      const box = document.getElementById("statusBox");
+      if (!box) return;
+      box.textContent = msg;
+      box.classList.add("show");
+      clearTimeout(window.__mangoStatusT);
+      window.__mangoStatusT = setTimeout(() => box.classList.remove("show"), 3200);
+    }
+
+    function saveLine(lang){
+      const ta = document.getElementById("riga");
+      if (!ta) return;
+      const text = (ta.value || "").trim();
+      if (!text) {
+        showStatus(STR[lang].savedEmpty);
+        return;
+      }
+      const arr = readArchive();
+      arr.unshift({
+        text,
+        ts: new Date().toISOString()
+      });
+      writeArchive(arr);
+      ta.value = "";
+      updateCount(lang);
+      showStatus(STR[lang].savedOk);
+    }
+
+    function openArchive(lang){
+      const arr = readArchive();
+      if (!arr.length){
+        showStatus(STR[lang].archiveEmpty);
+        return;
+      }
+      // simple modal via alert (safe, works everywhere)
+      const lines = arr
+        .slice(0, 30)
+        .map((x, i) => `${i+1}. ${x.text}  (${new Date(x.ts).toLocaleString()})`)
+        .join("\n\n");
+      alert(lines + (arr.length > 30 ? `\n\n… +${arr.length-30}` : ""));
+    }
+
+    function wipeArchive(lang){
+      if (!confirm(STR[lang].confirmWipe)) return;
+      writeArchive([]);
+      updateCount(lang);
+      showStatus(STR[lang].wiped);
+    }
+
+    // -----------------------------
+    // Init
+    // -----------------------------
+    const lang = getLang();
+    applyLang(lang);
+    updateCount(lang);
+
+    // Chip click
+    document.querySelectorAll(".chip").forEach(ch => {
+      ch.addEventListener("click", () => setLang(ch.dataset.lang));
     });
 
-    // ---- Scroll to top arrow (solo in home) ----
-    function toggleToTop(){
-      if (isSecretView()) return;
-      if (window.scrollY > 220) toTop.classList.add("show");
-      else toTop.classList.remove("show");
-    }
-    window.addEventListener("scroll", toggleToTop, {passive:true});
-    toggleToTop();
-    toTop.addEventListener("click", () => window.scrollTo({top:0, behavior:"smooth"}));
+    // Buttons
+    document.getElementById("btnInvia")?.addEventListener("click", () => saveLine(lang));
+    document.getElementById("btnPulisci")?.addEventListener("click", () => {
+      const ta = document.getElementById("riga");
+      if (ta) ta.value = "";
+      showStatus(STR[lang].cleared);
+    });
+    document.getElementById("btnApriArchivio")?.addEventListener("click", () => openArchive(lang));
+    document.getElementById("btnSvuotaArchivio")?.addEventListener("click", () => wipeArchive(lang));
 
-    // render iniziale view
-    renderView();
+    // Enter to save (desktop + iPhone external keyboard)
+    document.getElementById("riga")?.addEventListener("keydown", (e) => {
+      // Ctrl+Enter or Cmd+Enter saves, and also Enter alone if user wants:
+      if ((e.key === "Enter" && (e.ctrlKey || e.metaKey)) || (e.key === "Enter" && e.shiftKey === false && (e.target.value || "").length > 0 && window.innerWidth > 700)) {
+        e.preventDefault();
+        saveLine(lang);
+      }
+    });
   </script>
-  <div style="margin-top:40px; text-align:center;">
-  <p id="pdf-link"></p>
-</div>
-
-<script>
-  const lang = new URLSearchParams(window.location.search).get('lang') || 'it';
-
-  const pdfText = {
-    it: "📄 <strong>Documento ufficiale:</strong><br><a href='Mango_Documento_Fondativo.pdf' target='_blank'>Scarica il Documento Fondativo</a>",
-    en: "📄 <strong>Official document:</strong><br><a href='Mango_Documento_Fondativo.pdf' target='_blank'>Download the Foundational Document</a>",
-    es: "📄 <strong>Documento oficial:</strong><br><a href='Mango_Documento_Fondativo.pdf' target='_blank'>Descargar el Documento Fundacional</a>",
-    fr: "📄 <strong>Document officiel :</strong><br><a href='Mango_Documento_Fondativo.pdf' target='_blank'>Télécharger le Document Fondateur</a>",
-    de: "📄 <strong>Offizielles Dokument:</strong><br><a href='Mango_Documento_Fondativo.pdf' target='_blank'>Gründungsdokument herunterladen</a>",
-    zh: "📄 <strong>官方文件：</strong><br><a href='Mango_Documento_Fondativo.pdf' target='_blank'>下载创始文件</a>"
-  };
-
-  document.getElementById("pdf-link").innerHTML = pdfText[lang];
-</script>
 </body>
 </html>

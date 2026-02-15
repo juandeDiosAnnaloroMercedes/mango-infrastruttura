@@ -1,48 +1,86 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+
+  <!-- HOME -->
   <url>
     <loc>https://mangoinfrastruttura.org/</loc>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
+
+  <!-- LINGUE -->
   <url>
     <loc>https://mangoinfrastruttura.org/?lang=it</loc>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
+
   <url>
     <loc>https://mangoinfrastruttura.org/?lang=en</loc>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
+
   <url>
     <loc>https://mangoinfrastruttura.org/?lang=es</loc>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
+
   <url>
     <loc>https://mangoinfrastruttura.org/?lang=fr</loc>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
+
   <url>
     <loc>https://mangoinfrastruttura.org/?lang=de</loc>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
+
   <url>
     <loc>https://mangoinfrastruttura.org/?lang=zh</loc>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
+
+  <!-- PAGINE STRUTTURALI -->
+  <url>
+    <loc>https://mangoinfrastruttura.org/primo-scambio.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://mangoinfrastruttura.org/scrivi-una-riga.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- PDF UFFICIALI -->
   <url>
     <loc>https://mangoinfrastruttura.org/Mango_Documento_Fondativo.pdf</loc>
     <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
+    <priority>0.7</priority>
   </url>
+
   <url>
     <loc>https://mangoinfrastruttura.org/Mango_Documento_Fondativo_Multilingue.pdf</loc>
     <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
+    <priority>0.7</priority>
   </url>
+
+  <url>
+    <loc>https://mangoinfrastruttura.org/MANGO_INFRASTRUTTURA_UFFICIALE.pdf</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://mangoinfrastruttura.org/MANGO_Origine_Reale_e_Storia_Vissuta.pdf</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
 </urlset>

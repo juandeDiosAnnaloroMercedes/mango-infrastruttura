@@ -182,6 +182,39 @@
     }
     .smallnote{font-size:12px; color:var(--muted); margin-top:8px}
     .divider{height:1px;background:var(--line);margin:12px 0}
+
+    /* Toast (verde/rosso) */
+    .toast{
+      position:fixed;
+      left:50%;
+      bottom:22px;
+      transform:translateX(-50%);
+      z-index:9999;
+      padding:12px 14px;
+      border-radius:16px;
+      font-weight:900;
+      box-shadow:0 10px 24px rgba(0,0,0,.22);
+      opacity:0;
+      pointer-events:none;
+      transition:opacity .18s ease, transform .18s ease;
+      border:1px solid rgba(255,255,255,.10);
+      background:rgba(17,17,17,.92);
+      color:#fff;
+    }
+    .toast.show{
+      opacity:1;
+      transform:translateX(-50%) translateY(-4px);
+    }
+    .toast.good{
+      background:rgba(34,197,94,.18);
+      border-color:rgba(34,197,94,.35);
+      color:#eafff2;
+    }
+    .toast.warn{
+      background:rgba(239,68,68,.16);
+      border-color:rgba(239,68,68,.35);
+      color:#ffecec;
+    }
   </style>
 </head>
 
@@ -219,11 +252,9 @@
           Mango nasce da scambi reali tra persone. Non è denaro. Non si conta. Non si accumula.
         </p>
         <div class="btnrow">
-          <a class="btn primary" href="#scrivi">
+          <a class="btn primary" id="btnPrimoScambio" href="#scrivi">🥭 <span id="btnPrimoScambioTxt">Fai il primo scambio</span></a>
           <a class="btn" id="btnFAQ" href="faq.html">❓ <span id="btnFAQTxt">FAQ</span></a>
         </div>
-
-        <!-- ✅ nascosto: non mostra più la scritta tecnica -->
         <div class="smallnote" id="sec1Note" style="display:none"></div>
       </div>
 
@@ -276,8 +307,6 @@
             📄 <span id="btnPDFTxt">Documento Fondativo Ufficiale (Multilingua)</span>
           </a>
         </div>
-
-        <!-- ✅ nascosto: non mostra più la scritta tecnica -->
         <div class="smallnote" id="pdfNote" style="display:none"></div>
       </div>
     </section>
@@ -288,10 +317,10 @@
 
   </div>
 
+  <!-- Toast unico (cambia testo e colore) -->
+  <div class="toast" id="toastBox">Riga riconosciuta</div>
+
   <script>
-    // -----------------------------
-    // Language system (?lang=it/en/es/fr/de/zh)
-    // -----------------------------
     const STR = {
       it: {
         brandTitle: "Mango",
@@ -301,7 +330,6 @@
         sec1Text: "Mango nasce da scambi reali tra persone. Non è denaro. Non si conta. Non si accumula.",
         btnPrimoScambioTxt: "Fai il primo scambio",
         btnFAQTxt: "FAQ",
-        sec1Note: "",
         sec2Title: "Scrivi una riga",
         sec2Text: "Una riga = riconoscimento di uno scambio reale. Nessun numero, nessun valore.",
         rigaLabel: "Descrivi lo scambio (breve, umano, chiaro):",
@@ -315,14 +343,15 @@
         sec3Title: "Cos’è Mango",
         sec3Text: "Mango è un’infrastruttura di fiducia locale non monetaria: riconosce scambi reali senza trasformarli in quantità, valore o accumulo. Creato da Juan de Dios Annaloro Mercedes in memoria di sua sorella Larimar.",
         btnPDFTxt: "Documento Fondativo Ufficiale (Multilingua)",
-        pdfNote: "",
         footerTxt: "Mango — nato il 02 febbraio 2026. Infrastruttura non monetaria, non appropriabile, anti-accumulo, anti-cattura.",
         savedOk: "Salvato ✅",
         savedEmpty: "Scrivi qualcosa prima di salvare.",
         cleared: "Campo pulito.",
         archiveEmpty: "Archivio vuoto (nessuna riga salvata su questo dispositivo).",
         confirmWipe: "Sicuro di voler cancellare TUTTE le righe salvate su questo dispositivo?",
-        wiped: "Archivio cancellato."
+        wiped: "Archivio cancellato.",
+        toastOk: "Riga riconosciuta",
+        warnNumbers: "⚠️ Mango non si conta. Cerca di rispettare te stesso."
       },
       en: {
         brandTitle: "Mango",
@@ -332,7 +361,6 @@
         sec1Text: "Mango comes from real exchanges between people. It is not money. It is not counted. It is not accumulated.",
         btnPrimoScambioTxt: "Make the first exchange",
         btnFAQTxt: "FAQ",
-        sec1Note: "",
         sec2Title: "Write one line",
         sec2Text: "One line = recognition of a real exchange. No numbers, no value.",
         rigaLabel: "Describe the exchange (short, human, clear):",
@@ -346,14 +374,15 @@
         sec3Title: "What is Mango",
         sec3Text: "Mango is a non-monetary local trust infrastructure: it recognizes real exchanges without turning them into quantity, value, or accumulation. Created by Juan de Dios Annaloro Mercedes in memory of his sister Larimar.",
         btnPDFTxt: "Official Foundational Document (Multilingual)",
-        pdfNote: "",
         footerTxt: "Mango — born on 02 Feb 2026. Non-monetary, non-appropriable, anti-accumulation, anti-capture.",
         savedOk: "Saved ✅",
         savedEmpty: "Write something before saving.",
         cleared: "Cleared.",
         archiveEmpty: "Archive is empty (no lines saved on this device).",
         confirmWipe: "Are you sure you want to delete ALL saved lines on this device?",
-        wiped: "Archive deleted."
+        wiped: "Archive deleted.",
+        toastOk: "Line recognized",
+        warnNumbers: "⚠️ Mango is not counted. Try to respect yourself."
       },
       es: {
         brandTitle: "Mango",
@@ -363,7 +392,6 @@
         sec1Text: "Mango nace de intercambios reales entre personas. No es dinero. No se cuenta. No se acumula.",
         btnPrimoScambioTxt: "Hacer el primer intercambio",
         btnFAQTxt: "FAQ",
-        sec1Note: "",
         sec2Title: "Escribe una línea",
         sec2Text: "Una línea = reconocimiento de un intercambio real. Sin números, sin valor.",
         rigaLabel: "Describe el intercambio (breve, humano, claro):",
@@ -377,24 +405,25 @@
         sec3Title: "Qué es Mango",
         sec3Text: "Mango es una infraestructura local de confianza no monetaria: reconoce intercambios reales sin convertirlos en cantidad, valor o acumulación. Creado por Juan de Dios Annaloro Mercedes en memoria de su hermana Larimar.",
         btnPDFTxt: "Documento Fundacional Oficial (Multilingüe)",
-        pdfNote: "",
         footerTxt: "Mango — nacido el 02 feb 2026. No monetario, no apropiable, anti-acumulación, anti-captura.",
         savedOk: "Guardado ✅",
         savedEmpty: "Escribe algo antes de guardar.",
         cleared: "Limpio.",
         archiveEmpty: "Archivo vacío (no hay líneas guardadas en este dispositivo).",
         confirmWipe: "¿Seguro que quieres borrar TODAS las líneas guardadas en este dispositivo?",
-        wiped: "Archivo borrado."
+        wiped: "Archivo borrado.",
+        toastOk: "Línea reconocida",
+        warnNumbers: "⚠️ Mango no se cuenta. Intenta respetarte."
       },
       fr: {
         brandTitle: "Mango",
         heroTitle: "Mango — infrastructure locale de confiance",
         heroSub: "Non monétaire, non appropriable, anti-accumulation, anti-capture. Née le 02 fév 2026.",
+        sec1: "",
         sec1Title: "Fais Mango maintenant",
         sec1Text: "Mango naît d’échanges réels entre personnes. Ce n’est pas de l’argent. Ça ne se compte pas. Ça ne s’accumule pas.",
         btnPrimoScambioTxt: "Faire le premier échange",
         btnFAQTxt: "FAQ",
-        sec1Note: "",
         sec2Title: "Écris une ligne",
         sec2Text: "Une ligne = reconnaissance d’un échange réel. Aucun chiffre, aucune valeur.",
         rigaLabel: "Décris l’échange (court, humain, clair) :",
@@ -408,14 +437,15 @@
         sec3Title: "Qu’est-ce que Mango",
         sec3Text: "Mango est une infrastructure locale de confiance non monétaire : elle reconnaît des échanges réels sans les transformer en quantité, valeur ou accumulation. Créée par Juan de Dios Annaloro Mercedes en mémoire de sa sœur Larimar.",
         btnPDFTxt: "Document Fondateur Officiel (Multilingue)",
-        pdfNote: "",
         footerTxt: "Mango — né le 02 fév 2026. Non monétaire, non appropriable, anti-accumulation, anti-capture.",
         savedOk: "Enregistré ✅",
         savedEmpty: "Écris quelque chose avant d’enregistrer.",
         cleared: "Effacé.",
         archiveEmpty: "Archive vide (aucune ligne enregistrée sur cet appareil).",
         confirmWipe: "Es-tu sûr de vouloir supprimer TOUTES les lignes enregistrées sur cet appareil ?",
-        wiped: "Archive supprimée."
+        wiped: "Archive supprimée.",
+        toastOk: "Ligne reconnue",
+        warnNumbers: "⚠️ Mango ne se compte pas. Essaie de te respecter."
       },
       de: {
         brandTitle: "Mango",
@@ -425,7 +455,6 @@
         sec1Text: "Mango entsteht aus realen Austauschen zwischen Menschen. Es ist kein Geld. Es wird nicht gezählt. Es wird nicht angesammelt.",
         btnPrimoScambioTxt: "Ersten Austausch machen",
         btnFAQTxt: "FAQ",
-        sec1Note: "",
         sec2Title: "Schreibe eine Zeile",
         sec2Text: "Eine Zeile = Anerkennung eines realen Austauschs. Keine Zahlen, kein Wert.",
         rigaLabel: "Beschreibe den Austausch (kurz, menschlich, klar):",
@@ -439,14 +468,15 @@
         sec3Title: "Was ist Mango",
         sec3Text: "Mango ist eine nicht-monetäre lokale Vertrauens-Infrastruktur: Sie erkennt reale Austausche an, ohne sie in Menge, Wert oder Akkumulation zu verwandeln. Erschaffen von Juan de Dios Annaloro Mercedes im Gedenken an seine Schwester Larimar.",
         btnPDFTxt: "Offizielles Gründungsdokument (Mehrsprachig)",
-        pdfNote: "",
         footerTxt: "Mango — geboren am 02. Feb 2026. Nicht monetär, nicht aneignbar, anti-Akkumulation, anti-Capture.",
         savedOk: "Gespeichert ✅",
         savedEmpty: "Schreibe etwas, bevor du speicherst.",
         cleared: "Geleert.",
         archiveEmpty: "Archiv ist leer (keine Zeilen auf diesem Gerät gespeichert).",
         confirmWipe: "Bist du sicher, dass du ALLE gespeicherten Zeilen auf diesem Gerät löschen willst?",
-        wiped: "Archiv gelöscht."
+        wiped: "Archiv gelöscht.",
+        toastOk: "Zeile erkannt",
+        warnNumbers: "⚠️ Mango wird nicht gezählt. Respektiere dich selbst."
       },
       zh: {
         brandTitle: "Mango",
@@ -456,7 +486,6 @@
         sec1Text: "Mango 来自人与人之间真实交换。不是钱。不计数。不积累。",
         btnPrimoScambioTxt: "进行第一次交换",
         btnFAQTxt: "常见问题",
-        sec1Note: "",
         sec2Title: "写一行",
         sec2Text: "一行 = 对一次真实交换的认可。没有数字，没有价值。",
         rigaLabel: "描述这次交换（简短、人性、清楚）：",
@@ -470,14 +499,15 @@
         sec3Title: "什么是 Mango",
         sec3Text: "Mango 是一种非货币的本地信任基础设施：它认可真实交换，但不把它们变成数量、价值或积累。由 Juan de Dios Annaloro Mercedes 创建，以纪念其妹妹 Larimar。",
         btnPDFTxt: "官方奠基文件（多语言）",
-        pdfNote: "",
         footerTxt: "Mango — 诞生于 2026 年 2 月 2 日。非货币、不可占有、反积累、反机构俘获。",
         savedOk: "已保存 ✅",
         savedEmpty: "请先写点内容再保存。",
         cleared: "已清空。",
         archiveEmpty: "存档为空（本设备未保存任何记录）。",
         confirmWipe: "确定要删除本设备上已保存的所有记录吗？",
-        wiped: "已删除存档。"
+        wiped: "已删除存档。",
+        toastOk: "已确认这一行",
+        warnNumbers: "⚠️ Mango 不计数。请尊重自己。"
       }
     };
 
@@ -487,7 +517,6 @@
       if (STR[q]) return q;
       return "it";
     }
-
     function setLang(lang) {
       const url = new URL(window.location.href);
       url.searchParams.set("lang", lang);
@@ -496,7 +525,6 @@
 
     function applyLang(lang) {
       document.documentElement.lang = lang === "zh" ? "zh" : lang;
-
       const s = STR[lang];
 
       const map = {
@@ -507,7 +535,6 @@
         sec1Text: "sec1Text",
         btnPrimoScambioTxt: "btnPrimoScambioTxt",
         btnFAQTxt: "btnFAQTxt",
-        sec1Note: "sec1Note",
         sec2Title: "sec2Title",
         sec2Text: "sec2Text",
         rigaLabel: "rigaLabel",
@@ -520,10 +547,8 @@
         sec3Title: "sec3Title",
         sec3Text: "sec3Text",
         btnPDFTxt: "btnPDFTxt",
-        pdfNote: "pdfNote",
         footerTxt: "footerTxt",
       };
-
       Object.entries(map).forEach(([k, id]) => {
         const el = document.getElementById(id);
         if (el) el.textContent = s[k];
@@ -535,15 +560,19 @@
       document.querySelectorAll(".chip").forEach(ch => {
         ch.classList.toggle("active", ch.dataset.lang === lang);
       });
+
+      // imposta testo base toast (poi cambia al volo su ok/warn)
+      const toast = document.getElementById("toastBox");
+      if (toast) toast.textContent = s.toastOk;
     }
 
     // -----------------------------
-    // Registro unico integrale (righe) — MIGRAZIONE + DEDUP
+    // Registro unico (MIGRAZIONE + DEDUP)
     // -----------------------------
-
     const STORAGE_KEY = "MANGO_REGISTRO_UNICO_V1";
     const OLD_KEYS = [
-      "mango_righe_v1",     // tua vecchia chiave attuale
+      "mango_righe_v1",
+      "MANGO_RIGHE_V1",
       "mangoRighe",
       "righeMango",
       "MANGO_RIGHE",
@@ -553,10 +582,10 @@
       "MANGO_RIGHE_PRIMO"
     ];
 
-    function safeParse(raw) { try { return JSON.parse(raw); } catch { return null; } }
-    function normalizeText(t) { return String(t ?? "").replace(/\s+/g, " ").trim(); }
+    function safeParse(raw){ try { return JSON.parse(raw); } catch { return null; } }
+    function normalizeText(t){ return String(t ?? "").replace(/\s+/g," ").trim(); }
 
-    function asRow(x) {
+    function asRow(x){
       if (typeof x === "string") {
         const text = normalizeText(x);
         return text ? { text, ts: new Date().toISOString() } : null;
@@ -570,10 +599,10 @@
       return null;
     }
 
-    function dedup(arr) {
+    function dedup(arr){
       const seen = new Set();
       const out = [];
-      for (const r of arr) {
+      for (const r of arr){
         const k = r.text.toLowerCase();
         if (seen.has(k)) continue;
         seen.add(k);
@@ -582,45 +611,29 @@
       return out;
     }
 
-    function readKey(key) {
+    function readKey(key){
       const raw = localStorage.getItem(key);
       if (!raw) return [];
       const parsed = safeParse(raw);
       if (!parsed || !Array.isArray(parsed)) return [];
       return parsed.map(asRow).filter(Boolean);
     }
-
-    function writeKey(key, arr) {
+    function writeKey(key, arr){
       localStorage.setItem(key, JSON.stringify(arr));
     }
 
-    // Migrazione una volta sola: se la chiave unica non esiste, unisce tutte le vecchie e crea quella unica.
-    function migrateOnce() {
+    function migrateOnce(){
       if (localStorage.getItem(STORAGE_KEY)) return;
-
       let merged = [];
       for (const k of OLD_KEYS) merged = merged.concat(readKey(k));
-
-      merged = dedup(merged).sort((a, b) => {
-        const ta = Date.parse(a.ts) || 0;
-        const tb = Date.parse(b.ts) || 0;
-        return ta - tb;
-      });
-
+      merged = dedup(merged).sort((a,b)=>(Date.parse(a.ts)||0)-(Date.parse(b.ts)||0));
       writeKey(STORAGE_KEY, merged);
     }
 
-    function readArchive() {
-      migrateOnce();
-      return readKey(STORAGE_KEY);
-    }
+    function readArchive(){ migrateOnce(); return readKey(STORAGE_KEY); }
+    function writeArchive(arr){ migrateOnce(); writeKey(STORAGE_KEY, arr); }
 
-    function writeArchive(arr) {
-      migrateOnce();
-      writeKey(STORAGE_KEY, arr);
-    }
-
-    function updateCount(lang) {
+    function updateCount(lang){
       const n = readArchive().length;
       const el = document.getElementById("metaCount");
       if (!el) return;
@@ -635,23 +648,53 @@
       el.textContent = (t[lang] || t.it);
     }
 
-    function showStatus(msg) {
+    function showStatus(msg, tone){
       const box = document.getElementById("statusBox");
       if (!box) return;
+
+      // reset
+      box.style.borderColor = "";
+      box.style.color = "";
+
+      if (tone === "warn") {
+        box.style.borderColor = "#ef4444";
+        box.style.color = "#ef4444";
+      }
+
       box.textContent = msg;
       box.classList.add("show");
       clearTimeout(window.__mangoStatusT);
-      window.__mangoStatusT = setTimeout(() => box.classList.remove("show"), 3200);
+      window.__mangoStatusT = setTimeout(() => box.classList.remove("show"), 3500);
     }
 
-    function saveLine(lang) {
+    function showToast(type, lang){
+      const t = document.getElementById("toastBox");
+      if (!t) return;
+
+      t.classList.remove("good","warn");
+      t.textContent = (type === "warn") ? STR[lang].warnNumbers : STR[lang].toastOk;
+      t.classList.add(type === "warn" ? "warn" : "good");
+
+      t.classList.add("show");
+      clearTimeout(window.__mangoToastT);
+      window.__mangoToastT = setTimeout(() => t.classList.remove("show"), 2400);
+    }
+
+    function saveLine(lang){
       const ta = document.getElementById("riga");
       if (!ta) return;
 
       const text = normalizeText(ta.value);
-      if (!text) {
+      if (!text){
         showStatus(STR[lang].savedEmpty);
         return;
+      }
+
+      // ⚠️ BLOCCO NUMERI (avviso rosso + toast rosso)
+      if (/[0-9]/.test(text)){
+        showStatus(STR[lang].warnNumbers, "warn");
+        showToast("warn", lang);
+        return; // non salva
       }
 
       const arr = readArchive();
@@ -660,57 +703,53 @@
       writeArchive(merged);
       ta.value = "";
       updateCount(lang);
+
       showStatus(STR[lang].savedOk);
+      showToast("ok", lang); // toast verde
     }
 
-    function openArchive(lang) {
+    function openArchive(lang){
       const arr = readArchive();
-      if (!arr.length) {
+      if (!arr.length){
         showStatus(STR[lang].archiveEmpty);
         return;
       }
-
-      const lines = arr
-        .slice(0, 30)
-        .map((x, i) => `${i + 1}. ${x.text}  (${new Date(x.ts).toLocaleString()})`)
+      const lines = arr.slice(0,30)
+        .map((x,i)=>`${i+1}. ${x.text}  (${new Date(x.ts).toLocaleString()})`)
         .join("\n\n");
-
-      alert(lines + (arr.length > 30 ? `\n\n… +${arr.length - 30}` : ""));
+      alert(lines + (arr.length>30 ? `\n\n… +${arr.length-30}` : ""));
     }
 
-    function wipeArchive(lang) {
+    function wipeArchive(lang){
       if (!confirm(STR[lang].confirmWipe)) return;
       writeArchive([]);
       updateCount(lang);
       showStatus(STR[lang].wiped);
     }
 
-    // -----------------------------
     // Init
-    // -----------------------------
     const lang = getLang();
     applyLang(lang);
     updateCount(lang);
 
-    document.querySelectorAll(".chip").forEach(ch => {
-      ch.addEventListener("click", () => setLang(ch.dataset.lang));
+    document.querySelectorAll(".chip").forEach(ch=>{
+      ch.addEventListener("click", ()=> setLang(ch.dataset.lang));
     });
 
-    document.getElementById("btnInvia")?.addEventListener("click", () => saveLine(lang));
-    document.getElementById("btnPulisci")?.addEventListener("click", () => {
+    document.getElementById("btnInvia")?.addEventListener("click", ()=> saveLine(lang));
+    document.getElementById("btnPulisci")?.addEventListener("click", ()=>{
       const ta = document.getElementById("riga");
       if (ta) ta.value = "";
       showStatus(STR[lang].cleared);
     });
-    document.getElementById("btnApriArchivio")?.addEventListener("click", () => openArchive(lang));
-    document.getElementById("btnSvuotaArchivio")?.addEventListener("click", () => wipeArchive(lang));
+    document.getElementById("btnApriArchivio")?.addEventListener("click", ()=> openArchive(lang));
+    document.getElementById("btnSvuotaArchivio")?.addEventListener("click", ()=> wipeArchive(lang));
 
-    // Enter to save (desktop + iPhone external keyboard)
-    document.getElementById("riga")?.addEventListener("keydown", (e) => {
+    document.getElementById("riga")?.addEventListener("keydown", (e)=>{
       if (
         (e.key === "Enter" && (e.ctrlKey || e.metaKey)) ||
         (e.key === "Enter" && e.shiftKey === false && (e.target.value || "").length > 0 && window.innerWidth > 700)
-      ) {
+      ){
         e.preventDefault();
         saveLine(lang);
       }

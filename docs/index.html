@@ -1,5 +1,34 @@
 <!doctype html>
-<html lang="it";
+<html lang="it">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Mango — Infrastruttura di fiducia locale</title>
+
+  <style>
+    :root{
+      --bg:#0b0b0c;
+      --card:#121214;
+      --text:#ffffff;
+      --muted:#b8b8b8;
+      --line:#2a2a2f;
+      --accent:#2d6cdf;
+      --accent2:#22c55e;
+      --danger:#ef4444;
+      --radius:16px;
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
+      background:var(--bg);
+      color:var(--text);
+      line-height:1.35;
+    }
+    a{color:inherit}
+    .wrap{
+      max-width:980px;
+      margin:0 auto;
       padding:20px 16px 40px;
     }
     header{
@@ -193,9 +222,9 @@
           <a class="btn primary" id="btnPrimoScambio" href="primo-scambio.html">🥭 <span id="btnPrimoScambioTxt">Fai il primo scambio</span></a>
           <a class="btn" id="btnFAQ" href="faq.html">❓ <span id="btnFAQTxt">FAQ</span></a>
         </div>
-        <div class="smallnote" id="sec1Note">
-          Se non hai ancora le pagine, puoi aggiungerle dopo: qui intanto lasciamo i bottoni pronti.
-        </div>
+
+        <!-- ✅ nascosto: non mostra più la scritta tecnica -->
+        <div class="smallnote" id="sec1Note" style="display:none"></div>
       </div>
 
       <!-- 2) SCRIVI UNA RIGA -->
@@ -242,16 +271,14 @@
           Creato da Juan de Dios Annaloro Mercedes in memoria di sua sorella Larimar.
         </p>
 
-        <!-- ✅ BOTTONE PDF DEFINITIVO (multilingua) -->
         <div class="btnrow">
           <a class="btn primary" id="btnPDF" href="pdf/Mango_Documento_Fondativo_Multilingua_v1.pdf" target="_blank" rel="noopener">
             📄 <span id="btnPDFTxt">Documento Fondativo Ufficiale (Multilingua)</span>
           </a>
         </div>
 
-        <div class="smallnote" id="pdfNote">
-          Il PDF deve stare in: <b>docs/pdf/</b> con questo nome: <b>Mango_Documento_Fondativo_Multilingua_v1.pdf</b>
-        </div>
+        <!-- ✅ nascosto: non mostra più la scritta tecnica -->
+        <div class="smallnote" id="pdfNote" style="display:none"></div>
       </div>
     </section>
 
@@ -274,7 +301,7 @@
         sec1Text: "Mango nasce da scambi reali tra persone. Non è denaro. Non si conta. Non si accumula.",
         btnPrimoScambioTxt: "Fai il primo scambio",
         btnFAQTxt: "FAQ",
-        sec1Note: "Se non hai ancora le pagine, puoi aggiungerle dopo: qui intanto lasciamo i bottoni pronti.",
+        sec1Note: "",
         sec2Title: "Scrivi una riga",
         sec2Text: "Una riga = riconoscimento di uno scambio reale. Nessun numero, nessun valore.",
         rigaLabel: "Descrivi lo scambio (breve, umano, chiaro):",
@@ -288,7 +315,7 @@
         sec3Title: "Cos’è Mango",
         sec3Text: "Mango è un’infrastruttura di fiducia locale non monetaria: riconosce scambi reali senza trasformarli in quantità, valore o accumulo. Creato da Juan de Dios Annaloro Mercedes in memoria di sua sorella Larimar.",
         btnPDFTxt: "Documento Fondativo Ufficiale (Multilingua)",
-        pdfNote: "Il PDF deve stare in: docs/pdf/ con questo nome: Mango_Documento_Fondativo_Multilingua_v1.pdf",
+        pdfNote: "",
         footerTxt: "Mango — nato il 02 febbraio 2026. Infrastruttura non monetaria, non appropriabile, anti-accumulo, anti-cattura.",
         savedOk: "Salvato ✅",
         savedEmpty: "Scrivi qualcosa prima di salvare.",
@@ -305,7 +332,7 @@
         sec1Text: "Mango comes from real exchanges between people. It is not money. It is not counted. It is not accumulated.",
         btnPrimoScambioTxt: "Make the first exchange",
         btnFAQTxt: "FAQ",
-        sec1Note: "If pages are not ready yet, you can add them later: buttons stay here.",
+        sec1Note: "",
         sec2Title: "Write one line",
         sec2Text: "One line = recognition of a real exchange. No numbers, no value.",
         rigaLabel: "Describe the exchange (short, human, clear):",
@@ -319,7 +346,7 @@
         sec3Title: "What is Mango",
         sec3Text: "Mango is a non-monetary local trust infrastructure: it recognizes real exchanges without turning them into quantity, value, or accumulation. Created by Juan de Dios Annaloro Mercedes in memory of his sister Larimar.",
         btnPDFTxt: "Official Foundational Document (Multilingual)",
-        pdfNote: "The PDF must be in: docs/pdf/ with this name: Mango_Documento_Fondativo_Multilingua_v1.pdf",
+        pdfNote: "",
         footerTxt: "Mango — born on 02 Feb 2026. Non-monetary, non-appropriable, anti-accumulation, anti-capture.",
         savedOk: "Saved ✅",
         savedEmpty: "Write something before saving.",
@@ -336,7 +363,7 @@
         sec1Text: "Mango nace de intercambios reales entre personas. No es dinero. No se cuenta. No se acumula.",
         btnPrimoScambioTxt: "Hacer el primer intercambio",
         btnFAQTxt: "FAQ",
-        sec1Note: "Si aún no tienes las páginas, puedes añadirlas después: los botones quedan listos.",
+        sec1Note: "",
         sec2Title: "Escribe una línea",
         sec2Text: "Una línea = reconocimiento de un intercambio real. Sin números, sin valor.",
         rigaLabel: "Describe el intercambio (breve, humano, claro):",
@@ -350,7 +377,7 @@
         sec3Title: "Qué es Mango",
         sec3Text: "Mango es una infraestructura local de confianza no monetaria: reconoce intercambios reales sin convertirlos en cantidad, valor o acumulación. Creado por Juan de Dios Annaloro Mercedes en memoria de su hermana Larimar.",
         btnPDFTxt: "Documento Fundacional Oficial (Multilingüe)",
-        pdfNote: "El PDF debe estar en: docs/pdf/ con este nombre: Mango_Documento_Fondativo_Multilingua_v1.pdf",
+        pdfNote: "",
         footerTxt: "Mango — nacido el 02 feb 2026. No monetario, no apropiable, anti-acumulación, anti-captura.",
         savedOk: "Guardado ✅",
         savedEmpty: "Escribe algo antes de guardar.",
@@ -367,7 +394,7 @@
         sec1Text: "Mango naît d’échanges réels entre personnes. Ce n’est pas de l’argent. Ça ne se compte pas. Ça ne s’accumule pas.",
         btnPrimoScambioTxt: "Faire le premier échange",
         btnFAQTxt: "FAQ",
-        sec1Note: "Si les pages ne sont pas prêtes, tu peux les ajouter après : les boutons restent ici.",
+        sec1Note: "",
         sec2Title: "Écris une ligne",
         sec2Text: "Une ligne = reconnaissance d’un échange réel. Aucun chiffre, aucune valeur.",
         rigaLabel: "Décris l’échange (court, humain, clair) :",
@@ -381,7 +408,7 @@
         sec3Title: "Qu’est-ce que Mango",
         sec3Text: "Mango est une infrastructure locale de confiance non monétaire : elle reconnaît des échanges réels sans les transformer en quantité, valeur ou accumulation. Créée par Juan de Dios Annaloro Mercedes en mémoire de sa sœur Larimar.",
         btnPDFTxt: "Document Fondateur Officiel (Multilingue)",
-        pdfNote: "Le PDF doit être dans : docs/pdf/ avec ce nom : Mango_Documento_Fondativo_Multilingua_v1.pdf",
+        pdfNote: "",
         footerTxt: "Mango — né le 02 fév 2026. Non monétaire, non appropriable, anti-accumulation, anti-capture.",
         savedOk: "Enregistré ✅",
         savedEmpty: "Écris quelque chose avant d’enregistrer.",
@@ -398,7 +425,7 @@
         sec1Text: "Mango entsteht aus realen Austauschen zwischen Menschen. Es ist kein Geld. Es wird nicht gezählt. Es wird nicht angesammelt.",
         btnPrimoScambioTxt: "Ersten Austausch machen",
         btnFAQTxt: "FAQ",
-        sec1Note: "Wenn die Seiten noch nicht bereit sind, kannst du sie später hinzufügen: die Buttons bleiben hier.",
+        sec1Note: "",
         sec2Title: "Schreibe eine Zeile",
         sec2Text: "Eine Zeile = Anerkennung eines realen Austauschs. Keine Zahlen, kein Wert.",
         rigaLabel: "Beschreibe den Austausch (kurz, menschlich, klar):",
@@ -412,7 +439,7 @@
         sec3Title: "Was ist Mango",
         sec3Text: "Mango ist eine nicht-monetäre lokale Vertrauens-Infrastruktur: Sie erkennt reale Austausche an, ohne sie in Menge, Wert oder Akkumulation zu verwandeln. Erschaffen von Juan de Dios Annaloro Mercedes im Gedenken an seine Schwester Larimar.",
         btnPDFTxt: "Offizielles Gründungsdokument (Mehrsprachig)",
-        pdfNote: "Das PDF muss in: docs/pdf/ liegen mit diesem Namen: Mango_Documento_Fondativo_Multilingua_v1.pdf",
+        pdfNote: "",
         footerTxt: "Mango — geboren am 02. Feb 2026. Nicht monetär, nicht aneignbar, anti-Akkumulation, anti-Capture.",
         savedOk: "Gespeichert ✅",
         savedEmpty: "Schreibe etwas, bevor du speicherst.",
@@ -429,7 +456,7 @@
         sec1Text: "Mango 来自人与人之间真实交换。不是钱。不计数。不积累。",
         btnPrimoScambioTxt: "进行第一次交换",
         btnFAQTxt: "常见问题",
-        sec1Note: "如果页面还没准备好，之后可以再加：按钮先放在这里。",
+        sec1Note: "",
         sec2Title: "写一行",
         sec2Text: "一行 = 对一次真实交换的认可。没有数字，没有价值。",
         rigaLabel: "描述这次交换（简短、人性、清楚）：",
@@ -443,7 +470,7 @@
         sec3Title: "什么是 Mango",
         sec3Text: "Mango 是一种非货币的本地信任基础设施：它认可真实交换，但不把它们变成数量、价值或积累。由 Juan de Dios Annaloro Mercedes 创建，以纪念其妹妹 Larimar。",
         btnPDFTxt: "官方奠基文件（多语言）",
-        pdfNote: "PDF 必须放在：docs/pdf/ 文件名：Mango_Documento_Fondativo_Multilingua_v1.pdf",
+        pdfNote: "",
         footerTxt: "Mango — 诞生于 2026 年 2 月 2 日。非货币、不可占有、反积累、反机构俘获。",
         savedOk: "已保存 ✅",
         savedEmpty: "请先写点内容再保存。",
@@ -472,7 +499,6 @@
 
       const s = STR[lang];
 
-      // Text nodes
       const map = {
         brandTitle: "brandTitle",
         heroTitle: "heroTitle",
@@ -506,32 +532,98 @@
       const ta = document.getElementById("riga");
       if (ta) ta.placeholder = s.rigaPh;
 
-      // Chips active
       document.querySelectorAll(".chip").forEach(ch => {
         ch.classList.toggle("active", ch.dataset.lang === lang);
       });
     }
 
     // -----------------------------
-    // Local archive for "righe"
+    // Registro unico integrale (righe) — MIGRAZIONE + DEDUP
     // -----------------------------
-    const STORAGE_KEY = "mango_righe_v1";
 
-    function readArchive(){
-      try {
-        return JSON.parse(localStorage.getItem(STORAGE_KEY) || "[]");
-      } catch(e){
-        return [];
+    const STORAGE_KEY = "MANGO_REGISTRO_UNICO_V1";
+    const OLD_KEYS = [
+      "mango_righe_v1",     // tua vecchia chiave attuale
+      "mangoRighe",
+      "righeMango",
+      "MANGO_RIGHE",
+      "registroMango",
+      "MANGO_REGISTRO",
+      "MANGO_RIGHE_HOME",
+      "MANGO_RIGHE_PRIMO"
+    ];
+
+    function safeParse(raw) { try { return JSON.parse(raw); } catch { return null; } }
+    function normalizeText(t) { return String(t ?? "").replace(/\s+/g, " ").trim(); }
+
+    function asRow(x) {
+      if (typeof x === "string") {
+        const text = normalizeText(x);
+        return text ? { text, ts: new Date().toISOString() } : null;
       }
+      if (x && typeof x === "object") {
+        const text = normalizeText(x.text ?? x.riga ?? x.value ?? "");
+        if (!text) return null;
+        const ts = typeof x.ts === "string" && x.ts ? x.ts : new Date().toISOString();
+        return { text, ts };
+      }
+      return null;
     }
-    function writeArchive(arr){
-      localStorage.setItem(STORAGE_KEY, JSON.stringify(arr));
+
+    function dedup(arr) {
+      const seen = new Set();
+      const out = [];
+      for (const r of arr) {
+        const k = r.text.toLowerCase();
+        if (seen.has(k)) continue;
+        seen.add(k);
+        out.push(r);
+      }
+      return out;
     }
-    function updateCount(lang){
+
+    function readKey(key) {
+      const raw = localStorage.getItem(key);
+      if (!raw) return [];
+      const parsed = safeParse(raw);
+      if (!parsed || !Array.isArray(parsed)) return [];
+      return parsed.map(asRow).filter(Boolean);
+    }
+
+    function writeKey(key, arr) {
+      localStorage.setItem(key, JSON.stringify(arr));
+    }
+
+    // Migrazione una volta sola: se la chiave unica non esiste, unisce tutte le vecchie e crea quella unica.
+    function migrateOnce() {
+      if (localStorage.getItem(STORAGE_KEY)) return;
+
+      let merged = [];
+      for (const k of OLD_KEYS) merged = merged.concat(readKey(k));
+
+      merged = dedup(merged).sort((a, b) => {
+        const ta = Date.parse(a.ts) || 0;
+        const tb = Date.parse(b.ts) || 0;
+        return ta - tb;
+      });
+
+      writeKey(STORAGE_KEY, merged);
+    }
+
+    function readArchive() {
+      migrateOnce();
+      return readKey(STORAGE_KEY);
+    }
+
+    function writeArchive(arr) {
+      migrateOnce();
+      writeKey(STORAGE_KEY, arr);
+    }
+
+    function updateCount(lang) {
       const n = readArchive().length;
       const el = document.getElementById("metaCount");
       if (!el) return;
-      // quick multilingual count line
       const t = {
         it: `${n} righe salvate su questo dispositivo`,
         en: `${n} lines saved on this device`,
@@ -542,7 +634,8 @@
       };
       el.textContent = (t[lang] || t.it);
     }
-    function showStatus(msg){
+
+    function showStatus(msg) {
       const box = document.getElementById("statusBox");
       if (!box) return;
       box.textContent = msg;
@@ -551,40 +644,41 @@
       window.__mangoStatusT = setTimeout(() => box.classList.remove("show"), 3200);
     }
 
-    function saveLine(lang){
+    function saveLine(lang) {
       const ta = document.getElementById("riga");
       if (!ta) return;
-      const text = (ta.value || "").trim();
+
+      const text = normalizeText(ta.value);
       if (!text) {
         showStatus(STR[lang].savedEmpty);
         return;
       }
+
       const arr = readArchive();
-      arr.unshift({
-        text,
-        ts: new Date().toISOString()
-      });
-      writeArchive(arr);
+      const merged = dedup([{ text, ts: new Date().toISOString() }, ...arr]);
+
+      writeArchive(merged);
       ta.value = "";
       updateCount(lang);
       showStatus(STR[lang].savedOk);
     }
 
-    function openArchive(lang){
+    function openArchive(lang) {
       const arr = readArchive();
-      if (!arr.length){
+      if (!arr.length) {
         showStatus(STR[lang].archiveEmpty);
         return;
       }
-      // simple modal via alert (safe, works everywhere)
+
       const lines = arr
         .slice(0, 30)
-        .map((x, i) => `${i+1}. ${x.text}  (${new Date(x.ts).toLocaleString()})`)
+        .map((x, i) => `${i + 1}. ${x.text}  (${new Date(x.ts).toLocaleString()})`)
         .join("\n\n");
-      alert(lines + (arr.length > 30 ? `\n\n… +${arr.length-30}` : ""));
+
+      alert(lines + (arr.length > 30 ? `\n\n… +${arr.length - 30}` : ""));
     }
 
-    function wipeArchive(lang){
+    function wipeArchive(lang) {
       if (!confirm(STR[lang].confirmWipe)) return;
       writeArchive([]);
       updateCount(lang);
@@ -598,12 +692,10 @@
     applyLang(lang);
     updateCount(lang);
 
-    // Chip click
     document.querySelectorAll(".chip").forEach(ch => {
       ch.addEventListener("click", () => setLang(ch.dataset.lang));
     });
 
-    // Buttons
     document.getElementById("btnInvia")?.addEventListener("click", () => saveLine(lang));
     document.getElementById("btnPulisci")?.addEventListener("click", () => {
       const ta = document.getElementById("riga");
@@ -615,8 +707,10 @@
 
     // Enter to save (desktop + iPhone external keyboard)
     document.getElementById("riga")?.addEventListener("keydown", (e) => {
-      // Ctrl+Enter or Cmd+Enter saves, and also Enter alone if user wants:
-      if ((e.key === "Enter" && (e.ctrlKey || e.metaKey)) || (e.key === "Enter" && e.shiftKey === false && (e.target.value || "").length > 0 && window.innerWidth > 700)) {
+      if (
+        (e.key === "Enter" && (e.ctrlKey || e.metaKey)) ||
+        (e.key === "Enter" && e.shiftKey === false && (e.target.value || "").length > 0 && window.innerWidth > 700)
+      ) {
         e.preventDefault();
         saveLine(lang);
       }

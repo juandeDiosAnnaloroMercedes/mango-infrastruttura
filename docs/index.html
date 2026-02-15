@@ -636,5 +636,23 @@
     // render iniziale view
     renderView();
   </script>
+  <div style="margin-top:40px; text-align:center;">
+  <p id="pdf-link"></p>
+</div>
+
+<script>
+  const lang = new URLSearchParams(window.location.search).get('lang') || 'it';
+
+  const pdfText = {
+    it: "📄 <strong>Documento ufficiale:</strong><br><a href='Mango_Documento_Fondativo.pdf' target='_blank'>Scarica il Documento Fondativo</a>",
+    en: "📄 <strong>Official document:</strong><br><a href='Mango_Documento_Fondativo.pdf' target='_blank'>Download the Foundational Document</a>",
+    es: "📄 <strong>Documento oficial:</strong><br><a href='Mango_Documento_Fondativo.pdf' target='_blank'>Descargar el Documento Fundacional</a>",
+    fr: "📄 <strong>Document officiel :</strong><br><a href='Mango_Documento_Fondativo.pdf' target='_blank'>Télécharger le Document Fondateur</a>",
+    de: "📄 <strong>Offizielles Dokument:</strong><br><a href='Mango_Documento_Fondativo.pdf' target='_blank'>Gründungsdokument herunterladen</a>",
+    zh: "📄 <strong>官方文件：</strong><br><a href='Mango_Documento_Fondativo.pdf' target='_blank'>下载创始文件</a>"
+  };
+
+  document.getElementById("pdf-link").innerHTML = pdfText[lang];
+</script>
 </body>
 </html>

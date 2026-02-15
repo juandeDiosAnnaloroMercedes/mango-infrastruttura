@@ -44,21 +44,9 @@
   </url>
 
   <url>
-    <loc>https://mangoinfrastruttura.org/primo-scambio.html</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-
-  <url>
-    <loc>https://mangoinfrastruttura.org/scrivi-una-riga.html</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-
-  <url>
-    <loc>https://mangoinfrastruttura.org/origine-vissuta.html</loc>
+    <loc>https://mangoinfrastruttura.org/docs/pdf/Mango_Documento_Fondativo_Multilingua_v1.pdf</loc>
     <changefreq>yearly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
 
 </urlset>

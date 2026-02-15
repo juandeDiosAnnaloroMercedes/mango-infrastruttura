@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex,nofollow">
+  <title>Mango</title>
+  <script>
+    (function() {
+      var p = new URLSearchParams(location.search);
+      var lang = (p.get("lang") || "it").toLowerCase();
+      var ok = ["it","en","es","fr","de","zh"];
+      if (!ok.includes(lang)) lang = "it";
+      location.replace("https://mangoinfrastruttura.org/?lang=" + lang);
+    })();
+  </script>
+</head>
+<body></body>
+</html>

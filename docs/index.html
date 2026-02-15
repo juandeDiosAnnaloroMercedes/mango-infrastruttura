@@ -21,6 +21,7 @@
       gap:10px;
     }
     .brand{ font-weight:950; letter-spacing:.2px; }
+
     .langbar{ display:flex; gap:8px; flex-wrap:wrap; justify-content:flex-end; }
     .langbar a{
       font-size:.95rem; text-decoration:none; color:#111; opacity:.78; font-weight:900;
@@ -30,22 +31,22 @@
     }
     .langbar a.active{ opacity:1; border-color:rgba(0,0,0,.25); }
 
-    /* Solo 🥭 (NO parola "Bianco") */
-    .mango-only{
+    /* bottone “segreto”: SOLO 🥭, nessuna parola */
+    .secret-mango{
       text-decoration:none; color:#111; font-weight:950;
       border:1px solid var(--b2); border-radius:16px; padding:10px 12px;
-      background:#fff; display:inline-flex; align-items:center; gap:10px;
+      background:#fff; display:inline-flex; align-items:center;
       box-shadow:0 6px 18px rgba(0,0,0,.06);
       white-space:nowrap;
     }
-    .mango-only:active{ transform: translateY(1px); }
+    .secret-mango:active{ transform: translateY(1px); }
 
     .wrap{ max-width:980px; margin:0 auto; padding:18px; }
     header{ text-align:center; padding:44px 18px 10px; }
     h1{ margin:0; font-size:2.45rem; font-weight:950; line-height:1.12; letter-spacing:.2px; }
     p.lead{ margin:14px auto 0; max-width:820px; line-height:1.65; font-size:1.08rem; opacity:.78; }
 
-    /* La frase "dominio può sparire" SOLO QUI e "davanti" (non flottante) */
+    /* frase SOLO HOME: non flottante, non in basso */
     .motto{
       margin:18px auto 0;
       max-width:820px;
@@ -79,7 +80,7 @@
     }
     .btn:active{ transform: translateY(1px); }
 
-    /* 🥭 bottom-right = Home (sempre comodo) */
+    /* 🥭 bottom-right = Home sempre */
     .mango-fab{
       position:fixed; right:16px; bottom:16px; z-index:30;
       text-decoration:none; color:#111; font-weight:950;
@@ -96,8 +97,8 @@
   <div class="top">
     <div class="brand" id="brandTxt">Mango</div>
 
-    <!-- SOLO 🥭 (niente parola "Bianco") -->
-    <a class="mango-only" id="biancoBtn" href="bianco.html?lang=it" aria-label="Bianco">🥭</a>
+    <!-- SOLO 🥭 (segreto) -->
+    <a class="secret-mango" id="biancoBtn" href="bianco.html?lang=it" aria-label="Bianco">🥭</a>
 
     <div class="langbar" id="langbar"></div>
   </div>
@@ -106,7 +107,7 @@
     <h1 id="h1">Mango accade tra persone reali.</h1>
     <p class="lead" id="lead">Mango non è un sito. È una pratica. Qui trovi solo strumenti minimi per farlo adesso.</p>
 
-    <!-- Frase SOLO in Home -->
+    <!-- SOLO HOME -->
     <div class="motto" id="mottoBox">
       <div><strong id="m1">Questo dominio può sparire.</strong></div>
       <div><strong id="m2">Mango no.</strong></div>
@@ -116,7 +117,7 @@
     <div class="grid">
       <section class="card">
         <h2 id="c1t">Fai Mango adesso</h2>
-        <p id="c1p">Un primo scambio reale, semplice. Poi scrivi una riga.</p>
+        <p id="c1p">Riconosci uno scambio reale tra persone. Scrivi una riga. Non servono numeri.</p>
         <a class="btn" id="btn1" href="primo-scambio.html?lang=it">🥭 <span id="btn1t">Vai</span></a>
       </section>
 
@@ -128,13 +129,13 @@
 
       <section class="card">
         <h2 id="c3t">Cos’è Mango</h2>
-        <p id="c3p">Definizione e principi (lingua selezionata).</p>
+        <p id="c3p">Mango è un’infrastruttura di fiducia locale non monetaria.</p>
         <a class="btn" id="btn3" href="it.html?lang=it">📘 <span id="btn3t">Leggi</span></a>
       </section>
 
       <section class="card">
         <h2 id="c4t">PDF</h2>
-        <p id="c4p">Documenti PDF nella lingua selezionata.</p>
+        <p id="c4p">Apri i PDF nella lingua selezionata.</p>
         <a class="btn" id="pdf1" href="kit-mango.pdf">📄 <span id="pdf1t">Apri PDF</span></a>
       </section>
     </div>
@@ -148,66 +149,119 @@ const dict = {
     brand:"Mango",
     h1:"Mango accade tra persone reali.",
     lead:"Mango non è un sito. È una pratica. Qui trovi solo strumenti minimi per farlo adesso.",
-    c1t:"Fai Mango adesso", c1p:"Un primo scambio reale, semplice. Poi scrivi una riga.", btn1t:"Vai",
-    c2t:"Scrivi una riga", c2p:"Registra lo scambio: una riga. Nessun numero, nessun conto.", btn2t:"Apri",
-    c3t:"Cos’è Mango", c3p:"Definizione e principi (lingua selezionata).", btn3t:"Leggi",
-    c4t:"PDF", c4p:"Documenti PDF nella lingua selezionata.", pdf1t:"Apri PDF",
     m1:"Questo dominio può sparire.", m2:"Mango no.", m3:"Perché Mango non è un sito. È una pratica.",
+    c1t:"Fai Mango adesso",
+    c1p:"Riconosci uno scambio reale tra persone. Scrivi una riga. Non servono numeri.",
+    btn1t:"Vai",
+    c2t:"Scrivi una riga",
+    c2p:"Registra lo scambio: una riga. Nessun numero, nessun conto.",
+    btn2t:"Apri",
+    c3t:"Cos’è Mango",
+    c3p:"Mango è un’infrastruttura di fiducia locale non monetaria.",
+    btn3t:"Leggi",
+    c4t:"PDF",
+    c4p:"Apri i PDF nella lingua selezionata.",
+    pdf1t:"Apri PDF",
     fab:"Mango"
   },
+
   en:{ htmlLang:"en",
     brand:"Mango",
     h1:"Mango happens between real people.",
     lead:"Mango is not a website. It’s a practice. Here you only find minimal tools to do it now.",
-    c1t:"Do Mango now", c1p:"A simple real first exchange. Then write a line.", btn1t:"Go",
-    c2t:"Write a line", c2p:"Record the exchange: one line. No numbers, no counting.", btn2t:"Open",
-    c3t:"What is Mango", c3p:"Definition and principles (selected language).", btn3t:"Read",
-    c4t:"PDF", c4p:"PDF documents in the selected language.", pdf1t:"Open PDF",
     m1:"This domain can disappear.", m2:"Mango won’t.", m3:"Because Mango is not a website. It’s a practice.",
+    c1t:"Do Mango now",
+    c1p:"Recognize a real exchange between people. Write a line. No numbers needed.",
+    btn1t:"Go",
+    c2t:"Write a line",
+    c2p:"Record the exchange: one line. No numbers, no counting.",
+    btn2t:"Open",
+    c3t:"What is Mango",
+    c3p:"Mango is a local trust infrastructure (non-monetary).",
+    btn3t:"Read",
+    c4t:"PDF",
+    c4p:"Open the PDFs in the selected language.",
+    pdf1t:"Open PDF",
     fab:"Mango"
   },
+
   es:{ htmlLang:"es",
     brand:"Mango",
     h1:"Mango sucede entre personas reales.",
-    lead:"Mango no es un sitio web. Es una práctica. Aquí solo encuentras herramientas mínimas para hacerlo ahora.",
-    c1t:"Haz Mango ahora", c1p:"Un primer intercambio real y simple. Luego escribe una línea.", btn1t:"Ir",
-    c2t:"Escribe una línea", c2p:"Registra el intercambio: una línea. Sin números, sin conteos.", btn2t:"Abrir",
-    c3t:"Qué es Mango", c3p:"Definición y principios (idioma elegido).", btn3t:"Leer",
-    c4t:"PDF", c4p:"Documentos PDF en el idioma elegido.", pdf1t:"Abrir PDF",
+    lead:"Mango no es un sitio web. Es una práctica. Aquí solo hay herramientas mínimas para hacerlo ahora.",
     m1:"Este dominio puede desaparecer.", m2:"Mango no.", m3:"Porque Mango no es un sitio web. Es una práctica.",
+    c1t:"Haz Mango ahora",
+    c1p:"Reconoce un intercambio real entre personas. Escribe una línea. No hacen falta números.",
+    btn1t:"Ir",
+    c2t:"Escribe una línea",
+    c2p:"Registra el intercambio: una línea. Sin números, sin conteos.",
+    btn2t:"Abrir",
+    c3t:"Qué es Mango",
+    c3p:"Mango es una infraestructura local de confianza (no monetaria).",
+    btn3t:"Leer",
+    c4t:"PDF",
+    c4p:"Abre los PDF en el idioma seleccionado.",
+    pdf1t:"Abrir PDF",
     fab:"Mango"
   },
+
   fr:{ htmlLang:"fr",
     brand:"Mango",
     h1:"Mango se vit entre personnes réelles.",
     lead:"Mango n’est pas un site. C’est une pratique. Ici, seulement des outils minimaux pour le faire maintenant.",
-    c1t:"Faire Mango maintenant", c1p:"Un premier échange réel et simple. Puis écris une ligne.", btn1t:"Aller",
-    c2t:"Écrire une ligne", c2p:"Enregistre l’échange : une ligne. Pas de chiffres, pas de comptes.", btn2t:"Ouvrir",
-    c3t:"Qu’est-ce que Mango", c3p:"Définition et principes (langue choisie).", btn3t:"Lire",
-    c4t:"PDF", c4p:"Documents PDF dans la langue choisie.", pdf1t:"Ouvrir PDF",
     m1:"Ce domaine peut disparaître.", m2:"Mango non.", m3:"Parce que Mango n’est pas un site. C’est une pratique.",
+    c1t:"Faire Mango maintenant",
+    c1p:"Reconnais un échange réel entre personnes. Écris une ligne. Pas besoin de chiffres.",
+    btn1t:"Aller",
+    c2t:"Écrire une ligne",
+    c2p:"Enregistre l’échange : une ligne. Pas de chiffres, pas de comptes.",
+    btn2t:"Ouvrir",
+    c3t:"Qu’est-ce que Mango",
+    c3p:"Mango est une infrastructure locale de confiance (non monétaire).",
+    btn3t:"Lire",
+    c4t:"PDF",
+    c4p:"Ouvre les PDF dans la langue choisie.",
+    pdf1t:"Ouvrir PDF",
     fab:"Mango"
   },
+
   de:{ htmlLang:"de",
     brand:"Mango",
     h1:"Mango passiert zwischen echten Menschen.",
     lead:"Mango ist keine Website. Es ist eine Praxis. Hier findest du nur minimale Werkzeuge, um es jetzt zu tun.",
-    c1t:"Jetzt Mango machen", c1p:"Ein einfacher, realer erster Austausch. Dann schreibe eine Zeile.", btn1t:"Start",
-    c2t:"Eine Zeile schreiben", c2p:"Den Austausch notieren: eine Zeile. Keine Zahlen, kein Zählen.", btn2t:"Öffnen",
-    c3t:"Was ist Mango", c3p:"Definition und Prinzipien (gewählte Sprache).", btn3t:"Lesen",
-    c4t:"PDF", c4p:"PDF-Dokumente in der gewählten Sprache.", pdf1t:"PDF öffnen",
     m1:"Diese Domain kann verschwinden.", m2:"Mango nicht.", m3:"Weil Mango keine Website ist. Es ist eine Praxis.",
+    c1t:"Jetzt Mango machen",
+    c1p:"Erkenne einen echten Austausch zwischen Menschen. Schreib eine Zeile. Keine Zahlen nötig.",
+    btn1t:"Start",
+    c2t:"Eine Zeile schreiben",
+    c2p:"Den Austausch notieren: eine Zeile. Keine Zahlen, kein Zählen.",
+    btn2t:"Öffnen",
+    c3t:"Was ist Mango",
+    c3p:"Mango ist eine lokale Vertrauens-Infrastruktur (nicht-monetär).",
+    btn3t:"Lesen",
+    c4t:"PDF",
+    c4p:"Öffne die PDFs in der gewählten Sprache.",
+    pdf1t:"PDF öffnen",
     fab:"Mango"
   },
+
   zh:{ htmlLang:"zh-Hant",
     brand:"Mango",
     h1:"Mango 發生在人與人之間的真實關係中。",
-    lead:"Mango 不是網站，而是一種實踐。這裡只提供最少的工具，讓你現在就能開始。",
-    c1t:"現在做 Mango", c1p:"一個簡單的真實首次交換，然後寫一行。", btn1t:"開始",
-    c2t:"寫一行", c2p:"記錄交換：一行。不要數字，不要計算。", btn2t:"打開",
-    c3t:"什麼是 Mango", c3p:"定義與原則（所選語言）。", btn3t:"閱讀",
-    c4t:"PDF", c4p:"所選語言的 PDF 文件。", pdf1t:"打開 PDF",
+    lead:"Mango 不是網站，而是一種實踐。這裡只提供最少工具，讓你現在就能開始。",
     m1:"這個網域可以消失。", m2:"Mango 不會。", m3:"因為 Mango 不是網站，而是一種實踐。",
+    c1t:"現在做 Mango",
+    c1p:"辨認人與人之間的真實交換。寫一行。不需要數字。",
+    btn1t:"開始",
+    c2t:"寫一行",
+    c2p:"記錄交換：一行。不要數字，不要計算。",
+    btn2t:"打開",
+    c3t:"什麼是 Mango",
+    c3p:"Mango 是一種在地信任基礎設施（非貨幣）。",
+    btn3t:"閱讀",
+    c4t:"PDF",
+    c4p:"以所選語言開啟 PDF。",
+    pdf1t:"打開 PDF",
     fab:"Mango"
   }
 };
@@ -240,25 +294,24 @@ function applyI18n(){
   setText("h1", dict[L].h1);
   setText("lead", dict[L].lead);
 
+  setText("m1", dict[L].m1);
+  setText("m2", dict[L].m2);
+  setText("m3", dict[L].m3);
+
   setText("c1t", dict[L].c1t); setText("c1p", dict[L].c1p); setText("btn1t", dict[L].btn1t);
   setText("c2t", dict[L].c2t); setText("c2p", dict[L].c2p); setText("btn2t", dict[L].btn2t);
   setText("c3t", dict[L].c3t); setText("c3p", dict[L].c3p); setText("btn3t", dict[L].btn3t);
   setText("c4t", dict[L].c4t); setText("c4p", dict[L].c4p); setText("pdf1t", dict[L].pdf1t);
 
-  setText("m1", dict[L].m1); setText("m2", dict[L].m2); setText("m3", dict[L].m3);
-
-  const home = `index.html?lang=${L}`;
-  document.getElementById("homeFab").href = home;
   document.getElementById("fabTxt").textContent = dict[L].fab;
 
-  // link interni con lingua
+  // Link sempre con lingua
+  const home = `index.html?lang=${L}`;
+  document.getElementById("homeFab").href = home;
   document.getElementById("biancoBtn").href = `bianco.html?lang=${L}`;
   document.getElementById("btn1").href = `primo-scambio.html?lang=${L}`;
   document.getElementById("btn2").href = `scrivi-una-riga.html?lang=${L}`;
   document.getElementById("btn3").href = `${L}.html?lang=${L}`;
-
-  // PDF: se crei kit-mango-it.pdf ecc, cambia qui:
-  document.getElementById("pdf1").href = `kit-mango.pdf`;
 }
 
 buildLangbar();

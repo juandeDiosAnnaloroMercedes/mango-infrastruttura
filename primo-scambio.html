@@ -309,7 +309,18 @@
     const d=T[l]||T[DEFAULT_LANG];
     const v=(document.getElementById("line").value||"").trim();
     if(!v){ badge(d.empty); return; }
-    saveToLocalRegister(v);
+
+// ✅ Mango: date allowed, measures blocked
+const dateRegex = /.../;
+const measureRegex = /.../;
+
+
+if (!dateRegex.test(v) && measureRegex.test(v)) {
+  badge(d.err_measure || "Evita quantità o durate. La data è ammessa.");
+  return;
+}
+
+saveToLocalRegister(v);
 
 badge("✔ Questa riga è stata riconosciuta. Non è un credito. Non è un saldo.");
 

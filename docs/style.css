@@ -212,3 +212,40 @@ p {
   color: var(--muted);
   margin-top: 0.9rem;
 }
+/* === MURO MANGO (multilingua, non cumulabile, non temporale) === */
+.muro-mango { margin-top: 24px; }
+
+.muro-grid{
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 14px;
+}
+
+.muro-box{
+  border: 1px solid rgba(0,0,0,0.12);
+  border-radius: 12px;
+  padding: 12px 12px 10px;
+}
+
+.muro-lang{
+  font-weight: 700;
+  font-size: 12px;
+  letter-spacing: 0.06em;
+  opacity: 0.8;
+  margin-bottom: 6px;
+}
+
+.muro-desc{
+  margin: 0 0 10px;
+  font-size: 14px;
+  opacity: 0.9;
+}
+
+.muro-list{
+  margin: 0;
+  padding-left: 18px;
+}
+
+.muro-list li{
+  margin: 6px 0;
+}

@@ -1,4 +1,4 @@
-/* Muro Mango — definitivo */
+/* Muro Mango — renderer definitivo (usa .muro-box[lang], non data-lang) */
 
 const MURO_POOL = {
   it: [
@@ -95,15 +95,23 @@ function shuffle(a){
   return a;
 }
 
-document.addEventListener("DOMContentLoaded",()=>{
-  document.querySelectorAll(".muro-list").forEach(ul=>{
-    const lang=ul.dataset.lang;
-    const picked=shuffle(MURO_POOL[lang].slice()).slice(0,7);
-    ul.innerHTML="";
+function renderWall(){
+  const boxes = document.querySelectorAll(".muro-box[lang]");
+  if (!boxes.length) return;
+
+  boxes.forEach(box=>{
+    const lang = box.getAttribute("lang");
+    const ul = box.querySelector(".muro-list");
+    if (!ul || !MURO_POOL[lang]) return;
+
+    const picked = shuffle(MURO_POOL[lang].slice()).slice(0,7);
+    ul.innerHTML = "";
     picked.forEach(t=>{
       const li=document.createElement("li");
       li.textContent=t;
       ul.appendChild(li);
     });
   });
-});
+}
+
+document.addEventListener("DOMContentLoaded", renderWall);

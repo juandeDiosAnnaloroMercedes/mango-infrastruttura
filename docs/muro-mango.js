@@ -1,7 +1,7 @@
-// Muro Mango — 7 righe random per lingua, senza data, senza ordine, senza archivio.
+/* Muro Mango — definitivo */
 
 const MURO_POOL = {
-  "it": [
+  it: [
     "Qualcuno ha accompagnato qualcuno a una visita.",
     "Qualcuno ha cucinato per qualcuno.",
     "Qualcuno ha prestato ascolto a qualcuno.",
@@ -15,7 +15,7 @@ const MURO_POOL = {
     "Qualcuno ha fatto compagnia a qualcuno.",
     "Qualcuno ha aiutato qualcuno con una pratica."
   ],
-  "en": [
+  en: [
     "Someone accompanied someone to an appointment.",
     "Someone cooked for someone.",
     "Someone listened to someone.",
@@ -29,7 +29,7 @@ const MURO_POOL = {
     "Someone kept someone company.",
     "Someone helped someone with paperwork."
   ],
-  "es": [
+  es: [
     "Alguien acompañó a alguien a una cita.",
     "Alguien cocinó para alguien.",
     "Alguien escuchó a alguien.",
@@ -43,7 +43,7 @@ const MURO_POOL = {
     "Alguien acompañó a alguien con su presencia.",
     "Alguien ayudó a alguien con un trámite."
   ],
-  "fr": [
+  fr: [
     "Quelqu’un a accompagné quelqu’un à un rendez-vous.",
     "Quelqu’un a cuisiné pour quelqu’un.",
     "Quelqu’un a écouté quelqu’un.",
@@ -57,7 +57,7 @@ const MURO_POOL = {
     "Quelqu’un a tenu compagnie à quelqu’un.",
     "Quelqu’un a aidé quelqu’un avec une démarche."
   ],
-  "de": [
+  de: [
     "Jemand hat jemanden zu einem Termin begleitet.",
     "Jemand hat für jemanden gekocht.",
     "Jemand hat jemandem zugehört.",
@@ -87,36 +87,23 @@ const MURO_POOL = {
   ]
 };
 
-function shuffle(array) {
-  // Fisher–Yates
-  for (let i = array.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [array[i], array[j]] = [array[j], array[i]];
+function shuffle(a){
+  for(let i=a.length-1;i>0;i--){
+    const j=Math.floor(Math.random()*(i+1));
+    [a[i],a[j]]=[a[j],a[i]];
   }
-  return array;
+  return a;
 }
 
-function pickN(pool, n) {
-  const copy = pool.slice();
-  shuffle(copy);
-  return copy.slice(0, Math.min(n, copy.length));
-}
-
-function renderMuro() {
-  const lists = document.querySelectorAll(".muro-list[data-lang]");
-  lists.forEach((ul) => {
-    const lang = ul.getAttribute("data-lang");
-    const pool = MURO_POOL[lang] || [];
-    const picked = pickN(pool, 7);
-
-    // Niente ordine temporale: ordine random a ogni visita
-    ul.innerHTML = "";
-    picked.forEach((line) => {
-      const li = document.createElement("li");
-      li.textContent = line;
+document.addEventListener("DOMContentLoaded",()=>{
+  document.querySelectorAll(".muro-list").forEach(ul=>{
+    const lang=ul.dataset.lang;
+    const picked=shuffle(MURO_POOL[lang].slice()).slice(0,7);
+    ul.innerHTML="";
+    picked.forEach(t=>{
+      const li=document.createElement("li");
+      li.textContent=t;
       ul.appendChild(li);
     });
   });
-}
-
-document.addEventListener("DOMContentLoaded", renderMuro);
+});

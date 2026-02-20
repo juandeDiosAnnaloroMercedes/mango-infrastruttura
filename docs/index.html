@@ -622,6 +622,39 @@
       const toast = document.getElementById("toastBox");
       if (toast) toast.textContent = s.toastOk;
     }
+    if (toast) toast.textContent = s.toastOk;
+}
+// bottone Invia UNIVERSALE (unico)
+(() => {
+  const taInvia = document.getElementById("riga");
+  const btnInvia = document.getElementById("btnInvia");
+  if (!taInvia || !btnInvia) return;
+
+  const syncInvia = () => {
+    btnInvia.disabled = taInvia.value.trim().length === 0;
+  };
+
+  // abilita/disabilita mentre scrivi
+  taInvia.addEventListener("input", syncInvia);
+  syncInvia(); // stato iniziale
+
+  // click sul bottone
+  btnInvia.addEventListener("click", () => {
+    const lang = getLang();
+    saveLine(lang);
+    syncInvia();
+  });
+
+  // invio da tastiera: Enter = invia, Shift+Enter = nuova riga
+  taInvia.addEventListener("keydown", (e) => {
+    if (e.key === "Enter" && !e.shiftKey) {
+      e.preventDefault();
+      const lang = getLang();
+      saveLine(lang);
+      syncInvia();
+    }
+  });
+})();
 
     // -----------------------------
     // Registro unico (MIGRAZIONE + DEDUP)

@@ -346,7 +346,7 @@
         Le righe che seguono descrivono scambi reali avvenuti tra persone.
         Non indicano identità, quantità o temporalità. Mostrano che Mango accade.
       </p>
-      <ul class="muro-list" data-lang="it">
+      <ul class="muro-list">
         <li>Qualcuno ha accompagnato qualcuno a una visita.</li>
         <li>Qualcuno ha prestato ascolto a qualcuno.</li>
       </ul>
@@ -358,7 +358,7 @@
         The lines below describe real exchanges between people.
         They show no identity, quantity, or timeline. They show Mango happens.
       </p>
-      <ul class="muro-list" data-lang="en">
+      <ul class="muro-list">
         <li>Someone accompanied someone to an appointment.</li>
         <li>Someone listened to someone.</li>
       </ul>
@@ -370,7 +370,7 @@
         Las líneas abajo describen intercambios reales entre personas.
         No muestran identidad, cantidad ni temporalidad. Muestran que Mango sucede.
       </p>
-      <ul class="muro-list" data-lang="es">
+      <ul class="muro-list">
         <li>Alguien acompañó a alguien a una cita.</li>
         <li>Alguien escuchó a alguien.</li>
       </ul>
@@ -382,7 +382,7 @@
         Les lignes ci-dessous décrivent des échanges réels entre personnes.
         Elles n’indiquent ni identité, ni quantité, ni temporalité. Elles montrent que Mango arrive.
       </p>
-      <ul class="muro-list" data-lang="fr">
+      <ul class="muro-list">
         <li>Quelqu’un a accompagné quelqu’un à un rendez-vous.</li>
         <li>Quelqu’un a écouté quelqu’un.</li>
       </ul>
@@ -394,7 +394,7 @@
         Die folgenden Zeilen beschreiben echte Austausche zwischen Menschen.
         Keine Identität, keine Menge, keine Zeitlinie. Sie zeigen: Mango passiert.
       </p>
-      <ul class="muro-list" data-lang="de">
+      <ul class="muro-list">
         <li>Jemand hat jemanden zu einem Termin begleitet.</li>
         <li>Jemand hat jemandem zugehört.</li>
       </ul>
@@ -406,7 +406,7 @@
         以下文字描述人與人之間發生過的真實交換。
         不呈現身分、不呈現數量、也不呈現時間線。它們只表示：Mango 正在發生。
       </p>
-      <ul class="muro-list" data-lang="zh-Hant">
+      <ul class="muro-list">
         <li>有人陪同某人去看診。</li>
         <li>有人傾聽了某人。</li>
       </ul>
@@ -612,8 +612,7 @@
         toastOk: "已确认这一行",
         warnNumbers: "⚠️ Mango 不计数。请尊重自己。"
       }
-    };
-
+    
     function getLang() {
       const url = new URL(window.location.href);
       const q = (url.searchParams.get("lang") || "").toLowerCase().trim();

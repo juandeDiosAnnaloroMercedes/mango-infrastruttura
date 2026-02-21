@@ -3,868 +3,730 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
-  <meta name="theme-color" content="#0b0f16" />
+  <meta name="theme-color" content="#0b0f17" />
   <title>Mango — Infrastruttura di fiducia locale</title>
 
+  <!-- Usa il tuo stile esistente -->
+  <link rel="stylesheet" href="style.css" />
+
+  <!-- Fallback minimale per garantire pagina nera “bella” anche se style.css cambia -->
   <style>
     :root{
-      --bg:#070a10;
-      --panel:#0b0f16;
-      --panel2:#0e1420;
-      --text:#e7ecff;
-      --muted:#a7b1d3;
+      --bg:#0b0f17;
+      --card:rgba(255,255,255,.06);
+      --card2:rgba(255,255,255,.04);
       --line:rgba(255,255,255,.08);
-      --chip:#121a2a;
-      --chipOn:#1d2a45;
-      --good:#29c07b;
-      --bad:#ff4d4d;
-      --warn:#ffb020;
-      --shadow: 0 10px 30px rgba(0,0,0,.45);
-      --radius:18px;
-      --radius2:22px;
-      --max:980px;
+      --txt:rgba(255,255,255,.92);
+      --muted:rgba(255,255,255,.62);
+      --muted2:rgba(255,255,255,.48);
+      --good:#25d366;
+      --warn:#ff3b30;
+      --shadow: 0 12px 40px rgba(0,0,0,.35);
+      --r:22px;
     }
-
-    *{box-sizing:border-box}
     html,body{height:100%}
     body{
       margin:0;
-      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
-      background: radial-gradient(1200px 600px at 50% -20%, rgba(78,130,255,.20), transparent 60%),
-                  radial-gradient(900px 500px at 80% 0%, rgba(255,120,0,.12), transparent 55%),
-                  var(--bg);
-      color:var(--text);
-      line-height:1.35;
+      font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,system-ui,sans-serif;
+      background:radial-gradient(1100px 600px at 30% 0%, rgba(255,255,255,.08), transparent 55%),
+                 radial-gradient(900px 700px at 90% 10%, rgba(255,200,50,.10), transparent 55%),
+                 var(--bg);
+      color:var(--txt);
+    }
+    a{color:inherit}
+    .wrap{max-width:860px;margin:0 auto;padding:18px 16px 60px}
+    .card{
+      background:linear-gradient(180deg, rgba(255,255,255,.07), rgba(255,255,255,.045));
+      border:1px solid var(--line);
+      border-radius:var(--r);
+      box-shadow:var(--shadow);
+      padding:18px;
+      margin:14px 0;
+    }
+    .top{
+      display:flex; gap:14px; align-items:center; justify-content:space-between;
+    }
+    .brand{display:flex; gap:14px; align-items:center; min-width:260px}
+    .logo{
+      width:58px;height:58px;border-radius:18px;
+      background:rgba(255,255,255,.06);
+      border:1px solid rgba(255,255,255,.10);
+      display:flex; align-items:center; justify-content:center;
+      box-shadow:inset 0 0 0 1px rgba(0,0,0,.25);
+      text-decoration:none;
+    }
+    .logo img{width:34px;height:34px;display:block}
+    .title{line-height:1.1}
+    .title .h{font-size:30px;font-weight:800;letter-spacing:.2px}
+    .title .s{font-size:18px;color:var(--muted);margin-top:4px}
+    .langs{display:flex;gap:10px;flex-wrap:wrap;justify-content:flex-end}
+    .chip{
+      padding:10px 14px;border-radius:999px;
+      border:1px solid rgba(120,160,255,.25);
+      background:rgba(0,0,0,.18);
+      color:rgba(255,255,255,.88);
+      font-weight:700;
+      text-decoration:none;
+      -webkit-tap-highlight-color: transparent;
+    }
+    .chip.active{
+      border-color:rgba(120,160,255,.55);
+      background:rgba(120,160,255,.18);
+      box-shadow:inset 0 0 0 1px rgba(120,160,255,.18);
     }
 
-    a{color:inherit}
-    .wrap{max-width:var(--max); margin:0 auto; padding:18px 14px 60px}
-    .top{
-      display:flex; align-items:center; justify-content:space-between;
-      gap:12px;
-      padding:14px 14px;
-      background:linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.03));
-      border:1px solid var(--line);
-      border-radius:var(--radius2);
-      box-shadow:var(--shadow);
-      position:sticky; top:10px; z-index:10;
-      backdrop-filter: blur(10px);
-    }
-    .brand{
-      display:flex; align-items:center; gap:12px;
-      min-width: 220px;
-    }
-    .logo{
-      width:40px;height:40px;border-radius:12px;
-      display:grid;place-items:center;
-      background:linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.03));
-      border:1px solid var(--line);
-      font-size:22px;
-    }
-    .btxt{display:flex; flex-direction:column}
-    .btxt b{font-size:18px; letter-spacing:.2px}
-    .btxt span{font-size:13px; color:var(--muted)}
-    .langs{display:flex; gap:8px; flex-wrap:wrap; justify-content:flex-end}
-    .chip{
-      border:1px solid var(--line);
-      background:var(--chip);
-      color:var(--text);
-      padding:8px 10px;
-      border-radius:999px;
-      font-weight:700;
-      font-size:13px;
-      cursor:pointer;
+    h1{font-size:52px;letter-spacing:-.8px;margin:10px 0 6px}
+    .lead{font-size:20px;color:var(--muted);line-height:1.45;margin:0 0 14px}
+    .row{display:flex;gap:12px;flex-wrap:wrap;align-items:center}
+    .btn{
+      display:inline-flex;align-items:center;justify-content:center;
+      padding:14px 18px;border-radius:18px;
+      border:1px solid rgba(255,255,255,.12);
+      background:rgba(0,0,0,.22);
+      text-decoration:none;
+      font-weight:800;
+      -webkit-tap-highlight-color: transparent;
       user-select:none;
-      transition:transform .05s ease, background .15s ease;
     }
-    .chip:active{transform:scale(.98)}
-    .chip.on{background:var(--chipOn); border-color:rgba(120,160,255,.35)}
-    .grid{display:grid; gap:14px; margin-top:14px}
-    .card{
-      background:linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.03));
-      border:1px solid var(--line);
-      border-radius:var(--radius2);
-      box-shadow:var(--shadow);
-      padding:16px;
+    .btn:active{transform:translateY(1px)}
+    .btnPrimary{
+      background:rgba(120,160,255,.22);
+      border-color:rgba(120,160,255,.35);
     }
-    .row{display:flex; gap:10px; flex-wrap:wrap; align-items:center}
-    h2{margin:0 0 8px; font-size:30px}
-    .sub{margin:0; color:var(--muted); font-size:15px}
-    .note{color:var(--muted); font-size:14px; margin-top:10px}
-    .hr{height:1px;background:var(--line); margin:14px 0}
+    .btnDanger{
+      background:rgba(255,59,48,.14);
+      border-color:rgba(255,59,48,.28);
+    }
+    .btnWide{min-width:150px}
+    .sep{height:1px;background:rgba(255,255,255,.08);margin:16px 0}
+
     textarea{
       width:100%;
-      min-height:120px;
-      resize:vertical;
-      padding:14px;
-      border-radius:16px;
-      border:1px solid var(--line);
-      background:rgba(0,0,0,.28);
-      color:var(--text);
-      font-size:16px;
-      outline:none;
-    }
-    textarea:focus{border-color:rgba(120,160,255,.45)}
-    .btn{
-      border:1px solid var(--line);
-      background:rgba(0,0,0,.20);
-      color:var(--text);
-      padding:12px 14px;
-      border-radius:16px;
-      font-weight:800;
-      font-size:15px;
-      cursor:pointer;
-      user-select:none;
-      transition:transform .05s ease, background .15s ease, opacity .15s ease;
-    }
-    .btn:active{transform:scale(.99)}
-    .btn[disabled]{opacity:.45; cursor:not-allowed}
-    .btn.primary{background:rgba(120,160,255,.15); border-color:rgba(120,160,255,.35)}
-    .btn.danger{background:rgba(255,77,77,.10); border-color:rgba(255,77,77,.25)}
-    .btn.link{background:rgba(0,0,0,.10)}
-    .pill{
-      display:inline-flex; align-items:center; gap:8px;
-      padding:10px 12px;
-      border-radius:999px;
-      border:1px solid var(--line);
-      background:rgba(0,0,0,.20);
-      color:var(--muted);
-      font-size:13px;
-      font-weight:700;
-    }
-    .muroList{display:grid; gap:10px; margin-top:12px}
-    .muroItem{
-      border:1px solid var(--line);
+      min-height:98px;
+      border-radius:20px;
+      border:1px solid rgba(255,255,255,.10);
       background:rgba(0,0,0,.18);
-      border-radius:18px;
-      padding:12px 12px;
-      display:flex; justify-content:space-between; align-items:center;
-      gap:10px;
+      color:rgba(255,255,255,.92);
+      padding:18px 16px;
+      font-size:20px;
+      outline:none;
+      resize:vertical;
+      box-shadow:inset 0 0 0 1px rgba(0,0,0,.18);
     }
-    .muroItem b{letter-spacing:.6px; opacity:.9}
-    .muroItem .mango{opacity:.9}
-    .toast{
+    textarea::placeholder{color:rgba(255,255,255,.40)}
+
+    .meta{color:var(--muted);font-size:16px;line-height:1.5}
+    .meta a{color:rgba(200,220,255,.95)}
+    .pill{
+      display:inline-flex;align-items:center;gap:10px;
+      padding:10px 14px;border-radius:999px;
+      border:1px solid rgba(255,255,255,.12);
+      background:rgba(0,0,0,.18);
+      color:rgba(255,255,255,.86);
+      font-weight:800;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    /* Toast */
+    #toast{
       position:fixed;
       left:50%;
       transform:translateX(-50%);
-      bottom:14px;
-      width:min(var(--max), calc(100% - 24px));
-      padding:12px 14px;
-      border-radius:16px;
-      border:1px solid var(--line);
-      background:rgba(0,0,0,.55);
-      backdrop-filter: blur(10px);
-      box-shadow:var(--shadow);
-      display:none;
-      align-items:center;
-      justify-content:space-between;
-      gap:10px;
+      bottom:18px;
       z-index:9999;
+      max-width:min(680px, calc(100% - 26px));
+      padding:14px 16px;
+      border-radius:16px;
+      border:1px solid rgba(255,255,255,.14);
+      background:rgba(0,0,0,.55);
+      color:rgba(255,255,255,.92);
+      backdrop-filter: blur(12px);
+      display:none;
+      box-shadow:var(--shadow);
     }
-    .toast.show{display:flex}
-    .toast.good{border-color:rgba(41,192,123,.45)}
-    .toast.bad{border-color:rgba(255,77,77,.45)}
-    .toast .msg{font-weight:900}
-    .toast .x{cursor:pointer; opacity:.85; font-weight:900}
-    .footer{
-      margin-top:14px;
-      color:var(--muted);
-      font-size:13px;
-      display:flex; flex-wrap:wrap; gap:10px; justify-content:space-between; align-items:center;
+    #toast.show{display:block}
+    #toast.good{border-color:rgba(37,211,102,.35)}
+    #toast.warn{border-color:rgba(255,59,48,.38)}
+
+    /* QR link sempre cliccabile */
+    #btnQR{pointer-events:auto !important;}
+
+    /* Muro */
+    .muroBox{
+      background:linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.035));
+      border:1px solid rgba(255,255,255,.10);
+      border-radius:20px;
+      padding:14px;
     }
-    .smallLink{opacity:.9}
-    .smallLink:hover{opacity:1}
+    .muroHead{
+      display:flex;align-items:center;justify-content:space-between;
+      padding:10px 12px;border-radius:16px;
+      border:1px solid rgba(255,255,255,.10);
+      background:rgba(0,0,0,.16);
+      margin-bottom:12px;
+      font-weight:900;
+      letter-spacing:.6px;
+    }
+    .muroList{margin:0;padding-left:20px;color:rgba(255,255,255,.86);font-size:18px;line-height:1.6}
+    .foot{margin-top:24px;color:rgba(255,255,255,.45);text-align:center}
   </style>
 </head>
 
 <body>
   <div class="wrap">
-    <header class="top">
-      <div class="brand">
-        <a class="logo" href="Bianco.html" aria-label="Bianco">🥭</a>
-        <div class="btxt">
-          <b id="tTitle">Mango</b>
-          <span id="tSubtitle">Infrastruttura di fiducia locale</span>
+
+    <!-- HEADER -->
+    <div class="card">
+      <div class="top">
+        <div class="brand">
+          <a class="logo" href="bianco.html" aria-label="Vai a Bianco">
+            <img src="assets/mango.png" alt="Mango" onerror="this.style.display='none'; this.parentElement.textContent='🥭'; this.parentElement.style.fontSize='26px';" />
+          </a>
+          <div class="title">
+            <div class="h">Mango</div>
+            <div class="s" id="subTitle">Infrastruttura di fiducia locale</div>
+          </div>
+        </div>
+
+        <div class="langs" aria-label="Lingua">
+          <a class="chip" data-lang="it" href="./?lang=it">IT</a>
+          <a class="chip" data-lang="en" href="./?lang=en">EN</a>
+          <a class="chip" data-lang="es" href="./?lang=es">ES</a>
+          <a class="chip" data-lang="fr" href="./?lang=fr">FR</a>
+          <a class="chip" data-lang="de" href="./?lang=de">DE</a>
+          <a class="chip" data-lang="zh" href="./?lang=zh">中文</a>
         </div>
       </div>
+    </div>
 
-      <div class="langs" id="langBar">
-        <button class="chip on" data-lang="it">IT</button>
-        <button class="chip" data-lang="en">EN</button>
-        <button class="chip" data-lang="es">ES</button>
-        <button class="chip" data-lang="fr">FR</button>
-        <button class="chip" data-lang="de">DE</button>
-        <button class="chip" data-lang="zh">中文</button>
+    <!-- FAI MANGO ADESSO -->
+    <div class="card" id="secDoNow">
+      <h1 id="hDoNow">Fai Mango adesso</h1>
+      <p class="lead" id="pDoNow">Scrivi una sola riga reale. Niente cifre. Niente misure. Niente equivalenze.</p>
+
+      <div class="row">
+        <!-- QR: LINK VERO (sempre funziona) -->
+        <a id="btnQR" class="btn btnWide" href="stampa-qr.html" role="button">QR</a>
+        <a id="btnFAQ" class="btn btnWide" href="faq.html" role="button">FAQ</a>
+        <!-- facoltativo: torna alla home (sei già in home, ma lo volevi in alcune pagine) -->
       </div>
-    </header>
 
-    <main class="grid">
-      <!-- FAI MANGO ADESSO -->
-      <section class="card" id="secDo">
-        <div class="row" style="justify-content:space-between; align-items:flex-start">
-          <div>
-            <h2 id="sec1Title">Fai Mango adesso</h2>
-            <p class="sub" id="sec1Text">Scrivi una sola riga reale. Niente cifre. Niente misure. Niente equivalenze.</p>
-          </div>
-          <div class="row">
-            <a class="btn link" id="btnStampaQR" href="stampa-qr.html">QR</a>
-            <a class="btn link" id="btnFAQ" href="faq.html">FAQ</a>
-          </div>
+      <div class="sep"></div>
+
+      <textarea id="riga" placeholder="Scrivi qui una riga (Shift+Invio va a capo)"></textarea>
+
+      <div class="row" style="margin-top:12px">
+        <button id="btnInvia" class="btn btnPrimary btnWide" type="button" disabled>Invia riga</button>
+        <button id="btnPulisci" class="btn btnWide" type="button">Pulisci</button>
+        <button id="btnApri" class="btn btnWide" type="button">Apri archivio</button>
+      </div>
+
+      <div class="row" style="margin-top:10px">
+        <button id="btnSvuota" class="btn btnDanger btnWide" type="button">Svuota archivio</button>
+        <div class="pill" id="countPill">Righe in archivio: 0</div>
+      </div>
+
+      <p class="meta" style="margin-top:12px" id="pNote">
+        Nota: l’archivio è locale sul tuo dispositivo (non è pubblico).
+      </p>
+
+      <p class="meta" style="margin-top:10px">
+        Email: <a href="mailto:info@mangoinfrastruttura.org">info@mangoinfrastruttura.org</a>
+      </p>
+
+      <p class="meta" style="margin-top:8px">
+        <a href="QR_MANGO_UFFICIALE.pdf">PDF QR</a> &nbsp; <a href="kit-mango.pdf">Kit (PDF)</a> &nbsp; <a href="versione-permanente.pdf">Versione permanente (PDF)</a> &nbsp; <a href="MANGO_Origine_Reale_e_Storia_Vissuta.pdf">Origine reale (PDF)</a>
+      </p>
+
+      <p class="meta" style="margin-top:6px">
+        <a href="neutralita.html">Neutralità</a> &nbsp; <a href="non-appropriazione.html">Non appropriazione</a> &nbsp; <a href="statuto-permanente.html">Statuto permanente</a> &nbsp; <a href="primo-scambio.html">Primo scambio</a>
+      </p>
+    </div>
+
+    <!-- COS'È MANGO (senza documento fondativo) -->
+    <div class="card" id="secWhat">
+      <h2 style="margin:0 0 8px;font-size:42px;letter-spacing:-.6px" id="hWhat">Cos’è Mango</h2>
+      <p class="lead" id="pWhat">
+        Mango è un’infrastruttura di fiducia locale non monetaria, non appropriabile, progettata per evitare accumulo, speculazione e cattura istituzionale.
+        Creato da Juan de Dios Annaloro Mercedes in memoria di Larimar.
+      </p>
+      <div class="row">
+        <a class="btn btnWide" href="licenza.html" id="btnLicenza">Licenza</a>
+        <a class="btn btnWide" href="stampa-qr.html" id="btnStampa">Stampa QR</a>
+      </div>
+    </div>
+
+    <!-- MURO MANGO (solo lingua attiva: 7 righe) -->
+    <div class="card" id="secMuro">
+      <h2 style="margin:0 0 8px;font-size:42px;letter-spacing:-.6px" id="hMuro">Muro Mango</h2>
+      <p class="lead" id="pMuro">
+        Sette righe anonime per lingua, scelte a caso a ogni visita. Senza identità, senza date, senza archivio consultabile.
+      </p>
+
+      <div class="muroBox">
+        <div class="muroHead">
+          <span id="muroLangLabel">IT</span>
+          <span>🥭</span>
         </div>
+        <ul class="muroList" id="muroList"></ul>
+      </div>
+    </div>
 
-        <div class="hr"></div>
-
-        <textarea id="riga" placeholder="Scrivi qui una riga (Shift+Invio va a capo)"></textarea>
-
-        <div class="row" style="margin-top:10px">
-          <button class="btn primary" id="btnInvia" disabled>Invia riga</button>
-          <button class="btn" id="btnPulisci">Pulisci</button>
-          <button class="btn" id="btnApriArchivio">Apri archivio</button>
-          <button class="btn danger" id="btnSvuotaArchivio">Svuota archivio</button>
-          <span class="pill" id="countPill">Righe in archivio: 0</span>
-        </div>
-
-        <p class="note" id="sec1Note">Nota: l’archivio è locale sul tuo dispositivo (non è pubblico).</p>
-
-        <div class="footer">
-          <div>
-            <span id="emailLabel">Email:</span>
-            <a class="smallLink" id="emailLink" href="mailto:info@mangoinfrastruttura.org">info@mangoinfrastruttura.org</a>
-          </div>
-          <div class="row" style="gap:8px">
-            <a class="smallLink" id="btnQRpdf" href="QR_MANGO_UFFICIALE.pdf">PDF QR</a>
-            <a class="smallLink" id="btnKitPdf" href="kit-mango.pdf">Kit (PDF)</a>
-            <a class="smallLink" id="btnVersPdf" href="versione-permanente.pdf">Versione permanente (PDF)</a>
-          </div>
-        </div>
-      </section>
-
-      <!-- COS'È -->
-      <section class="card" id="secWhat">
-        <h2 id="sec2Title">Cos’è Mango</h2>
-        <p class="sub" id="sec2Text">
-          Mango è un’infrastruttura di fiducia locale non monetaria, non appropriabile, progettata per evitare accumulo,
-          speculazione e cattura istituzionale. Creato da Juan de Dios Annaloro Mercedes in memoria di Larimar.
-        </p>
-
-        <div class="hr"></div>
-
-        <div class="row">
-          <a class="btn link" id="btnFondativo" href="#" target="_blank" rel="noopener">Leggi il documento fondativo</a>
-          <a class="btn link" id="btnOrigine" href="#" target="_blank" rel="noopener">Origine reale e storia vissuta</a>
-          <a class="btn link" id="btnNeutralita" href="neutralita.html">Neutralità</a>
-          <a class="btn link" id="btnNonApp" href="non-appropriazione.html">Non appropriazione</a>
-          <a class="btn link" id="btnStatuto" href="statuto-permanente.html">Statuto permanente</a>
-        </div>
-
-        <p class="note" id="pdfNote">
-          Se un pulsante PDF non si apre, è quasi sempre perché il nome del file non coincide: vedi le variabili PDF in alto nel JS.
-        </p>
-      </section>
-
-      <!-- MURO -->
-      <section class="card" id="secWall">
-        <h2 id="sec3Title">Muro Mango</h2>
-        <p class="sub" id="sec3Text">Sette righe anonime per lingua, scelte a caso a ogni visita. Senza identità, senza date, senza archivio consultabile.</p>
-
-        <div class="muroList" id="muroList"></div>
-
-        <p class="note" id="wallNote">Il muro non mostra il tuo archivio. È una selezione anonima locale.</p>
-      </section>
-    </main>
+    <div class="foot" id="footBirth">Mango — nato il 02 febbraio 2026</div>
   </div>
 
-  <div class="toast" id="toast">
-    <div class="msg" id="toastMsg"></div>
-    <div class="x" id="toastX">✕</div>
-  </div>
+  <!-- Toast -->
+  <div id="toast"></div>
 
   <script>
-    /* ============================================================
-      ✅ CONFIG PDF (ANTI-404)
-      Incolla QUI i nomi file ESATTI (copiati da GitHub).
-      Quelli con "..." su GitHub devono essere scritti completi.
-    ============================================================ */
-    const PDF = {
-      // ESEMPIO: "Mango_Documento_Fondativo_....pdf"
-      fondativo: "Mango_Documento_Fondativo.pdf",
-      origine:   "MANGO_Origine_Reale_e_Storia_Vissuta.pdf"
-    };
-
-    /* ============================================================
-      🌍 LINGUE + TESTI
-    ============================================================ */
+    // ---------------------------
+    // Lingue
+    // ---------------------------
     const STR = {
-      it: {
-        title: "Mango",
-        subtitle: "Infrastruttura di fiducia locale",
-        sec1Title: "Fai Mango adesso",
-        sec1Text: "Scrivi una sola riga reale. Niente cifre. Niente misure. Niente equivalenze.",
-        sec1Note: "Nota: l’archivio è locale sul tuo dispositivo (non è pubblico).",
-        sec2Title: "Cos’è Mango",
-        sec2Text: "Mango è un’infrastruttura di fiducia locale non monetaria, non appropriabile, progettata per evitare accumulo, speculazione e cattura istituzionale. Creato da Juan de Dios Annaloro Mercedes in memoria di Larimar.",
-        sec3Title: "Muro Mango",
-        sec3Text: "Sette righe anonime per lingua, scelte a caso a ogni visita. Senza identità, senza date, senza archivio consultabile.",
-        wallNote: "Il muro non mostra il tuo archivio. È una selezione anonima locale.",
-        ph: "Scrivi qui una riga (Shift+Invio va a capo)",
-        send: "Invia riga",
-        clear: "Pulisci",
-        openA: "Apri archivio",
-        wipeA: "Svuota archivio",
-        count: "Righe in archivio:",
-        emailLabel: "Email:",
-        faq: "FAQ",
-        qr: "QR",
-        pdfQR: "PDF QR",
-        kit: "Kit (PDF)",
-        vers: "Versione permanente (PDF)",
-        fond: "Leggi il documento fondativo",
-        origine: "Origine reale e storia vissuta",
-        neutralita: "Neutralità",
-        nonapp: "Non appropriazione",
-        statuto: "Statuto permanente",
-        ok: "Riga riconosciuta.",
-        warnNum: "Rispetta te stesso e gli altri: Mango non si conta.",
-        empty: "Scrivi una riga reale prima di inviare.",
-        wiped: "Archivio svuotato.",
-        cleared: "Campo pulito.",
-        confirmWipe: "Vuoi svuotare l’archivio locale? (azione irreversibile)"
+      it:{
+        sub:"Infrastruttura di fiducia locale",
+        doNowH:"Fai Mango adesso",
+        doNowP:"Scrivi una sola riga reale. Niente cifre. Niente misure. Niente equivalenze.",
+        ph:"Scrivi qui una riga (Shift+Invio va a capo)",
+        invia:"Invia riga",
+        pulisci:"Pulisci",
+        apri:"Apri archivio",
+        svuota:"Svuota archivio",
+        count:(n)=>`Righe in archivio: ${n}`,
+        note:"Nota: l’archivio è locale sul tuo dispositivo (non è pubblico).",
+        ok:"Riga riconosciuta.",
+        warn:"Rispetta te stesso e gli altri: Mango non si conta.",
+        empty:"Scrivi una riga reale prima di inviare.",
+        confirmWipe:"Vuoi davvero svuotare l’archivio locale?",
+        wiped:"Archivio svuotato.",
+        whatH:"Cos’è Mango",
+        whatP:"Mango è un’infrastruttura di fiducia locale non monetaria, non appropriabile, progettata per evitare accumulo, speculazione e cattura istituzionale. Creato da Juan de Dios Annaloro Mercedes in memoria di Larimar.",
+        muroH:"Muro Mango",
+        muroP:"Sette righe anonime per lingua, scelte a caso a ogni visita. Senza identità, senza date, senza archivio consultabile.",
+        lic:"Licenza",
+        stampa:"Stampa QR",
+        born:"Mango — nato il 02 febbraio 2026"
       },
-      en: {
-        title: "Mango",
-        subtitle: "Local trust infrastructure",
-        sec1Title: "Do Mango now",
-        sec1Text: "Write one real line. No numbers. No measures. No equivalences.",
-        sec1Note: "Note: the archive is local on your device (not public).",
-        sec2Title: "What is Mango",
-        sec2Text: "Mango is a non-monetary, non-appropriable local trust infrastructure designed to avoid accumulation, speculation and institutional capture. Created by Juan de Dios Annaloro Mercedes in memory of Larimar.",
-        sec3Title: "Mango Wall",
-        sec3Text: "Seven anonymous lines per language, randomly chosen on each visit. No identity, no dates, no browsable archive.",
-        wallNote: "The wall does not show your archive. It is an anonymous local selection.",
-        ph: "Write one line here (Shift+Enter for a new line)",
-        send: "Send line",
-        clear: "Clear",
-        openA: "Open archive",
-        wipeA: "Wipe archive",
-        count: "Lines in archive:",
-        emailLabel: "Email:",
-        faq: "FAQ",
-        qr: "QR",
-        pdfQR: "QR PDF",
-        kit: "Kit (PDF)",
-        vers: "Permanent version (PDF)",
-        fond: "Read the founding document",
-        origine: "Real origin and lived story",
-        neutralita: "Neutrality",
-        nonapp: "Non-appropriation",
-        statuto: "Permanent statute",
-        ok: "Line recognized.",
-        warnNum: "Respect yourself and others: Mango is not counted.",
-        empty: "Write a real line before sending.",
-        wiped: "Archive wiped.",
-        cleared: "Field cleared.",
-        confirmWipe: "Wipe the local archive? (irreversible)"
+      en:{
+        sub:"Local trust infrastructure",
+        doNowH:"Do Mango now",
+        doNowP:"Write one real line. No numbers. No measures. No equivalences.",
+        ph:"Write one line here (Shift+Enter for a new line)",
+        invia:"Send line",
+        pulisci:"Clear",
+        apri:"Open archive",
+        svuota:"Wipe archive",
+        count:(n)=>`Lines in archive: ${n}`,
+        note:"Note: the archive is local on your device (not public).",
+        ok:"Line recognized.",
+        warn:"Respect yourself and others: Mango is not counted.",
+        empty:"Write a real line before sending.",
+        confirmWipe:"Do you really want to wipe the local archive?",
+        wiped:"Archive wiped.",
+        whatH:"What is Mango",
+        whatP:"Mango is a non-monetary, non-appropriable local trust infrastructure designed to prevent accumulation, speculation, and institutional capture. Created by Juan de Dios Annaloro Mercedes in memory of Larimar.",
+        muroH:"Mango Wall",
+        muroP:"Seven anonymous lines per language, chosen randomly on each visit. No identities, no dates, no browsable archive.",
+        lic:"License",
+        stampa:"Print QR",
+        born:"Mango — born on 02 February 2026"
       },
-      es: {
-        title: "Mango",
-        subtitle: "Infraestructura de confianza local",
-        sec1Title: "Haz Mango ahora",
-        sec1Text: "Escribe una sola línea real. Sin números. Sin medidas. Sin equivalencias.",
-        sec1Note: "Nota: el archivo es local en tu dispositivo (no es público).",
-        sec2Title: "Qué es Mango",
-        sec2Text: "Mango es una infraestructura local de confianza no monetaria, no apropiable, diseñada para evitar acumulación, especulación y captura institucional. Creado por Juan de Dios Annaloro Mercedes en memoria de Larimar.",
-        sec3Title: "Muro Mango",
-        sec3Text: "Siete líneas anónimas por idioma, elegidas al azar en cada visita. Sin identidad, sin fechas, sin archivo consultable.",
-        wallNote: "El muro no muestra tu archivo. Es una selección anónima local.",
-        ph: "Escribe aquí una línea (Shift+Enter para salto de línea)",
-        send: "Enviar línea",
-        clear: "Limpiar",
-        openA: "Abrir archivo",
-        wipeA: "Vaciar archivo",
-        count: "Líneas en archivo:",
-        emailLabel: "Email:",
-        faq: "FAQ",
-        qr: "QR",
-        pdfQR: "QR PDF",
-        kit: "Kit (PDF)",
-        vers: "Versión permanente (PDF)",
-        fond: "Leer el documento fundacional",
-        origine: "Origen real e historia vivida",
-        neutralita: "Neutralidad",
-        nonapp: "No apropiación",
-        statuto: "Estatuto permanente",
-        ok: "Línea reconocida.",
-        warnNum: "Respétate a ti y a los demás: Mango no se cuenta.",
-        empty: "Escribe una línea real antes de enviar.",
-        wiped: "Archivo vaciado.",
-        cleared: "Campo limpiado.",
-        confirmWipe: "¿Vaciar el archivo local? (irreversible)"
+      es:{
+        sub:"Infraestructura de confianza local",
+        doNowH:"Haz Mango ahora",
+        doNowP:"Escribe una sola línea real. Sin cifras. Sin medidas. Sin equivalencias.",
+        ph:"Escribe aquí una línea (Shift+Enter para saltar de línea)",
+        invia:"Enviar línea",
+        pulisci:"Limpiar",
+        apri:"Abrir archivo",
+        svuota:"Vaciar archivo",
+        count:(n)=>`Líneas en archivo: ${n}`,
+        note:"Nota: el archivo es local en tu dispositivo (no es público).",
+        ok:"Línea reconocida.",
+        warn:"Respétate a ti y a los demás: Mango no se cuenta.",
+        empty:"Escribe una línea real antes de enviar.",
+        confirmWipe:"¿Seguro que quieres vaciar el archivo local?",
+        wiped:"Archivo vaciado.",
+        whatH:"Qué es Mango",
+        whatP:"Mango es una infraestructura local de confianza no monetaria, no apropiable, diseñada para evitar acumulación, especulación y captura institucional. Creado por Juan de Dios Annaloro Mercedes en memoria de Larimar.",
+        muroH:"Muro Mango",
+        muroP:"Siete líneas anónimas por idioma, elegidas al azar en cada visita. Sin identidades, sin fechas, sin archivo consultable.",
+        lic:"Licencia",
+        stampa:"Imprimir QR",
+        born:"Mango — nacido el 02 de febrero de 2026"
       },
-      fr: {
-        title: "Mango",
-        subtitle: "Infrastructure de confiance locale",
-        sec1Title: "Fais Mango maintenant",
-        sec1Text: "Écris une seule ligne réelle. Pas de chiffres. Pas de mesures. Pas d’équivalences.",
-        sec1Note: "Note : l’archive est locale sur ton appareil (non publique).",
-        sec2Title: "Qu’est-ce que Mango",
-        sec2Text: "Mango est une infrastructure de confiance locale non monétaire, non appropriable, conçue pour éviter l’accumulation, la spéculation et la capture institutionnelle. Créé par Juan de Dios Annaloro Mercedes en mémoire de Larimar.",
-        sec3Title: "Mur Mango",
-        sec3Text: "Sept lignes anonymes par langue, tirées au hasard à chaque visite. Sans identité, sans dates, sans archive consultable.",
-        wallNote: "Le mur n’affiche pas ton archive. C’est une sélection anonyme locale.",
-        ph: "Écris une ligne ici (Maj+Entrée pour aller à la ligne)",
-        send: "Envoyer la ligne",
-        clear: "Effacer",
-        openA: "Ouvrir l’archive",
-        wipeA: "Vider l’archive",
-        count: "Lignes dans l’archive :",
-        emailLabel: "Email :",
-        faq: "FAQ",
-        qr: "QR",
-        pdfQR: "QR PDF",
-        kit: "Kit (PDF)",
-        vers: "Version permanente (PDF)",
-        fond: "Lire le document fondateur",
-        origine: "Origine réelle et histoire vécue",
-        neutralita: "Neutralité",
-        nonapp: "Non-appropriation",
-        statuto: "Statut permanent",
-        ok: "Ligne reconnue.",
-        warnNum: "Respecte-toi et les autres : Mango ne se compte pas.",
-        empty: "Écris une ligne réelle avant d’envoyer.",
-        wiped: "Archive vidée.",
-        cleared: "Champ effacé.",
-        confirmWipe: "Vider l’archive locale ? (irréversible)"
+      fr:{
+        sub:"Infrastructure de confiance locale",
+        doNowH:"Fais Mango maintenant",
+        doNowP:"Écris une seule ligne réelle. Pas de chiffres. Pas de mesures. Pas d’équivalences.",
+        ph:"Écris ici une ligne (Shift+Entrée pour aller à la ligne)",
+        invia:"Envoyer la ligne",
+        pulisci:"Effacer",
+        apri:"Ouvrir l’archive",
+        svuota:"Vider l’archive",
+        count:(n)=>`Lignes en archive : ${n}`,
+        note:"Note : l’archive est locale sur ton appareil (non publique).",
+        ok:"Ligne reconnue.",
+        warn:"Respecte-toi et respecte les autres : Mango ne se compte pas.",
+        empty:"Écris une ligne réelle avant d’envoyer.",
+        confirmWipe:"Veux-tu vraiment vider l’archive locale ?",
+        wiped:"Archive vidée.",
+        whatH:"Qu’est-ce que Mango",
+        whatP:"Mango est une infrastructure de confiance locale non monétaire, non appropriable, conçue pour éviter l’accumulation, la spéculation et la capture institutionnelle. Créé par Juan de Dios Annaloro Mercedes en mémoire de Larimar.",
+        muroH:"Mur Mango",
+        muroP:"Sept lignes anonymes par langue, choisies au hasard à chaque visite. Sans identités, sans dates, sans archive consultable.",
+        lic:"Licence",
+        stampa:"Imprimer QR",
+        born:"Mango — né le 02 février 2026"
       },
-      de: {
-        title: "Mango",
-        subtitle: "Lokale Vertrauens-Infrastruktur",
-        sec1Title: "Mach Mango jetzt",
-        sec1Text: "Schreibe eine echte Zeile. Keine Zahlen. Keine Maße. Keine Äquivalenzen.",
-        sec1Note: "Hinweis: Das Archiv ist lokal auf deinem Gerät (nicht öffentlich).",
-        sec2Title: "Was ist Mango",
-        sec2Text: "Mango ist eine nicht-monetäre, nicht-aneignbare lokale Vertrauens-Infrastruktur, entworfen um Akkumulation, Spekulation und institutionelle Vereinnahmung zu vermeiden. Erschaffen von Juan de Dios Annaloro Mercedes zum Gedenken an Larimar.",
-        sec3Title: "Mango-Mauer",
-        sec3Text: "Sieben anonyme Zeilen pro Sprache, bei jedem Besuch zufällig gewählt. Keine Identität, keine Daten, kein durchsuchbares Archiv.",
-        wallNote: "Die Mauer zeigt nicht dein Archiv. Es ist eine anonyme lokale Auswahl.",
-        ph: "Schreibe hier eine Zeile (Shift+Enter für Zeilenumbruch)",
-        send: "Zeile senden",
-        clear: "Leeren",
-        openA: "Archiv öffnen",
-        wipeA: "Archiv löschen",
-        count: "Zeilen im Archiv:",
-        emailLabel: "E-Mail:",
-        faq: "FAQ",
-        qr: "QR",
-        pdfQR: "QR PDF",
-        kit: "Kit (PDF)",
-        vers: "Permanente Version (PDF)",
-        fond: "Gründungsdokument lesen",
-        origine: "Realer Ursprung & gelebte Geschichte",
-        neutralita: "Neutralität",
-        nonapp: "Nicht-Aneignung",
-        statuto: "Permanentes Statut",
-        ok: "Zeile erkannt.",
-        warnNum: "Respektiere dich und andere: Mango wird nicht gezählt.",
-        empty: "Schreibe zuerst eine echte Zeile.",
-        wiped: "Archiv gelöscht.",
-        cleared: "Feld geleert.",
-        confirmWipe: "Lokales Archiv löschen? (irreversibel)"
+      de:{
+        sub:"Lokale Vertrauens-Infrastruktur",
+        doNowH:"Mach Mango jetzt",
+        doNowP:"Schreibe eine echte Zeile. Keine Zahlen. Keine Maße. Keine Äquivalenzen.",
+        ph:"Schreibe hier eine Zeile (Shift+Enter für Zeilenumbruch)",
+        invia:"Zeile senden",
+        pulisci:"Leeren",
+        apri:"Archiv öffnen",
+        svuota:"Archiv löschen",
+        count:(n)=>`Zeilen im Archiv: ${n}`,
+        note:"Hinweis: Das Archiv ist lokal auf deinem Gerät (nicht öffentlich).",
+        ok:"Zeile erkannt.",
+        warn:"Respektiere dich und andere: Mango wird nicht gezählt.",
+        empty:"Schreibe eine echte Zeile, bevor du sendest.",
+        confirmWipe:"Willst du das lokale Archiv wirklich löschen?",
+        wiped:"Archiv gelöscht.",
+        whatH:"Was ist Mango",
+        whatP:"Mango ist eine nicht-monetäre, nicht-aneignbare lokale Vertrauens-Infrastruktur, die Akkumulation, Spekulation und institutionelle Vereinnahmung verhindert. Erschaffen von Juan de Dios Annaloro Mercedes im Gedenken an Larimar.",
+        muroH:"Mango-Mauer",
+        muroP:"Sieben anonyme Zeilen pro Sprache, bei jedem Besuch zufällig ausgewählt. Keine Identitäten, keine Daten, kein durchsuchbares Archiv.",
+        lic:"Lizenz",
+        stampa:"QR drucken",
+        born:"Mango — geboren am 02. Februar 2026"
       },
-      zh: {
-        title: "Mango",
-        subtitle: "本地信任基础设施",
-        sec1Title: "现在开始 Mango",
-        sec1Text: "写一行真实发生的事。不写数字。不写度量。不做等价换算。",
-        sec1Note: "说明：存档只保存在你的设备上（不公开）。",
-        sec2Title: "什么是 Mango",
-        sec2Text: "Mango 是一种非货币、不可占有的本地信任基础设施，用来避免积累、投机与制度性捕获。由 Juan de Dios Annaloro Mercedes 创建，以纪念 Larimar。",
-        sec3Title: "Mango 墙",
-        sec3Text: "每种语言显示 7 行匿名文字，每次访问随机选择。无身份、无日期、不可浏览存档。",
-        wallNote: "墙不会显示你的个人存档，它是匿名的本地随机展示。",
-        ph: "在此写一行（Shift+Enter 换行）",
-        send: "提交",
-        clear: "清空",
-        openA: "打开存档",
-        wipeA: "清空存档",
-        count: "存档行数：",
-        emailLabel: "邮箱：",
-        faq: "FAQ",
-        qr: "QR",
-        pdfQR: "QR PDF",
-        kit: "Kit（PDF）",
-        vers: "永久版本（PDF）",
-        fond: "阅读奠基文件",
-        origine: "真实起源与亲历故事",
-        neutralita: "中立性",
-        nonapp: "不可占有",
-        statuto: "永久章程",
-        ok: "已识别这一行。",
-        warnNum: "尊重自己与他人：Mango 不可被计数。",
-        empty: "提交前请先写一行真实内容。",
-        wiped: "存档已清空。",
-        cleared: "已清空输入框。",
-        confirmWipe: "确定清空本地存档？（不可恢复）"
+      zh:{
+        sub:"本地信任基础设施",
+        doNowH:"现在就做 Mango",
+        doNowP:"写一条真实的一行。不要数字。不要度量。不要等价换算。",
+        ph:"在这里写一行（Shift+Enter 换行）",
+        invia:"提交",
+        pulisci:"清空输入",
+        apri:"打开存档",
+        svuota:"清空存档",
+        count:(n)=>`存档行数：${n}`,
+        note:"说明：存档只保存在你的设备上（不公开）。",
+        ok:"已识别为一行。",
+        warn:"尊重自己和他人：Mango 不能被计数。",
+        empty:"提交前请先写一条真实的一行。",
+        confirmWipe:"确定要清空本地存档吗？",
+        wiped:"存档已清空。",
+        whatH:"什么是 Mango",
+        whatP:"Mango 是一种非货币、不可占有的本地信任基础设施，用来避免积累、投机与制度性捕获。由 Juan de Dios Annaloro Mercedes 创建，以纪念 Larimar。",
+        muroH:"Mango 墙",
+        muroP:"每种语言展示 7 条匿名句子，每次访问随机出现。不含身份、不含日期、不可浏览存档。",
+        lic:"许可",
+        stampa:"打印二维码",
+        born:"Mango — 诞生于 2026年2月2日"
       }
     };
 
-    /* ============================================================
-      🧱 MURO — 7 righe per lingua (solo lingua corrente)
-      Puoi cambiarle quando vuoi.
-    ============================================================ */
     const MURO = {
-      it: [
-        "Ho aiutato a portare la spesa e mi hanno insegnato una ricetta.",
-        "Ho riparato una sedia e mi hanno prestato un libro.",
-        "Ho ascoltato davvero e mi hanno dato un passaggio.",
-        "Ho annaffiato le piante e mi hanno offerto un caffè.",
-        "Ho tradotto un testo e mi hanno aiutato con una telefonata.",
-        "Ho sistemato un cavo e mi hanno dato un consiglio.",
-        "Ho accompagnato qualcuno e mi hanno regalato del tempo."
+      it:[
+        "Qualcuno ha portato qualcosa a qualcuno che non poteva uscire.",
+        "Qualcuno ha insegnato qualcosa di difficile a qualcuno.",
+        "Qualcuno ha aiutato qualcuno a fare ordine.",
+        "Qualcuno ha prestato ascolto a qualcuno.",
+        "Qualcuno ha fatto compagnia a qualcuno.",
+        "Qualcuno ha tradotto un documento per qualcuno.",
+        "Qualcuno ha fatto una telefonata importante per qualcuno.",
+        "Qualcuno ha accompagnato qualcuno a una visita.",
+        "Qualcuno ha riparato qualcosa per qualcuno."
       ],
-      en: [
-        "I carried groceries and they taught me a recipe.",
-        "I fixed a chair and they lent me a book.",
-        "I truly listened and they gave me a ride.",
-        "I watered plants and they offered me coffee.",
-        "I translated a text and they helped with a call.",
-        "I untangled a cable and they gave me advice.",
-        "I accompanied someone and they gave me time."
+      en:[
+        "Someone made an important phone call for someone.",
+        "Someone cooked for someone.",
+        "Someone translated a document for someone.",
+        "Someone brought something to someone who couldn't go out.",
+        "Someone taught something difficult to someone.",
+        "Someone kept someone company.",
+        "Someone accompanied someone to an appointment.",
+        "Someone listened to someone.",
+        "Someone helped someone get organized."
       ],
-      es: [
-        "Ayudé con la compra y me enseñaron una receta.",
-        "Arreglé una silla y me prestaron un libro.",
-        "Escuché de verdad y me dieron un aventón.",
-        "Regué las plantas y me ofrecieron café.",
-        "Traduje un texto y me ayudaron con una llamada.",
-        "Arreglé un cable y me dieron un consejo.",
-        "Acompañé a alguien y me dieron tiempo."
+      es:[
+        "Alguien acompañó a alguien a una cita.",
+        "Alguien cocinó para alguien.",
+        "Alguien tradujo un documento para alguien.",
+        "Alguien escuchó a alguien.",
+        "Alguien acompañó a alguien con su presencia.",
+        "Alguien hizo una llamada importante por alguien.",
+        "Alguien llevó algo a alguien que no podía salir.",
+        "Alguien enseñó algo difícil a alguien.",
+        "Alguien ayudó a alguien a ordenar."
       ],
-      fr: [
-        "J’ai porté des courses et on m’a appris une recette.",
-        "J’ai réparé une chaise et on m’a prêté un livre.",
-        "J’ai vraiment écouté et on m’a conduit.",
-        "J’ai arrosé des plantes et on m’a offert un café.",
-        "J’ai traduit un texte et on m’a aidé pour un appel.",
-        "J’ai arrangé un câble et on m’a donné un conseil.",
-        "J’ai accompagné quelqu’un et on m’a donné du temps."
+      fr:[
+        "Quelqu’un a enseigné quelque chose de difficile à quelqu’un.",
+        "Quelqu’un a passé un appel important pour quelqu’un.",
+        "Quelqu’un a tenu compagnie à quelqu’un.",
+        "Quelqu’un a donné un trajet à quelqu’un.",
+        "Quelqu’un a aidé quelqu’un à s’organiser.",
+        "Quelqu’un a cuisiné pour quelqu’un.",
+        "Quelqu’un a accompagné quelqu’un à un rendez-vous.",
+        "Quelqu’un a écouté quelqu’un.",
+        "Quelqu’un a traduit un document pour quelqu’un."
       ],
-      de: [
-        "Ich trug Einkäufe und man zeigte mir ein Rezept.",
-        "Ich reparierte einen Stuhl und bekam ein Buch geliehen.",
-        "Ich hörte wirklich zu und bekam eine Mitfahrt.",
-        "Ich goss Pflanzen und bekam einen Kaffee.",
-        "Ich übersetzte einen Text und bekam Hilfe bei einem Anruf.",
-        "Ich ordnete ein Kabel und bekam einen Tipp.",
-        "Ich begleitete jemanden und bekam Zeit geschenkt."
+      de:[
+        "Jemand hat jemanden gefahren.",
+        "Jemand hat jemandem zugehört.",
+        "Jemand hat etwas für jemanden repariert.",
+        "Jemand hat jemandem etwas gebracht, der nicht raus konnte.",
+        "Jemand hat für jemanden gekocht.",
+        "Jemand hat ein Dokument für jemanden übersetzt.",
+        "Jemand hat jemanden zu einem Termin begleitet.",
+        "Jemand hat einen wichtigen Anruf für jemanden gemacht.",
+        "Jemand hat jemandem geholfen, Ordnung zu schaffen."
       ],
-      zh: [
-        "我帮忙提菜，他们教我一道菜。",
-        "我修好椅子，他们借我一本书。",
-        "我认真倾听，他们顺路载我一程。",
-        "我浇花，他们请我喝咖啡。",
-        "我帮忙翻译，他们帮我打电话。",
-        "我整理电线，他们给我一个建议。",
-        "我陪伴同行，他们给我一些时间。"
+      zh:[
+        "有人替某人打了一个重要电话。",
+        "有人为某人做了一顿饭。",
+        "有人替某人翻译了一份文件。",
+        "有人把东西送给无法外出的某人。",
+        "有人教会某人一件困难的事。",
+        "有人陪伴了某人。",
+        "有人陪某人去了一次约诊。",
+        "有人倾听了某人。",
+        "有人帮某人整理了东西。"
       ]
     };
 
-    /* ============================================================
-      🗃️ ARCHIVIO LOCALE (per lingua)
-    ============================================================ */
-    const STORAGE_KEY = "MANGO_ARCHIVE_UNICO_V2";
+    function getLang(){
+      const u = new URL(location.href);
+      const q = (u.searchParams.get("lang") || "").toLowerCase();
+      if (STR[q]) return q;
+      return "it";
+    }
+
+    function applyLang(lang){
+      document.documentElement.lang = lang === "zh" ? "zh-Hant" : lang;
+      const s = STR[lang];
+
+      // attiva chip
+      document.querySelectorAll(".chip").forEach(a=>{
+        a.classList.toggle("active", a.dataset.lang === lang);
+      });
+
+      // testi UI
+      document.getElementById("subTitle").textContent = s.sub;
+      document.getElementById("hDoNow").textContent = s.doNowH;
+      document.getElementById("pDoNow").textContent = s.doNowP;
+      document.getElementById("riga").placeholder = s.ph;
+
+      document.getElementById("btnInvia").textContent = s.invia;
+      document.getElementById("btnPulisci").textContent = s.pulisci;
+      document.getElementById("btnApri").textContent = s.apri;
+      document.getElementById("btnSvuota").textContent = s.svuota;
+      document.getElementById("pNote").textContent = s.note;
+
+      document.getElementById("hWhat").textContent = s.whatH;
+      document.getElementById("pWhat").textContent = s.whatP;
+      document.getElementById("hMuro").textContent = s.muroH;
+      document.getElementById("pMuro").textContent = s.muroP;
+
+      document.getElementById("btnLicenza").textContent = s.lic;
+      document.getElementById("btnStampa").textContent = s.stampa;
+
+      document.getElementById("footBirth").textContent = s.born;
+
+      // muro
+      renderMuro(lang);
+
+      // conteggio
+      updateCount(lang);
+    }
+
+    function shuffle(arr){
+      const a = arr.slice();
+      for (let i=a.length-1;i>0;i--){
+        const j = Math.floor(Math.random()*(i+1));
+        [a[i],a[j]]=[a[j],a[i]];
+      }
+      return a;
+    }
+
+    function renderMuro(lang){
+      const label = (lang==="zh") ? "中文" : lang.toUpperCase();
+      document.getElementById("muroLangLabel").textContent = label;
+
+      const list = document.getElementById("muroList");
+      list.innerHTML = "";
+
+      const pool = MURO[lang] || MURO.it;
+      const picks = shuffle(pool).slice(0,7);
+      picks.forEach(t=>{
+        const li = document.createElement("li");
+        li.textContent = t;
+        list.appendChild(li);
+      });
+    }
+
+    // ---------------------------
+    // Registro locale (unico)
+    // ---------------------------
+    const STORAGE_KEY = "MANGO_REGISTRO_UNICO_V2";
 
     function safeParse(raw){
       try { return JSON.parse(raw); } catch { return null; }
     }
-    function getLang(){
-      const url = new URL(location.href);
-      const q = (url.searchParams.get("lang") || "").toLowerCase();
-      if (q && STR[q]) return q;
-      const saved = localStorage.getItem("MANGO_LANG");
-      if (saved && STR[saved]) return saved;
-      return "it";
+    function normalizeText(t){
+      if (!t) return "";
+      return String(t).trim().replace(/\s+/g," ");
     }
-    function setLang(lang){
-      localStorage.setItem("MANGO_LANG", lang);
-      const url = new URL(location.href);
-      url.searchParams.set("lang", lang);
-      history.replaceState({}, "", url.toString());
-    }
-
-    function readAll(){
+    function readArchive(){
       const raw = localStorage.getItem(STORAGE_KEY);
       const parsed = safeParse(raw);
-      if (!parsed || typeof parsed !== "object") return {};
-      return parsed;
+      if (!Array.isArray(parsed)) return [];
+      // array di stringhe
+      return parsed.map(x=>normalizeText(x)).filter(Boolean);
     }
-    function writeAll(obj){
-      localStorage.setItem(STORAGE_KEY, JSON.stringify(obj));
+    function writeArchive(arr){
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(arr));
     }
-    function readArchive(lang){
-      const all = readAll();
-      const arr = Array.isArray(all[lang]) ? all[lang] : [];
-      // normalizza: solo stringhe
-      return arr.filter(x => typeof x === "string" && x.trim().length);
-    }
-    function writeArchive(lang, arr){
-      const all = readAll();
-      all[lang] = arr;
-      writeAll(all);
-    }
-
-    /* ============================================================
-      🚦 VALIDAZIONE MANGO (blocca numeri/valore/misure)
-      - Numeri: 0-9
-      - Simboli che spesso indicano conteggio/valore/misura: + = < > % € $ £ ¥ # @
-    ============================================================ */
-    function isCountingLike(text){
-      if (/[0-9]/.test(text)) return true;
-      if (/[€$£¥%+=<>#@]/.test(text)) return true;
-      return false;
-    }
-    function normalizeText(t){
-      return (t || "").replace(/\s+/g, " ").trim();
+    function dedup(arr){
+      const seen = new Set();
+      const out = [];
+      for (const t of arr){
+        const k = t.toLowerCase();
+        if (seen.has(k)) continue;
+        seen.add(k);
+        out.push(t);
+      }
+      return out;
     }
 
-    /* ============================================================
-      ✅ TOAST
-    ============================================================ */
-    let toastTimer = null;
-    function showToast(type, msg){
+    function showToast(type, lang, msg){
       const t = document.getElementById("toast");
-      const m = document.getElementById("toastMsg");
-      t.classList.remove("good","bad");
-      t.classList.add(type === "bad" ? "bad" : "good");
-      m.textContent = msg;
+      t.className = "";
       t.classList.add("show");
-      clearTimeout(toastTimer);
-      toastTimer = setTimeout(() => t.classList.remove("show"), 2800);
+      t.classList.add(type === "warn" ? "warn" : "good");
+      t.textContent = msg;
+      clearTimeout(window.__toastT);
+      window.__toastT = setTimeout(()=>t.classList.remove("show"), 2600);
     }
 
-    /* ============================================================
-      🧱 MURO: 7 righe casuali per lingua (solo lingua corrente)
-    ============================================================ */
-    function pick7(lang){
-      const src = (MURO[lang] || []).slice();
-      // shuffle
-      for (let i = src.length - 1; i > 0; i--){
-        const j = Math.floor(Math.random() * (i + 1));
-        [src[i], src[j]] = [src[j], src[i]];
-      }
-      return src.slice(0, 7);
-    }
-    function renderMuro(lang){
-      const box = document.getElementById("muroList");
-      box.innerHTML = "";
-      const lines = pick7(lang);
-      for (const line of lines){
-        const div = document.createElement("div");
-        div.className = "muroItem";
-        const left = document.createElement("div");
-        left.style.flex = "1";
-        left.textContent = line;
-        const right = document.createElement("div");
-        right.className = "mango";
-        right.textContent = "🥭";
-        div.appendChild(left);
-        div.appendChild(right);
-        box.appendChild(div);
-      }
-    }
-
-    /* ============================================================
-      🔤 APPLY LANG UI
-    ============================================================ */
-    function applyLang(lang){
-      document.documentElement.lang = lang;
-
-      // chips
-      document.querySelectorAll("#langBar .chip").forEach(b => {
-        b.classList.toggle("on", b.dataset.lang === lang);
-      });
-
-      const s = STR[lang];
-
-      // header
-      document.getElementById("tTitle").textContent = s.title;
-      document.getElementById("tSubtitle").textContent = s.subtitle;
-
-      // sections
-      document.getElementById("sec1Title").textContent = s.sec1Title;
-      document.getElementById("sec1Text").textContent  = s.sec1Text;
-      document.getElementById("sec1Note").textContent  = s.sec1Note;
-
-      document.getElementById("sec2Title").textContent = s.sec2Title;
-      document.getElementById("sec2Text").textContent  = s.sec2Text;
-
-      document.getElementById("sec3Title").textContent = s.sec3Title;
-      document.getElementById("sec3Text").textContent  = s.sec3Text;
-      document.getElementById("wallNote").textContent  = s.wallNote;
-
-      // placeholders/buttons
-      const ta = document.getElementById("riga");
-      ta.placeholder = s.ph;
-
-      document.getElementById("btnInvia").textContent = s.send;
-      document.getElementById("btnPulisci").textContent = s.clear;
-      document.getElementById("btnApriArchivio").textContent = s.openA;
-      document.getElementById("btnSvuotaArchivio").textContent = s.wipeA;
-
-      // links labels
-      document.getElementById("btnFAQ").textContent = s.faq;
-      document.getElementById("btnStampaQR").textContent = s.qr;
-
-      document.getElementById("emailLabel").textContent = s.emailLabel;
-      document.getElementById("btnQRpdf").textContent = s.pdfQR;
-      document.getElementById("btnKitPdf").textContent = s.kit;
-      document.getElementById("btnVersPdf").textContent = s.vers;
-
-      document.getElementById("btnFondativo").textContent = s.fond;
-      document.getElementById("btnOrigine").textContent = s.origine;
-      document.getElementById("btnNeutralita").textContent = s.neutralita;
-      document.getElementById("btnNonApp").textContent = s.nonapp;
-      document.getElementById("btnStatuto").textContent = s.statuto;
-
-      // pdf href (anti 404 via config)
-      const aFond = document.getElementById("btnFondativo");
-      const aOri  = document.getElementById("btnOrigine");
-      aFond.href = PDF.fondativo || "#";
-      aOri.href  = PDF.origine || "#";
-
-      // count
-      updateCount(lang);
-
-      // muro
-      renderMuro(lang);
+    // Blocca numeri + segni tipici da conteggio/misura
+    function violatesNoCount(text){
+      // cifre
+      if (/[0-9]/.test(text)) return true;
+      // simboli “da calcolo / equivalenza / misura”
+      if (/[=<>±÷×%€$£¥]/.test(text)) return true;
+      // pattern “tipo codice” (molti simboli)
+      if (/[{}[\]@#^*_~|\\]/.test(text)) return true;
+      return false;
     }
 
     function updateCount(lang){
-      const c = readArchive(lang).length;
       const s = STR[lang];
-      document.getElementById("countPill").textContent = `${s.count} ${c}`;
+      const n = readArchive().length;
+      document.getElementById("countPill").textContent = s.count(n);
     }
 
-    /* ============================================================
-      📩 SAVE LINE
-    ============================================================ */
     function syncInvia(){
-      const lang = currentLang;
       const ta = document.getElementById("riga");
       const btn = document.getElementById("btnInvia");
-      const txt = normalizeText(ta.value);
-      btn.disabled = !txt.length;
+      if (!ta || !btn) return;
+      btn.disabled = !normalizeText(ta.value);
     }
 
-    function saveLine(){
-      const lang = currentLang;
+    function saveLine(lang){
       const s = STR[lang];
       const ta = document.getElementById("riga");
+      if (!ta) return;
+
       const text = normalizeText(ta.value);
-
       if (!text){
-        showToast("bad", s.empty);
+        showToast("warn", lang, s.empty);
         return;
       }
 
-      // blocco numeri / misure / valore
-      if (isCountingLike(text)){
-        showToast("bad", s.warnNum);
+      if (violatesNoCount(text)){
+        showToast("warn", lang, s.warn);
         return;
       }
 
-      const arr = readArchive(lang);
-      arr.push(text);
-
-      // dedup semplice
-      const out = [];
-      const seen = new Set();
-      for (const x of arr){
-        const k = x.toLowerCase();
-        if (seen.has(k)) continue;
-        seen.add(k);
-        out.push(x);
-      }
-
-      writeArchive(lang, out);
+      const arr = readArchive();
+      const merged = dedup([text, ...arr]).slice(0, 200); // limite locale ragionevole
+      writeArchive(merged);
 
       ta.value = "";
       syncInvia();
       updateCount(lang);
-      showToast("good", s.ok);
+
+      showToast("ok", lang, s.ok);
     }
 
-    function openArchive(){
-      const lang = currentLang;
-      const s = STR[lang];
-      const arr = readArchive(lang);
-
+    function openArchive(lang){
+      const arr = readArchive();
       if (!arr.length){
-        showToast("bad", s.empty);
+        showToast("warn", lang, STR[lang].empty);
         return;
       }
-
-      // mostra le prime 60 (solo testo, no numeri di lista per coerenza)
-      const slice = arr.slice(-60);
-      alert(slice.join("\n\n"));
+      // mostra max 30
+      const lines = arr.slice(0,30).map((t,i)=>`${i+1}. ${t}`).join("\n\n");
+      alert(lines + (arr.length>30 ? `\n\n… (+${arr.length-30})` : ""));
     }
 
-    function wipeArchive(){
-      const lang = currentLang;
+    function wipeArchive(lang){
       const s = STR[lang];
       if (!confirm(s.confirmWipe)) return;
-      writeArchive(lang, []);
+      writeArchive([]);
       updateCount(lang);
-      showToast("good", s.wiped);
+      showToast("ok", lang, s.wiped);
     }
 
-    function clearField(){
-      const lang = currentLang;
-      const s = STR[lang];
-      document.getElementById("riga").value = "";
-      syncInvia();
-      showToast("good", s.cleared);
-    }
+    // ---------------------------
+    // Init
+    // ---------------------------
+    (function init(){
+      const lang = getLang();
+      applyLang(lang);
 
-    /* ============================================================
-      🚀 INIT
-    ============================================================ */
-    let currentLang = getLang();
-    setLang(currentLang);
-    applyLang(currentLang);
+      const ta = document.getElementById("riga");
+      const btnInvia = document.getElementById("btnInvia");
 
-    // close toast
-    document.getElementById("toastX").addEventListener("click", () => {
-      document.getElementById("toast").classList.remove("show");
-    });
+      if (ta){
+        ta.addEventListener("input", syncInvia);
 
-    // language clicks
-    document.querySelectorAll("#langBar .chip").forEach(b => {
-      b.addEventListener("click", () => {
-        currentLang = b.dataset.lang;
-        setLang(currentLang);
-        applyLang(currentLang);
+        // Enter = invia, Shift+Enter = a capo
+        ta.addEventListener("keydown", (e)=>{
+          if (e.key === "Enter" && !e.shiftKey){
+            e.preventDefault();
+            saveLine(getLang());
+          }
+        });
+      }
+
+      if (btnInvia){
+        btnInvia.addEventListener("click", ()=>saveLine(getLang()));
+      }
+
+      document.getElementById("btnPulisci")?.addEventListener("click", ()=>{
+        const ta = document.getElementById("riga");
+        if (ta) ta.value = "";
         syncInvia();
       });
-    });
 
-    // textarea events
-    const ta = document.getElementById("riga");
-    ta.addEventListener("input", syncInvia);
-    ta.addEventListener("keydown", (e) => {
-      if (e.key === "Enter" && !e.shiftKey){
-        e.preventDefault();
-        saveLine();
-      }
-    });
+      document.getElementById("btnApri")?.addEventListener("click", ()=>openArchive(getLang()));
+      document.getElementById("btnSvuota")?.addEventListener("click", ()=>wipeArchive(getLang()));
 
-    // buttons
-    document.getElementById("btnInvia").addEventListener("click", saveLine);
-    document.getElementById("btnApriArchivio").addEventListener("click", openArchive);
-    document.getElementById("btnSvuotaArchivio").addEventListener("click", wipeArchive);
-    document.getElementById("btnPulisci").addEventListener("click", clearField);
+      // sicurezza: QR deve restare cliccabile anche se qualcosa “copre”
+      document.getElementById("btnQR")?.addEventListener("click", ()=>{
+        // se per qualche motivo non naviga, forziamo
+        // (ma normalmente l'href basta)
+        // location.href = "stampa-qr.html";
+      });
 
-    // ensure enabled state on load
-    syncInvia();
+      // stato iniziale
+      syncInvia();
+    })();
   </script>
 </body>
 </html>

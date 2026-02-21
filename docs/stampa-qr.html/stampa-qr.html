@@ -1,139 +1,145 @@
 <!doctype html>
 <html lang="it">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Mango — Stampa & QR</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Mango — QR</title>
 
-  <style>
-    body{
-      margin:0;
-      font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;
-      text-align:center;
-      background:#fff;
-      color:#111;
-    }
-
-    .wrap{
-      max-width:700px;
-      margin:0 auto;
-      padding:40px 20px;
-    }
-
-    h1{
-      font-size:2rem;
-      margin-bottom:30px;
-    }
-
-    .qr{
-      width:220px;
-      max-width:90%;
-      margin:20px auto;
-    }
-
-    .claim{
-      font-size:1.3rem;
-      font-weight:600;
-      margin-top:30px;
-    }
-
-    .sub{
-      font-size:1.1rem;
-      margin-top:10px;
-    }
-
-    .buttons{
-      margin-top:40px;
-      display:flex;
-      justify-content:center;
-      gap:20px;
-      flex-wrap:wrap;
-    }
-
-    .btn{
-      padding:14px 22px;
-      border:1px solid #111;
-      border-radius:14px;
-      text-decoration:none;
-      color:#111;
-      font-size:1rem;
-      background:#fff;
-      cursor:pointer;
-    }
-
-    footer{
-      margin-top:60px;
-      font-size:.9rem;
-      color:#666;
-    }
-
-    @media print{
-      .buttons{ display:none; }
-    }
-  </style>
+<style>
+:root{color-scheme:dark}
+body{
+  margin:0;
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  background:#0b0f17;
+  color:#eef3ff;
+}
+.wrap{max-width:900px;margin:0 auto;padding:22px}
+.card{
+  background:rgba(255,255,255,.06);
+  border:1px solid rgba(255,255,255,.12);
+  border-radius:22px;
+  padding:22px;
+}
+h1{margin:0 0 10px;font-size:28px}
+p{margin:8px 0;opacity:.85;line-height:1.35}
+.actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:16px}
+a.btn{
+  padding:12px 16px;
+  border-radius:14px;
+  border:1px solid rgba(255,255,255,.14);
+  background:rgba(255,255,255,.08);
+  color:#eef3ff;
+  text-decoration:none;
+  font-weight:700;
+}
+a.btn:hover{background:rgba(255,255,255,.14)}
+.qrbox{margin-top:20px;text-align:center}
+img{
+  max-width:320px;
+  width:100%;
+  border-radius:18px;
+  border:1px solid rgba(255,255,255,.15);
+  background:#111;
+}
+footer{
+  margin-top:24px;
+  font-size:13px;
+  opacity:.6;
+}
+</style>
 </head>
 
 <body>
-  <div class="wrap">
+<div class="wrap">
+  <div class="card">
+    <h1 id="title">QR Mango</h1>
+    <p id="desc">Apri o stampa il QR ufficiale. Chiunque può iniziare dal telefono.</p>
 
-    <h1>Mango 🥭</h1>
-
-    <img src="assets/qr-home.png" class="qr" alt="QR Mango Home">
-
-    <!-- TESTI MULTILINGUA -->
-    <div id="text-it">
-      <div class="claim">È successo qualcosa tra due persone.</div>
-      <div class="sub">Qui puoi capirlo.</div>
+    <div class="actions">
+      <a class="btn" id="homeBtn" href="index.html">← Home</a>
+      <a class="btn" id="pdfBtn" href="QR_MANGO_UFFICIALE.pdf" target="_blank">PDF QR</a>
     </div>
 
-    <div id="text-en" style="display:none">
-      <div class="claim">Something happened between two people.</div>
-      <div class="sub">Here you can understand it.</div>
+    <div class="qrbox">
+      <!-- Se hai immagine QR -->
+      <img src="mango-home-qr.jpg" alt="QR Mango" onerror="this.style.display='none'">
     </div>
 
-    <div id="text-es" style="display:none">
-      <div class="claim">Ha sucedido algo entre dos personas.</div>
-      <div class="sub">Aquí puedes entenderlo.</div>
-    </div>
-
-    <div id="text-fr" style="display:none">
-      <div class="claim">Quelque chose s’est passé entre deux personnes.</div>
-      <div class="sub">Ici tu peux le comprendre.</div>
-    </div>
-
-    <div id="text-de" style="display:none">
-      <div class="claim">Zwischen zwei Menschen ist etwas passiert.</div>
-      <div class="sub">Hier kannst du es verstehen.</div>
-    </div>
-
-    <div id="text-zh" style="display:none">
-      <div class="claim">两个人之间发生了一些事情。</div>
-      <div class="sub">你可以在这里理解它。</div>
-    </div>
-
-    <!-- BOTTONI -->
-    <div class="buttons">
-      <a class="btn" href="index.html">← Torna alla Home</a>
-      <button class="btn" onclick="window.print()">Stampa</button>
-    </div>
-
-    <footer>
-      Mango — Juan de Dios Annaloro Mercedes  
-      <br>In memoria di Larimar — 02 febbraio 2026
-    </footer>
-
+    <footer id="footerText">Mango — nato il 02 febbraio 2026</footer>
   </div>
+</div>
 
-  <script>
-    const lang = new URLSearchParams(window.location.search).get("lang") || "it";
-    const supported = ["it","en","es","fr","de","zh"];
+<script>
+const STR = {
+  it:{
+    title:"QR Mango",
+    desc:"Apri o stampa il QR ufficiale. Chiunque può iniziare dal telefono.",
+    home:"← Home",
+    pdf:"PDF QR",
+    foot:"Mango — nato il 02 febbraio 2026"
+  },
+  en:{
+    title:"Mango QR",
+    desc:"Open or print the official QR. Anyone can start from their phone.",
+    home:"← Home",
+    pdf:"QR PDF",
+    foot:"Mango — born on 02 February 2026"
+  },
+  es:{
+    title:"QR Mango",
+    desc:"Abre o imprime el QR oficial. Cualquiera puede empezar desde el móvil.",
+    home:"← Inicio",
+    pdf:"PDF QR",
+    foot:"Mango — nacido el 02 febrero 2026"
+  },
+  fr:{
+    title:"QR Mango",
+    desc:"Ouvre ou imprime le QR officiel. N’importe qui peut commencer depuis son téléphone.",
+    home:"← Accueil",
+    pdf:"PDF QR",
+    foot:"Mango — né le 02 février 2026"
+  },
+  de:{
+    title:"Mango QR",
+    desc:"Öffne oder drucke den offiziellen QR. Jeder kann vom Handy starten.",
+    home:"← Start",
+    pdf:"QR PDF",
+    foot:"Mango — geboren am 02 Februar 2026"
+  },
+  zh:{
+    title:"Mango 二维码",
+    desc:"打开或打印官方二维码。任何人都可以用手机开始。",
+    home:"← 首页",
+    pdf:"二维码 PDF",
+    foot:"Mango — 诞生于 2026年2月2日"
+  }
+};
 
-    if(supported.includes(lang)){
-      document.querySelectorAll('[id^="text-"]').forEach(el => el.style.display="none");
-      const active = document.getElementById("text-"+lang);
-      if(active) active.style.display="block";
-    }
-  </script>
+function getLang(){
+  const p=new URLSearchParams(location.search);
+  const l=p.get("lang");
+  return STR[l]?l:"it";
+}
+
+function withLang(url){
+  const l=getLang();
+  const u=new URL(url,location.href);
+  u.searchParams.set("lang",l);
+  return u.pathname+"?"+u.searchParams.toString();
+}
+
+const lang=getLang();
+document.documentElement.lang=lang;
+
+document.getElementById("title").textContent=STR[lang].title;
+document.getElementById("desc").textContent=STR[lang].desc;
+document.getElementById("homeBtn").textContent=STR[lang].home;
+document.getElementById("pdfBtn").textContent=STR[lang].pdf;
+document.getElementById("footerText").textContent=STR[lang].foot;
+
+document.getElementById("homeBtn").href=withLang("index.html");
+document.getElementById("pdfBtn").href=withLang("QR_MANGO_UFFICIALE.pdf");
+</script>
 
 </body>
 </html>

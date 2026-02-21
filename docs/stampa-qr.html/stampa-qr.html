@@ -1,145 +1,268 @@
 <!doctype html>
 <html lang="it">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Mango — QR</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Mango — Stampa QR</title>
 
-<style>
-:root{color-scheme:dark}
-body{
-  margin:0;
-  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
-  background:#0b0f17;
-  color:#eef3ff;
-}
-.wrap{max-width:900px;margin:0 auto;padding:22px}
-.card{
-  background:rgba(255,255,255,.06);
-  border:1px solid rgba(255,255,255,.12);
-  border-radius:22px;
-  padding:22px;
-}
-h1{margin:0 0 10px;font-size:28px}
-p{margin:8px 0;opacity:.85;line-height:1.35}
-.actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:16px}
-a.btn{
-  padding:12px 16px;
-  border-radius:14px;
-  border:1px solid rgba(255,255,255,.14);
-  background:rgba(255,255,255,.08);
-  color:#eef3ff;
-  text-decoration:none;
-  font-weight:700;
-}
-a.btn:hover{background:rgba(255,255,255,.14)}
-.qrbox{margin-top:20px;text-align:center}
-img{
-  max-width:320px;
-  width:100%;
-  border-radius:18px;
-  border:1px solid rgba(255,255,255,.15);
-  background:#111;
-}
-footer{
-  margin-top:24px;
-  font-size:13px;
-  opacity:.6;
-}
-</style>
+  <style>
+    :root{
+      --bg:#0b0f1a;
+      --card:rgba(255,255,255,.06);
+      --line:rgba(255,255,255,.10);
+      --txt:rgba(255,255,255,.92);
+      --muted:rgba(255,255,255,.70);
+      --accent:#7aa7ff;
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+      background: radial-gradient(1200px 600px at 20% 10%, rgba(255,140,0,.08), transparent 60%),
+                  radial-gradient(900px 600px at 70% 30%, rgba(0,150,255,.08), transparent 55%),
+                  var(--bg);
+      color:var(--txt);
+    }
+    .wrap{max-width:980px;margin:0 auto;padding:18px 14px 28px}
+    .top{
+      display:flex;align-items:center;justify-content:space-between;gap:12px;
+      padding:14px 14px;border:1px solid var(--line);border-radius:18px;background:var(--card);
+      backdrop-filter: blur(10px);
+    }
+    .brand{display:flex;align-items:center;gap:12px}
+    .mango{
+      width:44px;height:44px;border-radius:14px;display:grid;place-items:center;
+      border:1px solid var(--line);background:rgba(0,0,0,.25);cursor:pointer;user-select:none;
+      font-size:22px;
+    }
+    .title{line-height:1.05}
+    .title b{display:block;font-size:18px}
+    .title span{display:block;font-size:13px;color:var(--muted);margin-top:2px}
+    .langs{display:flex;flex-wrap:wrap;gap:8px;justify-content:flex-end}
+    .chip{
+      border:1px solid var(--line);background:rgba(0,0,0,.22);color:var(--txt);
+      padding:9px 12px;border-radius:999px;font-weight:700;font-size:13px;cursor:pointer;
+      text-decoration:none;display:inline-block;
+    }
+    .chip.active{outline:2px solid rgba(122,167,255,.35); border-color:rgba(122,167,255,.6)}
+    .card{
+      margin-top:14px;
+      padding:18px 16px;
+      border:1px solid var(--line);
+      border-radius:22px;
+      background:rgba(0,0,0,.22);
+      backdrop-filter: blur(10px);
+    }
+    h1{margin:0 0 8px 0;font-size:26px}
+    p{margin:8px 0;color:var(--muted);font-size:15px;line-height:1.45}
+    .grid{
+      display:grid;
+      grid-template-columns: 1fr;
+      gap:14px;
+      margin-top:14px;
+    }
+    .qrbox{
+      border:1px solid var(--line);
+      border-radius:18px;
+      background:rgba(255,255,255,.04);
+      padding:14px;
+    }
+    .qrimg{
+      width:100%;
+      max-width:420px;
+      display:block;
+      margin:10px auto 0;
+      border-radius:14px;
+      border:1px solid rgba(255,255,255,.12);
+      background:#fff;
+      padding:10px;
+    }
+    .actions{
+      display:flex;flex-wrap:wrap;gap:10px;margin-top:14px;
+    }
+    .btn{
+      border:1px solid var(--line);
+      background:rgba(0,0,0,.25);
+      color:var(--txt);
+      padding:12px 14px;
+      border-radius:14px;
+      font-weight:800;
+      cursor:pointer;
+      text-decoration:none;
+      display:inline-flex;align-items:center;justify-content:center;
+      min-width:140px;
+    }
+    .btn.primary{background:rgba(122,167,255,.18); border-color:rgba(122,167,255,.45)}
+    .btn:hover{filter:brightness(1.05)}
+    .smalllinks{margin-top:10px}
+    .smalllinks a{color:var(--accent);text-decoration:underline;font-weight:700;margin-right:14px}
+    .foot{
+      margin-top:14px;color:rgba(255,255,255,.55);font-size:13px;text-align:center;
+    }
+
+    /* PRINT */
+    @media print{
+      body{background:#fff;color:#000}
+      .top,.actions,.smalllinks,.foot{display:none !important}
+      .card{border:none;background:#fff}
+      .qrbox{border:1px solid #ddd;background:#fff}
+      .qrimg{border:1px solid #ddd}
+      p{color:#111}
+    }
+  </style>
 </head>
 
 <body>
-<div class="wrap">
-  <div class="card">
-    <h1 id="title">QR Mango</h1>
-    <p id="desc">Apri o stampa il QR ufficiale. Chiunque può iniziare dal telefono.</p>
+  <div class="wrap">
+    <div class="top">
+      <div class="brand">
+        <!-- clic sul mango = Bianco.html -->
+        <a class="mango" href="Bianco.html" aria-label="Bianco">🥭</a>
+        <div class="title">
+          <b id="tBrand">Mango</b>
+          <span id="tSub">Stampa QR</span>
+        </div>
+      </div>
 
-    <div class="actions">
-      <a class="btn" id="homeBtn" href="index.html">← Home</a>
-      <a class="btn" id="pdfBtn" href="QR_MANGO_UFFICIALE.pdf" target="_blank">PDF QR</a>
+      <div class="langs" id="langs"></div>
     </div>
 
-    <div class="qrbox">
-      <!-- Se hai immagine QR -->
-      <img src="mango-home-qr.jpg" alt="QR Mango" onerror="this.style.display='none'">
-    </div>
+    <div class="card">
+      <h1 id="tTitle">Stampa il QR ufficiale</h1>
+      <p id="tDesc">
+        Questo QR porta alla home stabile di Mango. Chiunque può iniziare dal telefono.
+      </p>
 
-    <footer id="footerText">Mango — nato il 02 febbraio 2026</footer>
+      <div class="grid">
+        <div class="qrbox">
+          <p style="margin:0;font-weight:800;color:var(--txt)" id="tHomeQr">QR — Home</p>
+          <!-- immagine QR già presente in /docs -->
+          <img class="qrimg" src="mango-home-qr.jpg" alt="QR Mango Home" />
+          <div class="smalllinks">
+            <!-- link diretto alla home -->
+            <a id="lnkHome" href="/">Home</a>
+            <!-- link al PDF QR se esiste -->
+            <a id="lnkPdf" href="QR_MANGO_UFFICIALE.pdf">PDF QR</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="actions">
+        <a class="btn" id="btnHome" href="/">Torna alla Home</a>
+        <button class="btn primary" id="btnPrint" type="button">Stampa</button>
+      </div>
+
+      <div class="foot" id="tFoot">Mango — nato il 02 febbraio 2026</div>
+    </div>
   </div>
-</div>
 
-<script>
-const STR = {
-  it:{
-    title:"QR Mango",
-    desc:"Apri o stampa il QR ufficiale. Chiunque può iniziare dal telefono.",
-    home:"← Home",
-    pdf:"PDF QR",
-    foot:"Mango — nato il 02 febbraio 2026"
-  },
-  en:{
-    title:"Mango QR",
-    desc:"Open or print the official QR. Anyone can start from their phone.",
-    home:"← Home",
-    pdf:"QR PDF",
-    foot:"Mango — born on 02 February 2026"
-  },
-  es:{
-    title:"QR Mango",
-    desc:"Abre o imprime el QR oficial. Cualquiera puede empezar desde el móvil.",
-    home:"← Inicio",
-    pdf:"PDF QR",
-    foot:"Mango — nacido el 02 febrero 2026"
-  },
-  fr:{
-    title:"QR Mango",
-    desc:"Ouvre ou imprime le QR officiel. N’importe qui peut commencer depuis son téléphone.",
-    home:"← Accueil",
-    pdf:"PDF QR",
-    foot:"Mango — né le 02 février 2026"
-  },
-  de:{
-    title:"Mango QR",
-    desc:"Öffne oder drucke den offiziellen QR. Jeder kann vom Handy starten.",
-    home:"← Start",
-    pdf:"QR PDF",
-    foot:"Mango — geboren am 02 Februar 2026"
-  },
-  zh:{
-    title:"Mango 二维码",
-    desc:"打开或打印官方二维码。任何人都可以用手机开始。",
-    home:"← 首页",
-    pdf:"二维码 PDF",
-    foot:"Mango — 诞生于 2026年2月2日"
-  }
-};
+  <script>
+    const STR = {
+      it: {
+        brand:"Mango", sub:"Stampa QR",
+        title:"Stampa il QR ufficiale",
+        desc:"Questo QR porta alla home stabile di Mango. Chiunque può iniziare dal telefono.",
+        homeqr:"QR — Home",
+        home:"Torna alla Home",
+        print:"Stampa",
+        foot:"Mango — nato il 02 febbraio 2026"
+      },
+      en: {
+        brand:"Mango", sub:"Print QR",
+        title:"Print the official QR",
+        desc:"This QR opens Mango’s stable home. Anyone can start from their phone.",
+        homeqr:"QR — Home",
+        home:"Back to Home",
+        print:"Print",
+        foot:"Mango — born on 02 February 2026"
+      },
+      es: {
+        brand:"Mango", sub:"Imprimir QR",
+        title:"Imprime el QR oficial",
+        desc:"Este QR abre la página principal estable de Mango. Cualquiera puede empezar desde el teléfono.",
+        homeqr:"QR — Inicio",
+        home:"Volver al inicio",
+        print:"Imprimir",
+        foot:"Mango — nacido el 02 de febrero de 2026"
+      },
+      fr: {
+        brand:"Mango", sub:"Imprimer QR",
+        title:"Imprimer le QR officiel",
+        desc:"Ce QR ouvre la page d’accueil stable de Mango. Tout le monde peut commencer depuis un téléphone.",
+        homeqr:"QR — Accueil",
+        home:"Retour à l’accueil",
+        print:"Imprimer",
+        foot:"Mango — né le 02 février 2026"
+      },
+      de: {
+        brand:"Mango", sub:"QR drucken",
+        title:"Offiziellen QR drucken",
+        desc:"Dieser QR öffnet die stabile Mango-Startseite. Jeder kann vom Handy aus starten.",
+        homeqr:"QR — Start",
+        home:"Zur Startseite",
+        print:"Drucken",
+        foot:"Mango — geboren am 02. Februar 2026"
+      },
+      zh: {
+        brand:"Mango", sub:"列印 QR",
+        title:"列印官方 QR",
+        desc:"此 QR 會開啟 Mango 的穩定首頁。任何人都可以用手機開始。",
+        homeqr:"QR — 首頁",
+        home:"回到首頁",
+        print:"列印",
+        foot:"Mango — 誕生於 2026 年 02 月 02 日"
+      }
+    };
 
-function getLang(){
-  const p=new URLSearchParams(location.search);
-  const l=p.get("lang");
-  return STR[l]?l:"it";
-}
+    function getLang(){
+      const u = new URL(location.href);
+      const q = (u.searchParams.get("lang") || "it").toLowerCase();
+      return (q === "cn" ? "zh" : q);
+    }
 
-function withLang(url){
-  const l=getLang();
-  const u=new URL(url,location.href);
-  u.searchParams.set("lang",l);
-  return u.pathname+"?"+u.searchParams.toString();
-}
+    function setLang(lang){
+      const s = STR[lang] || STR.it;
+      document.documentElement.lang = (lang === "zh" ? "zh-Hant" : lang);
 
-const lang=getLang();
-document.documentElement.lang=lang;
+      document.getElementById("tBrand").textContent = s.brand;
+      document.getElementById("tSub").textContent = s.sub;
+      document.getElementById("tTitle").textContent = s.title;
+      document.getElementById("tDesc").textContent = s.desc;
+      document.getElementById("tHomeQr").textContent = s.homeqr;
 
-document.getElementById("title").textContent=STR[lang].title;
-document.getElementById("desc").textContent=STR[lang].desc;
-document.getElementById("homeBtn").textContent=STR[lang].home;
-document.getElementById("pdfBtn").textContent=STR[lang].pdf;
-document.getElementById("footerText").textContent=STR[lang].foot;
+      const btnHome = document.getElementById("btnHome");
+      btnHome.textContent = s.home;
 
-document.getElementById("homeBtn").href=withLang("index.html");
-document.getElementById("pdfBtn").href=withLang("QR_MANGO_UFFICIALE.pdf");
-</script>
+      const btnPrint = document.getElementById("btnPrint");
+      btnPrint.textContent = s.print;
 
+      document.getElementById("tFoot").textContent = s.foot;
+
+      // link home con lang mantenuto
+      btnHome.href = "/?lang=" + lang;
+      document.getElementById("lnkHome").href = "/?lang=" + lang;
+
+      // Bianco con lang mantenuto
+      document.querySelector(".mango").href = "Bianco.html?lang=" + lang;
+
+      // costruisci barra lingue
+      const langs = [
+        ["it","IT"],["en","EN"],["es","ES"],["fr","FR"],["de","DE"],["zh","中文"]
+      ];
+      const wrap = document.getElementById("langs");
+      wrap.innerHTML = "";
+      langs.forEach(([k,label])=>{
+        const a = document.createElement("a");
+        a.className = "chip" + (k===lang ? " active" : "");
+        a.textContent = label;
+        a.href = "stampa-qr.html?lang=" + k;
+        wrap.appendChild(a);
+      });
+    }
+
+    document.getElementById("btnPrint").addEventListener("click", ()=> window.print());
+
+    setLang(getLang());
+  </script>
 </body>
 </html>

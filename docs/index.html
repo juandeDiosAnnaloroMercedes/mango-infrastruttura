@@ -269,6 +269,7 @@
       <div class="btnRow">
         <a class="btn" id="btnQR" href="QR_MANGO_UFFICIALE.pdf" target="_blank">QR</a>
         <a class="btn" id="btnFAQ" href="faq.html">FAQ</a>
+        <a class="btn primary" id="btnMuroStrutture" href="muro-strutture.html">🥭 Muro Mango · Strutture</a>
       </div>
 
       <div class="divider"></div>
@@ -686,6 +687,7 @@ function applyLang(lang){
   // links label
   document.getElementById("btnQR").textContent = s.lnk.qr;
   document.getElementById("btnFAQ").textContent = s.lnk.faq;
+  document.getElementById("btnMuroStrutture").textContent = ({it:"🥭 Muro Mango · Strutture",en:"🥭 Mango Wall · Hospitality",es:"🥭 Muro Mango · Alojamientos",fr:"🥭 Mur Mango · Hébergements",de:"🥭 Mango-Wand · Unterkünfte",zh:"🥭 Mango 墙 · 住宿"})[lang] || "🥭 Muro Mango · Strutture";
   document.getElementById("btnLic").textContent = s.lnk.lic;
   document.getElementById("btnStampaQr").textContent = s.lnk.stampaQr;
 

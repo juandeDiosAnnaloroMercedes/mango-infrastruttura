@@ -1,0 +1,78 @@
+name: Mango - correzioni conservative
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  patch:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Scarica repository
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: true
+
+      - name: Correggi solo i file esistenti
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+
+          def patch(path, substitutions):
+              f = Path(path)
+              if not f.is_file():
+                  print(f'SALTATO: {path} non esiste')
+                  return
+              old = f.read_text(encoding='utf-8')
+              new = old
+              for a,b in substitutions:
+                  if a in new:
+                      new = new.replace(a,b)
+                  else:
+                      print(f'NOTA: frammento non presente in {path}: {a[:65]}')
+              if new != old:
+                  f.write_text(new, encoding='utf-8')
+                  print(f'AGGIORNATO: {path}')
+              else:
+                  print(f'INVARIATO: {path}')
+
+          patch('index.html', [
+              ('href="style.css"', 'href="docs/style.css"'),
+              ('href="scrivi-una-riga.html?lang=it"', 'href="docs/primo-scambio.html?lang=it"'),
+              ('href="it.html?lang=it"', 'href="docs/it.html?lang=it"'),
+          ])
+
+          for path in ('docs/muro-strutture.html', 'muro-strutture.html'):
+              patch(path, [
+                  (
+                    '<option value="community">Biblioteca o altro luogo della comunità</option>',
+                    '<option value="community">Studi medici, ambulatori, biblioteche e altri luoghi della comunità</option>'
+                  ),
+                  (
+                    'Per le scuole è sempre attiva.</span>',
+                    'Per le scuole è sempre attiva. Negli studi medici non inserire dati dei pazienti o informazioni sulla salute.</span>'
+                  ),
+              ])
+          PY
+
+      - name: Controlla i file
+        run: |
+          test -f docs/index.html
+          test -f docs/muro-strutture.html
+          test -f docs/primo-scambio.html
+          git diff --check
+
+      - name: Salva modifiche
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add index.html muro-strutture.html docs/muro-strutture.html
+          if git diff --cached --quiet; then
+            echo 'Nessuna modifica necessaria.'
+          else
+            git commit -m 'Mango: correggi link legacy e aggiungi studi medici nei luoghi'
+            git push
+          fi

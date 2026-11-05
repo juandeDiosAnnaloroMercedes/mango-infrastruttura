@@ -3,6 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+  <meta name="referrer" content="no-referrer" />
   <meta name="theme-color" content="#0b0f17" />
   <title>Mango — infrastruttura di fiducia locale</title>
   <style>
@@ -231,6 +232,8 @@
       font-weight:800;
       letter-spacing:.02em;
     }
+
+[hidden]{display:none!important}#personalDialog{width:min(720px,94vw);max-height:90vh;overflow:auto;background:#111722;color:var(--text);border:1px solid var(--line);border-radius:26px;padding:24px}#personalDialog::backdrop{background:rgba(0,0,0,.75)}.personalCheck{display:flex;align-items:flex-start;gap:12px;margin:18px 0;line-height:1.5}.personalCheck input{margin-top:6px;flex-shrink:0}.personalHidden{display:none!important}.personalArchiveRow{padding:18px 0;border-bottom:1px solid var(--line);overflow-wrap:anywhere}#personalPreview{margin:20px 0;padding:16px;border-left:3px solid #1fbf73;white-space:pre-wrap;overflow-wrap:anywhere}#personalReceipt p{overflow-wrap:anywhere}#personalReceiptsList{display:flex;gap:12px;flex-wrap:wrap}.btn:focus-visible{outline:3px solid #70a0ff;outline-offset:3px}
   </style>
 </head>
 
@@ -261,6 +264,7 @@
       </div>
     </div>
 
+    <section id="personalModeration" class="card" hidden></section>
     <!-- FAI MANGO -->
     <div class="card">
       <div class="h1" id="heroTitle">Fai Mango adesso</div>
@@ -277,14 +281,16 @@
       <textarea id="riga" placeholder="Scrivi qui una riga (Shift+Invio va a capo)"></textarea>
 
       <div class="btnRow" style="margin-top:14px">
-        <button class="btn primary" id="btnInvia">Invia riga</button>
+        <button class="btn primary" id="btnInvia">Conserva sul dispositivo</button>
+        <button class="btn primary" id="btnProponi">Proponi al muro Mango</button>
         <button class="btn" id="btnPulisci">Pulisci</button>
         <button class="btn" id="btnApri">Apri archivio</button>
         <button class="btn danger" id="btnSvuota">Svuota archivio</button>
         <div class="countPill" id="count">Righe in archivio: 0</div>
       </div>
 
-      <div id="status" class="status"></div>
+      <div id="status" class="status" role="status"></div><section id="personalReceipt" class="card" hidden></section>
+      <div class="btnRow"><button class="btn" id="btnReceipts">Controlla la tua riga</button></div>
 
       <p class="small" id="noteLocal">Nota: l’archivio è locale sul tuo dispositivo (non è pubblico).</p>
 
@@ -339,6 +345,7 @@
     <footer id="foot">Mango — nato il 02 febbraio 2026</footer>
   </div>
 
+<dialog id="personalDialog"></dialog>
 <script>
 /* =========================
    Lingue (6)
@@ -684,6 +691,8 @@ function applyLang(lang){
   document.getElementById("muroTitle").textContent = s.muroTitle;
   document.getElementById("muroLead").textContent = s.muroLead;
 
+  if(typeof personalRefreshLabels==="function")personalRefreshLabels();
+
   // links label
   document.getElementById("btnQR").textContent = s.lnk.qr;
   document.getElementById("btnFAQ").textContent = s.lnk.faq;
@@ -728,7 +737,7 @@ function pick7(arr){
 }
 async function renderMuro(lang){
   const ul=document.getElementById("muroList");
-  const empty={it:"Le righe reali appariranno qui quando saranno approvate e condivise dai luoghi. Nessuna riga viene pubblicata automaticamente.",en:"Real lines will appear here when places approve and choose to share them. Nothing is published automatically.",es:"Las líneas reales aparecerán aquí cuando los lugares las aprueben y decidan compartirlas. Nada se publica automáticamente.",fr:"Les lignes réelles apparaîtront ici après approbation et partage volontaire par les lieux. Aucune publication automatique.",de:"Echte Zeilen erscheinen hier, wenn Orte sie freigeben und teilen. Nichts wird automatisch veröffentlicht.",zh:"真实记录将在各场所审核并选择分享后显示。不会自动发布。"};
+  const empty={it:"Qui appariranno le righe anonime approvate delle persone e dei luoghi. Puoi proporre la tua riga dal modulo qui sopra.",en:"Approved anonymous lines from people and places will appear here. You can propose your line using the form above.",es:"Aquí aparecerán líneas anónimas aprobadas de personas y lugares. Puedes proponer la tuya en el formulario superior.",fr:"Les lignes anonymes validées des personnes et des lieux apparaîtront ici. Proposez la vôtre avec le formulaire ci-dessus.",de:"Freigegebene anonyme Zeilen von Menschen und Orten erscheinen hier. Schlagen Sie Ihre Zeile mit dem Formular oben vor.",zh:"經審核的人們與場所的匿名記錄將顯示於此。可透過上方表單投稿。"};
   const unavailable={it:"Il muro condiviso non è raggiungibile in questo momento. Riprova più tardi.",en:"The shared wall is temporarily unavailable. Please try again later.",es:"El muro compartido no está disponible. Inténtalo más tarde.",fr:"Le mur partagé est indisponible. Réessayez plus tard.",de:"Die gemeinsame Wand ist derzeit nicht erreichbar. Bitte später erneut versuchen.",zh:"共享墙暂时无法访问，请稍后重试。"};
   ul.replaceChildren();
   try{const response=await fetch("https://muro-mango-ospitalita.sheerpuffin.chatgpt.site/api/wall?lang="+encodeURIComponent(lang),{credentials:"omit",referrerPolicy:"no-referrer"});if(!response.ok)throw Error();const data=await response.json();if(getLang()!==lang)return;ul.replaceChildren();const lines=data.rows.length?data.rows.map(x=>x.text):[empty[lang]||empty.it];for(const line of lines){const li=document.createElement("li");li.textContent=line;ul.appendChild(li)}}catch{if(getLang()!==lang)return;const li=document.createElement("li");li.textContent=unavailable[lang]||unavailable.it;ul.replaceChildren(li)}
@@ -767,20 +776,11 @@ function saveLine(lang){
   writeArchive(merged);
 
   ta.value = "";
-  showStatus("good", s.ok);
+  showStatus("good", pl()[9]);
   updateCount(lang);
 }
 
-function openArchive(lang){
-  const s = STR[lang] || STR.it;
-  const arr = readArchive();
-  if(!arr.length){
-    alert(s.archiveEmpty);
-    return;
-  }
-  const lines = arr.slice(0,30).map(x => `• ${x.text}`).join("\n\n");
-  alert(lines + (arr.length>30 ? `\n\n… (${arr.length-30})` : ""));
-}
+function openArchive(lang){personalArchive();}
 
 function wipeArchive(lang){
   const s = STR[lang] || STR.it;
@@ -789,6 +789,33 @@ function wipeArchive(lang){
   showStatus("good", s.wiped);
   updateCount(lang);
 }
+
+const PERSONAL_API='https://muro-mango-ospitalita.sheerpuffin.chatgpt.site';
+const PERSONAL_HOME='https://mangoinfrastruttura.org/';
+const PERSONAL_LABELS={
+ it:['Conserva sul dispositivo','Proponi al muro Mango','Proponi una riga anonima','La riga sarà controllata prima della pubblicazione. Il controllo non certifica lo scambio.','Sono maggiorenne. Per le attività con minori usa un referente adulto e la modalità protetta nei luoghi.','Lo scambio è realmente avvenuto; le persone coinvolte hanno concordato questo testo anonimo e la pubblicazione sul muro Mango. Non contiene nomi, recapiti o dettagli identificativi.','Conferma proposta','Annulla','Riga inviata: è in attesa di approvazione.','Riga conservata sul dispositivo.','Controlla la tua riga','Copia link privato di ritiro','Salva link di ritiro','Ritira la riga','Aggiorna stato','Usa questa riga','Le righe già salvate restano private. Scegli una riga per rileggerla e decidere se proporla.','Conserva questo link privato: chi lo possiede può ritirare la riga.','Invio non riuscito. Il testo non è stato cancellato.','La riga deve contenere da dieci a cinquecento caratteri, senza misure o informazioni personali.','Ritirare questa riga dal muro? La copia eventualmente salvata sul tuo dispositivo resta privata.','Riga ritirata dal muro.','Non è possibile accedere al registro. Riprova più tardi.','Invio in corso…'],
+ en:['Keep on this device','Propose to the Mango wall','Propose an anonymous line','The text will be reviewed before publication. Review does not certify the exchange.','I am an adult. For activities involving children, use an adult coordinator and protected mode for places.','The exchange really happened; everyone involved agreed to this anonymous text and its publication on the Mango wall. It contains no names, contact details or identifying information.','Confirm proposal','Cancel','Line submitted: awaiting approval.','Line kept on this device.','Check your line','Copy private withdrawal link','Save withdrawal link','Withdraw line','Refresh status','Use this line','Saved lines remain private. Choose one to review and decide whether to propose it.','Keep this private link: anyone with it can withdraw the line.','Submission failed. Your text has been preserved.','The line must contain ten to five hundred characters, with no measurements or personal information.','Withdraw this line from the wall? A copy saved on your device stays private.','Line withdrawn from the wall.','The register is unavailable. Please try again later.','Submitting…'],
+ es:['Guardar en este dispositivo','Proponer al muro Mango','Proponer una línea anónima','El texto se revisará antes de publicarlo. La revisión no certifica el intercambio.','Soy mayor de edad. Para actividades con menores, utiliza un referente adulto y el modo protegido de los lugares.','El intercambio ocurrió realmente; las personas implicadas acordaron este texto anónimo y su publicación en el muro Mango. No contiene nombres, contactos ni datos identificativos.','Confirmar propuesta','Cancelar','Línea enviada: pendiente de aprobación.','Línea guardada en el dispositivo.','Consulta tu línea','Copiar enlace privado de retirada','Guardar enlace de retirada','Retirar línea','Actualizar estado','Usar esta línea','Las líneas guardadas siguen siendo privadas. Elige una para revisarla y decidir si proponerla.','Conserva este enlace privado: quien lo tenga puede retirar la línea.','No se pudo enviar. El texto se ha conservado.','La línea debe tener entre diez y quinientos caracteres, sin medidas ni datos personales.','¿Retirar la línea del muro? La copia guardada en tu dispositivo sigue siendo privada.','Línea retirada del muro.','El registro no está disponible. Inténtalo más tarde.','Enviando…'],
+ fr:['Conserver sur cet appareil','Proposer au mur Mango','Proposer une ligne anonyme','Le texte sera examiné avant publication. Cet examen ne certifie pas l’échange.','Je suis majeur. Pour les activités avec des mineurs, utilisez un référent adulte et le mode protégé des lieux.','L’échange a réellement eu lieu ; les personnes concernées ont accepté ce texte anonyme et sa publication sur le mur Mango. Il ne contient aucun nom, contact ou détail identifiable.','Confirmer la proposition','Annuler','Ligne envoyée : en attente de validation.','Ligne conservée sur cet appareil.','Consulter votre ligne','Copier le lien privé de retrait','Enregistrer le lien de retrait','Retirer la ligne','Actualiser','Utiliser cette ligne','Les lignes enregistrées restent privées. Choisissez-en une pour la relire et décider de la proposer.','Conservez ce lien privé : toute personne qui le possède peut retirer la ligne.','Échec de l’envoi. Votre texte est conservé.','La ligne doit contenir dix à cinq cents caractères, sans mesures ni informations personnelles.','Retirer cette ligne du mur ? La copie sur votre appareil reste privée.','Ligne retirée du mur.','Le registre est indisponible. Réessayez plus tard.','Envoi en cours…'],
+ de:['Auf diesem Gerät behalten','Für die Mango-Wand vorschlagen','Eine anonyme Zeile vorschlagen','Der Text wird vor Veröffentlichung geprüft. Die Prüfung bestätigt nicht den Austausch.','Ich bin volljährig. Für Aktivitäten mit Minderjährigen nutzen Sie eine erwachsene Ansprechperson und den geschützten Modus für Orte.','Der Austausch hat wirklich stattgefunden; die Beteiligten stimmen diesem anonymen Text und seiner Veröffentlichung auf der Mango-Wand zu. Er enthält keine Namen, Kontaktdaten oder identifizierenden Angaben.','Vorschlag bestätigen','Abbrechen','Zeile eingereicht: wartet auf Freigabe.','Zeile auf diesem Gerät gespeichert.','Ihre Zeile prüfen','Privaten Rücknahmelink kopieren','Rücknahmelink speichern','Zeile zurückziehen','Status aktualisieren','Diese Zeile verwenden','Gespeicherte Zeilen bleiben privat. Wählen Sie eine aus, um sie vor einem Vorschlag zu prüfen.','Bewahren Sie diesen privaten Link auf: Wer ihn besitzt, kann die Zeile zurückziehen.','Senden fehlgeschlagen. Ihr Text wurde nicht gelöscht.','Die Zeile muss zehn bis fünfhundert Zeichen enthalten, ohne Maße oder persönliche Angaben.','Diese Zeile von der Wand zurückziehen? Die Kopie auf Ihrem Gerät bleibt privat.','Zeile von der Wand zurückgezogen.','Das Register ist nicht erreichbar. Bitte später erneut versuchen.','Wird gesendet…'],
+ zh:['儲存在此裝置','投稿至 Mango 牆','提交匿名記錄','公開前會審核文字。審核不代表證明交換確實發生。','我已成年。涉及未成年人的活動，請由成年負責人使用場所的保護模式。','交換確實發生；相關人士同意此匿名文字及在 Mango 牆公開。文字不含姓名、聯絡方式或可識別個人的細節。','確認投稿','取消','已提交，等待審核。','已儲存在此裝置。','查看你的記錄','複製私人撤回連結','儲存撤回連結','撤回記錄','更新狀態','使用這則記錄','已儲存的記錄仍為私人內容。選擇後可重新閱讀，再決定是否投稿。','請保留私人連結：持有連結的人可撤回記錄。','提交失敗，文字已保留。','記錄須為十至五百字元，不含度量或個人資訊。','要從牆上撤回這則記錄嗎？裝置上儲存的副本仍為私人內容。','已從牆上撤回記錄。','目前無法連線，請稍後重試。','正在提交…']
+};
+const pl=()=>PERSONAL_LABELS[getLang()]||PERSONAL_LABELS.it;
+const pe=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const personalReceiptsKey='MANGO_PERSONAL_RECEIPTS_V1';let personalReceipts={};try{personalReceipts=JSON.parse(localStorage.getItem(personalReceiptsKey)||'{}');if(!personalReceipts||Array.isArray(personalReceipts)||typeof personalReceipts!=='object')personalReceipts={}}catch{}
+let proposedText='',personalBusy=false,moderatorKey='',personalDialog;
+async function personalApi(path,method='GET',data,key=''){const headers={};if(data)headers['Content-Type']='application/json';if(key)headers.Authorization='Bearer '+key;let response;try{response=await fetch(PERSONAL_API+path,{method,headers,body:data?JSON.stringify(data):undefined,credentials:'omit',referrerPolicy:'no-referrer'})}catch{throw Error(pl()[22])}let result;try{result=await response.json()}catch{throw Error(pl()[22])}if(!response.ok)throw Error(result.error||pl()[22]);return result}
+function personalDownload(name,content){const u=URL.createObjectURL(new Blob([content],{type:'text/plain;charset=utf-8'}));const a=document.createElement('a');a.href=u;a.download=name;a.click();setTimeout(()=>URL.revokeObjectURL(u),1000)}
+async function personalCopy(text){try{await navigator.clipboard.writeText(text)}catch{prompt(pl()[11],text)}}
+function personalState(s){const all={it:{pending:'In attesa di approvazione',approved:'Pubblicata sul muro',rejected:'Non pubblicata',withdrawn:'Ritirata'},en:{pending:'Awaiting approval',approved:'Published on the wall',rejected:'Not published',withdrawn:'Withdrawn'},es:{pending:'Pendiente de aprobación',approved:'Publicada en el muro',rejected:'No publicada',withdrawn:'Retirada'},fr:{pending:'En attente de validation',approved:'Publiée sur le mur',rejected:'Non publiée',withdrawn:'Retirée'},de:{pending:'Wartet auf Freigabe',approved:'An der Wand veröffentlicht',rejected:'Nicht veröffentlicht',withdrawn:'Zurückgezogen'},zh:{pending:'等待審核',approved:'已公開',rejected:'未公開',withdrawn:'已撤回'}};return (all[getLang()]||all.it)[s]||s}
+function personalRefreshLabels(){const t=pl();document.getElementById('btnInvia').textContent=t[0];document.getElementById('btnProponi').textContent=t[1];document.getElementById('btnReceipts').textContent=t[10]}
+function proposePersonal(value){if(personalBusy)return;const line=normalizeText(value??document.getElementById('riga').value);if(line.length<10||line.length>500||containsForbidden(line)){showStatus('warn',pl()[19]);return}proposedText=line;const t=pl();personalDialog.innerHTML='<form id="personalForm"><h2>'+pe(t[2])+'</h2><p>'+pe(t[3])+'</p><blockquote id="personalPreview"></blockquote><label class="personalCheck"><input id="personalAdult" type="checkbox" required><span>'+pe(t[4])+'</span></label><label class="personalCheck"><input id="personalConsent" type="checkbox" required><span>'+pe(t[5])+'</span></label><input name="website" class="personalHidden" tabindex="-1" autocomplete="off" aria-hidden="true"><div class="btnRow"><button class="btn primary" id="personalSend">'+pe(t[6])+'</button><button class="btn" type="button" id="personalCancel">'+pe(t[7])+'</button></div><p id="personalFeedback" role="status"></p></form>';personalDialog.querySelector('#personalPreview').textContent=line;personalDialog.querySelector('#personalCancel').onclick=()=>personalDialog.close();personalDialog.querySelector('form').onsubmit=async e=>{e.preventDefault();if(personalBusy)return;personalBusy=true;const button=document.getElementById('personalSend');button.disabled=true;document.getElementById('personalCancel').disabled=true;document.getElementById('personalFeedback').textContent=t[23];try{const result=await personalApi('/api/personal','POST',{text:line,lang:getLang(),adult:document.getElementById('personalAdult').checked,consent:document.getElementById('personalConsent').checked,website:e.target.website.value});personalReceipts[result.row.id]=result.withdrawKey;let stored=true;try{localStorage.setItem(personalReceiptsKey,JSON.stringify(personalReceipts))}catch{stored=false}personalDialog.close();if(normalizeText(document.getElementById('riga').value)===line)document.getElementById('riga').value='';updateCount(getLang());showStatus('good',t[8]);renderPersonalReceipt(result.row,result.withdrawKey,stored);await renderMuro(getLang())}catch(err){document.getElementById('personalFeedback').textContent=err.message||t[18];button.disabled=false;document.getElementById('personalCancel').disabled=false}finally{personalBusy=false}};personalDialog.showModal()}
+function renderPersonalReceipt(row,key,stored=true){const box=document.getElementById('personalReceipt');const t=pl(),link=PERSONAL_HOME+'?personal='+row.id+'#withdraw='+key;box.innerHTML='<h3>'+pe(t[10])+'</h3><p><strong>'+pe(personalState(row.status))+'</strong></p><p id="personalOwnText"></p><p>'+pe(t[17])+'</p>'+(!stored?'<p><strong>'+pe(t[12])+'</strong></p>':'')+'<div class="btnRow"><button class="btn" id="personalCopyLink">'+pe(t[11])+'</button><button class="btn" id="personalSaveLink">'+pe(t[12])+'</button><button class="btn" id="personalReload">'+pe(t[14])+'</button>'+(row.status!=='withdrawn'?'<button class="btn danger" id="personalWithdraw">'+pe(t[13])+'</button>':'')+'</div><p id="personalReceiptFeedback" role="status"></p>';box.hidden=false;document.getElementById('personalOwnText').textContent=row.text||'';document.getElementById('personalCopyLink').onclick=()=>personalCopy(link);document.getElementById('personalSaveLink').onclick=()=>personalDownload('mango-link-ritiro-personale.txt',t[17]+'\n\n'+link);document.getElementById('personalReload').onclick=()=>loadPersonalReceipt(row.id,key);if(row.status!=='withdrawn')document.getElementById('personalWithdraw').onclick=async()=>{if(!confirm(t[20]))return;try{await personalApi('/api/personal/'+row.id,'PATCH',{action:'withdraw'},key);await loadPersonalReceipt(row.id,key);showStatus('good',t[21]);await renderMuro(getLang())}catch(e){document.getElementById('personalReceiptFeedback').textContent=e.message}};box.scrollIntoView({behavior:'smooth',block:'nearest'})}
+async function loadPersonalReceipt(id,key){try{const data=await personalApi('/api/personal/'+id,'GET',null,key);renderPersonalReceipt(data.row,key)}catch(e){showStatus('warn',e.message)}}
+function personalArchive(){const t=pl();let rows;try{rows=readArchive()}catch{showStatus('warn',t[22]);return}if(!rows.length){alert((STR[getLang()]||STR.it).archiveEmpty);return}personalDialog.innerHTML='<h2>'+pe((STR[getLang()]||STR.it).btnApri)+'</h2><p>'+pe(t[16])+'</p><div id="personalArchiveList"></div><button class="btn" id="archiveClose">'+pe(t[7])+'</button>';const list=personalDialog.querySelector('#personalArchiveList');for(const r of rows){const card=document.createElement('div');card.className='personalArchiveRow';const p=document.createElement('p');p.textContent=r.text;const button=document.createElement('button');button.className='btn';button.textContent=t[15];button.onclick=()=>{document.getElementById('riga').value=r.text;updateCount(getLang());personalDialog.close();document.getElementById('riga').focus()};card.append(p,button);list.append(card)}personalDialog.querySelector('#archiveClose').onclick=()=>personalDialog.close();personalDialog.showModal()}
+async function showPersonalReceipts(){const entries=Object.entries(personalReceipts);if(!entries.length){showStatus('warn',(STR[getLang()]||STR.it).archiveEmpty);return}personalDialog.innerHTML='<h2>'+pe(pl()[10])+'</h2><div id="personalReceiptsList"></div><button class="btn" id="receiptsClose">'+pe(pl()[7])+'</button>';const list=personalDialog.querySelector('#personalReceiptsList');for(const [id,key] of entries){const button=document.createElement('button');button.className='btn';button.textContent=pl()[10]+' · '+(list.children.length+1);button.onclick=()=>{personalDialog.close();loadPersonalReceipt(id,key)};list.append(button)}personalDialog.querySelector('#receiptsClose').onclick=()=>personalDialog.close();personalDialog.showModal()}
+async function loadPersonalModeration(){const box=document.getElementById('personalModeration');box.hidden=false;box.innerHTML='<h2>Gestione privata delle righe personali</h2><p>Approva soltanto testi anonimi che raccontano gesti concreti, senza dati personali, pubblicità o accuse verso altre persone. Il controllo non certifica la verità dello scambio.</p><div class="btnRow"><button class="btn" id="moderationRefresh">Aggiorna</button><button class="btn" id="moderationExit">Esci dalla gestione</button></div><p id="moderationMessage" role="status"></p><div id="moderationRows"></div>';document.getElementById('moderationRefresh').onclick=loadPersonalModeration;document.getElementById('moderationExit').onclick=()=>{try{sessionStorage.removeItem('MANGO_PERSONAL_MODERATOR')}catch{}moderatorKey='';location.href='/'};if(!moderatorKey){document.getElementById('moderationMessage').textContent='Apri il tuo link privato di moderazione per accedere.';return}try{const data=await personalApi('/api/personal','GET',null,moderatorKey);const list=document.getElementById('moderationRows');if(!data.rows.length){list.textContent='Nessuna riga personale da gestire.';return}for(const row of data.rows){const card=document.createElement('article');card.className='personalArchiveRow';const status=document.createElement('strong');status.textContent=personalState(row.status);const p=document.createElement('p');p.textContent=row.text;const label=document.createElement('label');label.className='personalCheck';const checked=document.createElement('input');checked.type='checkbox';label.append(checked,document.createTextNode('Ho controllato che il testo sia anonimo, concordato e adatto alla pubblicazione.'));const actions=document.createElement('div');actions.className='btnRow';for(const [action,title] of row.status==='pending'?[['approve','Approva e pubblica'],['reject','Non pubblicare']]:[['reject','Rimuovi dal muro']]){const button=document.createElement('button');button.className='btn';button.textContent=title;button.onclick=async()=>{if(action==='approve'&&!checked.checked){document.getElementById('moderationMessage').textContent='Conferma il controllo del testo prima di approvare.';return}button.disabled=true;try{await personalApi('/api/personal/'+row.id,'PATCH',{action,reviewed:checked.checked},moderatorKey);await loadPersonalModeration();await renderMuro(getLang())}catch(e){document.getElementById('moderationMessage').textContent=e.message;button.disabled=false}};actions.append(button)}card.append(status,p);if(row.status==='pending')card.append(label);card.append(actions);list.append(card)}}catch(e){document.getElementById('moderationMessage').textContent=e.message}}
+function initPersonal(){personalDialog=document.getElementById('personalDialog');personalDialog.addEventListener('cancel',e=>{if(personalBusy)e.preventDefault()});personalRefreshLabels();document.getElementById('btnProponi').onclick=()=>proposePersonal();document.getElementById('btnReceipts').onclick=showPersonalReceipts;const query=new URLSearchParams(location.search),fragment=new URLSearchParams(location.hash.slice(1));const rid=query.get('personal'),withdraw=fragment.get('withdraw');if(rid&&/^[a-f0-9-]{36}$/.test(rid)){if(withdraw&&/^[a-f0-9-]{72}$/.test(withdraw)){personalReceipts[rid]=withdraw;try{localStorage.setItem(personalReceiptsKey,JSON.stringify(personalReceipts))}catch{}history.replaceState(null,'',location.pathname+location.search)}if(personalReceipts[rid])loadPersonalReceipt(rid,personalReceipts[rid]);else showStatus('warn',pl()[17])}if(query.get('moderation')==='1'){const key=fragment.get('key');if(key&&/^[a-f0-9-]{72}$/.test(key)){moderatorKey=key;try{sessionStorage.setItem('MANGO_PERSONAL_MODERATOR',key)}catch{}history.replaceState(null,'',location.pathname+location.search)}else try{moderatorKey=sessionStorage.getItem('MANGO_PERSONAL_MODERATOR')||''}catch{}loadPersonalModeration()}}
 
 /* =========================
    Init
@@ -808,6 +835,8 @@ function wipeArchive(lang){
   document.querySelectorAll(".chip").forEach(ch=>{
     ch.addEventListener("click", ()=> setLang(ch.dataset.lang));
   });
+
+  initPersonal();
 
   // textarea listeners
   const ta = document.getElementById("riga");

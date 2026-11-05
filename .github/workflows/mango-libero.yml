@@ -1,0 +1,73 @@
+name: Mango - scrittura libera e interfaccia
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  aggiorna:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Aggiorna senza cambiare grafica o dati
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+
+          p = Path('docs/index.html')
+          if not p.exists():
+              raise SystemExit('Manca docs/index.html')
+
+          original = p.read_text(encoding='utf-8')
+          s = original
+
+          old = "state.className='status '+(match?'good':'warn');state.textContent=match?t[2]:!guidedCache[lang]?t[4]:line.trim()?t[3]:t[5];document.getElementById('btnProponi').disabled=!match||personalBusy;"
+          new = "state.className='status '+(match?'good':'');state.textContent=match?t[2]:(line.trim()?t[5]:'');state.style.display=(match||line.trim())?'block':'none';document.getElementById('btnProponi').disabled=!line.trim()||personalBusy;"
+
+          if old not in s:
+              raise SystemExit('Codice cambiato: aggiornamento interrotto per sicurezza')
+
+          s = s.replace(old, new, 1)
+
+          old2 = "const line=guidedMatch(value??document.getElementById('riga').value);if(!line){showStatus('warn',(guidedWords[getLang()]||guidedWords.it)[3]);return}"
+          new2 = "const raw=String(value??document.getElementById('riga').value).trim();const line=guidedMatch(raw)||raw;if(!line){return}"
+
+          if old2 not in s:
+              raise SystemExit('Pubblicazione cambiata: aggiornamento interrotto')
+
+          s = s.replace(old2, new2, 1)
+
+          s = s.replace(
+              'Per il muro pubblico scegli un gesto realmente avvenuto',
+              'Scegli una frase suggerita oppure scrivi liberamente un gesto realmente avvenuto',
+              1
+          )
+
+          s = s.replace(
+              'Scegli una frase anonima…',
+              'Frasi suggerite (facoltative)…',
+              1
+          )
+
+          p.write_text(s, encoding='utf-8')
+          print('Interfaccia Mango aggiornata.')
+
+          PY
+
+      - name: Verifica
+        run: |
+          git diff --check
+          grep -q "const raw=String(value" docs/index.html
+
+      - name: Salva
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add docs/index.html
+          if ! git diff --cached --quiet; then
+            git commit -m 'Mango: scrittura libera e controllo discreto'
+            git push
+          fi

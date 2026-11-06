@@ -68,7 +68,7 @@
       user-select:none;
     }
     .logoBtn:active{transform:scale(.98)}
-    .logoEmoji{font-size:30px; line-height:1}
+    .logoEmoji{display:block;width:100%;height:100%;object-fit:cover;border-radius:15px}
     .brandTxt .title{
       font-size:28px;
       font-weight:800;
@@ -236,6 +236,12 @@
 
 [hidden]{display:none!important}#personalDialog{width:min(720px,94vw);max-height:90vh;overflow:auto;background:#111722;color:var(--text);border:1px solid var(--line);border-radius:26px;padding:24px}#personalDialog::backdrop{background:rgba(0,0,0,.75)}.personalCheck{display:flex;align-items:flex-start;gap:12px;margin:18px 0;line-height:1.5}.personalCheck input{margin-top:6px;flex-shrink:0}.personalHidden{display:none!important}.personalArchiveRow{padding:18px 0;border-bottom:1px solid var(--line);overflow-wrap:anywhere}#personalPreview{margin:20px 0;padding:16px;border-left:3px solid #1fbf73;white-space:pre-wrap;overflow-wrap:anywhere}#personalReceipt p{overflow-wrap:anywhere}#personalReceiptsList{display:flex;gap:12px;flex-wrap:wrap}.btn:focus-visible{outline:3px solid #70a0ff;outline-offset:3px}
   </style>
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32.png?v=20261106" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/apple-touch-icon.png?v=20261106" />
+  <link rel="manifest" href="/manifest.webmanifest" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-title" content="Mango" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="default" />
 </head>
 
 <body>
@@ -246,7 +252,7 @@
       <div class="top">
         <div class="brand">
           <div class="logoBtn" id="mangoBtn" title="Bianco">
-            <div class="logoEmoji" aria-hidden="true">🥭</div>
+            <img class="logoEmoji" src="/assets/mango-logo.png" width="54" height="54" alt="Mango" />
           </div>
           <div class="brandTxt">
             <p class="title" id="brandTitle">Mango</p>

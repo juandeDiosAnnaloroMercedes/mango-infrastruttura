@@ -309,7 +309,18 @@
     const d=T[l]||T[DEFAULT_LANG];
     const v=(document.getElementById("line").value||"").trim();
     if(!v){ badge(d.empty); return; }
-    saveToLocalRegister(v);
+
+// ✅ Mango: date allowed, measures blocked
+const dateRegex = /\b\d{1,2}[\/\-.]\d{1,2}[\/\-.]\d{2,4}\b|\b\d{4}-\d{2}-\d{2}\b/;
+const measureRegex = /\b\d+(?:[.,]\d+)?\s*(?:ore|ora|h|min|mins|minuti|minute|giorni|giorno|kg|g|grammi|grammo|l|lt|litri|litro|m|metri|metro|cm|mm|€|euro|usd|\$|£|mango)\b|(?:\b\d+\s*=\s*\d+\b)/i;
+
+
+if (!dateRegex.test(v) && measureRegex.test(v)) {
+  badge(d.err_measure || "Evita quantità o durate. La data è ammessa.");
+  return;
+}
+
+saveToLocalRegister(v);
 
 badge("✔ Questa riga è stata riconosciuta. Non è un credito. Non è un saldo.");
 
